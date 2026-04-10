@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- 카카오톡 공유시 보여질 썸네일 및 제목 (Open Graph 태그) -->
     <meta property="og:title" content="태광 ♥ 지현 결혼합니다">
     <meta property="og:description" content="2027년 1월 30일(토) 낮 1시 10분 남양주 파로스컨벤션, 따뜻한 마음으로 함께 축복해 주세요.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1545315003-c5ad6226c272?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
-    
     <title>태광 ♥ 지현 결혼합니다</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
@@ -17,96 +14,41 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        'batang': ['"Gowun Batang"', 'serif'],
-                    },
-                    colors: {
-                        'wedding-bg': '#F9F7F3',
-                        'wedding-text': '#4A4036',
-                        'wedding-point': '#D4C4B7',
-                        'wedding-dark': '#8B7D6B',
-                    }
+                    fontFamily: { 'batang': ['"Gowun Batang"', 'serif'] },
+                    colors: { 'wedding-bg': '#F9F7F3', 'wedding-text': '#4A4036', 'wedding-point': '#D4C4B7', 'wedding-dark': '#8B7D6B' }
                 }
             }
         }
     </script>
     <style>
         body { background-color: #E5E5E5; display: flex; justify-content: center; }
-        .mobile-container {
-            width: 100%;
-            max-width: 430px; /* iPhone Pro Max width */
-            background-color: #F9F7F3;
-            min-height: 100vh;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            position: relative;
-            overflow-x: hidden;
-        }
+        .mobile-container { width: 100%; max-width: 430px; background-color: #F9F7F3; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; overflow-x: hidden; }
         .fade-in { animation: fadeIn 2s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* BGM Player Spin */
         .spin { animation: spin 4s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        /* Toast Message Animation */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            margin-left: -125px;
-            background-color: rgba(74, 64, 54, 0.9);
-            color: #fff;
-            text-align: center;
-            border-radius: 20px;
-            padding: 12px;
-            position: fixed;
-            z-index: 100;
-            left: 50%;
-            bottom: 30px;
-            font-size: 14px;
-            font-family: sans-serif;
-        }
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
+        #toast { visibility: hidden; min-width: 250px; margin-left: -125px; background-color: rgba(74, 64, 54, 0.9); color: #fff; text-align: center; border-radius: 20px; padding: 12px; position: fixed; z-index: 1000; left: 50%; bottom: 30px; font-size: 14px; }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+        .snowflake { position: absolute; top: -10px; background-color: #fff; border-radius: 50%; filter: blur(1px); pointer-events: none; animation: snowfall linear infinite; }
+        @keyframes snowfall { 0% { transform: translateY(-10vh) translateX(0); opacity: 0; } 10% { opacity: var(--max-opacity); } 90% { opacity: var(--max-opacity); } 100% { transform: translateY(110vh) translateX(var(--end-x)); opacity: 0; } }
         
-        /* Snowfall Animation */
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            background-color: #fff;
-            border-radius: 50%;
-            filter: blur(1px);
-            pointer-events: none; /* 눈송이가 클릭을 방해하지 않음 */
-            animation: snowfall linear infinite;
-        }
-        @keyframes snowfall {
-            0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
-            10% { opacity: var(--max-opacity); }
-            90% { opacity: var(--max-opacity); }
-            100% { transform: translateY(110vh) translateX(var(--end-x)); opacity: 0; }
-        }
+        /* Modal Style for Image Zoom */
+        #img-modal { display: none; }
+        #img-modal.active { display: flex; }
+        .modal-btn { background-color: rgba(0,0,0,0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; items-center: center; justify-content: center; color: white; transition: all 0.2s; }
+        .modal-btn:active { background-color: rgba(0,0,0,0.6); transform: scale(0.9); }
     </style>
 </head>
 <body class="font-batang text-wedding-text antialiased">
-
-    <!-- Snow Container -->
     <div id="snow-container" class="fixed inset-0 pointer-events-none z-40 overflow-hidden"></div>
-
-    <!-- Toast Notification -->
     <div id="toast">계좌번호가 복사되었습니다.</div>
-
-    <!-- 오디오 태그 (파일명 띄어쓰기 제거: 모바일 에러 방지용) -->
-    <audio id="wedding-bgm" loop preload="auto">
-        <source src="Film_Love.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="wedding-bgm" loop preload="auto"><source src="Film_Love.mp3" type="audio/mpeg"></audio>
 
     <div class="mobile-container">
-        
-        <!-- BGM Floating Button -->
-        <div class="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-[430px] z-50 pointer-events-none">
+        <!-- BGM Button -->
+        <div class="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-[430px] z-[500] pointer-events-none">
             <div class="absolute right-4 pointer-events-auto">
                 <button id="bgm-btn" class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-full shadow-md flex items-center space-x-2 text-wedding-dark hover:bg-white transition border border-stone-200">
                     <i class="fas fa-compact-disc text-lg" id="disc-icon"></i>
@@ -118,381 +60,273 @@
         <!-- 1. Main Cover -->
         <section class="relative w-full h-[85vh] flex flex-col items-center justify-center fade-in bg-cover bg-center" style="background-image: linear-gradient(rgba(249, 247, 243, 0.3), rgba(249, 247, 243, 1)), url('https://images.unsplash.com/photo-1545315003-c5ad6226c272?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
             <div class="absolute bottom-12 flex flex-col items-center text-center px-6">
-                <p class="text-sm md:text-base leading-relaxed text-wedding-dark mb-8">
-                    어느 시인의 말처럼,<br>
-                    우리의 사랑은 겨울에도 춥지 않을 거예요.
-                </p>
+                <p class="text-sm md:text-base leading-relaxed text-wedding-dark mb-8">어느 시인의 말처럼,<br>우리의 사랑은 겨울에도 춥지 않을 거예요.</p>
                 <h1 class="text-3xl font-bold tracking-widest mb-4">태광 <span class="text-wedding-point text-2xl mx-1">♥</span> 지현</h1>
                 <p class="text-sm tracking-wide">2027. 01. 30 SAT 13:10</p>
                 <p class="text-sm mt-1">파로스컨벤션 2층 파로스홀</p>
             </div>
         </section>
 
-        <!-- 2. Greeting -->
+        <!-- 2. Invitation -->
         <section class="py-20 px-8 text-center fade-in border-b border-wedding-point/30">
             <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 font-bold">INVITATION</h2>
             <div class="space-y-6 text-[15px] leading-loose">
-                <p>
-                    하나는 유연하고, 하나는 단단한 편이라<br>
-                    함께일 때 가장 잘 어울리는 사이가 되었습니다.
-                </p>
-                <p>
-                    웃음이 필요할 땐 장난으로,<br>
-                    힘이 필요할 땐 든든한 버팀목이 되어<br>
-                    서로의 부족함을 채우며 살아가겠습니다.
-                </p>
-                <p>
-                    저희 두 사람의 시작을<br>
-                    귀한 걸음으로 축복해 주신다면<br>
-                    그 마음 오래도록 간직하겠습니다.
-                </p>
+                <p>하나는 유연하고, 하나는 단단한 편이라<br>함께일 때 가장 잘 어울리는 사이가 되었습니다.</p>
+                <p>웃음이 필요할 땐 장난으로,<br>힘이 필요할 든든한 버팀목이 되어<br>서로의 부족함을 채우며 살아가겠습니다.</p>
+                <p>저희 두 사람의 시작을<br>귀한 걸음으로 축복해 주신다면<br>그 마음 오래도록 간직하겠습니다.</p>
             </div>
-
             <div class="mt-16 text-base space-y-4">
                 <p><span class="font-bold">박유경 · 김기옥</span> 의 장남 <span class="font-bold text-lg ml-2">태광</span></p>
                 <p><span class="font-bold">이기영 · 지백현</span> 의 차녀 <span class="font-bold text-lg ml-2">지현</span></p>
-                <p>
-                    <br>
-                </p>
             </div>
-            
+        </section>
 
-        <!-- 3. RSVP Section -->
-        <section class="py-10 px-6 text-center bg-[#F4EFEA] border-b border-wedding-point/30">
+        <!-- 3. RSVP -->
+        <section class="py-16 px-6 text-center bg-[#F4EFEA] border-b border-wedding-point/30">
             <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-4 font-bold">참석 여부 확인</h2>
-            <p class="text-sm leading-relaxed mb-6">
-                원활한 예식 준비와 전세버스 좌석 배정을 위해<br>
-                참석 여부를 전달해 주시면 감사하겠습니다.
-            </p>
-            <button onclick="document.getElementById('rsvp-modal').classList.remove('hidden')" class="w-full bg-wedding-dark text-white py-4 rounded-lg font-bold tracking-wide shadow-md hover:bg-opacity-90 transition">
-                참석 의사 전달하기
-            </button>
+            <p class="text-sm leading-relaxed mb-6">원활한 예식 준비와 전세버스 좌석 배정을 위해<br>참석 여부를 전달해 주시면 감사하겠습니다.</p>
+            <button onclick="document.getElementById('rsvp-modal').classList.remove('hidden')" class="w-full bg-wedding-dark text-white py-4 rounded-lg font-bold shadow-md hover:bg-opacity-90 transition">참석 의사 전달하기</button>
         </section>
 
-        <!-- 4. Gallery -->
-        <section class="py-20 px-6 border-b border-wedding-point/30 text-center">
+        <!-- 4. Gallery (15 Images) -->
+        <section class="py-20 px-4 border-b border-wedding-point/30 text-center">
             <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 font-bold">GALLERY</h2>
-            <div class="grid grid-cols-3 gap-1 mb-4">
-                <!-- Placeholders for gallery -->
-                <div class="aspect-square bg-stone-300 bg-cover bg-center cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="aspect-square bg-stone-300 bg-cover bg-center cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="aspect-square bg-stone-300 bg-cover bg-center cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="aspect-square bg-stone-300 bg-cover bg-center cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="aspect-square bg-stone-300 bg-cover bg-center cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="aspect-square bg-stone-300 bg-cover bg-center cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1607580665213-911e8ee1c3e3?auto=format&fit=crop&w=300&q=80');"></div>
+            <div class="grid grid-cols-3 gap-1 mb-4" id="gallery-grid">
+                <!-- 15 Images 슬롯 (JS로 관리하기 위해 주소만 배열로 관리해도 되지만 구조 유지를 위해 직접 배치) -->
             </div>
-            <p class="text-xs text-stone-400">사진을 터치하면 확대됩니다.</p>
+            <p class="text-xs text-stone-400">사진을 터치하면 크게 보실 수 있습니다.</p>
         </section>
 
-        <!-- 5. Location & Bus Info -->
+        <!-- 5. Location -->
         <section class="py-20 px-6 border-b border-wedding-point/30">
-            <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 text-center font-bold">오시는 길</h2>
-            
-            <!-- Map Placeholder -->
-            <div class="w-full h-48 bg-stone-200 rounded-lg flex items-center justify-center mb-4 overflow-hidden border border-stone-300">
-                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" alt="Map Placeholder" class="w-full h-full object-cover opacity-60">
+            <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 text-center font-bold">LOCATION</h2>
+            <div class="w-full h-48 bg-stone-200 rounded-lg mb-4 overflow-hidden border border-stone-300"><img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-60"></div>
+            <div class="grid grid-cols-3 gap-2 mb-8 font-sans text-xs font-bold text-center">
+                <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="bg-[#FEE500] py-2.5 rounded shadow-sm text-[#191919]">카카오맵</a>
+                <a href="https://map.naver.com/v5/search/남양주 파로스컨벤션" target="_blank" class="bg-[#03C75A] py-2.5 rounded shadow-sm text-white">네이버 지도</a>
+                <a href="tmap://search?name=남양주 파로스컨벤션" class="bg-[#222222] py-2.5 rounded shadow-sm text-white">티맵</a>
             </div>
-
-            <!-- Navigation Buttons -->
-            <div class="grid grid-cols-3 gap-2 mb-8 font-sans">
-                <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="bg-[#FEE500] text-[#191919] text-xs font-bold py-2.5 rounded text-center shadow-sm">
-                    카카오맵
-                </a>
-                <a href="https://map.naver.com/v5/search/남양주 파로스컨벤션" target="_blank" class="bg-[#03C75A] text-white text-xs font-bold py-2.5 rounded text-center shadow-sm">
-                    네이버 지도
-                </a>
-                <a href="tmap://search?name=남양주 파로스컨벤션" target="_blank" class="bg-[#222222] text-white text-xs font-bold py-2.5 rounded text-center shadow-sm">
-                    티맵
-                </a>
-            </div>
-
             <h3 class="text-lg font-bold mb-2 text-center">파로스컨벤션 2층 파로스홀</h3>
             <p class="text-sm text-center mb-8 text-stone-600">경기 남양주시 다산순환로 20<br>다산현대프리미어캠퍼스몰 E동</p>
-
             <div class="space-y-6 text-sm">
-                <div>
-                    <h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-subway mr-2"></i>지하철 안내</h4>
-                    <p class="text-stone-600 leading-relaxed pl-6">구리역 7번 출구 (8호선, 경의중앙선)<br>· 셔틀버스 운행 (예식 행사 시 운행)</p>
-                </div>
-                            <div class="space-y-6 text-sm">
-                <div>
-                    <h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-subway mr-2"></i>버스 안내</h4>
-                    <p class="text-stone-600 leading-relaxed pl-6">도농고 앞 정류장 하차 (정류장번호 : 23092, 23093)<br>· [일반버스] 79, 95, 땡큐12, 땡큐50(도농고 하차)<br>· [직행버스] 1006(현대프리미엄아울렛 하차)</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-car mr-2"></i>자가용 안내</h4>
-                    <p class="text-stone-600 leading-relaxed pl-6">· 내비게이션 '다산순환로20' 또는 '파로스컨벤션' 입력<br>· 파로스컨벤션 전용 주차장 GATE2 이용 (지하 3층~4층)</p>
-                </div>
-                
-                <!-- Bus Info Box -->
-                <div class="bg-white p-5 rounded-lg border border-wedding-point shadow-sm mt-4">
-                    <h4 class="font-bold text-wedding-dark mb-3 text-center border-b pb-2"><i class="fas fa-bus mr-2"></i>전세버스 안내</h4>
+                <div><h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-subway mr-2"></i>지하철/버스 안내</h4><p class="text-stone-600 leading-relaxed pl-6">구리역 7번 출구 셔틀버스 운행<br>도농고 앞 정류장 하차 (79, 95, 땡큐12, 땡큐50)</p></div>
+                <div class="bg-white p-5 rounded-lg border border-wedding-point shadow-sm">
+                    <h4 class="font-bold text-wedding-dark mb-3 text-center border-b pb-2">전세버스 안내</h4>
                     <div class="space-y-4">
-                        <div>
-                            <p class="font-bold text-[#8B7D6B]">[전주 출발]</p>
-                            <p class="text-stone-600">1/30(토) 8:30am, 전북특별자치도청 앞</p>
-                        </div>
-                        <div>
-                            <p class="font-bold text-[#8B7D6B]">[원주 출발]</p>
-                            <p class="text-stone-600 mb-2">원주 지역 전세버스 운행 및 탑승 안내는 신랑에게 개별 문의 부탁드립니다.</p>
-                            <a href="tel:010" class="inline-block bg-[#F4EFEA] text-wedding-dark text-xs px-3 py-1.5 rounded-full border border-wedding-point hover:bg-stone-100 transition">
-                                <i class="fas fa-comment-dots mr-1"></i> 신랑에게 문의하기
-                            </a>
-                        </div>
+                        <p class="text-stone-600"><b>[전주]</b> 1/30(토) 8:30am, 전북도청 앞</p>
+                        <p class="text-stone-600"><b>[원주]</b> 신랑에게 개별 문의 부탁드립니다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Account Info -->
+        <!-- 6. Account -->
         <section class="py-20 px-6 text-center pb-32">
-            <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 font-bold">마음 전하실 곳</h2>
-            
-            <div class="space-y-3">
-                <!-- Groom Side Accordion -->
-                <div class="border border-wedding-point rounded-lg overflow-hidden text-left bg-white">
-                    <button onclick="toggleAccordion('groom-account')" class="w-full px-5 py-4 flex justify-between items-center bg-[#F9F7F3]">
-                        <span class="font-bold text-sm">신랑측에 마음 전하기</span>
-                        <i class="fas fa-chevron-down text-wedding-point transition-transform duration-300" id="groom-icon"></i>
-                    </button>
-                    <div id="groom-account" class="hidden px-5 py-4 border-t border-wedding-point bg-white space-y-4">
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm">
-                                <p class="text-stone-500 text-xs mb-1">혼주 박유경</p>
-                                <p class="text-stone-700 tracking-wide">은행명 000-000-000000</p>
-                            </div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded text-stone-600 hover:bg-stone-200 transition border border-stone-200">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm">
-                                <p class="text-stone-500 text-xs mb-1">혼주 김기옥</p>
-                                <p class="text-stone-700 tracking-wide">은행명 000-000-000000</p>
-                            </div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded text-stone-600 hover:bg-stone-200 transition border border-stone-200">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm">
-                                <p class="text-stone-500 text-xs mb-1">신랑 박태광</p>
-                                <p class="text-stone-700 tracking-wide">은행명 000-000-000000</p>
-                            </div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded text-stone-600 hover:bg-stone-200 transition border border-stone-200">복사</button>
-                        </div>
+            <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 font-bold text-center">마음 전하실 곳</h2>
+            <div class="space-y-3 text-left">
+                <div class="border border-wedding-point rounded-lg overflow-hidden bg-white">
+                    <button onclick="toggleAccordion('groom')" class="w-full px-5 py-4 flex justify-between bg-[#F9F7F3] font-bold text-sm">신랑측에 마음 전하기 <i class="fas fa-chevron-down" id="groom-icon"></i></button>
+                    <div id="groom" class="hidden px-5 py-4 border-t border-wedding-point space-y-4 text-sm">
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500">혼주 박유경</p><p>은행명 000-000-000000</p></div><button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded border">복사</button></div>
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500">신랑 박태광</p><p>은행명 000-000-000000</p></div><button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded border">복사</button></div>
                     </div>
                 </div>
-
-                <!-- Bride Side Accordion -->
-                <div class="border border-wedding-point rounded-lg overflow-hidden text-left bg-white">
-                    <button onclick="toggleAccordion('bride-account')" class="w-full px-5 py-4 flex justify-between items-center bg-[#F9F7F3]">
-                        <span class="font-bold text-sm">신부측에 마음 전하기</span>
-                        <i class="fas fa-chevron-down text-wedding-point transition-transform duration-300" id="bride-icon"></i>
-                    </button>
-                    <div id="bride-account" class="hidden px-5 py-4 border-t border-wedding-point bg-white space-y-4">
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm">
-                                <p class="text-stone-500 text-xs mb-1">혼주 이기영</p>
-                                <p class="text-stone-700 tracking-wide">은행명 000-000-000000</p>
-                            </div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded text-stone-600 hover:bg-stone-200 transition border border-stone-200">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm">
-                                <p class="text-stone-500 text-xs mb-1">혼주 지백현</p>
-                                <p class="text-stone-700 tracking-wide">은행명 000-000-000000</p>
-                            </div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded text-stone-600 hover:bg-stone-200 transition border border-stone-200">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm">
-                                <p class="text-stone-500 text-xs mb-1">신부 이지현</p>
-                                <p class="text-stone-700 tracking-wide">은행명 000-000-000000</p>
-                            </div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded text-stone-600 hover:bg-stone-200 transition border border-stone-200">복사</button>
-                        </div>
+                <div class="border border-wedding-point rounded-lg overflow-hidden bg-white">
+                    <button onclick="toggleAccordion('bride')" class="w-full px-5 py-4 flex justify-between bg-[#F9F7F3] font-bold text-sm">신부측에 마음 전하기 <i class="fas fa-chevron-down" id="bride-icon"></i></button>
+                    <div id="bride" class="hidden px-5 py-4 border-t border-wedding-point space-y-4 text-sm">
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500">혼주 이기영</p><p>은행명 000-000-000000</p></div><button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded border">복사</button></div>
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500">신부 이지현</p><p>은행명 000-000-000000</p></div><button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-100 px-3 py-1.5 rounded border">복사</button></div>
                     </div>
                 </div>
             </div>
-            
-            <p class="mt-16 text-xs text-stone-400 pb-10">ⓒ 2027 Taekwang & Jihyun Wedding</p>
+            <p class="mt-16 text-xs text-stone-400">ⓒ 2027 Taekwang & Jihyun Wedding</p>
         </section>
 
         <!-- RSVP Modal -->
-        <div id="rsvp-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden px-4">
+        <div id="rsvp-modal" class="fixed inset-0 z-[600] flex items-center justify-center bg-black/60 hidden px-4">
             <div class="bg-white w-full max-w-sm rounded-xl p-6 shadow-2xl">
-                <div class="flex justify-between items-center mb-4 border-b pb-3">
-                    <h3 class="font-bold text-lg">참석 의사 전달</h3>
-                    <button onclick="document.getElementById('rsvp-modal').classList.add('hidden')" class="text-stone-400 hover:text-stone-600">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-                
-                <!-- 실제 구글시트 데이터 전송 폼 -->
-                <form id="rsvp-form" method="POST" class="space-y-4 text-sm font-sans" onsubmit="handleRSVPSubmit(event)">
-                    <div>
-                        <label class="block text-stone-600 mb-1 font-batang">성함</label>
-                        <input type="text" name="name" class="w-full border border-stone-300 rounded p-2 focus:outline-none focus:border-wedding-dark" required placeholder="이름을 입력해주세요">
+                <div class="flex justify-between items-center mb-4 border-b pb-3 font-bold"><h3>참석 의사 전달</h3><button onclick="document.getElementById('rsvp-modal').classList.add('hidden')"><i class="fas fa-times text-xl text-stone-400"></i></button></div>
+                <form onsubmit="handleRSVPSubmit(event)" class="space-y-4 text-sm">
+                    <div><label class="block text-stone-600 mb-1">성함</label><input type="text" name="name" class="w-full border rounded p-2" required></div>
+                    <div><label class="block text-stone-600 mb-1">참석 여부</label>
+                        <div class="flex space-x-2"><label class="flex-1 text-center border p-2 rounded cursor-pointer has-[:checked]:bg-[#F9F7F3]"><input type="radio" name="attend" value="참석" class="hidden" checked> 참석</label><label class="flex-1 text-center border p-2 rounded cursor-pointer has-[:checked]:bg-[#F9F7F3]"><input type="radio" name="attend" value="마음만" class="hidden"> 마음만</label></div>
                     </div>
-                    
-                    <div>
-                        <label class="block text-stone-600 mb-1 font-batang">참석 여부</label>
-                        <div class="flex space-x-2">
-                            <label class="flex-1 text-center border border-stone-200 p-2 rounded cursor-pointer hover:bg-stone-50 has-[:checked]:border-wedding-dark has-[:checked]:bg-[#F9F7F3] transition">
-                                <input type="radio" name="attend" value="참석" class="hidden" checked> 참석할게요
-                            </label>
-                            <label class="flex-1 text-center border border-stone-200 p-2 rounded cursor-pointer hover:bg-stone-50 has-[:checked]:border-wedding-dark has-[:checked]:bg-[#F9F7F3] transition">
-                                <input type="radio" name="attend" value="마음만" class="hidden"> 마음만 전해요
-                            </label>
-                        </div>
+                    <div><label class="block text-stone-600 mb-1">전세버스</label>
+                        <div class="flex flex-col space-y-2 text-xs"><label class="flex items-center space-x-2 border p-2 rounded"><input type="radio" name="bus" value="이용안함" checked> <span>이용 안 함</span></label><label class="flex items-center space-x-2 border p-2 rounded"><input type="radio" name="bus" value="전주탑승"> <span>전주 노선</span></label><label class="flex items-center space-x-2 border p-2 rounded"><input type="radio" name="bus" value="원주탑승"> <span>원주 노선</span></label></div>
                     </div>
-
-                    <div id="bus-section">
-                        <label class="block text-stone-600 mb-1 font-batang">전세버스 이용 (선택)</label>
-                        <div class="flex flex-col space-y-2">
-                            <label class="flex items-center space-x-2 border border-stone-200 p-2 rounded cursor-pointer hover:bg-stone-50 transition">
-                                <input type="radio" name="bus" value="이용안함" checked class="accent-wedding-dark w-4 h-4">
-                                <span>이용 안 함 (개별 이동)</span>
-                            </label>
-                            <label class="flex items-center space-x-2 border border-stone-200 p-2 rounded cursor-pointer hover:bg-stone-50 transition">
-                                <input type="radio" name="bus" value="전주탑승" class="accent-wedding-dark w-4 h-4">
-                                <span>[전주] 08:30 전북도청 앞 탑승</span>
-                            </label>
-                            <label class="flex items-center space-x-2 border border-stone-200 p-2 rounded cursor-pointer hover:bg-stone-50 transition">
-                                <input type="radio" name="bus" value="원주탑승" class="accent-wedding-dark w-4 h-4">
-                                <span class="text-stone-500">[원주] *신랑 개별 안내 예정*</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full bg-wedding-dark text-white py-3 rounded-lg mt-4 font-bold font-batang tracking-wider hover:bg-opacity-90 transition">
-                        메시지 보내기
-                    </button>
+                    <button type="submit" class="w-full bg-wedding-dark text-white py-3 rounded-lg mt-4 font-bold">보내기</button>
                 </form>
             </div>
+        </div>
+
+        <!-- 이미지 확대 모달 (슬라이드 기능 추가) -->
+        <div id="img-modal" class="fixed inset-0 z-[1000] bg-black/95 hidden items-center justify-center select-none">
+            <!-- 닫기 버튼 -->
+            <button class="absolute top-6 right-6 text-white text-3xl z-[1100] p-2 opacity-70" onclick="closeImageModal()"><i class="fas fa-times"></i></button>
+            
+            <!-- 왼쪽 화살표 -->
+            <button class="absolute left-4 top-1/2 -translate-y-1/2 z-[1100] modal-btn" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
+            
+            <!-- 이미지 영역 -->
+            <div class="w-full h-full flex items-center justify-center p-4 overflow-hidden" id="modal-touch-area">
+                <img id="modal-content" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl transition-transform duration-300">
+            </div>
+            
+            <!-- 오른쪽 화살표 -->
+            <button class="absolute right-4 top-1/2 -translate-y-1/2 z-[1100] modal-btn" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
+            
+            <!-- 페이지 인디케이터 -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 text-sm font-sans" id="modal-page-num">1 / 15</div>
         </div>
 
     </div>
 
     <script>
-        // 눈 내리는 효과 생성 함수
+        // 갤러리 이미지 데이터 (15장)
+        const galleryImages = [
+            'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1607580665213-911e8ee1c3e3?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1522673607200-164883eecd0c?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1549416878-b9ca35c2d47a?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1502633013503-e17588119570?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1510076857177-74700760be15?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1525772345561-306730d71d32?auto=format&fit=crop&w=800&q=80'
+        ];
+
+        let currentImgIndex = 0;
+
+        // 갤러리 그리드 생성
+        function initGallery() {
+            const grid = document.getElementById('gallery-grid');
+            galleryImages.forEach((src, idx) => {
+                const div = document.createElement('div');
+                div.className = "aspect-square bg-stone-200 bg-cover bg-center cursor-pointer fade-in";
+                div.style.backgroundImage = `url('${src}')`;
+                div.onclick = () => openImageModal(idx);
+                grid.appendChild(div);
+            });
+        }
+
+        // 이미지 확대 모달
+        function openImageModal(idx) {
+            currentImgIndex = idx;
+            updateModalImage();
+            const modal = document.getElementById('img-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateModalImage() {
+            const modalImg = document.getElementById('modal-content');
+            const pageNum = document.getElementById('modal-page-num');
+            modalImg.src = galleryImages[currentImgIndex];
+            pageNum.innerText = `${currentImgIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function prevImage() {
+            currentImgIndex = (currentImgIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateModalImage();
+        }
+
+        function nextImage() {
+            currentImgIndex = (currentImgIndex + 1) % galleryImages.length;
+            updateModalImage();
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('img-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 터치 스와이프 지원
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const touchArea = document.getElementById('modal-touch-area');
+        touchArea.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, false);
+        touchArea.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextImage(); // 왼쪽으로 밀면 다음
+            if (touchEndX > touchStartX + 50) prevImage(); // 오른쪽으로 밀면 이전
+        }
+
+        // 눈 내리는 효과
         function createSnowflakes() {
             const container = document.getElementById('snow-container');
-            const snowflakeCount = 40; // 적당한 눈송이 개수
-
-            for (let i = 0; i < snowflakeCount; i++) {
+            for (let i = 0; i < 40; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.classList.add('snowflake');
-
-                // 눈송이마다 랜덤한 속성 부여
-                const size = Math.random() * 4 + 2; 
-                const left = Math.random() * 100; 
-                const duration = Math.random() * 10 + 10; 
-                const delay = Math.random() * -20; 
-                const maxOpacity = Math.random() * 0.5 + 0.2; 
-                const endX = (Math.random() - 0.5) * 60; 
-
-                snowflake.style.width = `${size}px`;
-                snowflake.style.height = `${size}px`;
-                snowflake.style.left = `${left}%`;
-                snowflake.style.animationDuration = `${duration}s`;
-                snowflake.style.animationDelay = `${delay}s`;
-                snowflake.style.setProperty('--max-opacity', maxOpacity);
-                snowflake.style.setProperty('--end-x', `${endX}px`);
-
+                const size = Math.random() * 4 + 2;
+                snowflake.style.width = size + 'px'; snowflake.style.height = size + 'px';
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                snowflake.style.animationDelay = (Math.random() * -20) + 's';
+                snowflake.style.setProperty('--max-opacity', Math.random() * 0.5 + 0.2);
+                snowflake.style.setProperty('--end-x', (Math.random() - 0.5) * 60 + 'px');
                 container.appendChild(snowflake);
             }
         }
 
-        // 아코디언 토글 기능
         function toggleAccordion(id) {
             const content = document.getElementById(id);
-            const icon = document.getElementById(id === 'groom-account' ? 'groom-icon' : 'bride-icon');
-            
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
-            }
+            const icon = document.getElementById(id + '-icon');
+            content.classList.toggle('hidden');
+            icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
         }
 
-        // BGM 플레이어 기능 연동
         document.getElementById('bgm-btn').addEventListener('click', function() {
             const audio = document.getElementById('wedding-bgm');
             const icon = document.getElementById('disc-icon');
-            const playPauseIcon = document.getElementById('play-pause-icon');
-            
-            if (audio.paused) {
-                audio.play();
-                icon.classList.add('spin');
-                playPauseIcon.classList.remove('fa-play');
-                playPauseIcon.classList.add('fa-pause');
-            } else {
-                audio.pause();
-                icon.classList.remove('spin');
-                playPauseIcon.classList.remove('fa-pause');
-                playPauseIcon.classList.add('fa-play');
-            }
+            const playIcon = document.getElementById('play-pause-icon');
+            if (audio.paused) { audio.play(); icon.classList.add('spin'); playIcon.className = 'fas fa-pause text-xs'; }
+            else { audio.pause(); icon.classList.remove('spin'); playIcon.className = 'fas fa-play text-xs'; }
         });
 
-        // 계좌번호 복사 및 토스트 알림 기능
         function copyToClipboard(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast();
-            } catch (err) {
-                console.error('복사 실패', err);
-            }
-            document.body.removeChild(textArea);
+            const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+            const toast = document.getElementById("toast"); toast.className = "show"; setTimeout(() => { toast.className = ""; }, 3000);
         }
 
-        function showToast() {
-            const toast = document.getElementById("toast");
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-        }
-
-        // ★ [가장 중요한 부분] 구글 시트 데이터 전송 스크립트 ★
         function handleRSVPSubmit(event) {
-            event.preventDefault(); // 폼 기본 이동 막기
-            
+            event.preventDefault();
             const form = event.target;
             const data = new FormData(form);
-
-            // ★★★ 주의: 아래 쌍따옴표 안에 구글 스프레드시트에서 발급받은 '웹 앱 URL'을 반드시 넣어주세요! ★★★
-            const googleSheetUrl = "https://script.google.com/macros/s/AKfycbxzgjzdi0AV6fppxA1iQESyOnPNe-QWObSf-e4vlkyDguYjlEbZLx5YUqtai6U18oSt/exec";
-
-            // 구글 URL을 아직 안 넣었을 경우 경고
-            if(googleSheetUrl === "https://script.google.com/macros/s/AKfycbxzgjzdi0AV6fppxA1iQESyOnPNe-QWObSf-e4vlkyDguYjlEbZLx5YUqtai6U18oSt/exec") {
-                alert("구글 시트 URL이 아직 연결되지 않았습니다! 코드를 수정해주세요.");
-                return;
-            }
-
-            fetch(googleSheetUrl, {
-                method: "POST",
-                mode: "no-cors", // 구글 시트 전송 시 필수 보안 설정
-                body: data
-            }).then(() => {
-                // 전송 성공 시 팝업창 닫기 및 알림
+            const googleSheetUrl = "여기에_구글_웹앱_URL을_붙여넣으세요";
+            if(googleSheetUrl.includes("여기에")) { alert("구글 시트 주소가 연결되지 않았습니다!"); return; }
+            fetch(googleSheetUrl, { method: "POST", mode: "no-cors", body: data }).then(() => {
                 document.getElementById('rsvp-modal').classList.add('hidden');
-                const toast = document.getElementById("toast");
-                toast.innerText = "참석 정보가 성공적으로 전달되었습니다! 🤍";
-                toast.className = "show";
-                setTimeout(function(){ 
-                    toast.className = toast.className.replace("show", ""); 
-                    toast.innerText = "계좌번호가 복사되었습니다."; 
-                }, 3000);
-                form.reset(); // 성공 후 입력칸 비우기
-            }).catch((error) => {
-                alert("전송에 실패했습니다. 잠시 후 다시 시도해주세요.");
-            });
+                const toast = document.getElementById("toast"); toast.innerText = "전달되었습니다! 🤍"; toast.className = "show";
+                setTimeout(() => { toast.className = ""; toast.innerText = "계좌번호가 복사되었습니다."; }, 3000);
+                form.reset();
+            }).catch(() => { alert("전송 실패. 다시 시도해 주세요."); });
         }
 
-        // 페이지 로드 시 눈 내리기 시작
-        window.addEventListener('DOMContentLoaded', createSnowflakes);
+        window.addEventListener('DOMContentLoaded', () => {
+            createSnowflakes();
+            initGallery();
+        });
+
+        // ESC 키로 모달 닫기 지원
+        window.addEventListener('keydown', e => {
+            if(e.key === "Escape") closeImageModal();
+            if(e.key === "ArrowLeft") prevImage();
+            if(e.key === "ArrowRight") nextImage();
+        });
     </script>
 </body>
 </html>
