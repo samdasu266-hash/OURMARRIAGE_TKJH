@@ -99,8 +99,8 @@
             <p class="text-xs text-stone-400">사진을 터치하면 크게 보실 수 있습니다.</p>
         </section>
 
-        <!-- 5. Location -->
-        <section class="py-20 px-6 border-b border-wedding-point/30">
+       <!-- 5. Location -->
+        <section class="pt-20 pb-2 px-6">
             <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 text-center font-bold">LOCATION</h2>
             <div class="w-full h-48 bg-stone-200 rounded-lg mb-4 overflow-hidden border border-stone-300"><img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-60"></div>
             <div class="grid grid-cols-3 gap-2 mb-8 font-sans text-xs font-bold text-center">
@@ -110,21 +110,44 @@
             </div>
             <h3 class="text-lg font-bold mb-2 text-center">파로스컨벤션 2층 파로스홀</h3>
             <p class="text-sm text-center mb-8 text-stone-600">경기 남양주시 다산순환로 20<br>다산현대프리미어캠퍼스몰 E동</p>
-            <div class="space-y-6 text-sm">
-                <div><h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-subway mr-2"></i>지하철/버스 안내</h4><p class="text-stone-600 leading-relaxed pl-6">구리역 7번 출구 셔틀버스 운행<br>도농고 앞 정류장 하차 (79, 95, 땡큐12, 땡큐50)</p></div>
-                <div class="bg-white p-5 rounded-lg border border-wedding-point shadow-sm">
-                    <h4 class="font-bold text-wedding-dark mb-3 text-center border-b pb-2">전세버스 안내</h4>
-                    <div class="space-y-4">
-                        <p class="text-stone-600"><b>[전주]</b> 1/30(토) 8:30am, 전북도청 앞</p>
-                        <p class="text-stone-600"><b>[원주]</b> 신랑에게 개별 문의 부탁드립니다.</p>
+            
+            <div class="space-y-6 text-sm mb-4 text-left">
+                <!-- 지하철 -->
+                <div>
+                    <h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-subway mr-2"></i>지하철 안내</h4>
+                    <p class="text-stone-600 leading-relaxed pl-6">구리역 7번 출구 (8호선, 경의중앙선)<br>· 예식 당일 셔틀버스 운행</p>
+                </div>
+                <!-- 버스 -->
+                <div>
+                    <h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-bus mr-2"></i>버스 안내</h4>
+                    <p class="text-stone-600 leading-relaxed pl-6">도농고 앞 정류장 하차 (정류장번호: 23092, 23093)<br>· [일반] 79, 95, 땡큐12, 땡큐50<br>· [직행] 1006 (현대프리미엄아울렛 하차)</p>
+                </div>
+                <!-- 자가용 -->
+                <div>
+                    <h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-car mr-2"></i>자가용 안내</h4>
+                    <p class="text-stone-600 leading-relaxed pl-6">내비게이션 '다산순환로 20' 또는 '파로스컨벤션'<br>· 건물 내 지하 3층~4층 주차장 GATE2 이용</p>
+                </div>
+                
+                <!-- 전세버스 박스 -->
+                <div class="bg-white p-5 rounded-lg border border-wedding-point shadow-sm mt-6">
+                    <h4 class="font-bold text-wedding-dark mb-4 text-center border-b pb-3"><i class="fas fa-bus-alt mr-2"></i>전세버스 안내</h4>
+                    <div class="space-y-5">
+                        <div>
+                            <p class="font-bold text-wedding-dark text-[14px] mb-1">[전주 출발]</p>
+                            <p class="text-stone-600 text-[13px] leading-relaxed pl-2">· 일시 : 1월 30일(토) 오전 8시 30분<br>· 장소 : 전북특별자치도청 앞<br>· 인솔 : 홍길동 <a href="tel:010-9999-9999" class="text-stone-500 underline underline-offset-2 ml-1 font-sans">010-9999-9999</a></p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-wedding-dark text-[14px] mb-1">[원주 출발]</p>
+                            <p class="text-stone-600 text-[13px] leading-relaxed pl-2 break-keep">현재 하객분들의 편의를 위해 대절 여부를 조사 중입니다. 참석 의사 전달 시 탑승을 체크해 주시면, 확정 시 개별 안내해 드리겠습니다.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Account -->
-        <section class="py-15 px-6 text-center pb-32">
-            <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 font-bold text-center">마음 전하실 곳</h2>
+        <!-- 6. Account (Location 섹션과 붙이기 위해 상단 pt를 0으로 설정) -->
+        <section class="pt-4 pb-20 px-6 text-center border-b border-wedding-point/30">
+            <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-6 font-bold text-center uppercase">마음 전하실 곳</h2>
             <div class="space-y-3 text-left">
                 <div class="border border-wedding-point rounded-lg overflow-hidden bg-white">
                     <button onclick="toggleAccordion('groom')" class="w-full px-5 py-4 flex justify-between bg-[#F9F7F3] font-bold text-sm">신랑측에 마음 전하기 <i class="fas fa-chevron-down" id="groom-icon"></i></button>
@@ -142,23 +165,25 @@
                 </div>
             </div>
         </section>
-        <!-- 7. Bottom Personal Message (No Italic, Poetic Style) -->
-        <section class="py-20 px-8 text-center bg-stone-50/50">
-            <div class="max-w-[280px] mx-auto">
-                <div class="h-[1px] w-8 bg-wedding-point mx-auto mb-8"></div>
-                <p class="text-[13px] leading-relaxed text-wedding-dark font-batang">
-                    소중한 분들을 모시는 설레는 마음을 담아,<br>
-                    신부가 한 글자 한 글자 정성을 다해 직접 만든<br>
-                    우리만의 작고 소중한 초대장입니다.<br>
-                    <span class="mt-4 block text-stone-400">따뜻한 마음으로 함께 축복해 주세요.</span>
+
+        <!-- 7. Bottom Personal Message (우아하고 감성적인 버전) -->
+        <section class="py-24 px-8 text-center bg-[#F9F7F3]">
+            <div class="max-w-[320px] mx-auto">
+                <div class="h-[1px] w-6 bg-wedding-point mx-auto mb-10"></div>
+                <p class="text-[13.5px] leading-relaxed text-wedding-dark font-batang break-keep">
+                    우리의 시작을 알리는 이 첫 편지는<br>
+                    초대하는 설렘을 가득 담아,<br>
+                    디자인부터 완성까지 신부의 손길로<br>
+                    직접 피워낸 세상에 하나뿐인 공간입니다.<br>
+                    <span class="mt-4 block text-stone-400 text-[12px]">정성스레 매만진 이 진심이<br>여러분께 따뜻한 온기로 전해지길 바랍니다.</span>
                 </p>
-                <div class="h-[1px] w-8 bg-wedding-point mx-auto mt-8"></div>
+                <div class="h-[1px] w-6 bg-wedding-point mx-auto mt-10"></div>
             </div>
             <p class="mt-16 text-[10px] text-stone-300 tracking-[0.3em] uppercase">
-                Save The Date 20270130
+                2027 Taekwang & Jihyun Wedding
             </p>
-        </section> 
-        
+        </section>
+
         <!-- RSVP Modal -->
         <div id="rsvp-modal" class="fixed inset-0 z-[600] flex items-center justify-center bg-black/60 hidden px-4">
             <div class="bg-white w-full max-w-sm rounded-xl p-6 shadow-2xl">
@@ -177,13 +202,13 @@
         </div>
 
         <!-- 이미지 확대 모달 -->
-        <div id="img-modal" class="fixed inset-0 z-[1000] bg-black/95 hidden items-center justify-center select-none">
-            <button class="absolute top-6 right-6 text-white text-3xl z-[1100] p-2 opacity-70" onclick="closeImageModal()"><i class="fas fa-times"></i></button>
-            <button class="absolute left-4 top-1/2 -translate-y-1/2 z-[1100] modal-btn" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
+        <div id="img-modal" class="fixed inset-0 z-[1500] bg-black/95 hidden items-center justify-center select-none">
+            <button class="absolute top-6 right-6 text-white text-3xl z-[1600] p-2 opacity-70" onclick="closeImageModal()"><i class="fas fa-times"></i></button>
+            <button class="absolute left-4 top-1/2 -translate-y-1/2 z-[1600] modal-btn" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
             <div class="w-full h-full flex items-center justify-center p-4 overflow-hidden" id="modal-touch-area">
                 <img id="modal-content" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl transition-transform duration-300">
             </div>
-            <button class="absolute right-4 top-1/2 -translate-y-1/2 z-[1100] modal-btn" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
+            <button class="absolute right-4 top-1/2 -translate-y-1/2 z-[1600] modal-btn" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
             <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 text-sm font-sans" id="modal-page-num">1 / 15</div>
         </div>
     </div>
@@ -303,7 +328,6 @@
             event.preventDefault();
             const form = event.target;
             const data = new FormData(form);
-            // 발급받으신 주소로 연동 완료!
             const googleSheetUrl = "https://script.google.com/macros/s/AKfycbxzgjzdi0AV6fppxA1iQESyOnPNe-QWObSf-e4vlkyDguYjlEbZLx5YUqtai6U18oSt/exec";
             
             fetch(googleSheetUrl, { method: "POST", mode: "no-cors", body: data }).then(() => {
