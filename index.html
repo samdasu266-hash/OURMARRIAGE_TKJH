@@ -46,7 +46,6 @@
         .modal-btn { background-color: rgba(0,0,0,0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.2s; }
         .modal-btn:active { background-color: rgba(0,0,0,0.6); transform: scale(0.9); }
 
-        .modal-open { overflow: hidden; height: 100vh; touch-action: none; }
         .text-glow { text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 20px rgba(249, 247, 243, 0.8); }
 
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="%238B7D6B" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); background-repeat: no-repeat; background-position-x: 98%; background-position-y: 50%; }
@@ -318,6 +317,25 @@
         ];
 
         let currentImgIndex = 0;
+        let scrollPosition = 0; // 스크롤 위치 기억 변수
+
+        // 스크롤 고정 (위치 기억)
+        function lockScroll() {
+            scrollPosition = window.pageYOffset;
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollPosition}px`;
+            document.body.style.width = '100%';
+        }
+
+        // 스크롤 복원 (기억한 위치로)
+        function unlockScroll() {
+            document.body.style.removeProperty('overflow');
+            document.body.style.removeProperty('position');
+            document.body.style.removeProperty('top');
+            document.body.style.removeProperty('width');
+            window.scrollTo(0, scrollPosition);
+        }
 
         function initGallery() {
             const grid = document.getElementById('gallery-grid');
@@ -336,7 +354,7 @@
             const modal = document.getElementById('img-modal');
             modal.classList.remove('hidden');
             modal.classList.add('active');
-            document.body.classList.add('modal-open'); 
+            lockScroll(); // 스크롤 고정 실행
         }
 
         function updateModalImage() {
@@ -360,7 +378,7 @@
             const modal = document.getElementById('img-modal');
             modal.classList.add('hidden');
             modal.classList.remove('active');
-            document.body.classList.remove('modal-open'); 
+            unlockScroll(); // 스크롤 복원 실행
         }
 
         let touchStartX = 0;
@@ -397,7 +415,7 @@
         }
 
         // ==========================================
-        // ★ BGM 로직: 2분 8초시작 & 터치 시 자동재생
+        // ★ BGM 로직: 2분 8초 시작 & 터치 시 자동재생
         // ==========================================
         const audio = document.getElementById('wedding-bgm');
         const discIcon = document.getElementById('disc-icon');
@@ -435,13 +453,11 @@
             if (audio.paused && isFirstPlay) {
                 playWeddingBgm();
             }
-            // 한 번 실행 후 이벤트 해제
             document.removeEventListener('touchstart', autoPlayOnFirstInteraction);
             document.removeEventListener('scroll', autoPlayOnFirstInteraction);
             document.removeEventListener('click', autoPlayOnFirstInteraction);
         }
 
-        // 상호작용 이벤트 리스너 등록
         document.addEventListener('touchstart', autoPlayOnFirstInteraction, { passive: true });
         document.addEventListener('scroll', autoPlayOnFirstInteraction, { passive: true });
         document.addEventListener('click', autoPlayOnFirstInteraction);
@@ -454,7 +470,7 @@
 
         function openRsvpModal() {
             document.getElementById('rsvp-modal').classList.remove('hidden');
-            document.body.classList.add('modal-open'); 
+            lockScroll(); // 스크롤 고정 실행
         }
 
         function toggleBusSection() {
@@ -468,7 +484,7 @@
             document.getElementById('rsvp-modal').classList.add('hidden');
             document.getElementById('rsvp-form').reset();
             toggleBusSection(); 
-            document.body.classList.remove('modal-open'); 
+            unlockScroll(); // 스크롤 복원 실행
         }
 
         function openTmap() {
@@ -511,7 +527,10 @@
         });
 
         window.addEventListener('keydown', e => {
-            if(e.key === "Escape") { closeImageModal(); closeRsvpModal(); }
+            if(e.key === "Escape") { 
+                if(!document.getElementById('img-modal').classList.contains('hidden')) closeImageModal(); 
+                if(!document.getElementById('rsvp-modal').classList.contains('hidden')) closeRsvpModal(); 
+            }
             if(e.key === "ArrowLeft") prevImage();
             if(e.key === "ArrowRight") nextImage();
         });
