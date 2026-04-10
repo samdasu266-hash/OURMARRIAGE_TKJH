@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="태광 ♥ 지현 결혼합니다">
     <meta property="og:description" content="2027년 1월 30일(토) 낮 1시 10분 남양주 파로스컨벤션, 따뜻한 마음으로 함께 축복해 주세요.">
-    <!-- 1. 카카오톡 공유 썸네일 변경 완료 -->
+    <!-- 카카오톡 공유 썸네일 -->
     <meta property="og:image" content="IMG_1033.jpeg">
     <title>태광 ♥ 지현 결혼합니다</title>
     
-    <!-- 2. 퍼스콘(파비콘) & 아이폰 홈화면 아이콘 변경 완료 -->
+    <!-- 퍼스콘(파비콘) & 아이폰 홈화면 아이콘 -->
     <link rel="icon" href="IMG_1033.jpeg">
     <link rel="apple-touch-icon" href="IMG_1033.jpeg">
 
@@ -182,43 +182,26 @@
             <div class="space-y-3 text-left">
                 <!-- 신랑측 -->
                 <div class="border border-wedding-point rounded-lg overflow-hidden bg-white">
-                    <button onclick="toggleAccordion('groom')" class="w-full px-5 py-4 flex justify-between items-center bg-[#F9F7F3] font-bold text-sm text-wedding-deep">
-                        신랑측에 마음 전하기 <i class="fas fa-chevron-down transition-transform duration-300 text-wedding-dark" id="groom-icon"></i>
-                    </button>
+                    <button onclick="toggleAccordion('groom')" class="w-full px-5 py-4 flex justify-between items-center bg-[#F9F7F3] font-bold text-sm text-wedding-deep">신랑측에 마음 전하기 <i class="fas fa-chevron-down transition-transform duration-300 text-wedding-dark" id="groom-icon"></i></button>
                     <div id="groom" class="hidden px-5 py-4 border-t border-wedding-point space-y-4 text-sm text-wedding-deep">
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-xs text-stone-500 mb-1">혼주 박유경</p><p class="font-medium">은행명 000-000-000000</p></div>
-                            <!-- 복사 버튼 클릭 시 실제 계좌번호가 인자로 들어가도록 수정 완료 -->
-                            <button onclick="copyToClipboard('000-000-000000'); event.stopPropagation();" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-xs text-stone-500 mb-1">혼주 김기옥</p><p class="font-medium">은행명 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000-000-000000'); event.stopPropagation();" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-xs text-stone-500 mb-1">신랑 박태광</p><p class="font-medium">신한은행 110-305-227134</p></div>
-                            <button onclick="copyToClipboard('110-305-227134'); event.stopPropagation();" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button>
-                        </div>
+                        <!-- 박유경 (아직 미입력) -->
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500 mb-1">혼주 박유경</p><p class="font-medium">은행명 000-000-000000</p></div><button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button></div>
+                        <!-- 김기옥 (아직 미입력) -->
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500 mb-1">혼주 김기옥</p><p class="font-medium">은행명 000-000-000000</p></div><button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button></div>
+                        <!-- 태광 (입력 완료!) -->
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500 mb-1">신랑 박태광</p><p class="font-medium">신한은행 110-305-227134</p></div><button onclick="copyToClipboard('110305227134')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button></div>
                     </div>
                 </div>
                 <!-- 신부측 -->
                 <div class="border border-wedding-point rounded-lg overflow-hidden bg-white">
-                    <button onclick="toggleAccordion('bride')" class="w-full px-5 py-4 flex justify-between items-center bg-[#F9F7F3] font-bold text-sm text-wedding-deep">
-                        신부측에 마음 전하기 <i class="fas fa-chevron-down transition-transform duration-300 text-wedding-dark" id="bride-icon"></i>
-                    </button>
+                    <button onclick="toggleAccordion('bride')" class="w-full px-5 py-4 flex justify-between items-center bg-[#F9F7F3] font-bold text-sm text-wedding-deep">신부측에 마음 전하기 <i class="fas fa-chevron-down transition-transform duration-300 text-wedding-dark" id="bride-icon"></i></button>
                     <div id="bride" class="hidden px-5 py-4 border-t border-wedding-point bg-white space-y-4 text-sm text-wedding-deep">
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-xs text-stone-500 mb-1">혼주 이기영</p><p class="font-medium">은행명 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000-000-000000'); event.stopPropagation();" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-xs text-stone-500 mb-1">혼주 지백현</p><p class="font-medium">은행명 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000-000-000000'); event.stopPropagation();" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-xs text-stone-500 mb-1">신부 이지현</p><p class="font-medium">신한은행 110-477-676185</p></div>
-                            <button onclick="copyToClipboard('110-477-676185'); event.stopPropagation();" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button>
-                        </div>
+                        <!-- 이기영 (아직 미입력) -->
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500 mb-1">혼주 이기영</p><p class="font-medium">은행명 000-000-000000</p></div><button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button></div>
+                        <!-- 지백현 (입력 완료!) -->
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500 mb-1">혼주 지백현</p><p class="font-medium">농협 301-0089-9502-11</p></div><button onclick="copyToClipboard('3010089950211')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button></div>
+                        <!-- 지현 (입력 완료!) -->
+                        <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500 mb-1">신부 이지현</p><p class="font-medium">신한은행 110-477-676185</p></div><button onclick="copyToClipboard('110477676185')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200 text-stone-600 active:bg-stone-200">복사</button></div>
                     </div>
                 </div>
             </div>
@@ -476,50 +459,10 @@
         document.addEventListener('scroll', autoPlayOnFirstInteraction, { passive: true });
         document.addEventListener('click', autoPlayOnFirstInteraction);
 
-        // --- 수정 완료된 부분: 복사 기능 ---
         function copyToClipboard(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            
-            // 화면에서 보이지 않도록 위치 조정 (iOS 스크롤 튐 현상 방지)
-            textArea.style.position = "fixed";
-            textArea.style.top = "0";
-            textArea.style.left = "-9999px";
-
-            document.body.appendChild(textArea);
-
-            // iOS 기기 호환성을 위한 텍스트 선택 처리
-            if (navigator.userAgent.match(/ipad|iphone/i)) {
-                const range = document.createRange();
-                range.selectNodeContents(textArea);
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-                textArea.setSelectionRange(0, 999999);
-            } else {
-                textArea.focus();
-                textArea.select();
-            }
-
-            try {
-                // 복사 실행
-                document.execCommand('copy');
-                
-                // 성공 시 토스트 알림 띄우기
-                const toast = document.getElementById("toast");
-                toast.innerText = "계좌번호가 복사되었습니다."; // RSVP 완료 메시지와 혼동 방지
-                toast.className = "show";
-                setTimeout(() => { toast.className = ""; }, 3000);
-            } catch (err) {
-                console.error('복사에 실패했습니다.', err);
-                alert("기기 설정으로 인해 자동 복사가 지원되지 않습니다. 직접 계좌번호를 선택해 복사해 주세요.");
-            }
-
-            // 임시 생성한 textarea 제거 및 선택 영역 초기화
-            document.body.removeChild(textArea);
-            window.getSelection().removeAllRanges();
+            const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+            const toast = document.getElementById("toast"); toast.className = "show"; setTimeout(() => { toast.className = ""; }, 3000);
         }
-        // ------------------------------------
 
         function openRsvpModal() {
             document.getElementById('rsvp-modal').classList.remove('hidden');
@@ -564,14 +507,8 @@
 
             fetch(googleSheetUrl, { method: "POST", mode: "no-cors", body: data }).then(() => {
                 closeRsvpModal();
-                const toast = document.getElementById("toast"); 
-                toast.innerText = "참석 정보가 안전하게 전달되었습니다! 🤍"; 
-                toast.className = "show";
-                setTimeout(() => { 
-                    toast.className = ""; 
-                    // 메시지 초기화 (다음 번 계좌 복사를 위해)
-                    setTimeout(() => { toast.innerText = "계좌번호가 복사되었습니다."; }, 500);
-                }, 3000);
+                const toast = document.getElementById("toast"); toast.innerText = "참석 정보가 안전하게 전달되었습니다! 🤍"; toast.className = "show";
+                setTimeout(() => { toast.className = ""; toast.innerText = "계좌번호가 복사되었습니다."; }, 3000);
             }).catch(() => { 
                 alert("일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."); 
             }).finally(() => {
