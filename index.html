@@ -99,18 +99,27 @@
             <p class="text-xs text-stone-400">사진을 터치하면 크게 보실 수 있습니다.</p>
         </section>
 
-       <!-- 5. Location -->
-        <section class="pt-20 pb-2 px-6">
+        <!-- 5. Location (순서 재배치: 예식장 -> 주소 -> 지도 -> 지도버튼 -> 상세 교통편) -->
+        <section class="pt-20 pb-0 px-6 border-b border-wedding-point/30">
             <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 text-center font-bold">LOCATION</h2>
+            
+            <!-- 예식장 및 주소 -->
             <h3 class="text-lg font-bold mb-2 text-center">파로스컨벤션 2층 파로스홀</h3>
-            <p class="text-sm text-center mb-8 text-stone-600">경기 남양주시 다산순환로 20<br>다산현대프리미어캠퍼스몰 E동</p>
-            <div class="w-full h-48 bg-stone-200 rounded-lg mb-4 overflow-hidden border border-stone-300"><img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-60"></div>
-            <div class="grid grid-cols-3 gap-2 mb-8 font-sans text-xs font-bold text-center">
+            <p class="text-sm text-center mb-6 text-stone-600">경기 남양주시 다산순환로 20<br>다산현대프리미어캠퍼스몰 E동</p>
+
+            <!-- 지도 이미지 -->
+            <div class="w-full h-48 bg-stone-200 rounded-lg mb-4 overflow-hidden border border-stone-300">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-60">
+            </div>
+            
+            <!-- 내비게이션 버튼 -->
+            <div class="grid grid-cols-3 gap-2 mb-10 font-sans text-xs font-bold text-center">
                 <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="bg-[#FEE500] py-2.5 rounded shadow-sm text-[#191919]">카카오맵</a>
                 <a href="https://map.naver.com/v5/search/남양주 파로스컨벤션" target="_blank" class="bg-[#03C75A] py-2.5 rounded shadow-sm text-white">네이버 지도</a>
                 <a href="tmap://search?name=남양주 파로스컨벤션" class="bg-[#222222] py-2.5 rounded shadow-sm text-white">티맵</a>
             </div>
             
+            <!-- 상세 교통편 안내 -->
             <div class="space-y-6 text-sm mb-4 text-left">
                 <!-- 지하철 -->
                 <div>
@@ -140,6 +149,14 @@
                             <p class="font-bold text-wedding-dark text-[14px] mb-1">[원주 출발]</p>
                             <p class="text-stone-600 text-[13px] leading-relaxed pl-2 break-keep">현재 하객분들의 편의를 위해 대절 여부를 조사 중입니다. 참석 의사 전달 시 탑승을 체크해 주시면, 확정 시 개별 안내해 드리겠습니다.</p>
                         </div>
+                    </div>
+                    
+                    <!-- 10분 전 도착 당부 문구 -->
+                    <div class="mt-5 pt-4 border-t border-dashed border-stone-200">
+                        <p class="text-[12.5px] text-[#8B7D6B] leading-relaxed break-keep bg-[#F9F7F3] p-3 rounded-md">
+                            <i class="fas fa-info-circle mr-1 opacity-70"></i>
+                            여러 하객분들이 함께 이용하시는 만큼 정시 출발 예정입니다. 원활한 출발을 위해 <b>출발 10분 전</b>까지 미리 도착하여 탑승해 주시면 감사하겠습니다.
+                        </p>
                     </div>
                 </div>
             </div>
