@@ -21,7 +21,7 @@
                         'wedding-text': '#4A4036', 
                         'wedding-point': '#D4C4B7', 
                         'wedding-dark': '#8B7D6B',
-                        'wedding-deep': '#5C4D43' /* 가독성을 위한 딥 브라운 추가 */
+                        'wedding-deep': '#5C4D43'
                     }
                 }
             }
@@ -46,13 +46,9 @@
         .modal-btn { background-color: rgba(0,0,0,0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.2s; }
         .modal-btn:active { background-color: rgba(0,0,0,0.6); transform: scale(0.9); }
 
-        /* iOS Safari 모달 스크롤 방지용 클래스 */
         .modal-open { overflow: hidden; height: 100vh; touch-action: none; }
-
-        /* 가독성 극대화를 위한 텍스트 후광(Glow) 효과 */
         .text-glow { text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 20px rgba(249, 247, 243, 0.8); }
 
-        /* Custom Scrollbar for Select */
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="%238B7D6B" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); background-repeat: no-repeat; background-position-x: 98%; background-position-y: 50%; }
     </style>
 </head>
@@ -73,7 +69,6 @@
         </div>
 
         <!-- 1. Main Cover -->
-        <!-- 배경 딤(Dim) 그라데이션 정교화: 상단은 투명하게, 하단은 배경색으로 자연스럽게 스며들도록 조정 -->
         <section class="relative w-full h-[85vh] flex flex-col items-center justify-center fade-in bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(249, 247, 243, 0.1) 0%, rgba(249, 247, 243, 0.75) 60%, rgba(249, 247, 243, 1) 100%), url('https://images.unsplash.com/photo-1545315003-c5ad6226c272?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
             <div class="absolute bottom-12 flex flex-col items-center text-center px-6">
                 <p class="text-[15px] leading-relaxed text-wedding-deep mb-8 font-medium text-glow break-keep">
@@ -88,7 +83,6 @@
 
         <!-- 2. Invitation -->
         <section class="py-20 px-8 text-center fade-in border-b border-wedding-point/30">
-            <!-- 폰트 굵기 및 명도 상향 -->
             <h2 class="text-sm tracking-[0.25em] text-wedding-deep mb-10 font-extrabold">INVITATION</h2>
             <div class="space-y-6 text-[15px] leading-loose text-wedding-deep">
                 <p>하나는 유연하고, 하나는 단단한 편이라<br>함께일 때 가장 잘 어울리는 사이가 되었습니다.</p>
@@ -211,7 +205,6 @@
                 </p>
                 <div class="h-[1px] w-6 bg-wedding-point mx-auto mt-10"></div>
             </div>
-            <!-- 명도 대비를 확보한 세련된 푸터 -->
             <p class="mt-16 text-[10px] text-[#8B8378] tracking-[0.3em] uppercase font-medium">
                 2027 Taekwang & Jihyun Wedding
             </p>
@@ -403,13 +396,56 @@
             icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
         }
 
-        document.getElementById('bgm-btn').addEventListener('click', function() {
-            const audio = document.getElementById('wedding-bgm');
-            const icon = document.getElementById('disc-icon');
-            const playIcon = document.getElementById('play-pause-icon');
-            if (audio.paused) { audio.play(); icon.classList.add('spin'); playIcon.className = 'fas fa-pause text-xs'; }
-            else { audio.pause(); icon.classList.remove('spin'); playIcon.className = 'fas fa-play text-xs'; }
-        });
+        // ==========================================
+        // ★ BGM 로직: 2분 8초시작 & 터치 시 자동재생
+        // ==========================================
+        const audio = document.getElementById('wedding-bgm');
+        const discIcon = document.getElementById('disc-icon');
+        const playIcon = document.getElementById('play-pause-icon');
+        let isFirstPlay = true;
+
+        function playWeddingBgm() {
+            if (isFirstPlay) {
+                audio.currentTime = 128; // 2분 8초(128초)부터 시작
+                isFirstPlay = false;
+            }
+            audio.play().then(() => {
+                discIcon.classList.add('spin');
+                playIcon.className = 'fas fa-pause text-xs';
+            }).catch(e => {
+                console.log("모바일 브라우저 정책으로 재생 대기중입니다.");
+            });
+        }
+
+        function toggleBgm(e) {
+            if(e) e.stopPropagation();
+            if (audio.paused) {
+                playWeddingBgm();
+            } else {
+                audio.pause();
+                discIcon.classList.remove('spin');
+                playIcon.className = 'fas fa-play text-xs';
+            }
+        }
+
+        document.getElementById('bgm-btn').addEventListener('click', toggleBgm);
+
+        // 하객이 화면을 처음 스크롤/터치하는 순간 우아하게 음악 재생
+        function autoPlayOnFirstInteraction() {
+            if (audio.paused && isFirstPlay) {
+                playWeddingBgm();
+            }
+            // 한 번 실행 후 이벤트 해제
+            document.removeEventListener('touchstart', autoPlayOnFirstInteraction);
+            document.removeEventListener('scroll', autoPlayOnFirstInteraction);
+            document.removeEventListener('click', autoPlayOnFirstInteraction);
+        }
+
+        // 상호작용 이벤트 리스너 등록
+        document.addEventListener('touchstart', autoPlayOnFirstInteraction, { passive: true });
+        document.addEventListener('scroll', autoPlayOnFirstInteraction, { passive: true });
+        document.addEventListener('click', autoPlayOnFirstInteraction);
+        // ==========================================
 
         function copyToClipboard(text) {
             const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
