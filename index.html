@@ -51,7 +51,6 @@
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
         
-        /* 순백색 시네마틱 스노우 */
         .snowflake { 
             position: absolute; 
             top: -20px; 
@@ -84,7 +83,6 @@
 
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="%238B7D6B" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); background-repeat: no-repeat; background-position-x: 98%; background-position-y: 50%; }
 
-        /* 갤러리 이미지 부드러운 전환(Fade-in) */
         .gallery-item { transition: opacity 0.6s ease; opacity: 0; }
         .gallery-item.loaded { opacity: 1; }
     </style>
@@ -615,11 +613,12 @@
             });
         }
 
-        // ★ 진짜 최종! 신부님의 Vercel 주소와 카카오 키 완벽 세팅 ★
+        // ★★★ 신부님이 세팅하신 진짜 키(11b4...) 완벽 적용! ★★★
         function shareKakao() {
             if (typeof Kakao === 'undefined' || !Kakao.isInitialized()) {
                 try { 
-                    Kakao.init('f57835b26e8af00b27fcf663f1089db6'); 
+                    // 여기에 신부님이 캡처해주신 그 키를 100% 정확하게 넣었습니다!
+                    Kakao.init('11b4645eacca1144dac2f2f2316a7a3f'); 
                 } catch(e) {
                     copyPageUrl();
                     return;
@@ -630,7 +629,7 @@
                 content: {
                     title: '태광 ♥ 지현 결혼합니다',
                     description: '2027년 1월 30일(토) 낮 1시 10분 · 남양주 파로스컨벤션',
-                    // 신부님의 Vercel 주소로 완벽하게 연결!
+                    // 우리가 쓸 진짜 주소!
                     imageUrl: 'https://ourmarriage-tkjh.vercel.app/IMG_1033.jpeg',
                     link: {
                         mobileWebUrl: 'https://ourmarriage-tkjh.vercel.app/',
