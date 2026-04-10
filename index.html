@@ -37,7 +37,7 @@
         /* Modal Style for Image Zoom */
         #img-modal { display: none; }
         #img-modal.active { display: flex; }
-        .modal-btn { background-color: rgba(0,0,0,0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; items-center: center; justify-content: center; color: white; transition: all 0.2s; }
+        .modal-btn { background-color: rgba(0,0,0,0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.2s; }
         .modal-btn:active { background-color: rgba(0,0,0,0.6); transform: scale(0.9); }
     </style>
 </head>
@@ -72,7 +72,7 @@
             <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 font-bold">INVITATION</h2>
             <div class="space-y-6 text-[15px] leading-loose">
                 <p>하나는 유연하고, 하나는 단단한 편이라<br>함께일 때 가장 잘 어울리는 사이가 되었습니다.</p>
-                <p>웃음이 필요할 땐 장난으로,<br>힘이 필요할 든든한 버팀목이 되어<br>서로의 부족함을 채우며 살아가겠습니다.</p>
+                <p>웃음이 필요할 땐 장난으로,<br>힘이 필요할 때 든든한 버팀목이 되어<br>서로의 부족함을 채우며 살아가겠습니다.</p>
                 <p>저희 두 사람의 시작을<br>귀한 걸음으로 축복해 주신다면<br>그 마음 오래도록 간직하겠습니다.</p>
             </div>
             <div class="mt-16 text-base space-y-4">
@@ -92,7 +92,7 @@
         <section class="py-20 px-4 border-b border-wedding-point/30 text-center">
             <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 font-bold">GALLERY</h2>
             <div class="grid grid-cols-3 gap-1 mb-4" id="gallery-grid">
-                <!-- 15 Images 슬롯 (JS로 관리하기 위해 주소만 배열로 관리해도 되지만 구조 유지를 위해 직접 배치) -->
+                <!-- 15 Images 슬롯 -->
             </div>
             <p class="text-xs text-stone-400">사진을 터치하면 크게 보실 수 있습니다.</p>
         </section>
@@ -159,30 +159,19 @@
             </div>
         </div>
 
-        <!-- 이미지 확대 모달 (슬라이드 기능 추가) -->
+        <!-- 이미지 확대 모달 -->
         <div id="img-modal" class="fixed inset-0 z-[1000] bg-black/95 hidden items-center justify-center select-none">
-            <!-- 닫기 버튼 -->
             <button class="absolute top-6 right-6 text-white text-3xl z-[1100] p-2 opacity-70" onclick="closeImageModal()"><i class="fas fa-times"></i></button>
-            
-            <!-- 왼쪽 화살표 -->
             <button class="absolute left-4 top-1/2 -translate-y-1/2 z-[1100] modal-btn" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
-            
-            <!-- 이미지 영역 -->
             <div class="w-full h-full flex items-center justify-center p-4 overflow-hidden" id="modal-touch-area">
                 <img id="modal-content" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl transition-transform duration-300">
             </div>
-            
-            <!-- 오른쪽 화살표 -->
             <button class="absolute right-4 top-1/2 -translate-y-1/2 z-[1100] modal-btn" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
-            
-            <!-- 페이지 인디케이터 -->
             <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 text-sm font-sans" id="modal-page-num">1 / 15</div>
         </div>
-
     </div>
 
     <script>
-        // 갤러리 이미지 데이터 (15장)
         const galleryImages = [
             'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80',
             'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80',
@@ -203,7 +192,6 @@
 
         let currentImgIndex = 0;
 
-        // 갤러리 그리드 생성
         function initGallery() {
             const grid = document.getElementById('gallery-grid');
             galleryImages.forEach((src, idx) => {
@@ -215,7 +203,6 @@
             });
         }
 
-        // 이미지 확대 모달
         function openImageModal(idx) {
             currentImgIndex = idx;
             updateModalImage();
@@ -249,23 +236,16 @@
             document.body.style.overflow = 'auto';
         }
 
-        // 터치 스와이프 지원
         let touchStartX = 0;
         let touchEndX = 0;
-
         const touchArea = document.getElementById('modal-touch-area');
         touchArea.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, false);
         touchArea.addEventListener('touchend', e => {
             touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
+            if (touchEndX < touchStartX - 50) nextImage();
+            if (touchEndX > touchStartX + 50) prevImage();
         }, false);
 
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) nextImage(); // 왼쪽으로 밀면 다음
-            if (touchEndX > touchStartX + 50) prevImage(); // 오른쪽으로 밀면 이전
-        }
-
-        // 눈 내리는 효과
         function createSnowflakes() {
             const container = document.getElementById('snow-container');
             for (let i = 0; i < 40; i++) {
@@ -306,8 +286,9 @@
             event.preventDefault();
             const form = event.target;
             const data = new FormData(form);
-            const googleSheetUrl = "여기에_구글_웹앱_URL을_붙여넣으세요";
-            if(googleSheetUrl.includes("여기에")) { alert("구글 시트 주소가 연결되지 않았습니다!"); return; }
+            // 발급받으신 주소로 연동 완료!
+            const googleSheetUrl = "https://script.google.com/macros/s/AKfycbxzgjzdi0AV6fppxA1iQESyOnPNe-QWObSf-e4vlkyDguYjlEbZLx5YUqtai6U18oSt/exec";
+            
             fetch(googleSheetUrl, { method: "POST", mode: "no-cors", body: data }).then(() => {
                 document.getElementById('rsvp-modal').classList.add('hidden');
                 const toast = document.getElementById("toast"); toast.innerText = "전달되었습니다! 🤍"; toast.className = "show";
@@ -321,7 +302,6 @@
             initGallery();
         });
 
-        // ESC 키로 모달 닫기 지원
         window.addEventListener('keydown', e => {
             if(e.key === "Escape") closeImageModal();
             if(e.key === "ArrowLeft") prevImage();
