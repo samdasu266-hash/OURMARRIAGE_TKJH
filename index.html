@@ -45,7 +45,7 @@
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
         
-        /* 순백색의 고급스러운 시네마틱 스노우 효과 */
+        /* 순백색 시네마틱 스노우 */
         .snowflake { 
             position: absolute; 
             top: -20px; 
@@ -123,11 +123,11 @@
             </div>
         </section>
 
-        <!-- 3. RSVP -->
+        <!-- 3. RSVP (UX 라이팅 완벽 적용) -->
         <section class="py-16 px-6 text-center bg-[#F4EFEA] border-b border-wedding-point/30">
-            <h2 class="text-sm tracking-[0.2em] text-wedding-deep mb-4 font-bold">참석 여부 확인</h2>
-            <p class="text-sm leading-relaxed mb-6 text-wedding-deep">원활한 예식 준비와 전세버스 좌석 배정을 위해<br>참석 여부를 전달해 주시면 감사하겠습니다.</p>
-            <button onclick="openRsvpModal()" class="w-full bg-wedding-deep text-white py-4 rounded-lg font-bold shadow-md hover:bg-opacity-90 transition tracking-wide">참석 의사 전달하기</button>
+            <h2 class="text-sm tracking-[0.2em] text-wedding-deep mb-4 font-bold">참석 및 전세버스 탑승 안내</h2>
+            <p class="text-[14px] leading-relaxed mb-6 text-wedding-deep break-keep">귀한 걸음 해주시는 분들을 모시기에 부족함이 없도록,<br>참석 여부와 전세버스 이용 계획을 알려주시면 감사하겠습니다.</p>
+            <button onclick="openRsvpModal()" class="w-full bg-wedding-deep text-white py-4 rounded-lg font-bold shadow-md hover:bg-opacity-90 transition tracking-wide">참석 및 탑승 정보 전달하기</button>
         </section>
 
         <!-- 4. Gallery -->
@@ -147,7 +147,6 @@
                 <span class="text-[12px] text-stone-400">(지번: 경기 남양주시 다산동 6143)</span>
             </p>
 
-            <!-- ★웨딩홀 이름으로 정확히 핀이 꽂히는 구글맵 검색형 임베드★ -->
             <div class="w-full h-60 bg-stone-200 rounded-lg mb-2 overflow-hidden border border-stone-200 relative">
                 <iframe 
                     src="https://maps.google.com/maps?q=%EB%82%A8%EC%96%91%EC%A3%BC%20%ED%8C%8C%EB%A1%9C%EC%8A%A4%EC%BB%A8%EB%B2%A4%EC%85%98&t=&z=16&ie=UTF8&iwloc=&output=embed" 
@@ -251,8 +250,9 @@
         <!-- RSVP Modal -->
         <div id="rsvp-modal" class="fixed inset-0 z-[600] flex items-center justify-center bg-black/60 hidden px-4">
             <div class="bg-white w-full max-w-sm rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+                <!-- 모달 타이틀 업데이트 -->
                 <div class="flex justify-between items-center mb-4 border-b pb-3 font-bold text-wedding-deep">
-                    <h3 class="text-lg">참석 의사 전달</h3>
+                    <h3 class="text-lg">참석 및 탑승 정보 입력</h3>
                     <button type="button" onclick="closeRsvpModal()" class="p-1"><i class="fas fa-times text-xl text-stone-400 active:text-stone-600"></i></button>
                 </div>
                 <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="space-y-4 text-sm font-sans text-wedding-deep">
@@ -452,13 +452,11 @@
             icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
         }
 
-        // ★ [업데이트] BGM 오토플레이 방어막 완벽 우회 로직 ★
         const audio = document.getElementById('wedding-bgm');
         const discIcon = document.getElementById('disc-icon');
         const playIcon = document.getElementById('play-pause-icon');
         let isFirstPlay = true;
 
-        // 화면에 손가락이 닿는 '최초' 순간을 캐치하여 실행
         function initBgmPlayback() {
             if (!isFirstPlay) return;
             
@@ -467,25 +465,20 @@
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    // 재생 성공 시
                     isFirstPlay = false;
                     discIcon.classList.add('spin');
                     playIcon.className = 'fas fa-pause text-xs';
                     
-                    // 재생 성공했으므로 더 이상 감지할 필요 없음 (성능 최적화)
                     document.removeEventListener('touchstart', initBgmPlayback);
                     document.removeEventListener('click', initBgmPlayback);
                 }).catch(error => {
-                    // 애플/구글 정책으로 차단된 경우 조용히 무시하고 다음 터치를 기다림
                 });
             }
         }
 
-        // 스크롤 감지 대신 확실한 터치/클릭 감지로 변경
         document.addEventListener('touchstart', initBgmPlayback, { passive: true });
         document.addEventListener('click', initBgmPlayback);
 
-        // 사용자가 직접 BGM 버튼을 눌렀을 때의 동작
         function toggleBgm(e) {
             if(e) e.stopPropagation();
             if (audio.paused) {
@@ -505,7 +498,6 @@
         }
 
         document.getElementById('bgm-btn').addEventListener('click', toggleBgm);
-        // ===============================================
 
         function copyToClipboard(text) {
             const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
