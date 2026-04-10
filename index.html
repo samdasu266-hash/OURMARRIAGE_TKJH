@@ -66,7 +66,6 @@
         <!-- 1. Main Cover -->
         <section class="relative w-full h-[85vh] flex flex-col items-center justify-center fade-in bg-cover bg-center" style="background-image: linear-gradient(rgba(249, 247, 243, 0.3), rgba(249, 247, 243, 1)), url('https://images.unsplash.com/photo-1545315003-c5ad6226c272?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
             <div class="absolute bottom-12 flex flex-col items-center text-center px-6">
-                <!-- 변경된 메인 문구 적용 -->
                 <p class="text-sm md:text-base leading-relaxed text-wedding-dark mb-8">
                     가장 뜨거웠던 여름날 만난 두 사람,<br>
                     이제 하얀 눈꽃 아래서 영원을 약속합니다.
@@ -105,7 +104,7 @@
             <p class="text-xs text-stone-400">사진을 터치하면 크게 보실 수 있습니다.</p>
         </section>
 
-        <!-- 5. Location -->
+        <!-- 5. Location (약도 최적화 및 티맵 오류 수정) -->
         <section class="pt-20 pb-0 px-6 border-b border-wedding-point/30">
             <h2 class="text-sm tracking-[0.2em] text-wedding-dark mb-10 text-center font-bold">LOCATION</h2>
             
@@ -115,20 +114,23 @@
                 <span class="text-[12px] text-stone-400">(지번: 경기 남양주시 다산동 6143)</span>
             </p>
 
-            <div class="w-full h-48 bg-stone-200 rounded-lg mb-4 overflow-hidden border border-stone-300">
-                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-60">
+            <!-- 약도 영역 (비율 깨짐 방지 및 map.jpg 세팅) -->
+            <div class="w-full bg-white rounded-lg mb-6 overflow-hidden border border-stone-200">
+                <!-- 깃허브에 map.jpg 파일을 올리시면 여기에 약도가 뜹니다! -->
+                <img src="map.jpg" alt="오시는 길 약도" class="w-full h-auto object-contain" onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80'; this.classList.add('opacity-60', 'object-cover', 'h-48');">
             </div>
             
             <div class="grid grid-cols-3 gap-2 mb-10 font-sans text-xs font-bold text-center">
                 <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="bg-[#FEE500] py-2.5 rounded shadow-sm text-[#191919]">카카오맵</a>
                 <a href="https://map.naver.com/v5/search/남양주 파로스컨벤션" target="_blank" class="bg-[#03C75A] py-2.5 rounded shadow-sm text-white">네이버 지도</a>
-                <a href="tmap://search?name=남양주 파로스컨벤션" class="bg-[#222222] py-2.5 rounded shadow-sm text-white">티맵</a>
+                <!-- 티맵은 스마트폰에서만 열리도록 자바스크립트 함수 연결 -->
+                <button onclick="openTmap()" class="bg-[#222222] py-2.5 rounded shadow-sm text-white">티맵</button>
             </div>
             
             <div class="space-y-6 text-sm mb-4 text-left pb-10">
                 <div>
                     <h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-subway mr-2"></i>지하철 안내</h4>
-                    <p class="text-stone-600 leading-relaxed pl-6 break-keep">구리역 7번 출구 (8호선, 경경의중앙선)<br>· 예식 당일 구리역 7번 출구에서 <b>약 15분 간격</b>으로 셔틀버스가 운행됩니다.</p>
+                    <p class="text-stone-600 leading-relaxed pl-6 break-keep">구리역 7번 출구 (8호선, 경의중앙선)<br>· 예식 당일 구리역 7번 출구에서 <b>약 15분 간격</b>으로 셔틀버스가 운행됩니다.</p>
                 </div>
                 <div>
                     <h4 class="font-bold text-wedding-dark mb-1"><i class="fas fa-bus mr-2"></i>버스 안내</h4>
@@ -422,6 +424,17 @@
             document.getElementById('rsvp-form').reset();
             toggleBusSection(); 
             document.body.classList.remove('modal-open'); 
+        }
+
+        // 티맵 오픈 함수 (PC 클릭 방지용)
+        function openTmap() {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (!isMobile) {
+                alert("티맵은 스마트폰 어플에서만 실행됩니다. 모바일에서 확인해 주세요!");
+                return false;
+            }
+            // URL 인코딩 처리 (검색어 깨짐 방지)
+            window.location.href = "tmap://search?name=" + encodeURIComponent("남양주 파로스컨벤션");
         }
 
         function handleRSVPSubmit(event) {
