@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="태광 ♥ 지현 결혼합니다">
     <meta property="og:description" content="2027년 1월 30일(토) 낮 1시 10분 남양주 파로스컨벤션, 따뜻한 마음으로 함께 축복해 주세요.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1545315003-c5ad6226c272?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+    <!-- 1. 카카오톡 공유 썸네일 -->
+    <meta property="og:image" content="main.jpg">
     <title>태광 ♥ 지현 결혼합니다</title>
+    
+    <!-- 2. 퍼스콘(파비콘) & 아이폰 홈화면 아이콘 세팅 -->
+    <link rel="icon" href="main.jpg">
+    <link rel="apple-touch-icon" href="main.jpg">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,6 +52,7 @@
         .modal-btn { background-color: rgba(0,0,0,0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.2s; }
         .modal-btn:active { background-color: rgba(0,0,0,0.6); transform: scale(0.9); }
 
+        .modal-open { overflow: hidden; height: 100vh; touch-action: none; }
         .text-glow { text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 20px rgba(249, 247, 243, 0.8); }
 
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="%238B7D6B" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); background-repeat: no-repeat; background-position-x: 98%; background-position-y: 50%; }
@@ -68,7 +75,8 @@
         </div>
 
         <!-- 1. Main Cover -->
-        <section class="relative w-full h-[85vh] flex flex-col items-center justify-center fade-in bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(249, 247, 243, 0.1) 0%, rgba(249, 247, 243, 0.75) 60%, rgba(249, 247, 243, 1) 100%), url('https://images.unsplash.com/photo-1545315003-c5ad6226c272?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+        <!-- 3. 메인 배경 사진 세팅 (main.jpg) -->
+        <section class="relative w-full h-[85vh] flex flex-col items-center justify-center fade-in bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(249, 247, 243, 0.1) 0%, rgba(249, 247, 243, 0.75) 60%, rgba(249, 247, 243, 1) 100%), url('main.jpg');">
             <div class="absolute bottom-12 flex flex-col items-center text-center px-6">
                 <p class="text-[15px] leading-relaxed text-wedding-deep mb-8 font-medium text-glow break-keep">
                     가장 뜨거웠던 여름날 만난 두 사람,<br>
@@ -118,6 +126,7 @@
                 <span class="text-[12px] text-stone-400">(지번: 경기 남양주시 다산동 6143)</span>
             </p>
 
+            <!-- 4. 약도 세팅 (map.jpg) -->
             <div class="w-full bg-white rounded-lg mb-6 overflow-hidden border border-stone-200">
                 <img src="map.jpg" alt="오시는 길 약도" class="w-full h-auto object-contain" onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80'; this.classList.add('opacity-60', 'object-cover', 'h-48');">
             </div>
@@ -298,28 +307,16 @@
     </div>
 
     <script>
+        // 5. 갤러리 15장 세팅 (1.jpg ~ 15.jpg)
         const galleryImages = [
-            'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1607580665213-911e8ee1c3e3?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1522673607200-164883eecd0c?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1549416878-b9ca35c2d47a?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1502633013503-e17588119570?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1510076857177-74700760be15?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1525772345561-306730d71d32?auto=format&fit=crop&w=800&q=80'
+            '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
+            '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
+            '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg'
         ];
 
         let currentImgIndex = 0;
-        let scrollPosition = 0; // 스크롤 위치 기억 변수
+        let scrollPosition = 0;
 
-        // 스크롤 고정 (위치 기억)
         function lockScroll() {
             scrollPosition = window.pageYOffset;
             document.body.style.overflow = 'hidden';
@@ -328,7 +325,6 @@
             document.body.style.width = '100%';
         }
 
-        // 스크롤 복원 (기억한 위치로)
         function unlockScroll() {
             document.body.style.removeProperty('overflow');
             document.body.style.removeProperty('position');
@@ -354,7 +350,7 @@
             const modal = document.getElementById('img-modal');
             modal.classList.remove('hidden');
             modal.classList.add('active');
-            lockScroll(); // 스크롤 고정 실행
+            lockScroll(); 
         }
 
         function updateModalImage() {
@@ -378,7 +374,7 @@
             const modal = document.getElementById('img-modal');
             modal.classList.add('hidden');
             modal.classList.remove('active');
-            unlockScroll(); // 스크롤 복원 실행
+            unlockScroll(); 
         }
 
         let touchStartX = 0;
@@ -414,9 +410,6 @@
             icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
         }
 
-        // ==========================================
-        // ★ BGM 로직: 2분 8초 시작 & 터치 시 자동재생
-        // ==========================================
         const audio = document.getElementById('wedding-bgm');
         const discIcon = document.getElementById('disc-icon');
         const playIcon = document.getElementById('play-pause-icon');
@@ -448,7 +441,6 @@
 
         document.getElementById('bgm-btn').addEventListener('click', toggleBgm);
 
-        // 하객이 화면을 처음 스크롤/터치하는 순간 우아하게 음악 재생
         function autoPlayOnFirstInteraction() {
             if (audio.paused && isFirstPlay) {
                 playWeddingBgm();
@@ -461,7 +453,6 @@
         document.addEventListener('touchstart', autoPlayOnFirstInteraction, { passive: true });
         document.addEventListener('scroll', autoPlayOnFirstInteraction, { passive: true });
         document.addEventListener('click', autoPlayOnFirstInteraction);
-        // ==========================================
 
         function copyToClipboard(text) {
             const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
@@ -470,7 +461,7 @@
 
         function openRsvpModal() {
             document.getElementById('rsvp-modal').classList.remove('hidden');
-            lockScroll(); // 스크롤 고정 실행
+            lockScroll(); 
         }
 
         function toggleBusSection() {
@@ -484,7 +475,7 @@
             document.getElementById('rsvp-modal').classList.add('hidden');
             document.getElementById('rsvp-form').reset();
             toggleBusSection(); 
-            unlockScroll(); // 스크롤 복원 실행
+            unlockScroll(); 
         }
 
         function openTmap() {
@@ -537,3 +528,4 @@
     </script>
 </body>
 </html>
+
