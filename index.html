@@ -461,10 +461,10 @@
             const data = new FormData(form);
 
             // ★★★ 주의: 아래 쌍따옴표 안에 구글 스프레드시트에서 발급받은 '웹 앱 URL'을 반드시 넣어주세요! ★★★
-            const googleSheetUrl = "여기에_구글_웹앱_URL을_붙여넣으세요";
+            const googleSheetUrl = "https://script.google.com/macros/s/AKfycbxzgjzdi0AV6fppxA1iQESyOnPNe-QWObSf-e4vlkyDguYjlEbZLx5YUqtai6U18oSt/exec";
 
             // 구글 URL을 아직 안 넣었을 경우 경고
-            if(googleSheetUrl === "여기에_구글_웹앱_URL을_붙여넣으세요") {
+            if(googleSheetUrl === "https://script.google.com/macros/s/AKfycbxzgjzdi0AV6fppxA1iQESyOnPNe-QWObSf-e4vlkyDguYjlEbZLx5YUqtai6U18oSt/exec") {
                 alert("구글 시트 URL이 아직 연결되지 않았습니다! 코드를 수정해주세요.");
                 return;
             }
