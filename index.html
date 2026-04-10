@@ -6,20 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="태광 ♥ 지현 결혼합니다">
     <meta property="og:description" content="2027년 1월 30일(토) 낮 1시 10분 남양주 파로스컨벤션, 따뜻한 마음으로 함께 축복해 주세요.">
-    <!-- 카카오톡 공유 썸네일 -->
     <meta property="og:image" content="IMG_1033.jpeg">
     <title>태광 ♥ 지현 결혼합니다</title>
 
-    <!-- 모바일 주소창 색상 통일 (브라우저 상단 테마 컬러) -->
     <meta name="theme-color" content="#F9F7F3">
-
-    <!-- 커스텀 파비콘 (크림색 하트) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%23F9F7F3'/%3E%3Ctext y='75' x='20' font-family='serif' font-size='70' fill='%235C4D43'%3E♥%3C/text%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="IMG_1033.jpeg">
 
-    <!-- 카카오 공유 SDK -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -43,7 +37,6 @@
         body { background-color: #E5E5E5; display: flex; justify-content: center; }
         .mobile-container { width: 100%; max-width: 430px; background-color: #F9F7F3; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; overflow-x: hidden; }
         
-        /* 하객 피로도를 낮추는 스크롤 페이드인 */
         .scroll-fade { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
         .scroll-fade.visible { opacity: 1; transform: translateY(0); }
 
@@ -55,7 +48,6 @@
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
         
-        /* 시네마틱 스노우 애니메이션 */
         .snowflake { 
             position: absolute; top: -20px; background-color: #ffffff; border-radius: 50%; pointer-events: none; 
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.9); 
@@ -68,7 +60,6 @@
         #img-modal { display: none; }
         #img-modal.active { display: flex; }
         .modal-btn { background-color: rgba(0,0,0,0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.2s; }
-        .modal-btn:active { background-color: rgba(0,0,0,0.6); transform: scale(0.9); }
         .modal-open { overflow: hidden; height: 100vh; touch-action: none; }
         .text-glow { text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 20px rgba(249, 247, 243, 0.8); }
 
@@ -102,14 +93,14 @@
                     이제 하얀 눈꽃 아래서 영원을 약속합니다.
                 </p>
                 <h1 class="text-[32px] font-extrabold tracking-widest mb-4 text-wedding-deep text-glow">태광 <span class="text-wedding-point text-2xl mx-1">♥</span> 지현</h1>
-                <p class="text-[15px] tracking-widest font-semibold text-wedding-deep text-glow">2027. 01. 30 SAT 13:10</p>
+                <p class="text-[15px] tracking-widest font-semibold text-wedding-deep text-glow uppercase">2027. 01. 30 SAT 13:10</p>
                 <p class="text-[14px] mt-2 font-medium text-wedding-deep text-glow">파로스컨벤션 2층 파로스홀</p>
             </div>
         </section>
 
         <!-- 2. Invitation -->
         <section class="py-24 px-8 text-center border-b border-wedding-point/30 scroll-fade">
-            <h2 class="text-sm tracking-[0.25em] text-wedding-deep mb-10 font-extrabold">INVITATION</h2>
+            <h2 class="text-sm tracking-[0.25em] text-wedding-deep mb-10 font-extrabold uppercase">Invitation</h2>
             <div class="space-y-6 text-[15px] leading-[2.0] text-wedding-deep break-keep">
                 <p>하나는 유연하고, 하나는 단단한 편이라<br>함께일 때 가장 잘 어울리는 사이가 되었습니다.</p>
                 <p>웃음이 필요할 땐 장난으로,<br>힘이 필요할 때 든든한 버팀목이 되어<br>서로의 부족함을 채우며 살아가겠습니다.</p>
@@ -125,8 +116,8 @@
         <section class="py-20 px-8 text-center bg-white border-b border-wedding-point/30 scroll-fade">
             <h2 class="text-[16px] tracking-[0.2em] text-wedding-deep mb-8 font-extrabold uppercase">2027. 01. 30</h2>
             <div class="max-w-[280px] mx-auto">
-                <div class="grid grid-cols-7 gap-2 text-[12px] mb-4 text-stone-400 font-sans font-bold">
-                    <div class="text-red-400">SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div class="text-stone-500">SAT</div>
+                <div class="grid grid-cols-7 gap-2 text-[12px] mb-4 text-stone-400 font-sans font-bold uppercase">
+                    <div class="text-red-400">Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div class="text-stone-500">Sat</div>
                 </div>
                 <div class="grid grid-cols-7 gap-y-5 gap-x-2 text-[14px] text-wedding-deep font-medium font-sans">
                     <div></div><div></div><div></div><div></div><div></div>
@@ -153,14 +144,14 @@
 
         <!-- 5. Gallery -->
         <section class="py-20 px-4 border-b border-wedding-point/30 text-center scroll-fade">
-            <h2 class="text-sm tracking-[0.2em] text-wedding-deep mb-10 font-bold uppercase">GALLERY</h2>
+            <h2 class="text-sm tracking-[0.2em] text-wedding-deep mb-10 font-bold uppercase">Gallery</h2>
             <div class="grid grid-cols-3 gap-1 mb-4" id="gallery-grid"></div>
             <p class="text-xs text-stone-400">사진을 터치하면 크게 보실 수 있습니다.</p>
         </section>
 
         <!-- 6. Location -->
         <section class="pt-20 pb-0 px-6 border-b border-wedding-point/30 scroll-fade">
-            <h2 class="text-sm tracking-[0.2em] text-wedding-deep mb-10 text-center font-bold uppercase">LOCATION</h2>
+            <h2 class="text-sm tracking-[0.2em] text-wedding-deep mb-10 text-center font-bold uppercase">Location</h2>
             <h3 class="text-lg font-bold mb-2 text-center text-wedding-deep">파로스컨벤션 2층 파로스홀</h3>
             <p class="text-sm text-center mb-6 text-wedding-deep leading-[1.8]">
                 경기 남양주시 다산순환로 20 다산현대프리미어캠퍼스몰 E동 2층<br>
@@ -176,7 +167,7 @@
                 <button onclick="openTmap()" class="bg-[#222222] py-2.5 rounded shadow-sm text-white">티맵</button>
             </div>
             
-            <div class="space-y-6 text-sm mb-4 text-left pb-10 text-wedding-deep">
+            <div class="space-y-8 text-sm mb-4 text-left pb-10 text-wedding-deep">
                 <div>
                     <h4 class="font-bold mb-1"><i class="fas fa-subway mr-2 text-wedding-dark"></i>지하철 안내</h4>
                     <p class="leading-[1.8] pl-6">구리역 7번 출구 (8호선, 경의중앙선)<br>· 예식 당일 구리역 7번 출구에서 <b>약 15분 간격</b>으로 셔틀버스가 운행됩니다.</p>
@@ -189,11 +180,30 @@
                     <h4 class="font-bold mb-1"><i class="fas fa-car mr-2 text-wedding-dark"></i>자가용 안내</h4>
                     <p class="leading-[1.8] pl-6">내비게이션 '다산순환로 20' 또는 '파로스컨벤션'<br>· <b>주차:</b> 다산현대프리미어캠퍼스몰 <b>GATE 2</b> 진입 후 <b>지하 3~4층 E동 방면</b><br>· <b>요금:</b> 2시간 무료 주차</p>
                 </div>
-                <div class="bg-white p-5 rounded-lg border border-wedding-point shadow-sm mt-8">
-                    <h4 class="font-bold text-center border-b border-stone-100 pb-3 mb-4"><i class="fas fa-bus-alt mr-2 text-wedding-dark"></i>전세버스 안내</h4>
-                    <div class="space-y-4 text-[13px]">
-                        <div><p class="font-bold">[전주 출발]</p><p>1월 30일(토) 08:30 전북특별자치도청 앞</p></div>
-                        <div><p class="font-bold">[원주 출발]</p><p>대절 여부 조사 중입니다. 참석 폼에 체크해 주세요.</p></div>
+
+                <!-- ★ 전세버스 안내: 하객 편의를 위해 상세 정보 완벽 복구 ★ -->
+                <div class="bg-white p-6 rounded-lg border border-wedding-point shadow-sm">
+                    <h4 class="font-bold text-center border-b border-stone-100 pb-3 mb-5 uppercase tracking-wider"><i class="fas fa-bus-alt mr-2 text-wedding-dark"></i>전세버스 안내</h4>
+                    <div class="space-y-6">
+                        <div class="relative pl-3 border-l-2 border-wedding-point/50">
+                            <p class="font-bold text-[14px] mb-1 text-wedding-deep">[전주 노선]</p>
+                            <div class="text-[13px] leading-[1.7] text-stone-600 space-y-1">
+                                <p>· 일시: 1월 30일(토) <span class="font-bold">오전 8시 30분</span> 정시 출발</p>
+                                <p>· 장소: <span class="font-bold">전북특별자치도청 앞</span></p>
+                                <p>· 인솔: 홍길동 <a href="tel:010-9999-9999" class="text-wedding-dark underline font-sans ml-1 font-bold">010-9999-9999</a></p>
+                            </div>
+                        </div>
+                        <div class="relative pl-3 border-l-2 border-wedding-point/50">
+                            <p class="font-bold text-[14px] mb-1 text-wedding-deep">[원주 노선]</p>
+                            <p class="text-[13px] leading-[1.7] text-stone-600">현재 대절 여부를 조사 중입니다. 참석 의사 전달 시 탑승 여부를 체크해 주시면 확정 시 개별 안내해 드리겠습니다.</p>
+                        </div>
+                    </div>
+                    <!-- 중요 공지 강조 -->
+                    <div class="mt-6 pt-4 border-t border-dashed border-stone-200">
+                        <p class="text-[12px] text-wedding-deep leading-[1.6] break-keep bg-[#F9F7F3] p-3 rounded-md">
+                            <i class="fas fa-info-circle mr-1 opacity-70"></i>
+                            원활한 출발을 위해 <span class="font-bold">출발 10분 전</span>까지 미리 도착하여 탑승해 주시면 감사하겠습니다.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -213,7 +223,7 @@
                 </div>
                 <div class="border border-wedding-point rounded-lg overflow-hidden bg-white">
                     <button onclick="toggleAccordion('bride')" class="w-full px-5 py-4 flex justify-between items-center bg-[#F9F7F3] font-bold text-sm text-wedding-deep">신부측에 마음 전하기 <i class="fas fa-chevron-down transition-transform duration-300 text-wedding-dark" id="bride-icon"></i></button>
-                    <div id="bride" class="hidden px-5 py-4 border-t border-wedding-point space-y-4 text-sm text-wedding-deep">
+                    <div id="bride" class="hidden px-5 py-4 border-t border-wedding-point bg-white space-y-4 text-sm text-wedding-deep">
                         <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500">아버지 이기영</p><p class="font-medium">은행명 000-000-000000</p></div><button onclick="copyToClipboard('000000000000')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200">복사</button></div>
                         <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500">어머니 지백현</p><p class="font-medium">농협 301-0089-9502-11</p></div><button onclick="copyToClipboard('3010089950211')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200">복사</button></div>
                         <div class="flex justify-between items-center"><div><p class="text-xs text-stone-500">신부 이지현</p><p class="font-medium">신한은행 110-477-676185</p></div><button onclick="copyToClipboard('110477676185')" class="text-xs bg-stone-50 px-3 py-1.5 rounded border border-stone-200">복사</button></div>
@@ -236,7 +246,7 @@
                     <i class="fas fa-link"></i>청첩장 주소 복사
                 </button>
             </div>
-            <p class="mt-16 text-[10px] text-[#8B8378] tracking-[0.3em] uppercase">2027 Taekwang & Jihyun Wedding</p>
+            <p class="mt-16 text-[10px] text-[#8B8378] tracking-[0.3em] uppercase font-sans">2027 Taekwang & Jihyun Wedding</p>
         </section>
 
         <!-- RSVP Modal -->
@@ -306,19 +316,14 @@
     </div>
 
     <script>
-        // ★ [중요] 신부님의 새로운 구글 웹앱 URL 적용 ★
         const googleSheetUrl = "https://script.google.com/macros/s/AKfycbxB1pThlfHmUPd3zKj03sgfes1a7CV9KEEtdX0KnxA2B9b4Rs6DK4Vwq-6hI5vhd-Ps/exec";
-        
-        // 갤러리 이미지 리스트
         const galleryImages = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg'];
         let currentImgIndex = 0; let scrollPosition = 0;
 
-        // 스크롤 페이드인 옵저버
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); } });
         }, { threshold: 0.1 });
 
-        // 이미지 지연 로딩 옵저버
         const galleryObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) { const el = entry.target; el.style.backgroundImage = `url('${el.dataset.src}')`; el.classList.add('loaded'); galleryObserver.unobserve(el); } });
         }, { rootMargin: '200px' });
