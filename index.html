@@ -98,9 +98,9 @@
     <!-- Toast Notification -->
     <div id="toast">계좌번호가 복사되었습니다.</div>
 
-    <!-- 오디오 태그  -->
-   <audio id="wedding-bgm" loop preload="auto">
-        <source src="Film Love.mp3" type="audio/mpeg">
+    <!-- 오디오 태그 (파일명 띄어쓰기 제거: 모바일 에러 방지용) -->
+    <audio id="wedding-bgm" loop preload="auto">
+        <source src="Film_Love.mp3" type="audio/mpeg">
     </audio>
 
     <div class="mobile-container">
@@ -317,8 +317,8 @@
                     </button>
                 </div>
                 
-                <!-- 실제 데이터 전송을 위한 폼 (나중에 Formspree URL로 action 변경 예정) -->
-                <form id="rsvp-form" action="#" method="POST" class="space-y-4 text-sm font-sans" onsubmit="handleRSVPSubmit(event)">
+                <!-- 실제 구글시트 데이터 전송 폼 -->
+                <form id="rsvp-form" method="POST" class="space-y-4 text-sm font-sans" onsubmit="handleRSVPSubmit(event)">
                     <div>
                         <label class="block text-stone-600 mb-1 font-batang">성함</label>
                         <input type="text" name="name" class="w-full border border-stone-300 rounded p-2 focus:outline-none focus:border-wedding-dark" required placeholder="이름을 입력해주세요">
@@ -447,18 +447,40 @@
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
-        // RSVP 폼 제출 테스트 (임시)
+        // ★ [가장 중요한 부분] 구글 시트 데이터 전송 스크립트 ★
         function handleRSVPSubmit(event) {
-            event.preventDefault(); 
-            document.getElementById('rsvp-modal').classList.add('hidden');
+            event.preventDefault(); // 폼 기본 이동 막기
             
-            const toast = document.getElementById("toast");
-            toast.innerText = "참석 정보가 성공적으로 전달되었습니다! 🤍";
-            toast.className = "show";
-            setTimeout(function(){ 
-                toast.className = toast.className.replace("show", ""); 
-                toast.innerText = "계좌번호가 복사되었습니다."; 
-            }, 3000);
+            const form = event.target;
+            const data = new FormData(form);
+
+            // ★★★ 주의: 아래 쌍따옴표 안에 구글 스프레드시트에서 발급받은 '웹 앱 URL'을 반드시 넣어주세요! ★★★
+            const googleSheetUrl = "여기에_구글_웹앱_URL을_붙여넣으세요";
+
+            // 구글 URL을 아직 안 넣었을 경우 경고
+            if(googleSheetUrl === "여기에_구글_웹앱_URL을_붙여넣으세요") {
+                alert("구글 시트 URL이 아직 연결되지 않았습니다! 코드를 수정해주세요.");
+                return;
+            }
+
+            fetch(googleSheetUrl, {
+                method: "POST",
+                mode: "no-cors", // 구글 시트 전송 시 필수 보안 설정
+                body: data
+            }).then(() => {
+                // 전송 성공 시 팝업창 닫기 및 알림
+                document.getElementById('rsvp-modal').classList.add('hidden');
+                const toast = document.getElementById("toast");
+                toast.innerText = "참석 정보가 성공적으로 전달되었습니다! 🤍";
+                toast.className = "show";
+                setTimeout(function(){ 
+                    toast.className = toast.className.replace("show", ""); 
+                    toast.innerText = "계좌번호가 복사되었습니다."; 
+                }, 3000);
+                form.reset(); // 성공 후 입력칸 비우기
+            }).catch((error) => {
+                alert("전송에 실패했습니다. 잠시 후 다시 시도해주세요.");
+            });
         }
 
         // 페이지 로드 시 눈 내리기 시작
