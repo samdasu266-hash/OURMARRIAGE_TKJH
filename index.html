@@ -2,612 +2,739 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta property="og:title" content="태광 ♥ 지현 결혼합니다">
-    <meta property="og:description" content="2027년 1월 30일(토) 낮 1시 10분 남양주 파로스컨벤션">
-    <meta property="og:image" content="IMG_1033.jpeg">
-    <title>태광 ♥ 지현 결혼합니다</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta property="og:title" content="태광 ♥ 지현 결혼합니다">
+<meta property="og:description" content="2027년 1월 30일(토) 낮 1시 10분 남양주 파로스컨벤션">
+<meta property="og:image" content="IMG_1033.jpeg">
+<title>태광 ♥ 지현 결혼합니다</title>
+<meta name="theme-color" content="#0E0C0A">
 
-    <meta name="theme-color" content="#FDFBF7">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='0' fill='%23FDFBF7'/%3E%3Cpath d='M50,75 C50,75 20,48 20,30 A15,15 0 0,1 50,23 A15,15 0 0,1 80,30 C80,48 50,75 50,75 Z' fill='%232C2621'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="IMG_1033.jpeg">
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { 
-                        'batang': ['"Gowun Batang"', 'serif'],
-                        'sans': ['"Noto Sans KR"', 'sans-serif']
-                    },
-                    colors: { 
-                        /* 에르메스 럭셔리 팔레트 */
-                        'hermes-bg': '#FDFBF7',      
-                        'hermes-text': '#2C2621',    
-                        'hermes-orange': '#E35D20',  
-                        'hermes-muted': '#786C61',   
-                        'hermes-line': '#E6DED5'     
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        html, body { width: 100%; margin: 0; padding: 0; overscroll-behavior-y: none; }
-        body { background-color: #EFEFEF; display: flex; justify-content: center; }
-        
-        .mobile-container { width: 100%; max-width: 430px; background-color: #FDFBF7; min-height: 100vh; position: relative; box-shadow: 0 0 40px rgba(0,0,0,0.06); }
-        
-        .spin { animation: spin 8s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        #toast { visibility: hidden; min-width: 280px; margin-left: -140px; background-color: #2C2621; color: #FDFBF7; text-align: center; border-radius: 2px; padding: 16px; position: fixed; z-index: 2000; left: 50%; bottom: 40px; font-size: 15px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; letter-spacing: 0.05em; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-bottom: 2px solid #E35D20; }
-        #toast.show { visibility: visible; animation: fadein 0.4s, fadeout 0.4s 2.5s; }
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 40px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 40px; opacity: 1;} to {bottom: 0; opacity: 0;} }
-        
-        .snowflake { position: absolute; background-color: rgba(255, 255, 255, 0.9); border-radius: 50%; pointer-events: none; box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); animation: snowfall linear infinite; }
-        @keyframes snowfall { 
-            0% { transform: translate3d(0, -10px, 0); opacity: 0; } 
-            10% { opacity: 1; } 
-            90% { opacity: 1; } 
-            100% { transform: translate3d(var(--end-x), 100vh, 0); opacity: 0; } 
-        }
-        
-        #img-modal { display: none; }
-        #img-modal.active { display: flex; }
-        
-        .hero-text-shadow { text-shadow: 0 2px 10px rgba(253, 251, 247, 0.9), 0 0 20px rgba(253, 251, 247, 0.8); }
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #D5CCC3; border-radius: 4px; }
-    </style>
+:root{
+  --ink:#1A1714;
+  --cream:#F7F2EA;
+  --gold:#B5924A;
+  --gold-lt:#D4B07A;
+  --muted:#8A7D72;
+  --line:#E2D9CC;
+  --bg2:#F0EBE1;
+  --white:#FDFAF5;
+}
+
+html,body{width:100%;background:#D0CBC3;}
+body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+.wrap{width:100%;max-width:430px;background:var(--cream);min-height:100vh;position:relative;box-shadow:0 0 80px rgba(0,0,0,0.18);overflow-x:hidden;}
+
+/* ── TOAST ── */
+#toast{visibility:hidden;position:fixed;z-index:2000;left:50%;bottom:36px;transform:translateX(-50%);background:var(--ink);color:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;letter-spacing:.05em;padding:15px 28px;white-space:nowrap;border-bottom:2px solid var(--gold);box-shadow:0 8px 28px rgba(0,0,0,.22);border-radius:4px;}
+#toast.show{visibility:visible;animation:toastIn .35s ease,toastOut .35s ease 2.5s forwards;}
+@keyframes toastIn{from{bottom:10px;opacity:0}to{bottom:36px;opacity:1}}
+@keyframes toastOut{from{bottom:36px;opacity:1}to{bottom:10px;opacity:0}}
+
+/* ── GLOBAL LOADER (사진 업로드 등 대기용) ── */
+#loader-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(14,12,10,.85);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);flex-direction:column;align-items:center;justify-content:center;color:var(--white);}
+#loader-overlay.active{display:flex;}
+.spinner{border:3px solid rgba(253,250,245,.2);border-top:3px solid var(--gold);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin-bottom:20px;}
+#loader-text{font-family:'Noto Sans KR',sans-serif;font-size:14px;letter-spacing:.05em;font-weight:300;}
+
+/* ── BGM ── */
+.bgm-btn{position:fixed;top:18px;right:18px;z-index:500;background:rgba(247,242,234,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;}
+.bgm-btn:active{transform:scale(.95);}
+.bgm-btn i{font-size:13px;color:var(--ink);}
+.bgm-btn span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);font-weight:500;}
+@keyframes spin{100%{transform:rotate(360deg)}}
+
+/* ── HERO ── */
+.hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
+.hero-photo{position:absolute;inset:0;background-color:#555;background-image:url('IMG_1033.jpeg');background-size:cover;background-position:center 30%;transform-origin:center;will-change:transform;}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,12,10,.04) 0%,rgba(14,12,10,.18) 38%,rgba(14,12,10,.72) 72%,rgba(14,12,10,.96) 100%);}
+#snow-c{position:absolute;inset:0;pointer-events:none;z-index:5;}
+.hero-body{position:absolute;bottom:0;left:0;right:0;padding:0 32px 56px;text-align:center;color:var(--white);z-index:10;}
+.hero-body>*{animation:fadeUp 1s ease forwards;opacity:0;}
+.hero-lead{animation-delay:.3s!important;font-size:13.5px;font-weight:300;line-height:2.1;color:rgba(253,250,245,.68);margin-bottom:28px;letter-spacing:.04em;font-family:'Noto Serif KR',serif;}
+.hero-names{animation-delay:.65s!important;font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;letter-spacing:.18em;color:var(--white);line-height:1;margin-bottom:22px;}
+.hero-names .hrt{font-size:20px;color:var(--gold-lt);vertical-align:middle;margin:0 2px;font-family:sans-serif;}
+.hero-rule{animation-delay:.9s!important;width:36px;height:1px;background:var(--gold-lt);margin:0 auto 22px;opacity:.7;}
+.hero-date{animation-delay:1s!important;font-family:'Cormorant Garamond',serif;font-size:13.5px;letter-spacing:.38em;color:rgba(253,250,245,.82);text-transform:uppercase;margin-bottom:7px;}
+.hero-venue{animation-delay:1.1s!important;font-family:'Noto Sans KR',sans-serif;font-size:12.5px;letter-spacing:.12em;color:rgba(253,250,245,.55);font-weight:300;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SNOWFLAKE ── */
+.sf{position:absolute;border-radius:50%;background:rgba(255,255,255,.88);pointer-events:none;animation:sf linear infinite;box-shadow:0 0 5px rgba(255,255,255,.5);}
+@keyframes sf{0%{transform:translate3d(0,-10px,0);opacity:0}10%{opacity:.85}90%{opacity:.85}100%{transform:translate3d(var(--sx),100vh,0);opacity:0}}
+
+/* ── ORNAMENT RULE ── */
+.orn{display:flex;align-items:center;justify-content:center;margin:0 auto;}
+.orn::before,.orn::after{content:'';flex:1;height:.5px;background:var(--gold);opacity:.5;}
+.orn::before{background:linear-gradient(to right,transparent,var(--gold));}
+.orn::after{background:linear-gradient(to left,transparent,var(--gold));}
+.orn i{font-size:7px;color:var(--gold);margin:0 14px;opacity:.8;transform:rotate(45deg);}
+
+/* ── SECTION BASE ── */
+section{padding:80px 32px;border-bottom:.5px solid var(--line);}
+
+/* ── LABEL (어르신 배려 한글 부제목 추가) ── */
+.lbl{font-family:'Cormorant Garamond',serif;font-size:12.5px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;display:block;text-align:center;margin-bottom:36px;line-height:1.4;}
+.lbl-kr{display:block;font-family:'Noto Serif KR',serif;font-size:13px;color:var(--muted);letter-spacing:.15em;font-weight:400;margin-top:8px;text-transform:none;}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease;}
+.rv.in{opacity:1;transform:none;}
+.rv.d1{transition-delay:.1s;}.rv.d2{transition-delay:.2s;}.rv.d3{transition-delay:.3s;}
+
+/* ── INVITATION ── */
+.inv-text{font-family:'Noto Serif KR',serif;font-size:16px;line-height:2.5;font-weight:300;color:var(--ink);text-align:center;word-break:keep-all;}
+.inv-families{margin-top:52px;text-align:center;}
+.fam-row{display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.fam-par{font-size:14px;color:var(--muted);font-weight:300;}
+.fam-rel{font-family:'Noto Sans KR',sans-serif;font-size:12.5px;color:var(--muted);font-weight:300;}
+.fam-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ink);letter-spacing:.08em;}
+
+/* ── CALENDAR ── */
+.cal-wrap{max-width:296px;margin:0 auto;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+.cday-lbl{text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:10px;letter-spacing:.12em;color:var(--muted);font-weight:500;padding-bottom:18px;text-transform:uppercase;}
+.cday-lbl.s{color:#C04B30;}
+.cday{text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;color:var(--ink);padding:9px 0;}
+.cday.s{color:#C04B30;}.cday.sa{color:var(--muted);}
+.cday.w{background:var(--ink);color:var(--white);font-weight:500;position:relative;border-radius:50%;}
+.cday.w::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:3px;height:3px;background:var(--gold-lt);border-radius:50%;}
+.dday-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;text-align:center;color:var(--muted);margin-top:36px;font-weight:300;letter-spacing:.04em;}
+.dday-t strong{color:var(--gold);font-size:19px;font-family:'Cormorant Garamond',serif;font-weight:600;margin:0 4px;}
+
+/* ── RSVP SECTION ── */
+.rsvp-sec{background:var(--ink);}
+.rsvp-sec .lbl{color:var(--gold-lt);}
+.rsvp-sec .lbl-kr{color:rgba(253,250,245,.6);}
+.rsvp-text{font-family:'Noto Serif KR',serif;font-size:15.5px;line-height:2.3;text-align:center;color:rgba(253,250,245,.8);font-weight:300;word-break:keep-all;margin-bottom:40px;}
+.btn-ghost{display:block;width:100%;background:transparent;color:var(--white);border:1px solid rgba(181,146,74,.5);padding:17px 24px;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:500;letter-spacing:.2em;cursor:pointer;transition:all .3s;text-align:center;}
+.btn-ghost:hover{background:rgba(181,146,74,.15);border-color:var(--gold-lt);}
+.btn-ghost:active{transform:scale(.98);}
+
+/* ── GALLERY ── */
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.gal-item{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;background:var(--bg2);}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.25,.1,.25,1);display:block;}
+.gal-item:hover img{transform:scale(1.06);}
+.gal-item::after{content:'';position:absolute;inset:0;background:rgba(181,146,74,0);transition:background .3s;pointer-events:none;}
+.gal-item:hover::after{background:rgba(181,146,74,.12);}
+.gal-hint{font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--muted);text-align:center;margin-top:24px;font-weight:300;letter-spacing:.1em;}
+
+/* ── IMAGE MODAL ── */
+#img-modal{display:none;position:fixed;inset:0;z-index:900;background:rgba(10,8,7,.97);flex-direction:column;align-items:center;justify-content:center;}
+#img-modal.active{display:flex;}
+#img-modal .m-close{position:absolute;top:20px;right:20px;color:rgba(253,250,245,.55);font-size:24px;cursor:pointer;padding:12px;background:none;border:none;}
+#modal-pnum{position:absolute;top:26px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.32em;color:rgba(253,250,245,.5);}
+#modal-ta{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:64px 16px;}
+#modal-img{max-width:100%;max-height:85vh;object-fit:contain;}
+#img-modal .m-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:rgba(253,250,245,.4);letter-spacing:.14em;white-space:nowrap;}
+
+/* ── LOCATION ── */
+.map-f{width:100%;height:256px;border:.5px solid var(--line);overflow:hidden;margin-bottom:20px;}
+.map-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:40px;}
+.mbtn{padding:13px 6px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:500;text-align:center;cursor:pointer;transition:opacity .2s;text-decoration:none;display:block;border:none;border-radius:4px;}
+.mbtn:active{opacity:.75;}
+.mbtn.ka{background:#FEE500;color:#1A1714;}
+.mbtn.na{background:#03C75A;color:#fff;}
+.mbtn.tm{background:var(--ink);color:var(--white);border:.5px solid var(--line);}
+.t-title{font-family:'Cormorant Garamond',serif;font-size:18.5px;font-weight:400;color:var(--ink);margin-bottom:14px;letter-spacing:.04em;padding-bottom:10px;border-bottom:.5px solid var(--line);}
+.t-body{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:2.1;color:var(--muted);font-weight:300;}
+.t-body strong{color:var(--ink);font-weight:500;}
+.t-body .ac{color:var(--gold);font-weight:500;}
+.t-note{background:var(--bg2);border-left:3px solid var(--gold);padding:18px;margin:16px 0;font-size:14px;line-height:1.95;font-family:'Noto Sans KR',sans-serif;}
+.bus-r{border-left:2px solid var(--line);padding-left:20px;margin-bottom:22px;}
+.bus-r.on{border-left-color:var(--ink);}
+.bus-r-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px;}
+
+/* ── REGISTRY ── */
+.reg-sec{background:var(--bg2);}
+.acc-item{border:.5px solid var(--line);margin-bottom:10px;overflow:hidden;border-radius:4px;}
+.acc-btn{width:100%;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;background:var(--white);border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);transition:background .2s;}
+.acc-btn:hover{background:var(--cream);}
+.acc-btn i{font-size:12px;color:var(--muted);transition:transform .3s;}
+.acc-btn.open i{transform:rotate(45deg);}
+.acc-body{display:none;background:var(--cream);border-top:.5px solid var(--line);padding:24px 20px;}
+.acc-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:.5px dashed var(--line);}
+.acc-row:last-child{border-bottom:none;padding-bottom:0;}
+.acc-row:first-child{padding-top:0;}
+.acc-lbl{font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--muted);font-weight:400;margin-bottom:6px;letter-spacing:.04em;}
+.acc-num{font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;color:var(--ink);letter-spacing:.08em;}
+.copy-btn{padding:8px 16px;border:.5px solid var(--line);background:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;border-radius:4px;}
+.copy-btn.f{background:var(--ink);color:var(--white);border-color:var(--ink);}
+.copy-btn:active{transform:scale(.96);}
+
+/* ── PHOTO SHARE ── */
+.share-card{background:var(--white);border:.5px solid var(--line);padding:40px 28px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.02);}
+.share-t{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;letter-spacing:.04em;}
+.share-p{font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:2.1;color:var(--muted);font-weight:300;word-break:keep-all;margin-bottom:28px;}
+.up-btn{width:100%;background:var(--cream);border:.5px solid var(--line);padding:18px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);letter-spacing:.1em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;border-radius:4px;}
+.up-btn:active{transform:scale(.98);background:var(--bg2);}
+.up-btn i{color:var(--gold);font-size:16px;}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:72px 32px 100px;text-align:center;}
+.foot-quote{font-family:'Noto Serif KR',serif;font-size:14px;line-height:2.4;color:rgba(253,250,245,.6);font-weight:300;word-break:keep-all;margin-bottom:52px;}
+.foot-quote strong{color:rgba(253,250,245,.9);font-weight:400;}
+.foot-share{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:272px;margin:0 auto 12px;padding:16px 20px;background:transparent;border:1px solid rgba(253,250,245,.2);color:rgba(253,250,245,.8);font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;letter-spacing:.1em;cursor:pointer;transition:all .2s;border-radius:30px;}
+.foot-share:hover{border-color:rgba(253,250,245,.4);color:var(--white);}
+.foot-share:active{transform:scale(.98);}
+.foot-copy{margin-top:60px;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.4em;color:rgba(253,250,245,.3);text-transform:uppercase;}
+
+/* ── RSVP MODAL ── */
+#rsvp-modal{display:none;position:fixed;inset:0;z-index:600;background:rgba(14,12,10,.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px 16px;}
+#rsvp-modal.open{display:flex;}
+.m-box{background:var(--cream);width:100%;max-width:380px;max-height:88vh;display:flex;flex-direction:column;border:.5px solid var(--line);box-shadow:0 28px 64px rgba(0,0,0,.32);border-radius:8px;overflow:hidden;}
+.m-head{padding:22px 24px;border-bottom:.5px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--cream);flex-shrink:0;}
+.m-head h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--ink);letter-spacing:.1em;}
+.m-head button{background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;padding:4px;}
+.m-scroll{overflow-y:auto;padding:24px;flex:1;background:var(--white);overscroll-behavior:contain;}
+.fg{margin-bottom:24px;}
+.fl{display:block;font-family:'Noto Sans KR',sans-serif;font-size:12px;letter-spacing:.15em;color:var(--ink);font-weight:500;margin-bottom:10px;}
+.frg{display:flex;gap:8px;}
+.frg input{display:none;}
+.frg label{flex:1;text-align:center;border:1px solid var(--line);padding:14px 8px;font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);cursor:pointer;transition:all .2s;border-radius:4px;background:var(--cream);}
+.frg input:checked+label{background:var(--ink);border-color:var(--ink);color:var(--white);font-weight:500;}
+.fi{width:100%;border:1px solid var(--line);background:var(--cream);padding:14px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;color:var(--ink);outline:none;transition:border-color .2s;text-align:center;border-radius:4px;}
+.fi:focus{border-color:var(--gold);}
+.fs{width:100%;border:1px solid var(--line);background:var(--cream);padding:14px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;color:var(--ink);outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A7D72'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:var(--cream);border-radius:4px;}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.sub-btn{width:100%;background:var(--ink);color:var(--white);border:none;padding:18px;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;letter-spacing:.2em;cursor:pointer;transition:opacity .2s;margin-top:10px;border-radius:4px;}
+.sub-btn:disabled{opacity:.55;cursor:not-allowed;}
+.sub-btn:active{opacity:.8;}
+</style>
 </head>
-<body class="font-batang text-hermes-text antialiased selection:bg-[#E35D20]/20">
-    <div id="toast">알림 메시지</div>
-    <audio id="wedding-bgm" loop preload="auto"><source src="Film_Love.mp3" type="audio/mpeg"></audio>
+<body>
 
-    <div class="mobile-container">
-        
-        <!-- BGM 컨트롤러 -->
-        <div class="fixed top-5 right-5 z-[500]">
-            <button id="bgm-btn" class="bg-hermes-bg/90 backdrop-blur-sm px-4 py-2.5 rounded-sm shadow-sm border border-hermes-line flex items-center space-x-2 transition-all active:scale-95">
-                <i class="fas fa-compact-disc text-[16px] text-hermes-text" id="disc-icon"></i>
-                <span id="bgm-status" class="text-[10px] font-bold tracking-widest text-hermes-text font-sans uppercase">Music Off</span>
-            </button>
-        </div>
+<div id="toast"></div>
 
-        <!-- 메인 커버 -->
-        <section class="relative w-full overflow-hidden flex flex-col items-center justify-center bg-cover bg-center" style="height: 100vh; height: 100dvh; background-image: linear-gradient(to bottom, rgba(44, 38, 33, 0) 0%, rgba(44, 38, 33, 0.2) 50%, rgba(253, 251, 247, 0.9) 85%, rgba(253, 251, 247, 1) 100%), url('IMG_1033.jpeg');">
-            <div id="snow-container" class="absolute inset-0 pointer-events-none z-10"></div>
-            
-            <div class="absolute bottom-16 flex flex-col items-center text-center px-6 w-full z-20">
-                <p class="text-[16px] leading-relaxed mb-10 font-bold hero-text-shadow break-keep text-hermes-text tracking-wide">
-                    가장 뜨거웠던 여름날 만난 두 사람,<br>이제 하얀 눈꽃 아래서 영원을 약속합니다.
-                </p>
-                <div class="space-y-4">
-                    <h1 class="text-[40px] font-extrabold tracking-[0.25em] text-hermes-text hero-text-shadow ml-3">태광 <span class="text-hermes-orange text-2xl mx-2 font-sans opacity-90">♥</span> 지현</h1>
-                    <div class="h-[1px] w-12 bg-hermes-text mx-auto my-6 opacity-40"></div>
-                    <p class="text-[15px] font-sans font-bold text-hermes-text tracking-[0.25em] uppercase hero-text-shadow">2027. 01. 30 SAT 13:10</p>
-                    <p class="text-[15.5px] font-bold text-hermes-text tracking-widest hero-text-shadow">남양주 파로스컨벤션 2층 파로스홀</p>
-                </div>
-            </div>
-        </section>
+<!-- ── GLOBAL LOADER ── -->
+<div id="loader-overlay">
+  <div class="spinner"></div>
+  <p id="loader-text">사진을 안전하게 업로드하고 있습니다...</p>
+</div>
 
-        <!-- 초대 문구 -->
-        <section class="py-28 px-8 text-center border-b border-hermes-line">
-            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-16 font-bold uppercase ml-2">Invitation</h2>
-            <div class="space-y-9 text-[17px] leading-[2.3] text-hermes-text break-keep font-medium">
-                <p>하나는 유연하고, 하나는 단단한 편이라<br>함께일 때 가장 잘 어울리는 사이가 되었습니다.</p>
-                <p>웃음이 필요할 땐 장난으로,<br>힘이 필요할 때 든든한 버팀목이 되어<br>서로의 부족함을 채우며 살아가겠습니다.</p>
-                <p>저희 두 사람의 시작을<br>귀한 걸음으로 축복해 주신다면<br>그 마음 오래도록 간직하겠습니다.</p>
-            </div>
-            
-            <div class="mt-24 space-y-7 text-[18px] text-hermes-text">
-                <div class="flex items-center justify-center space-x-4">
-                    <span class="font-bold text-[17px]">박유경 · 김기옥</span> <span class="text-hermes-muted text-[14.5px] font-normal">의 장남</span> <span class="text-[21px] font-bold ml-1">태광</span>
-                </div>
-                <div class="flex items-center justify-center space-x-4">
-                    <span class="font-bold text-[17px]">이기영 · 지백현</span> <span class="text-hermes-muted text-[14.5px] font-normal">의 차녀</span> <span class="text-[21px] font-bold ml-1">지현</span>
-                </div>
-            </div>
-        </section>
+<audio id="bgm" loop preload="auto"><source src="Film_Love.mp3" type="audio/mpeg"></audio>
 
-        <!-- 달력 -->
-        <section class="py-24 px-8 text-center border-b border-hermes-line">
-            <h2 class="text-[16px] font-sans tracking-[0.3em] text-hermes-text mb-14 font-bold uppercase">2027. 01. 30</h2>
-            <div class="max-w-[320px] mx-auto p-4">
-                <div class="grid grid-cols-7 gap-2 text-[12px] mb-8 text-hermes-muted font-sans font-bold uppercase tracking-widest border-b border-hermes-line pb-4">
-                    <div class="text-[#C84B31]">S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div class="text-hermes-text">S</div>
-                </div>
-                <div class="grid grid-cols-7 gap-y-7 gap-x-2 text-[16px] text-hermes-text font-bold font-sans">
-                    <div></div><div></div><div></div><div></div><div></div><div>1</div><div>2</div>
-                    <div class="text-[#C84B31]">3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div>
-                    <div class="text-[#C84B31]">10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div>
-                    <div class="text-[#C84B31]">17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div>
-                    <div class="text-[#C84B31]">24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div>
-                    <div class="bg-hermes-orange text-white rounded-sm w-8 h-8 flex items-center justify-center mx-auto -mt-1 text-[15px] shadow-sm">30</div>
-                    <div class="text-[#C84B31]">31</div>
-                </div>
-            </div>
-            <div class="mt-14">
-                <p id="dday" class="text-[16px] tracking-wide font-medium text-hermes-text font-sans"></p>
-            </div>
-        </section>
+<div class="wrap">
 
-        <!-- 참석 의사 전달 버튼 -->
-        <section class="py-24 px-8 text-center bg-[#F7F4EF] border-b border-hermes-line">
-            <h2 class="text-[11px] font-sans tracking-[0.5em] text-hermes-orange mb-10 font-bold uppercase">R . S . V . P</h2>
-            <p class="text-[16px] leading-[1.9] mb-12 text-hermes-text break-keep font-medium">귀한 걸음 해주시는 분들을 모시기에<br>부족함이 없도록,<br>참석 여부와 전세버스 탑승 계획을 여쭙습니다.</p>
-            <button onclick="openRsvpModal()" class="w-full bg-hermes-text text-hermes-bg py-4.5 rounded-sm font-sans font-bold tracking-[0.15em] text-[15px] active:scale-95 transition-all shadow-md">참석 의사 전달하기</button>
-        </section>
+<!-- BGM -->
+<button class="bgm-btn" id="bgm-btn">
+  <i class="fas fa-compact-disc" id="disc-i"></i>
+  <span id="bgm-lbl">Music Off</span>
+</button>
 
-        <!-- ★ 갤러리 (JS 에러 원천 차단. 100% 렌더링 보장) ★ -->
-        <section class="pt-24 pb-16 px-5 text-center border-b border-hermes-line">
-            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-14 font-bold uppercase ml-2">Gallery</h2>
-            <div class="grid grid-cols-3 gap-1.5" id="gallery-grid"></div>
-            <p class="text-[13px] text-hermes-muted mt-10 font-sans tracking-wide font-medium">사진을 터치하시면 크게 보실 수 있습니다.</p>
-        </section>
+<!-- ─── HERO ─── -->
+<section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
+  <div class="hero-photo" id="hero-photo"></div>
+  <div class="hero-veil"></div>
+  <div id="snow-c"></div>
+  <div class="hero-body">
+    <p class="hero-lead">가장 뜨거웠던 여름날 만난 두 사람,<br>이제 하얀 눈꽃 아래서 영원을 약속합니다.</p>
+    <h1 class="hero-names">태광<span class="hrt">♥</span>지현</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-date">2027 · 01 · 30 &nbsp;·&nbsp; Sat &nbsp;·&nbsp; 13:10</p>
+    <p class="hero-venue">남양주 파로스컨벤션 &nbsp;2층 파로스홀</p>
+  </div>
+</section>
 
-        <!-- 오시는 길 -->
-        <section class="pt-24 pb-0 px-6 border-b border-hermes-line">
-            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-12 text-center font-bold uppercase ml-2">Location</h2>
-            <h3 class="text-[21px] font-bold mb-4 text-center text-hermes-text">파로스컨벤션 2층 파로스홀</h3>
-            <p class="text-[16px] text-center mb-12 text-hermes-muted leading-relaxed font-sans font-medium">경기 남양주시 다산순환로 20<br>다산현대프리미어캠퍼스몰 <span class="font-bold text-hermes-text border-b border-hermes-text pb-0.5">E동 2층</span></p>
-            
-            <div class="w-full h-72 bg-[#F2EDE5] rounded-sm mb-10 overflow-hidden border border-hermes-line block">
-                <iframe src="https://maps.google.com/maps?q=%EB%82%A8%EC%96%91%EC%A3%BC%20%ED%8C%8C%EB%A1%9C%EC%8A%A4%EC%BB%A8%EB%B2%A4%EC%85%98&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="예식장 지도"></iframe>
-            </div>
-            
-            <div class="grid grid-cols-3 gap-2 mb-16 font-sans">
-                <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="bg-[#FEE500] py-3.5 rounded-sm text-[#191919] text-center font-bold text-[14px] active:scale-95 transition-all border border-[#E5CD00]/50 tracking-wide">카카오맵</a>
-                <a href="https://m.map.naver.com/search2/search.naver?query=남양주 파로스컨벤션" target="_blank" class="bg-[#03C75A] py-3.5 rounded-sm text-white text-center font-bold text-[14px] active:scale-95 transition-all border border-[#02B04F]/50 tracking-wide">네이버지도</a>
-                <button onclick="openTmap()" class="bg-[#222222] py-3.5 rounded-sm text-white font-bold text-[14px] active:scale-95 transition-all tracking-wide">티맵</button>
-            </div>
-            
-            <div class="space-y-12 text-[15.5px] mb-12 text-left pb-10 text-hermes-text font-sans font-medium">
-                <div>
-                    <h4 class="font-bold mb-4 text-[17px] text-hermes-text border-b border-hermes-text pb-2 inline-block">지하철 안내</h4>
-                    <p class="leading-[1.8] mt-3 pl-2">구리역 7번 출구 (8호선, 경의중앙선)<br>· 예식 당일 7번 출구 앞 <span class="font-bold text-hermes-orange">약 15분 간격 셔틀버스</span> 운행</p>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4 text-[17px] text-hermes-text border-b border-hermes-text pb-2 inline-block">자가용 및 주차 안내</h4>
-                    <div class="leading-[1.8] mt-3 space-y-3 pl-2">
-                        <p>· 내비게이션 <span class="font-bold underline underline-offset-2">"남양주 파로스컨벤션"</span> 검색</p>
-                        <div class="bg-[#F7F4EF] p-4.5 rounded-sm border border-hermes-line text-[14.5px]">
-                            <p class="font-bold mb-2 text-hermes-text">※ 가장 가까운 주차 방법</p>
-                            <p class="mb-1 text-hermes-muted">1. 주차장 진입 시 반드시 <span class="font-bold text-[#C84B31]">GATE 2</span> 확인</p>
-                            <p class="mb-1 text-hermes-muted">2. <span class="font-bold text-hermes-text">지하 3~4층 E동 구역</span> 주차</p>
-                            <p class="text-hermes-muted">3. <span class="font-bold text-hermes-text">E동 전용 엘리베이터</span> 탑승 (2층)</p>
-                        </div>
-                        <p>· <span class="font-bold">2시간 무료 주차</span> (이후 30분당 1,500원)</p>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-[17px] text-hermes-text border-b border-hermes-text pb-2 inline-block">전세버스 안내</h4>
-                    <div class="mt-4 space-y-6 pl-2">
-                        <div class="pl-4 border-l-[3px] border-hermes-text">
-                            <p class="font-bold text-[16px] mb-2">[ 전주 노선 ]</p>
-                            <div class="text-[15px] leading-[1.8] space-y-1 text-hermes-muted">
-                                <p>· 일시: 1월 30일(토) <span class="font-bold text-hermes-text">오전 8시 30분 정시 출발</span></p>
-                                <p>· 장소: <span class="font-bold text-hermes-text">전북특별자치도청 앞</span></p>
-                                <p>· 인솔: 홍길동 <a href="tel:010-9999-9999" class="font-bold text-hermes-text underline underline-offset-2 ml-1">010-9999-9999</a></p>
-                            </div>
-                        </div>
-                        <div class="pl-4 border-l-[3px] border-hermes-line">
-                            <p class="font-bold text-[16px] mb-2 text-hermes-muted">[ 원주 노선 ]</p>
-                            <p class="text-[15px] leading-[1.8] text-hermes-muted">현재 대절 여부를 조사 중입니다. 참석 정보 전달 시 체크해 주시면 확정 시 개별 안내해 드리겠습니다.</p>
-                        </div>
-                    </div>
-                    <div class="mt-8 text-[14.5px] leading-[1.8] text-hermes-muted break-keep">
-                        여럿이 함께 이용하는 버스이므로 <span class="text-hermes-orange font-bold">정시 출발</span> 예정입니다. 원활한 진행을 위해 <span class="font-bold text-hermes-text">출발 10분 전</span>까지 도착하여 탑승해 주시기를 정중히 부탁드립니다.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. 축하 마음 전하기 -->
-        <section class="pt-20 pb-20 px-6 text-center border-b border-hermes-line bg-[#F7F4EF]">
-            <h2 class="text-[11px] font-sans tracking-[0.5em] text-hermes-orange mb-12 font-bold uppercase ml-2">Registry</h2>
-            <div class="space-y-4 text-left font-sans">
-                <div class="border border-hermes-line rounded-sm overflow-hidden bg-white">
-                    <button onclick="toggleAccordion('groom')" class="w-full px-5 py-5 flex justify-between items-center font-medium text-[15px] text-hermes-text hover:bg-gray-50 transition-colors">
-                        <span>신랑측 마음 전하실 곳</span>
-                        <i class="fas fa-plus transition-transform duration-300 text-hermes-muted text-xs" id="groom-icon"></i>
-                    </button>
-                    <div id="groom" class="hidden px-5 py-6 border-t border-hermes-line space-y-6 bg-[#FCFAF6]">
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">혼주 박유경</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-[12.5px] border border-hermes-line px-4 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">혼주 김기옥</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-[12.5px] border border-hermes-line px-4 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center border-t border-hermes-line pt-5">
-                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">신랑 박태광</p><p class="font-bold text-[16px] tracking-wide text-hermes-text">신한 110-305-227134</p></div>
-                            <button onclick="copyToClipboard('110305227134')" class="text-[12.5px] border border-hermes-text px-4 py-2 rounded-sm font-medium bg-hermes-text text-white active:bg-gray-800 transition-all">복사</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="border border-hermes-line rounded-sm overflow-hidden bg-white">
-                    <button onclick="toggleAccordion('bride')" class="w-full px-5 py-5 flex justify-between items-center font-medium text-[15px] text-hermes-text hover:bg-gray-50 transition-colors">
-                        <span>신부측 마음 전하실 곳</span>
-                        <i class="fas fa-plus transition-transform duration-300 text-hermes-muted text-xs" id="bride-icon"></i>
-                    </button>
-                    <div id="bride" class="hidden px-5 py-6 border-t border-hermes-line space-y-6 bg-[#FCFAF6]">
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">혼주 이기영</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-[12.5px] border border-hermes-line px-4 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">혼주 지백현</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">농협 301-0089-9502-11</p></div>
-                            <button onclick="copyToClipboard('3010089950211')" class="text-[12.5px] border border-hermes-line px-4 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
-                        </div>
-                        <div class="flex justify-between items-center border-t border-hermes-line pt-5">
-                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">신부 이지현</p><p class="font-bold text-[16px] tracking-wide text-hermes-text">신한 110-477-676185</p></div>
-                            <button onclick="copyToClipboard('110477676185')" class="text-[12.5px] border border-hermes-text px-4 py-2 rounded-sm font-medium bg-hermes-text text-white active:bg-gray-800 transition-all">복사</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 9. 네이티브 갤러리 업로더 -->
-        <section class="pt-20 pb-28 px-6 font-sans">
-            <div class="bg-white rounded-sm p-8 border border-hermes-line text-center relative overflow-hidden shadow-sm">
-                <div class="mb-6">
-                    <p class="text-[11px] tracking-[0.4em] font-bold text-hermes-orange uppercase mb-2">Memory</p>
-                    <h3 class="text-[18px] font-bold text-hermes-text tracking-tight">사진 공유하기</h3>
-                </div>
-                <p class="text-[14.5px] leading-[1.8] text-hermes-muted mb-8 break-keep font-medium">
-                    예식 당일, 하객분들의 따뜻한 시선으로 담아주신<br>저희의 예쁜 순간들을 아래 버튼을 통해 전해 주시면<br>소중히 간직하겠습니다.
-                </p>
-                
-                <input type="file" id="photo-upload" accept="image/*,video/*" multiple class="hidden">
-                <button id="upload-btn" class="flex items-center justify-center w-full bg-hermes-bg text-hermes-text py-4 rounded-sm font-bold tracking-wide text-[14.5px] border border-hermes-line active:bg-gray-100 transition-all shadow-sm">
-                    <i id="upload-icon" class="fas fa-camera mr-2 text-hermes-orange"></i> 
-                    <span id="upload-text">사진 / 영상 올려주기</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- 10. 푸터 (프라이드 문구 완벽 적용) -->
-        <section class="pt-24 pb-32 px-10 text-center bg-hermes-text text-hermes-bg">
-            <div class="max-w-[340px] mx-auto space-y-8">
-                <div class="h-[1px] w-8 bg-hermes-muted mx-auto"></div>
-                <p class="text-[14.5px] leading-[2.1] font-light break-keep font-batang italic text-white/80">소중한 분들을 모시는 설레는 마음을 담아,<br><span class="font-medium text-white">기획부터 디자인, 코딩, 배포까지<br>신부가 직접 완성했습니다.</span><br>축복해주시는 그 진심 오래도록 간직하겠습니다.</p>
-                <div class="h-[1px] w-8 bg-hermes-muted mx-auto"></div>
-            </div>
-            
-            <div class="mt-20 flex flex-col items-center gap-3 px-2 font-sans">
-                <button onclick="shareKakao()" class="flex items-center justify-center w-full max-w-[280px] bg-transparent border border-hermes-muted/50 text-white/90 font-medium text-[13px] py-3.5 rounded-sm active:bg-white/10 transition-all tracking-wide">
-                    <i class="fas fa-comment text-sm mr-2 text-[#FEE500]"></i> 카카오톡으로 공유하기
-                </button>
-                <button onclick="copyPageUrl()" class="flex items-center justify-center w-full max-w-[280px] bg-transparent border border-hermes-muted/50 text-white/90 font-medium text-[13px] py-3.5 rounded-sm active:bg-white/10 transition-all tracking-wide">
-                    <i class="fas fa-link text-sm mr-2 text-white/60"></i> 청첩장 주소 복사하기
-                </button>
-            </div>
-            <p class="mt-24 text-[10px] text-hermes-muted tracking-[0.4em] font-sans font-bold uppercase">Taekwang & Jihyun</p>
-        </section>
-
-        <!-- ★ 11. 참석 정보 모달 (전송 버튼 폼 최하단 배치 완료 - 무조건 스크롤 유도) ★ -->
-        <div id="rsvp-modal" class="fixed inset-0 z-[600] flex items-center justify-center bg-[#1A1614]/80 backdrop-blur-sm hidden px-4 py-8">
-            <div class="bg-hermes-bg w-full max-w-[380px] rounded-sm shadow-2xl flex flex-col max-h-[85vh] relative overflow-hidden font-sans border border-hermes-line">
-                
-                <!-- 상단 헤더만 고정 -->
-                <div class="bg-hermes-bg z-20 flex justify-between items-center px-6 py-4 border-b border-hermes-line shrink-0">
-                    <h3 class="text-[16.5px] font-bold text-hermes-text tracking-wide">참석 정보 전달</h3>
-                    <button type="button" onclick="closeRsvpModal()" class="p-2 -mr-2 active:bg-gray-200 rounded-full transition-all"><i class="fas fa-times text-xl text-hermes-muted"></i></button>
-                </div>
-                
-                <!-- 폼 전체 스크롤 영역 -->
-                <div class="overflow-y-auto px-6 py-6 overscroll-contain flex-1 bg-white">
-                    <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="space-y-7 text-[14.5px] text-hermes-text font-normal">
-                        
-                        <div class="grid grid-cols-2 gap-4 items-start">
-                            <div>
-                                <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">구분</label>
-                                <div class="flex space-x-1.5">
-                                    <div class="flex-1 relative">
-                                        <input type="radio" id="side-groom" name="side" value="신랑측" class="peer hidden" required>
-                                        <label for="side-groom" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[13.5px]">신랑</label>
-                                    </div>
-                                    <div class="flex-1 relative">
-                                        <input type="radio" id="side-bride" name="side" value="신부측" class="peer hidden" required>
-                                        <label for="side-bride" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[13.5px]">신부</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">성함</label>
-                                <input type="text" name="name" class="w-full border border-hermes-line rounded-sm py-3 px-3 focus:border-hermes-text transition-all outline-none font-medium text-[14px] text-center bg-hermes-bg" required placeholder="이름 입력">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">동반 인원</label>
-                                <select name="companion" class="w-full border border-hermes-line py-3 px-2 rounded-sm bg-hermes-bg font-normal text-[13.5px] outline-none"><option value="1명 (본인만)">본인 (1명)</option><option value="2명">2명</option><option value="3명">3명</option><option value="4명">4명</option><option value="5명 이상">5명 이상</option></select>
-                            </div>
-                            <div>
-                                <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">어린이(식권)</label>
-                                <select name="child" class="w-full border border-hermes-line py-3 px-2 rounded-sm bg-hermes-bg font-normal text-[13.5px] outline-none"><option value="해당 없음">없음</option><option value="1명">1명</option><option value="2명">2명</option><option value="3명 이상">3명 이상</option></select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">참석 여부</label>
-                            <div class="flex space-x-2">
-                                <div class="flex-1 relative">
-                                    <input type="radio" id="attend-yes" name="attend" value="참석" class="peer hidden" onchange="toggleBusSection()" checked>
-                                    <label for="attend-yes" class="block w-full text-center border border-hermes-line py-3.5 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[14px] font-medium">참석합니다</label>
-                                </div>
-                                <div class="flex-1 relative">
-                                    <input type="radio" id="attend-no" name="attend" value="마음만" class="peer hidden" onchange="toggleBusSection()">
-                                    <label for="attend-no" class="block w-full text-center border border-hermes-line py-3.5 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[14px] font-medium">마음만 전해요</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="bus-section-container">
-                            <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">전세버스 탑승</label>
-                            <div class="grid grid-cols-3 gap-1.5">
-                                <div class="relative">
-                                    <input type="radio" id="bus-no" name="bus" value="이용안함" class="peer hidden" checked>
-                                    <label for="bus-no" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[13px] font-medium">안 함</label>
-                                </div>
-                                <div class="relative">
-                                    <input type="radio" id="bus-jj" name="bus" value="전주탑승" class="peer hidden">
-                                    <label for="bus-jj" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[13px] font-medium">전주 노선</label>
-                                </div>
-                                <div class="relative">
-                                    <input type="radio" id="bus-wj" name="bus" value="원주탑승" class="peer hidden">
-                                    <label for="bus-wj" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[13px] font-medium">원주 노선</label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- ★ 스크롤의 끝(종착점)에 전송 버튼 배치. 스크롤 안 하면 전송 불가 ★ -->
-                        <div class="pt-6 pb-2">
-                            <button type="submit" class="w-full bg-hermes-text text-white py-4 rounded-sm font-bold tracking-[0.15em] transition-all active:scale-95 text-[15px]">전송하기</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<!-- ─── INVITATION ─── -->
+<section>
+  <span class="lbl rv">
+    Invitation
+    <span class="lbl-kr">소중한 분들을 초대합니다</span>
+  </span>
+  <div class="orn rv d1"><i class="fas fa-diamond"></i></div>
+  <div style="margin:44px 0;">
+    <p class="inv-text rv d2">하나는 유연하고, 하나는 단단한 편이라<br>함께일 때 가장 잘 어울리는 사이가 되었습니다.</p>
+    <p class="inv-text rv d2" style="margin-top:40px;">웃음이 필요할 땐 장난으로,<br>힘이 필요할 때 든든한 버팀목이 되어<br>서로의 부족함을 채우며 살아가겠습니다.</p>
+    <p class="inv-text rv d3" style="margin-top:40px;">저희 두 사람의 시작을<br>귀한 걸음으로 축복해 주신다면<br>그 마음 오래도록 간직하겠습니다.</p>
+  </div>
+  <div class="orn rv"><i class="fas fa-diamond"></i></div>
+  <div class="inv-families rv">
+    <div class="fam-row">
+      <span class="fam-par">박유경 · 김기옥</span>
+      <span class="fam-rel">의 장남</span>
+      <span class="fam-name">태광</span>
     </div>
+    <div class="fam-row">
+      <span class="fam-par">이기영 · 지백현</span>
+      <span class="fam-rel">의 차녀</span>
+      <span class="fam-name">지현</span>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // 신부님의 최종 웹앱 주소
-        const googleSheetUrl = "https://script.google.com/macros/s/AKfycbyLY909WTTePfuDgjOMhQMZX5fjPKrXgd4s8bzrD2QCYzWDZdhOQlmYINUg9dtBsvip/exec";
-        
-        const galleryImages = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg'];
-        let currentImgIndex = 0; let scrollPosition = 0;
-        
-        // ★ 갤러리 로딩 에러 원천 차단 (가장 안전한 HTML5 img 삽입 방식) ★
-        function initGallery() { 
-            const grid = document.getElementById('gallery-grid'); 
-            grid.innerHTML = ''; // 초기화
-            galleryImages.forEach((src, idx) => { 
-                const wrapper = document.createElement('div'); 
-                wrapper.className = "aspect-square cursor-pointer rounded-sm border border-hermes-line overflow-hidden bg-[#F5F2EC]"; 
-                wrapper.onclick = () => openImageModal(idx); 
-                
-                const img = document.createElement('img');
-                img.src = src;
-                img.className = "w-full h-full object-cover"; 
-                // 네이티브 지연 로딩 속성만 남기고 CSS 기교(opacity)는 모두 버림. 무조건 뜹니다.
-                img.loading = "lazy"; 
-                
-                wrapper.appendChild(img);
-                grid.appendChild(wrapper); 
-            }); 
-        }
-        
-        function lockScroll() { scrollPosition = window.pageYOffset; document.body.style.overflow = 'hidden'; document.body.style.position = 'fixed'; document.body.style.top = `-${scrollPosition}px`; document.body.style.width = '100%'; }
-        function unlockScroll() { document.body.style.removeProperty('overflow'); document.body.style.removeProperty('position'); document.body.style.removeProperty('top'); document.body.style.removeProperty('width'); window.scrollTo(0, scrollPosition); }
-        function openImageModal(idx) { currentImgIndex = idx; updateModalImage(); document.getElementById('img-modal').classList.remove('hidden'); document.getElementById('img-modal').classList.add('active'); lockScroll(); }
-        function closeImageModal() { document.getElementById('img-modal').classList.add('hidden'); document.getElementById('img-modal').classList.remove('active'); unlockScroll(); }
-        function updateModalImage() { document.getElementById('modal-content').src = galleryImages[currentImgIndex]; document.getElementById('modal-page-num').innerText = `${currentImgIndex + 1} / ${galleryImages.length}`; }
-        
-        let touchStartX = 0; let touchStartY = 0;
-        document.getElementById('modal-touch-area').addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; touchStartY = e.changedTouches[0].screenY; }, { passive: true });
-        document.getElementById('modal-touch-area').addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].screenX - touchStartX; const dy = e.changedTouches[0].screenY - touchStartY;
-            if (dy > 120 && Math.abs(dy) > Math.abs(dx)) { closeImageModal(); return; }
-            if (dx < -60) { currentImgIndex = (currentImgIndex + 1) % galleryImages.length; updateModalImage(); }
-            if (dx > 60) { currentImgIndex = (currentImgIndex - 1 + galleryImages.length) % galleryImages.length; updateModalImage(); }
-        }, { passive: true });
+<!-- ─── CALENDAR ─── -->
+<section style="background:var(--bg2);">
+  <span class="lbl rv">
+    2027 &nbsp;·&nbsp; January
+    <span class="lbl-kr">예식일 안내</span>
+  </span>
+  <div class="cal-wrap rv">
+    <div class="cal-grid">
+      <div class="cday-lbl s">S</div><div class="cday-lbl">M</div><div class="cday-lbl">T</div>
+      <div class="cday-lbl">W</div><div class="cday-lbl">T</div><div class="cday-lbl">F</div><div class="cday-lbl">SA</div>
+      <!-- Jan 2027: 1일=금요일 -->
+      <div class="cday"></div><div class="cday"></div><div class="cday"></div>
+      <div class="cday"></div><div class="cday"></div>
+      <div class="cday">1</div><div class="cday sa">2</div>
+      <div class="cday s">3</div><div class="cday">4</div><div class="cday">5</div>
+      <div class="cday">6</div><div class="cday">7</div><div class="cday">8</div><div class="cday sa">9</div>
+      <div class="cday s">10</div><div class="cday">11</div><div class="cday">12</div>
+      <div class="cday">13</div><div class="cday">14</div><div class="cday">15</div><div class="cday sa">16</div>
+      <div class="cday s">17</div><div class="cday">18</div><div class="cday">19</div>
+      <div class="cday">20</div><div class="cday">21</div><div class="cday">22</div><div class="cday sa">23</div>
+      <div class="cday s">24</div><div class="cday">25</div><div class="cday">26</div>
+      <div class="cday">27</div><div class="cday">28</div><div class="cday">29</div>
+      <div class="cday w">30</div>
+      <!-- 31일 = 일요일 -->
+      <div class="cday s">31</div>
+    </div>
+  </div>
+  <p class="dday-t rv" id="dday"></p>
+</section>
 
-        function createSnowflakes() { 
-            const container = document.getElementById('snow-container'); 
-            if(!container) return;
-            for (let i = 0; i < 15; i++) { 
-                const s = document.createElement('div'); 
-                s.classList.add('snowflake'); 
-                const size = Math.random() * 3 + 2; 
-                s.style.width = size + 'px'; 
-                s.style.height = size + 'px'; 
-                s.style.left = Math.random() * 100 + '%'; 
-                s.style.animationDuration = (Math.random() * 8 + 8) + 's'; 
-                s.style.animationDelay = (Math.random() * -15) + 's'; 
-                s.style.setProperty('--end-x', `${(Math.random() - 0.5) * 40}px`); 
-                container.appendChild(s); 
-            } 
-        }
-        
-        function toggleAccordion(id) { 
-            const content = document.getElementById(id); 
-            const icon = document.getElementById(id + '-icon'); 
-            const isHidden = content.classList.contains('hidden'); 
-            document.querySelectorAll('[id^="groom"], [id^="bride"]').forEach(el => { if(el.id === 'groom' || el.id === 'bride') el.classList.add('hidden'); }); 
-            document.querySelectorAll('[id$="-icon"]').forEach(el => el.style.transform = 'rotate(0deg)'); 
-            if(isHidden) { content.classList.remove('hidden'); icon.style.transform = 'rotate(45deg)'; } 
-        }
-        
-        // ★ BGM 로직 모바일 충돌 (InvalidStateError) 완벽 해결 ★
-        const audio = document.getElementById('wedding-bgm'); 
-        const discIcon = document.getElementById('disc-icon'); 
-        const bgmStatus = document.getElementById('bgm-status'); 
-        let isFirstPlay = true;
-        
-        // 오디오 객체가 로드된 후 볼륨 설정
-        audio.volume = 0.35; 
-        
-        function initBgmPlayback() { 
-            if (!isFirstPlay) return; 
-            // play() 자체가 Promise를 반환하므로 안전하게 캐치해야 전체 스크립트가 멈추지 않음.
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    isFirstPlay = false; 
-                    discIcon.classList.add('spin'); 
-                    bgmStatus.innerText = "Music On"; 
-                }).catch(error => {
-                    // 자동재생이 브라우저 정책상 막힌 경우 무시함 (에러 뿜지 않음)
-                    console.log("자동재생이 차단되었습니다. 버튼을 눌러 재생해주세요.");
-                });
-            }
-        }
-        
-        // 터치 및 클릭 이벤트로 안전하게 활성화 (에러 주범인 scroll은 제거)
-        ['touchstart', 'click'].forEach(evt => {
-            document.body.addEventListener(evt, initBgmPlayback, { once: true, passive: true });
-        });
+<!-- ─── RSVP ─── -->
+<section class="rsvp-sec">
+  <span class="lbl rv">
+    R · S · V · P
+    <span class="lbl-kr">참석 의사 전달</span>
+  </span>
+  <p class="rsvp-text rv">귀한 걸음 해주시는 분들을 모시기에<br>부족함이 없도록,<br>참석 여부와 전세버스 탑승 계획을 여쭙습니다.</p>
+  <button class="btn-ghost rv" onclick="openRsvp()">참석 여부 전달하기</button>
+</section>
 
-        document.getElementById('bgm-btn').addEventListener('click', (e) => { 
-            e.stopPropagation(); 
-            if (audio.paused) { 
-                audio.play().then(() => {
-                    discIcon.classList.add('spin'); 
-                    bgmStatus.innerText = "Music On"; 
-                    isFirstPlay = false;
-                }).catch(err => console.log(err));
-            } else { 
-                audio.pause(); 
-                discIcon.classList.remove('spin'); 
-                bgmStatus.innerText = "Music Off"; 
-            } 
-        });
+<!-- ─── GALLERY ─── -->
+<section>
+  <span class="lbl rv">
+    Gallery
+    <span class="lbl-kr">우리의 예쁜 순간들</span>
+  </span>
+  <div class="gal-grid rv" id="gal-grid"></div>
+  <p class="gal-hint rv">사진을 터치하시면 크게 보실 수 있습니다</p>
+</section>
 
-        // 사진 업로드
-        const photoUploadInput = document.getElementById('photo-upload');
-        const uploadBtn = document.getElementById('upload-btn');
-        const uploadText = document.getElementById('upload-text');
-        const uploadIcon = document.getElementById('upload-icon');
+<!-- IMAGE MODAL -->
+<div id="img-modal">
+  <button class="m-close" onclick="closeImg()"><i class="fas fa-times"></i></button>
+  <p id="modal-pnum"></p>
+  <div id="modal-ta">
+    <img id="modal-img" src="" alt="">
+  </div>
+  <p class="m-hint">← 좌우 스와이프 이동 &nbsp;·&nbsp; 아래로 내려 닫기 →</p>
+</div>
 
-        uploadBtn.addEventListener('click', () => { photoUploadInput.click(); });
+<!-- ─── LOCATION ─── -->
+<section>
+  <span class="lbl rv">
+    Location
+    <span class="lbl-kr">오시는 길</span>
+  </span>
+  <h3 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;text-align:center;letter-spacing:.05em;margin-bottom:8px;">파로스컨벤션 2층 파로스홀</h3>
+  <p class="rv" style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);text-align:center;margin-bottom:32px;line-height:2;font-weight:300;">
+    경기 남양주시 다산순환로 20<br>
+    다산현대프리미어캠퍼스몰 <strong style="color:var(--ink);font-weight:500;">E동 2층</strong>
+  </p>
+  <div class="map-f rv">
+    <iframe src="https://maps.google.com/maps?q=%EB%82%A8%EC%91%A1%EC%A3%BC%20%ED%8C%8C%EB%A1%9C%EC%8A%A4%EC%BB%A8%EB%B2%A4%EC%85%98&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="예식장 지도"></iframe>
+  </div>
+  <div class="map-btns rv">
+    <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="mbtn ka">카카오맵</a>
+    <a href="https://m.map.naver.com/search2/search.naver?query=남양주 파로스컨벤션" target="_blank" class="mbtn na">네이버지도</a>
+    <button onclick="openTmap()" class="mbtn tm">티맵</button>
+  </div>
 
-        photoUploadInput.addEventListener('change', async (e) => {
-            const files = e.target.files;
-            if(files.length === 0) return;
+  <div class="rv" style="margin-bottom:36px;">
+    <p class="t-title">지하철 안내</p>
+    <div class="t-body">
+      구리역 7번 출구 (8호선, 경의중앙선)<br>
+      예식 당일 7번 출구 앞 <span class="ac">약 15분 간격 셔틀버스</span> 운행
+    </div>
+  </div>
 
-            let hasLargeFiles = false;
-            let successCount = 0;
-            const maxSizeBytes = 10 * 1024 * 1024;
+  <div class="rv" style="margin-bottom:36px;">
+    <p class="t-title">자가용 및 주차 안내</p>
+    <div class="t-body">
+      <p style="margin-bottom:10px;">내비게이션 <strong>"남양주 파로스컨벤션"</strong> 검색</p>
+      <div class="t-note">
+        <p style="font-weight:500;margin-bottom:10px;color:var(--ink);font-family:'Noto Sans KR',sans-serif;">[ 가장 빠른 주차/이동 동선 ]</p>
+        <p>1. 주차장 진입 시 반드시 <strong style="color:#C04B30;">GATE 2</strong> 확인</p>
+        <p>2. <strong>지하 3~4층 E동 구역</strong> 주차</p>
+        <p>3. <strong>E동 전용 엘리베이터</strong> 탑승 (2층)</p>
+      </div>
+      <p style="margin-top:10px;"><strong>2시간 무료 주차</strong> (이후 30분당 1,500원)</p>
+    </div>
+  </div>
 
-            uploadBtn.disabled = true;
-            uploadBtn.classList.replace('bg-hermes-bg', 'bg-[#EAE5DF]');
+  <div class="rv">
+    <p class="t-title">전세버스 안내</p>
+    <div class="t-body">
+      <div class="bus-r on" style="margin-bottom:18px;">
+        <p class="bus-r-t">[ 전주 노선 ]</p>
+        <p>일시 : 1월 30일(토) <span class="ac">오전 8시 30분 정시 출발</span></p>
+        <p>장소 : <strong>전북특별자치도청 앞</strong></p>
+        <p>인솔 : 홍길동 &nbsp;<a href="tel:010-9999-9999" style="color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px;">010-9999-9999</a></p>
+      </div>
+      <div class="bus-r">
+        <p class="bus-r-t" style="color:var(--muted);">[ 원주 노선 ]</p>
+        <p style="color:var(--muted);">현재 대절 여부를 조사 중입니다. 참석 정보 전달 시 체크해 주시면 확정 시 개별 안내해 드리겠습니다.</p>
+      </div>
+      <p style="margin-top:20px;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;line-height:2;color:var(--muted);word-break:keep-all;">
+        정시 출발 예정이오니, 원활한 진행을 위해 <strong style="color:var(--ink);">출발 10분 전</strong>까지 도착하여 탑승해 주시기를 정중히 부탁드립니다.
+      </p>
+    </div>
+  </div>
+</section>
 
-            for(let i=0; i<files.length; i++) {
-                const file = files[i];
-                if(file.size > maxSizeBytes) { 
-                    hasLargeFiles = true; 
-                    continue; 
-                }
+<!-- ─── REGISTRY ─── -->
+<section class="reg-sec">
+  <span class="lbl rv">
+    Registry
+    <span class="lbl-kr">마음 전하실 곳</span>
+  </span>
+  <div class="rv">
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc('gr')" id="gr-btn">
+        <span>신랑측 계좌번호 보기</span>
+        <i class="fas fa-plus" id="gr-i"></i>
+      </button>
+      <div class="acc-body" id="gr">
+        <div class="acc-row">
+          <div><p class="acc-lbl">혼주 박유경</p><p class="acc-num">신한 000-000-000000</p></div>
+          <button class="copy-btn" onclick="cpCopy('000000000000')">복사하기</button>
+        </div>
+        <div class="acc-row">
+          <div><p class="acc-lbl">혼주 김기옥</p><p class="acc-num">신한 000-000-000000</p></div>
+          <button class="copy-btn" onclick="cpCopy('000000000000')">복사하기</button>
+        </div>
+        <div class="acc-row">
+          <div><p class="acc-lbl">신랑 박태광</p><p class="acc-num">신한 110-305-227134</p></div>
+          <button class="copy-btn f" onclick="cpCopy('110305227134')">복사하기</button>
+        </div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc('br')" id="br-btn">
+        <span>신부측 계좌번호 보기</span>
+        <i class="fas fa-plus" id="br-i"></i>
+      </button>
+      <div class="acc-body" id="br">
+        <div class="acc-row">
+          <div><p class="acc-lbl">혼주 이기영</p><p class="acc-num">신한 000-000-000000</p></div>
+          <button class="copy-btn" onclick="cpCopy('000000000000')">복사하기</button>
+        </div>
+        <div class="acc-row">
+          <div><p class="acc-lbl">혼주 지백현</p><p class="acc-num">농협 301-0089-9502-11</p></div>
+          <button class="copy-btn" onclick="cpCopy('3010089950211')">복사하기</button>
+        </div>
+        <div class="acc-row">
+          <div><p class="acc-lbl">신부 이지현</p><p class="acc-num">신한 110-477-676185</p></div>
+          <button class="copy-btn f" onclick="cpCopy('110477676185')">복사하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                uploadText.innerText = `업로드 중... (${i+1}/${files.length})`;
-                uploadIcon.className = "fas fa-spinner fa-spin mr-2 text-hermes-muted";
+<!-- ─── PHOTO SHARE ─── -->
+<section>
+  <input type="file" id="photo-up" accept="image/*,video/*" multiple style="display:none;">
+  <div class="share-card rv">
+    <span class="lbl" style="margin-bottom:14px;">
+      Memory
+      <span class="lbl-kr">사진 공유하기</span>
+    </span>
+    <p class="share-p" style="margin-top:24px;">예식 당일, 하객분들의 따뜻한 시선으로 담아주신<br>저희의 예쁜 순간들을 아래 버튼을 통해<br>전해 주시면 소중히 간직하겠습니다.</p>
+    <button class="up-btn" id="up-btn">
+      <i class="fas fa-camera" id="up-i"></i>
+      <span id="up-txt">사진 / 영상 올려주기</span>
+    </button>
+  </div>
+</section>
 
-                try {
-                    const base64 = await toBase64(file);
-                    const formData = new FormData();
-                    formData.append('action', 'upload');
-                    formData.append('fileName', file.name);
-                    formData.append('mimeType', file.type);
-                    formData.append('fileData', base64.split(',')[1]);
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="orn" style="margin-bottom:40px;"><i class="fas fa-diamond" style="font-size:7px;color:rgba(181,146,74,.5);margin:0 14px;"></i></div>
+  <p class="foot-quote">
+    소중한 분들을 모시는 설레는 마음을 담아,<br>
+    <strong>기획부터 디자인, 코딩, 배포까지<br>신부가 직접 완성했습니다.</strong><br>
+    축복해주시는 그 진심 오래도록 간직하겠습니다.
+  </p>
+  <div class="orn" style="margin-bottom:40px;"><i class="fas fa-diamond" style="font-size:7px;color:rgba(181,146,74,.5);margin:0 14px;"></i></div>
+  <button class="foot-share" onclick="shareKakao()"><i class="fas fa-comment" style="color:#FEE500;font-size:15px;"></i> 카카오톡으로 공유하기</button>
+  <button class="foot-share" onclick="cpUrl()"><i class="fas fa-link" style="color:rgba(253,250,245,.35);font-size:14px;"></i> 청첩장 주소 복사하기</button>
+  <p class="foot-copy" style="font-family:'Cormorant Garamond',serif;">Taekwang &amp; Jihyun &nbsp;·&nbsp; 2027</p>
+</footer>
 
-                    await fetch(googleSheetUrl, { method: 'POST', mode: 'no-cors', body: formData });
-                    successCount++;
-                } catch(err) {
-                    console.error("업로드 실패:", err);
-                }
-            }
+<!-- ─── RSVP MODAL ─── -->
+<div id="rsvp-modal">
+  <div class="m-box">
+    <div class="m-head">
+      <h3>참석 정보 전달</h3>
+      <button onclick="closeRsvp()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="m-scroll">
+      <form id="rsvp-form" onsubmit="submitRsvp(event)">
+        <div class="fg2 fg">
+          <div>
+            <label class="fl">구분</label>
+            <div class="frg">
+              <input type="radio" id="s-g" name="side" value="신랑측" required>
+              <label for="s-g">신랑</label>
+              <input type="radio" id="s-b" name="side" value="신부측">
+              <label for="s-b">신부</label>
+            </div>
+          </div>
+          <div>
+            <label class="fl" for="nm">성함</label>
+            <input type="text" id="nm" name="name" class="fi" required placeholder="이름 입력">
+          </div>
+        </div>
+        <div class="fg2 fg">
+          <div>
+            <label class="fl">동반 인원</label>
+            <select name="companion" class="fs">
+              <option value="1명 (본인만)">본인 (1명)</option>
+              <option value="2명">2명</option>
+              <option value="3명">3명</option>
+              <option value="4명">4명</option>
+              <option value="5명 이상">5명 이상</option>
+            </select>
+          </div>
+          <div>
+            <label class="fl">어린이(식권)</label>
+            <select name="child" class="fs">
+              <option value="해당 없음">없음</option>
+              <option value="1명">1명</option>
+              <option value="2명">2명</option>
+              <option value="3명 이상">3명 이상</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl">참석 여부</label>
+          <div class="frg">
+            <input type="radio" id="at-y" name="attend" value="참석" checked onchange="toggleBus()">
+            <label for="at-y" style="font-size:14px;">참석합니다</label>
+            <input type="radio" id="at-n" name="attend" value="마음만" onchange="toggleBus()">
+            <label for="at-n" style="font-size:14px;">마음만 전해요</label>
+          </div>
+        </div>
+        <div class="fg" id="bus-sec">
+          <label class="fl">전세버스 탑승</label>
+          <div class="frg" style="flex-wrap:wrap;gap:8px;">
+            <input type="radio" id="bu-n" name="bus" value="이용안함" checked>
+            <label for="bu-n" style="flex:none;padding:12px 14px;">안 함</label>
+            <input type="radio" id="bu-j" name="bus" value="전주탑승">
+            <label for="bu-j" style="flex:none;padding:12px 14px;">전주 탑승</label>
+            <input type="radio" id="bu-w" name="bus" value="원주탑승">
+            <label for="bu-w" style="flex:none;padding:12px 14px;">원주 탑승</label>
+          </div>
+        </div>
+        <button type="submit" class="sub-btn" id="sub-btn">전송하기</button>
+      </form>
+    </div>
+  </div>
+</div>
 
-            uploadBtn.disabled = false;
-            uploadBtn.classList.replace('bg-[#EAE5DF]', 'bg-hermes-bg');
-            uploadText.innerText = "사진 / 영상 올려주기";
-            uploadIcon.className = "fas fa-camera mr-2 text-hermes-orange";
-            photoUploadInput.value = ''; 
+</div><!-- .wrap -->
 
-            if(hasLargeFiles) {
-                alert("10MB가 넘는 고화질 영상은 브라우저 안전을 위해 구글 드라이브로 직접 연결해 드립니다. 🤍");
-                window.open("https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link", "_blank");
-            } else if(successCount > 0) {
-                showToast(`소중한 사진 ${successCount}장이 안전하게 보관되었습니다.`);
-            }
-        });
+<script>
+const GAS='https://script.google.com/macros/s/AKfycbyLY909WTTePfuDgjOMhQMZX5fjPKrXgd4s8bzrD2QCYzWDZdhOQlmYINUg9dtBsvip/exec';
+/* 갤러리 이미지 원본 파일명으로 복구 완료 */
+const IMGS=['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg']; 
+let ci=0, sy=0;
 
-        function toBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
-        }
+/* GALLERY */
+function initGallery(){
+  const g=document.getElementById('gal-grid');
+  g.innerHTML='';
+  IMGS.forEach((s,i)=>{
+    const d=document.createElement('div');
+    d.className='gal-item';
+    d.onclick=()=>openImg(i);
+    const im=document.createElement('img');
+    im.src=s; im.loading='lazy'; im.alt='';
+    d.appendChild(im); g.appendChild(d);
+  });
+}
 
-        function showToast(msg) { const toast = document.getElementById('toast'); toast.innerText = msg; toast.className = "show"; setTimeout(() => { toast.className = ""; }, 3000); }
-        function copyToClipboard(text) { const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); showToast('계좌번호가 복사되었습니다.'); }
-        function copyPageUrl() { const url = window.location.href; if (navigator.clipboard) { navigator.clipboard.writeText(url).then(() => showToast('청첩장 주소가 복사되었습니다.')); } else { copyToClipboard(url); } }
-        function openRsvpModal() { document.getElementById('rsvp-modal').classList.remove('hidden'); lockScroll(); }
-        function closeRsvpModal() { document.getElementById('rsvp-modal').classList.add('hidden'); document.getElementById('rsvp-form').reset(); unlockScroll(); }
-        function toggleBusSection() { const val = document.querySelector('input[name="attend"]:checked').value; document.getElementById('bus-section-container').style.display = (val === '마음만') ? 'none' : 'block'; }
-        
-        function handleRSVPSubmit(event) { 
-            event.preventDefault(); 
-            // 잦은 수정으로 인한 캐시 문제 방지용 새 키 발급 (에르메스 무결점 에디션)
-            if (localStorage.getItem('rsvp_sent_hermes_flawless_v1')) { alert('이미 참석 정보를 전달하셨습니다. 감사합니다.'); closeRsvpModal(); return; } 
-            
-            const form = event.target; 
-            const data = new FormData(form); 
-            const submitBtn = form.querySelector('button[type="submit"]'); 
-            
-            submitBtn.innerText = "전송 중..."; 
-            submitBtn.disabled = true; 
-            
-            fetch(googleSheetUrl, { method: "POST", mode: "no-cors", body: data })
-            .then(() => { 
-                localStorage.setItem('rsvp_sent_hermes_flawless_v1', 'true'); 
-                closeRsvpModal(); 
-                showToast('참석 정보가 성공적으로 전달되었습니다.'); 
-            }).catch(() => { 
-                alert("오류가 발생했습니다."); 
-            }).finally(() => { 
-                submitBtn.innerText = "전송하기"; 
-                submitBtn.disabled = false; 
-            }); 
-        }
-        
-        function shareKakao() { if (typeof Kakao === 'undefined' || !Kakao.isInitialized()) { try { Kakao.init('11b4645eacca1144dac2f2f2316a7a3f'); } catch(e) { copyPageUrl(); return; } } Kakao.Share.sendDefault({ objectType: 'feed', content: { title: '태광 ♥ 지현 결혼합니다', description: '2027년 1월 30일(토) 낮 1시 10분 · 남양주 파로스컨벤션', imageUrl: 'https://ourmarriage-tkjh.vercel.app/IMG_1033.jpeg', link: { mobileWebUrl: 'https://ourmarriage-tkjh.vercel.app/', webUrl: 'https://ourmarriage-tkjh.vercel.app/' } }, buttons: [{ title: '청첩장 보기', link: { mobileWebUrl: 'https://ourmarriage-tkjh.vercel.app/', webUrl: 'https://ourmarriage-tkjh.vercel.app/' } }] }); }
-        function initDday() { const wedding = new Date('2027-01-30T00:00:00'); const today = new Date(); today.setHours(0, 0, 0, 0); const diff = Math.ceil((wedding - today) / 86400000); const el = document.getElementById('dday'); if (diff > 0) el.innerHTML = `저희의 결혼식이 <span class="font-bold text-hermes-orange text-[17px] mx-1">${diff}</span>일 남았습니다.`; else if (diff === 0) el.innerHTML = `저희의 결혼식이 <span class="font-bold text-hermes-orange text-[17px] mx-1">오늘</span>입니다.`; else el.innerHTML = `축복 속에 결혼식을 무사히 마쳤습니다.`; }
-        
-        window.addEventListener('DOMContentLoaded', () => { 
-            createSnowflakes(); initGallery(); initDday(); 
-        });
-        
-        function openTmap() { if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) { alert("스마트폰에서 확인해주세요!"); return; } window.location.href = "tmap://search?name=" + encodeURIComponent("남양주 파로스컨벤션"); }
-    </script>
+/* IMAGE MODAL */
+function openImg(i){ ci=i; updModal(); document.getElementById('img-modal').classList.add('active'); lock(); }
+function closeImg(){ document.getElementById('img-modal').classList.remove('active'); unlock(); }
+function updModal(){ document.getElementById('modal-img').src=IMGS[ci]; document.getElementById('modal-pnum').textContent=`${ci+1} / ${IMGS.length}`; }
+
+let tx=0,ty=0;
+document.getElementById('modal-ta').addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;ty=e.changedTouches[0].screenY;},{passive:true});
+document.getElementById('modal-ta').addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].screenX-tx, dy=e.changedTouches[0].screenY-ty;
+  if(dy>100&&Math.abs(dy)>Math.abs(dx)){closeImg();return;}
+  if(dx<-60){ci=(ci+1)%IMGS.length;updModal();}
+  if(dx>60){ci=(ci-1+IMGS.length)%IMGS.length;updModal();}
+},{passive:true});
+
+/* SCROLL LOCK */
+function lock(){ sy=window.pageYOffset; document.body.style.cssText+=';overflow:hidden;position:fixed;top:-'+sy+'px;width:100%;'; }
+function unlock(){ document.body.style.removeProperty('overflow'); document.body.style.removeProperty('position'); document.body.style.removeProperty('top'); document.body.style.removeProperty('width'); window.scrollTo(0,sy); }
+
+/* SNOW */
+function initSnow(){
+  const c=document.getElementById('snow-c');
+  for(let i=0;i<18;i++){
+    const s=document.createElement('div'); s.className='sf';
+    const sz=Math.random()*3+2;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;animation-duration:${Math.random()*8+8}s;animation-delay:${Math.random()*-15}s;--sx:${(Math.random()-.5)*40}px;`;
+    c.appendChild(s);
+  }
+}
+
+/* D-DAY */
+function initDday(){
+  const w=new Date('2027-01-30T00:00:00'), t=new Date(); t.setHours(0,0,0,0);
+  const d=Math.ceil((w-t)/86400000), el=document.getElementById('dday');
+  if(d>0) el.innerHTML=`결혼식까지 <strong>${d}</strong>일 남았습니다`;
+  else if(d===0) el.innerHTML=`결혼식이 <strong>오늘</strong>입니다`;
+  else el.textContent='축복 속에 결혼식을 무사히 마쳤습니다';
+}
+
+/* BGM - 파일명 Film_Love.mp3 확인 완료 */
+const audio=document.getElementById('bgm');
+const discI=document.getElementById('disc-i');
+const bgmLbl=document.getElementById('bgm-lbl');
+audio.volume=0.35;
+
+document.getElementById('bgm-btn').addEventListener('click',e=>{
+  e.stopPropagation();
+  if(audio.paused){
+    audio.play().then(()=>{discI.style.animation='spin 8s linear infinite';bgmLbl.textContent='Music On';}).catch(()=>{});
+  } else {
+    audio.pause(); discI.style.animation='none'; bgmLbl.textContent='Music Off';
+  }
+});
+
+/* PARALLAX */
+window.addEventListener('scroll',()=>{
+  const p=document.getElementById('hero-photo'), y=window.pageYOffset;
+  if(y<window.innerHeight) p.style.transform=`scale(1.05) translateY(${y*.28}px)`;
+},{passive:true});
+
+/* SCROLL REVEAL */
+const ro=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+/* ACCORDION */
+function toggleAcc(id){
+  const body=document.getElementById(id), btn=document.getElementById(id+'-btn'), icon=document.getElementById(id+'-i');
+  const isOpen=body.style.display==='block';
+  ['gr','br'].forEach(k=>{ document.getElementById(k).style.display='none'; document.getElementById(k+'-btn').classList.remove('open'); document.getElementById(k+'-i').style.transform=''; });
+  if(!isOpen){ body.style.display='block'; btn.classList.add('open'); icon.style.transform='rotate(45deg)'; }
+}
+
+/* RSVP */
+function openRsvp(){ document.getElementById('rsvp-modal').classList.add('open'); lock(); }
+function closeRsvp(){ document.getElementById('rsvp-modal').classList.remove('open'); document.getElementById('rsvp-form').reset(); document.getElementById('bus-sec').style.display='block'; unlock(); }
+function toggleBus(){ document.getElementById('bus-sec').style.display=document.querySelector('input[name="attend"]:checked').value==='마음만'?'none':'block'; }
+
+function submitRsvp(e){
+  e.preventDefault();
+  
+  if(localStorage.getItem('rsvp_v2')){
+    if(!confirm('이미 참석 정보를 한 번 전달하셨습니다.\n내용을 수정하여 다시 전송하시겠습니까?\n(가장 마지막에 전송된 내용으로 접수됩니다)')){
+      closeRsvp(); return;
+    }
+  }
+
+  const btn=document.getElementById('sub-btn'); 
+  btn.textContent='전송 중...'; 
+  btn.disabled=true;
+  
+  fetch(GAS,{method:'POST',mode:'no-cors',body:new FormData(e.target)})
+    .then(()=>{ 
+      localStorage.setItem('rsvp_v2','1'); 
+      closeRsvp(); 
+      toast('참석 정보가 성공적으로 전달되었습니다.'); 
+    })
+    .catch(()=>alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.'))
+    .finally(()=>{ 
+      btn.textContent='전송하기'; 
+      btn.disabled=false; 
+    });
+}
+
+/* PHOTO UPLOAD */
+const photoUp=document.getElementById('photo-up');
+const upBtn=document.getElementById('up-btn');
+const loaderOverlay=document.getElementById('loader-overlay');
+const loaderText=document.getElementById('loader-text');
+
+upBtn.addEventListener('click',()=>photoUp.click());
+photoUp.addEventListener('change',async e=>{
+  const files=e.target.files; if(!files.length)return;
+  const MAX=10*1024*1024; let big=false, ok=0;
+  
+  lock();
+  loaderOverlay.classList.add('active');
+  
+  for(let i=0;i<files.length;i++){
+    const f=files[i];
+    if(f.size>MAX){big=true;continue;}
+    
+    loaderText.textContent=`사진을 안전하게 업로드하고 있습니다... (${i+1}/${files.length})`;
+    
+    try{
+      const b64=await toB64(f);
+      const p=new URLSearchParams();
+      p.append('action','upload'); p.append('fileName',f.name); p.append('mimeType',f.type); p.append('fileData',b64.split(',')[1]);
+      await fetch(GAS,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()});
+      ok++;
+    }catch(err){
+      console.error(err);
+    }
+  }
+  
+  loaderOverlay.classList.remove('active');
+  unlock();
+  photoUp.value='';
+  
+  if(big){
+    alert('10MB가 넘는 고화질 파일이 포함되어 있습니다.\n구글 드라이브로 직접 연결해 드릴 테니 그곳에 올려주시면 감사하겠습니다!');
+    window.open('https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link','_blank');
+  } else if(ok>0) {
+    toast(`소중한 사진 ${ok}장이 안전하게 보관되었습니다. 감사합니다!`);
+  } else {
+    toast('업로드된 사진이 없습니다.');
+  }
+});
+
+function toB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.readAsDataURL(f);r.onload=()=>res(r.result);r.onerror=rej;});}
+
+/* UTILS */
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.className='show'; setTimeout(()=>t.className='',3000); }
+function cpCopy(txt){
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast('계좌번호가 복사되었습니다.'));}
+  else{const el=document.createElement('textarea');el.value=txt;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);toast('계좌번호가 복사되었습니다.');}
+}
+function cpUrl(){ const u=window.location.href; if(navigator.clipboard){navigator.clipboard.writeText(u).then(()=>toast('청첩장 주소가 복사되었습니다.'));}else cpCopy(u); }
+function openTmap(){
+  if(!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){alert('스마트폰에서 확인해주세요!');return;}
+  window.location.href='tmap://search?name='+encodeURIComponent('남양주 파로스컨벤션');
+  setTimeout(()=>window.location.href='https://play.google.com/store/apps/details?id=com.skt.tmap.ku',2000);
+}
+function shareKakao(){
+  if(typeof Kakao==='undefined'){cpUrl();return;}
+  if(!Kakao.isInitialized()){try{Kakao.init('11b4645eacca1144dac2f2f2316a7a3f');}catch(e){cpUrl();return;}}
+  Kakao.Share.sendDefault({objectType:'feed',content:{title:'태광 ♥ 지현 결혼합니다',description:'2027년 1월 30일(토) 낮 1시 10분 · 남양주 파로스컨벤션',imageUrl:'https://ourmarriage-tkjh.vercel.app/IMG_1033.jpeg',link:{mobileWebUrl:'https://ourmarriage-tkjh.vercel.app/',webUrl:'https://ourmarriage-tkjh.vercel.app/'}},buttons:[{title:'청첩장 보기',link:{mobileWebUrl:'https://ourmarriage-tkjh.vercel.app/',webUrl:'https://ourmarriage-tkjh.vercel.app/'}}]});
+}
+
+document.addEventListener('DOMContentLoaded',()=>{ initSnow(); initGallery(); initDday(); });
+</script>
 </body>
 </html>
