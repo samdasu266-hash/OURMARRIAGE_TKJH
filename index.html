@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -38,9 +37,6 @@
         body { background-color: #EFEFEF; display: flex; justify-content: center; }
         .mobile-container { width: 100%; max-width: 430px; background-color: #F9F7F3; min-height: 100vh; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
         
-        .scroll-fade { opacity: 0; transform: translateY(15px); transition: all 0.7s ease-out; }
-        .scroll-fade.visible { opacity: 1; transform: translateY(0); }
-        
         .spin { animation: spin 8s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         
@@ -62,6 +58,10 @@
         .gallery-item { transition: opacity 0.3s ease; opacity: 0; }
         .gallery-item.loaded { opacity: 1; }
         .btn-fill { background: #3E342E; color: white; border-radius: 12px; }
+        
+        /* 스크롤 애니메이션 최적화 */
+        .scroll-fade { opacity: 0; transform: translateY(15px); transition: all 0.7s ease-out; }
+        .scroll-fade.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body class="font-batang text-wedding-text antialiased">
@@ -81,7 +81,10 @@
         <!-- 2. 메인 커버 -->
         <section class="relative w-full flex flex-col items-center justify-center bg-cover bg-center" style="height: 100vh; height: 100dvh; background-image: linear-gradient(to bottom, rgba(249, 247, 243, 0) 0%, rgba(249, 247, 243, 0.3) 50%, rgba(249, 247, 243, 0.7) 75%, rgba(249, 247, 243, 1) 98%), url('IMG_1033.jpeg');">
             <div class="absolute bottom-16 flex flex-col items-center text-center px-6 w-full">
-                <p class="text-[17.5px] leading-relaxed mb-10 font-bold hero-text-glow break-keep text-wedding-deep">가장 뜨거웠던 여름날 만난 두 사람,<br>이제 하얀 눈꽃 아래서 영원을 약속합니다.</p>
+                <p class="text-[17.5px] leading-relaxed mb-10 font-bold hero-text-glow break-keep text-wedding-deep">
+                    가장 뜨거웠던 여름날 만난 두 사람,<br>
+                    이제 하얀 눈꽃 아래서 영원을 약속합니다.
+                </p>
                 <div class="space-y-4">
                     <h1 class="text-[36px] font-extrabold tracking-[0.2em] text-wedding-deep hero-text-glow ml-3">태광 <span class="text-wedding-point text-3xl mx-1">♥</span> 지현</h1>
                     <div class="h-[1.5px] w-12 bg-wedding-deep/30 mx-auto"></div>
@@ -99,9 +102,14 @@
                 <p>웃음이 필요할 땐 장난으로,<br>힘이 필요할 때 든든한 버팀목이 되어<br>서로의 부족함을 채우며 살아가겠습니다.</p>
                 <p>저희 두 사람의 시작을<br>귀한 걸음으로 축복해 주신다면<br>그 마음 오래도록 간직하겠습니다.</p>
             </div>
+            
             <div class="mt-24 space-y-6 text-[17px] text-wedding-deep">
-                <div class="flex items-center justify-center space-x-3"><span class="font-bold">박유경 · 김기옥</span> <span class="opacity-40 text-[14px]">의 장남</span> <span class="text-[21px] font-bold ml-1">태광</span></div>
-                <div class="flex items-center justify-center space-x-3"><span class="font-bold">이기영 · 지백현</span> <span class="opacity-40 text-[14px]">의 차녀</span> <span class="text-[21px] font-bold ml-1">지현</span></div>
+                <div class="flex items-center justify-center space-x-3">
+                    <span class="font-bold">박유경 · 김기옥</span> <span class="opacity-40 text-[14px]">의 장남</span> <span class="text-[21px] font-bold ml-1">태광</span>
+                </div>
+                <div class="flex items-center justify-center space-x-3">
+                    <span class="font-bold">이기영 · 지백현</span> <span class="opacity-40 text-[14px]">의 차녀</span> <span class="text-[21px] font-bold ml-1">지현</span>
+                </div>
             </div>
         </section>
 
@@ -109,7 +117,9 @@
         <section class="py-24 px-8 text-center bg-white border-b border-wedding-point/20 scroll-fade">
             <h2 class="text-[18px] tracking-[0.3em] text-wedding-deep mb-12 font-bold uppercase">2027. 01. 30</h2>
             <div class="max-w-[300px] mx-auto">
-                <div class="grid grid-cols-7 gap-2 text-[12px] mb-6 text-stone-400 font-sans font-bold uppercase tracking-widest"><div class="text-red-400">Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div class="text-stone-600">Sat</div></div>
+                <div class="grid grid-cols-7 gap-2 text-[12px] mb-6 text-stone-400 font-sans font-bold uppercase tracking-widest">
+                    <div class="text-red-400">Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div class="text-stone-600">Sat</div>
+                </div>
                 <div class="grid grid-cols-7 gap-y-6 gap-x-2 text-[15.5px] text-stone-800 font-medium font-sans">
                     <div></div><div></div><div></div><div></div><div></div><div>1</div><div class="text-stone-600">2</div>
                     <div class="text-red-400">3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div class="text-stone-600">9</div>
@@ -120,7 +130,9 @@
                     <div class="text-red-400">31</div>
                 </div>
             </div>
-            <div class="mt-16 pt-10 border-t border-stone-50"><p id="dday" class="text-[16px] tracking-tight font-bold text-wedding-deep"></p></div>
+            <div class="mt-16 pt-10 border-t border-stone-50">
+                <p id="dday" class="text-[16px] tracking-tight font-bold text-wedding-deep"></p>
+            </div>
         </section>
 
         <!-- 5. 참석 의사 전달 버튼 -->
@@ -131,7 +143,7 @@
         </section>
 
         <!-- 6. 갤러리 -->
-        <section class="py-24 px-4 border-b border-wedding-point/20 text-center scroll-fade">
+        <section class="pt-24 pb-16 px-4 text-center scroll-fade">
             <h2 class="text-[12px] tracking-[0.6em] text-wedding-point mb-16 font-bold uppercase ml-2">Gallery</h2>
             <div class="grid grid-cols-3 gap-1" id="gallery-grid"></div>
             <p class="text-[12.5px] text-stone-500 mt-8 font-medium">사진을 터치하면 크게 보실 수 있습니다.</p>
@@ -222,7 +234,7 @@
             </div>
         </section>
 
-        <!-- ★ 9. 네이티브 갤러리 업로더 (하객 사진 공유) ★ -->
+        <!-- 9. 네이티브 갤러리 업로더 -->
         <section class="pt-4 pb-24 px-6 scroll-fade">
             <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-wedding-point/40 text-center relative overflow-hidden">
                 <div class="w-14 h-14 bg-[#F9F7F3] rounded-full flex items-center justify-center mx-auto mb-5">
@@ -234,10 +246,7 @@
                     두 사람의 예쁜 사진을 아래 버튼을 눌러 전해 주시면<br>평생 소중하게 간직하겠습니다.
                 </p>
                 
-                <!-- 숨겨진 네이티브 파일 선택기 -->
                 <input type="file" id="photo-upload" accept="image/*,video/*" multiple class="hidden">
-                
-                <!-- 하객이 누르는 우아한 디자인의 버튼 -->
                 <button id="upload-btn" class="flex items-center justify-center w-full bg-stone-50 text-stone-800 border border-stone-200 py-4.5 rounded-2xl font-bold tracking-[0.1em] text-[15.5px] active:scale-95 transition-all">
                     <i id="upload-icon" class="fas fa-cloud-upload-alt mr-2 text-stone-500"></i> 
                     <span id="upload-text">사진 / 영상 올려주기</span>
@@ -306,13 +315,12 @@
             </div>
         </div>
 
-        <!-- 이미지 모달 -->
+        <!-- 이미지 확대 모달 -->
         <div id="img-modal" class="fixed inset-0 z-[1500] bg-black hidden items-center justify-center select-none"><button class="absolute top-8 right-8 text-white/40 text-5xl z-[1600] p-4" onclick="closeImageModal()"><i class="fas fa-times"></i></button><div class="w-full h-full flex items-center justify-center overflow-hidden" id="modal-touch-area"><img id="modal-content" src="" class="max-w-full max-h-full object-contain"></div><div class="absolute bottom-16 left-1/2 -translate-x-1/2 text-white/30 text-[13px] font-sans tracking-[0.6em] font-bold uppercase" id="modal-page-num"></div></div>
     </div>
 
     <script>
-        // ★ 신부님의 구글 앱스 스크립트 웹앱 주소 (필수 확인) ★
-        const googleSheetUrl = "https://script.google.com/macros/s/AKfycbxB1pThlfHmUPd3zKj03sgfes1a7CV9KEEtdX0KnxA2B9b4Rs6DK4Vwq-6hI5vhd-Ps/exec";
+        const googleSheetUrl = "https://script.google.com/macros/s/AKfycbzWLvH8hPEa7bwNW4QVfLH39xwIBRuc29qId15jVrFG9Jl781t2Cq08_3vuZT4d77d5/exec";
         
         const galleryImages = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg'];
         let currentImgIndex = 0; let scrollPosition = 0;
@@ -349,6 +357,7 @@
         function createSnowflakes() { const container = document.getElementById('snow-container'); for (let i = 0; i < 15; i++) { const s = document.createElement('div'); s.classList.add('snowflake'); const size = Math.random() * 4 + 3; s.style.width = size + 'px'; s.style.height = size + 'px'; s.style.left = Math.random() * 100 + '%'; s.style.animationDuration = (Math.random() * 10 + 10) + 's, ' + (Math.random() * 3 + 2) + 's'; s.style.animationDelay = (Math.random() * -20) + 's, ' + (Math.random() * -5) + 's'; container.appendChild(s); } }
         function toggleAccordion(id) { const content = document.getElementById(id); const icon = document.getElementById(id + '-icon'); const isHidden = content.classList.contains('hidden'); document.querySelectorAll('[id^="groom"], [id^="bride"]').forEach(el => { if(el.id === 'groom' || el.id === 'bride') el.classList.add('hidden'); }); document.querySelectorAll('[id$="-icon"]').forEach(el => el.style.transform = 'rotate(0deg)'); if(isHidden) { content.classList.remove('hidden'); icon.style.transform = 'rotate(180deg)'; } }
         
+        // ★ 최적화된 BGM 자동 재생 로직 (스크롤 간섭 없음) ★
         const audio = document.getElementById('wedding-bgm'); 
         const discIcon = document.getElementById('disc-icon'); 
         const bgmStatus = document.getElementById('bgm-status'); 
@@ -362,7 +371,8 @@
             }).catch(() => { }); 
         }
         
-        ['touchstart', 'click'].forEach(evt => {
+        // 하객이 처음 화면을 톡 건드리거나 스크롤하는 0.1초의 순간에 노래가 켜짐 (passive: true로 스크롤 방해 안함)
+        ['touchstart', 'click', 'scroll'].forEach(evt => {
             document.addEventListener(evt, initBgmPlayback, { once: true, passive: true });
         });
 
@@ -376,18 +386,14 @@
             } 
         });
 
-        // ★★★ 네이티브 갤러리 업로드 로직 (핵심) ★★★
+        // 네이티브 갤러리 업로더 로직
         const photoUploadInput = document.getElementById('photo-upload');
         const uploadBtn = document.getElementById('upload-btn');
         const uploadText = document.getElementById('upload-text');
         const uploadIcon = document.getElementById('upload-icon');
 
-        // 1. 버튼을 누르면 몰래 숨겨둔 파일 선택기(갤러리) 열기
-        uploadBtn.addEventListener('click', () => {
-            photoUploadInput.click();
-        });
+        uploadBtn.addEventListener('click', () => { photoUploadInput.click(); });
 
-        // 2. 사용자가 사진/영상을 선택했을 때 처리
         photoUploadInput.addEventListener('change', async (e) => {
             const files = e.target.files;
             if(files.length === 0) return;
@@ -395,19 +401,13 @@
             let hasLargeFiles = false;
             let successCount = 0;
 
-            // 버튼 상태를 '업로드 중'으로 변경
             uploadBtn.disabled = true;
             uploadBtn.classList.replace('bg-stone-50', 'bg-stone-200');
             uploadBtn.classList.replace('text-stone-800', 'text-stone-400');
 
             for(let i=0; i<files.length; i++) {
                 const file = files[i];
-                
-                // UX 포인트: 15MB 이상의 고화질/대용량 영상은 브라우저 뻗음 방지를 위해 구글 드라이브 앱으로 직접 넘김
-                if(file.size > 15 * 1024 * 1024) { 
-                    hasLargeFiles = true;
-                    continue; 
-                }
+                if(file.size > 15 * 1024 * 1024) { hasLargeFiles = true; continue; }
 
                 uploadText.innerText = `업로드 중... (${i+1}/${files.length})`;
                 uploadIcon.className = "fas fa-spinner fa-spin mr-2 text-stone-500";
@@ -418,7 +418,7 @@
                     formData.append('action', 'upload');
                     formData.append('fileName', file.name);
                     formData.append('mimeType', file.type);
-                    formData.append('fileData', base64.split(',')[1]); // 불필요한 헤더 제거
+                    formData.append('fileData', base64.split(',')[1]);
 
                     await fetch(googleSheetUrl, { method: 'POST', mode: 'no-cors', body: formData });
                     successCount++;
@@ -427,20 +427,18 @@
                 }
             }
 
-            // 업로드 완료 후 버튼 원상복구
             uploadBtn.disabled = false;
             uploadBtn.classList.replace('bg-stone-200', 'bg-stone-50');
             uploadBtn.classList.replace('text-stone-400', 'text-stone-800');
             uploadText.innerText = "사진 / 영상 올려주기";
             uploadIcon.className = "fas fa-cloud-upload-alt mr-2 text-stone-500";
-            photoUploadInput.value = ''; // 초기화
+            photoUploadInput.value = ''; 
 
             if(hasLargeFiles) {
-                // 대용량 파일이 섞여 있을 때의 10.0점짜리 우아한 안내
-                alert("15MB 이상의 고화질/대용량 영상은 화질 보존을 위해 구글 드라이브로 직접 연결해 드립니다. 드라이브 앱에서 편하게 올려주세요! 🤍");
+                alert("15MB 이상의 고화질 영상은 드라이브로 직접 연결해 드립니다. 편하게 올려주세요! 🤍");
                 window.open("https://drive.google.com/drive/folders/11960tl01qDdGmYDJglaLbd4oRrnf8YoA?usp=sharing", "_blank");
             } else if(successCount > 0) {
-                showToast(`소중한 사진 ${successCount}장이 안전하게 전달되었습니다! 🤍`);
+                showToast(`사진 ${successCount}장이 안전하게 전달되었습니다! 🤍`);
             }
         });
 
@@ -452,7 +450,6 @@
                 reader.onerror = error => reject(error);
             });
         }
-        // ★★★ 업로드 로직 끝 ★★★
 
         function showToast(msg) { const toast = document.getElementById('toast'); toast.innerText = msg; toast.className = "show"; setTimeout(() => { toast.className = ""; }, 3000); }
         function copyToClipboard(text) { const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); showToast('복사되었습니다.'); }
@@ -463,11 +460,11 @@
         
         function handleRSVPSubmit(event) { 
             event.preventDefault(); 
-            if (localStorage.getItem('rsvp_sent_tkjh_final_upload')) { alert('이미 참석 정보를 전달하셨습니다 🤍'); closeRsvpModal(); return; } 
+            if (localStorage.getItem('rsvp_sent_tkjh_final_no_cover')) { alert('이미 참석 정보를 전달하셨습니다 🤍'); closeRsvpModal(); return; } 
             const form = event.target; const data = new FormData(form); const submitBtn = form.querySelector('button[type="submit"]'); 
             submitBtn.innerText = "전송 중..."; submitBtn.disabled = true; 
             fetch(googleSheetUrl, { method: "POST", mode: "no-cors", body: data }).then(() => { 
-                localStorage.setItem('rsvp_sent_tkjh_final_upload', 'true'); closeRsvpModal(); showToast('성공적으로 전달되었습니다! 🤍'); 
+                localStorage.setItem('rsvp_sent_tkjh_final_no_cover', 'true'); closeRsvpModal(); showToast('성공적으로 전달되었습니다! 🤍'); 
             }).catch(() => { alert("오류가 발생했습니다."); }).finally(() => { submitBtn.innerText = "참석 정보 보내기"; submitBtn.disabled = false; }); 
         }
         
