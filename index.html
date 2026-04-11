@@ -62,9 +62,32 @@
         /* 스크롤 애니메이션 최적화 */
         .scroll-fade { opacity: 0; transform: translateY(15px); transition: all 0.7s ease-out; }
         .scroll-fade.visible { opacity: 1; transform: translateY(0); }
+
+        /* 부드러운 버튼 애니메이션 */
+        @keyframes gentle-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .animate-gentle-bounce { animation: gentle-bounce 2s infinite ease-in-out; }
+        
+        /* 오프닝 커버 페이드아웃 효과 */
+        .cover-fade-out { opacity: 0; pointer-events: none; transition: opacity 1.2s ease-in-out; }
     </style>
 </head>
 <body class="font-batang text-wedding-text antialiased">
+    
+    <!-- ★ BGM 100% 재생을 위한 럭셔리 오프닝 커버 ★ -->
+    <div id="intro-cover" class="fixed inset-0 z-[9999] bg-[#F9F7F3] flex flex-col items-center justify-center w-full max-w-[430px] mx-auto transition-opacity duration-1000">
+        <div class="text-center">
+            <p class="text-[13px] text-stone-400 tracking-[0.4em] uppercase mb-8 font-sans font-bold">Wedding Invitation</p>
+            <h1 class="text-[32px] font-extrabold tracking-[0.3em] text-wedding-deep mb-4 ml-3">태광 <span class="text-wedding-point text-2xl mx-1">♥</span> 지현</h1>
+            <p class="text-[14px] font-medium text-wedding-dark tracking-widest mb-16">2027년 1월 30일 토요일</p>
+            
+            <button id="open-invite-btn" class="bg-wedding-deep text-white px-10 py-5 rounded-full font-bold tracking-[0.2em] shadow-lg text-[15px] transition-all active:scale-95 animate-gentle-bounce flex items-center mx-auto space-x-3">
+                <i class="fas fa-envelope-open-text text-wedding-point"></i>
+                <span>초대장 열기</span>
+            </button>
+            <p class="text-[11px] text-stone-400 mt-6 tracking-tight font-sans">※ 터치하시면 음악과 함께 초대장이 열립니다.</p>
+        </div>
+    </div>
+
     <div id="snow-container" class="fixed inset-0 pointer-events-none z-40 overflow-hidden"></div>
     <div id="toast">복사되었습니다.</div>
     <audio id="wedding-bgm" loop preload="auto"><source src="Film_Love.mp3" type="audio/mpeg"></audio>
@@ -234,7 +257,7 @@
             </div>
         </section>
 
-        <!-- 9. 네이티브 갤러리 업로더 -->
+        <!-- 9. 네이티브 갤러리 업로더 (하객 사진 공유) -->
         <section class="pt-4 pb-24 px-6 scroll-fade">
             <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-wedding-point/40 text-center relative overflow-hidden">
                 <div class="w-14 h-14 bg-[#F9F7F3] rounded-full flex items-center justify-center mx-auto mb-5">
@@ -320,6 +343,7 @@
     </div>
 
     <script>
+        // ★ 신부님의 최신 구글 앱스 스크립트 웹앱 주소 적용 완료! ★
         const googleSheetUrl = "https://script.google.com/macros/s/AKfycbzWLvH8hPEa7bwNW4QVfLH39xwIBRuc29qId15jVrFG9Jl781t2Cq08_3vuZT4d77d5/exec";
         
         const galleryImages = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg'];
@@ -357,7 +381,6 @@
         function createSnowflakes() { const container = document.getElementById('snow-container'); for (let i = 0; i < 15; i++) { const s = document.createElement('div'); s.classList.add('snowflake'); const size = Math.random() * 4 + 3; s.style.width = size + 'px'; s.style.height = size + 'px'; s.style.left = Math.random() * 100 + '%'; s.style.animationDuration = (Math.random() * 10 + 10) + 's, ' + (Math.random() * 3 + 2) + 's'; s.style.animationDelay = (Math.random() * -20) + 's, ' + (Math.random() * -5) + 's'; container.appendChild(s); } }
         function toggleAccordion(id) { const content = document.getElementById(id); const icon = document.getElementById(id + '-icon'); const isHidden = content.classList.contains('hidden'); document.querySelectorAll('[id^="groom"], [id^="bride"]').forEach(el => { if(el.id === 'groom' || el.id === 'bride') el.classList.add('hidden'); }); document.querySelectorAll('[id$="-icon"]').forEach(el => el.style.transform = 'rotate(0deg)'); if(isHidden) { content.classList.remove('hidden'); icon.style.transform = 'rotate(180deg)'; } }
         
-        // ★ 최적화된 BGM 자동 재생 로직 (스크롤 간섭 없음) ★
         const audio = document.getElementById('wedding-bgm'); 
         const discIcon = document.getElementById('disc-icon'); 
         const bgmStatus = document.getElementById('bgm-status'); 
@@ -371,9 +394,11 @@
             }).catch(() => { }); 
         }
         
-        // 하객이 처음 화면을 톡 건드리거나 스크롤하는 0.1초의 순간에 노래가 켜짐 (passive: true로 스크롤 방해 안함)
-        ['touchstart', 'click', 'scroll'].forEach(evt => {
-            document.addEventListener(evt, initBgmPlayback, { once: true, passive: true });
+        document.getElementById('open-invite-btn').addEventListener('click', function() {
+            const cover = document.getElementById('intro-cover');
+            cover.classList.add('cover-fade-out');
+            setTimeout(() => { cover.style.display = 'none'; }, 1200);
+            initBgmPlayback();
         });
 
         document.getElementById('bgm-btn').addEventListener('click', (e) => { 
@@ -460,11 +485,11 @@
         
         function handleRSVPSubmit(event) { 
             event.preventDefault(); 
-            if (localStorage.getItem('rsvp_sent_tkjh_final_no_cover')) { alert('이미 참석 정보를 전달하셨습니다 🤍'); closeRsvpModal(); return; } 
+            if (localStorage.getItem('rsvp_sent_tkjh_url_updated')) { alert('이미 참석 정보를 전달하셨습니다 🤍'); closeRsvpModal(); return; } 
             const form = event.target; const data = new FormData(form); const submitBtn = form.querySelector('button[type="submit"]'); 
             submitBtn.innerText = "전송 중..."; submitBtn.disabled = true; 
             fetch(googleSheetUrl, { method: "POST", mode: "no-cors", body: data }).then(() => { 
-                localStorage.setItem('rsvp_sent_tkjh_final_no_cover', 'true'); closeRsvpModal(); showToast('성공적으로 전달되었습니다! 🤍'); 
+                localStorage.setItem('rsvp_sent_tkjh_url_updated', 'true'); closeRsvpModal(); showToast('성공적으로 전달되었습니다! 🤍'); 
             }).catch(() => { alert("오류가 발생했습니다."); }).finally(() => { submitBtn.innerText = "참석 정보 보내기"; submitBtn.disabled = false; }); 
         }
         
