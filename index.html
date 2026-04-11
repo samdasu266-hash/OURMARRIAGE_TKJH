@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -92,7 +93,7 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .lbl{font-family:'Cormorant Garamond',serif;font-size:12.5px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;display:block;text-align:center;margin-bottom:36px;line-height:1.4;}
 .lbl-kr{display:block;font-family:'Noto Serif KR',serif;font-size:13px;color:var(--muted);letter-spacing:.15em;font-weight:400;margin-top:8px;text-transform:none;}
 
-/* ── 예식일 안내 레이블 (순서 변경: 한글 주, 영문 보조) ── */
+/* ── 예식일 안내 레이블 ── */
 .lbl-cal{display:block;text-align:center;margin-bottom:36px;}
 .lbl-cal-main{font-family:'Noto Serif KR',serif;font-size:16px;letter-spacing:.32em;color:var(--gold);font-weight:400;display:block;margin-bottom:8px;}
 .lbl-cal-sub{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase;display:block;}
@@ -132,6 +133,7 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .cday{text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;color:var(--ink);padding:9px 0;}
 .cday.s{color:#C04B30;}.cday.sa{color:var(--muted);}
 .cday.w{background:var(--ink);color:var(--white);font-weight:500;position:relative;border-radius:50%;}
+/* [수정] absolute 텍스트 버그 해결. content를 비우고 position:absolute 지정 */
 .cday.w::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:3px;height:3px;background:var(--gold-lt);border-radius:50%;}
 .dday-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;text-align:center;color:var(--muted);margin-top:36px;font-weight:300;letter-spacing:.04em;}
 .dday-t strong{color:var(--gold);font-size:19px;font-family:'Cormorant Garamond',serif;font-weight:600;margin:0 4px;}
@@ -288,7 +290,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <p class="hero-lead">가장 뜨거웠던 여름날 만난 두 사람,<br>이제 하얀 눈꽃 아래서 영원을 약속합니다.</p>
     <h1 class="hero-names">태광<span class="hrt">♥</span>지현</h1>
 
-    <!-- [개선] 예식 일시·장소 인포박스 — 코너 장식 프레임으로 시인성 향상 -->
     <div class="hero-info-box">
       <p class="hero-date">2027년 1월 30일 토요일 낮 1시 10분</p>
       <p class="hero-date-sub">2027 · 01 · 30 &nbsp;Sat &nbsp;13:10</p>
@@ -348,7 +349,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
       </a>
     </div>
   </div>
-  <!-- [개선] 당일 연락 어려움 안내 -->
   <div class="contact-day-note">
     <strong>예식 당일에는 신랑·신부가<br>연락을 받기 어려울 수 있습니다.</strong><br>
     당일 긴급 문의는 혼주께 연락해 주시면<br>더욱 신속하게 도움을 드릴 수 있습니다.
@@ -357,7 +357,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <!-- ─── CALENDAR ─── -->
 <section style="background:var(--bg2);">
-  <!-- [개선] 레이블 순서 변경: 예식일 안내 → 2027 January -->
   <div class="lbl-cal rv">
     <span class="lbl-cal-main">예식일 안내</span>
     <span class="lbl-cal-sub">2027 &nbsp;·&nbsp; January</span>
@@ -397,7 +396,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <span class="order-sub">뷔페 식사는 예식 전·후 모두 이용하실 수 있습니다</span>
       </div>
     </li>
-    <!-- [개선] 입장 5분 전 강조 항목 -->
     <li class="highlight">
       <span class="order-time">13:05</span>
       <div class="order-txt">홀 내 입실 완료
@@ -407,7 +405,8 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <li>
       <span class="order-time">13:10</span>
       <div class="order-txt">본식 시작
-        <span class="order-sub">파로스홀 2층</span>
+        <!-- [수정] "파로스홀 2층"을 "2층 파로스홀"로 변경 -->
+        <span class="order-sub">2층 파로스홀</span>
       </div>
     </li>
     <li>
@@ -416,7 +415,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <span class="order-sub">가족·친지 단체 사진 촬영</span>
       </div>
     </li>
-    <!-- [개선] 귀환 버스 시간 여유롭게 변경 -->
     <li>
       <span class="order-time">15:00</span>
       <div class="order-txt">전세버스 귀환 출발
@@ -471,25 +469,20 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     다산현대프리미어캠퍼스몰 <strong style="color:var(--ink);font-weight:500;">E동 2층</strong>
   </p>
 
-  <!-- [수정] 지도 — 좌표 기반 구글맵 embed (API 키 불필요, 안정적) -->
   <div class="map-wrap rv">
     <div class="map-overlay" id="map-overlay" onclick="enableMap()">
       <i class="fas fa-hand-pointer"></i>
       <p>터치하면 지도가 활성화됩니다<br><span style="font-size:12px;opacity:.7;">이후 두 손가락으로 이동·확대 가능합니다</span></p>
     </div>
-    <!--
-      파로스컨벤션 좌표 기반 embed (좌표: 37.5940, 127.2080)
-      API 키 없이도 작동하는 안정적인 방식입니다.
-    -->
-    <iframe
+    <iframe 
       id="map-iframe"
       class="map-f"
-      src="https://maps.google.com/maps?q=37.5940,127.2080&z=17&output=embed&hl=ko"
-      width="100%"
-      height="100%"
-      style="border:0;"
-      allowfullscreen=""
-      loading="lazy"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3160.5266936862217!2d127.15201959999999!3d37.6132969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cb7001626960f%3A0x48a2589bb9e9cde!2z7YyM66Gc7Iqk7Luo67Kk7IWY!5e0!3m2!1sko!2skr!4v1775910649975!5m2!1sko!2skr" 
+      width="100%" 
+      height="100%" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
       referrerpolicy="no-referrer-when-downgrade"
       title="예식장 위치 — 남양주 파로스컨벤션">
     </iframe>
@@ -501,7 +494,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <button onclick="openTmap()" class="mbtn tm">티맵</button>
   </div>
 
-  <!-- 지하철 -->
   <div class="rv" style="margin-bottom:36px;">
     <p class="t-title">지하철 안내</p>
     <div class="t-body">
@@ -511,12 +503,10 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </div>
   </div>
 
-  <!-- 자가용·주차 -->
   <div class="rv" style="margin-bottom:36px;">
     <p class="t-title">자가용 및 주차 안내</p>
     <div class="t-body">
       <p style="margin-bottom:10px;">내비게이션 <strong>"남양주 파로스컨벤션"</strong> 으로 검색해 주세요.</p>
-      <!-- [개선] 주차 동선 상세화 — 좌회전 안내 추가 -->
       <div class="t-note">
         <p style="font-weight:500;margin-bottom:10px;color:var(--ink);font-family:'Noto Sans KR',sans-serif;">[ 주차 동선 안내 ]</p>
         <p>① 반드시 <strong style="color:#C04B30;">GATE 2</strong> 로 진입해 주세요.</p>
@@ -528,7 +518,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </div>
   </div>
 
-  <!-- 전세버스 -->
   <div class="rv">
     <p class="t-title">전세버스 안내</p>
     <div class="t-body">
@@ -536,16 +525,13 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <p class="bus-r-t">[ 전주 노선 ]</p>
         <p>일시 : 1월 30일(토) <span class="ac">오전 8시 30분 정시 출발</span></p>
         <p>장소 : <strong>전북특별자치도청 앞</strong></p>
-        <!-- ✏️ 실제 인솔자 이름·번호로 교체 필요 -->
         <p>인솔 : 홍길동 &nbsp;<a href="tel:010-9999-9999" style="color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px;">010-9999-9999</a></p>
       </div>
       <div class="bus-r" style="margin-bottom:18px;">
         <p class="bus-r-t" style="color:var(--muted);">[ 원주 노선 ]</p>
-        <!-- [개선] 원주는 미확정이므로 조건부 안내 -->
         <p style="color:var(--muted);">하객분들의 편의를 위해 운행 여부를 검토 중입니다.<br>참석 의사 전달 시 원주 탑승을 체크해 주시면,<br>확정되는 대로 개별적으로 안내해 드리겠습니다.</p>
       </div>
 
-      <!-- 귀환 버스 -->
       <div class="bus-return">
         <p class="bus-return-t"><i class="fas fa-rotate-left"></i> 귀환 버스 안내</p>
         <p>예식 종료 후 충분한 여유를 두어<br><strong>오후 3시경</strong> 현장에서 전주 방면으로 출발 예정입니다.<br>예식장 앞 버스 앞에서 인솔자의 안내에 따라<br>탑승해 주시면 감사하겠습니다.</p>
@@ -572,7 +558,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <i class="fas fa-plus" id="gr-i"></i>
       </button>
       <div class="acc-body" id="gr">
-        <!-- ✏️ 혼주 박유경 실제 계좌번호·은행명 입력 필요 -->
         <div class="acc-row">
           <div>
             <p class="acc-lbl">혼주 박유경</p>
@@ -580,7 +565,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
           </div>
           <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
         </div>
-        <!-- ✏️ 혼주 김기옥 실제 계좌번호·은행명 입력 필요 -->
         <div class="acc-row">
           <div>
             <p class="acc-lbl">혼주 김기옥</p>
@@ -603,7 +587,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <i class="fas fa-plus" id="br-i"></i>
       </button>
       <div class="acc-body" id="br">
-        <!-- ✏️ 혼주 이기영 실제 계좌번호·은행명 입력 필요 -->
         <div class="acc-row">
           <div>
             <p class="acc-lbl">혼주 이기영</p>
@@ -791,19 +774,54 @@ function initDday(){
   else el.textContent='축복 속에 결혼식을 무사히 마쳤습니다';
 }
 
-/* BGM */
+/* ── BGM (자동재생 적용) ── */
 const audio=document.getElementById('bgm');
 const discI=document.getElementById('disc-i');
 const bgmLbl=document.getElementById('bgm-lbl');
 audio.volume=0.35;
-document.getElementById('bgm-btn').addEventListener('click',e=>{
-  e.stopPropagation();
-  if(audio.paused){
-    audio.play().then(()=>{discI.style.animation='spin 8s linear infinite';bgmLbl.textContent='Music On';}).catch(()=>{});
-  } else {
-    audio.pause(); discI.style.animation='none'; bgmLbl.textContent='Music Off';
+let bgmStarted = false;
+
+// 모바일 브라우저 보안 정책(Autoplay 차단)을 우회하기 위해
+// 사용자가 화면을 스크롤하거나 첫 터치를 하는 순간 바로 노래를 틀어주는 마법의 코드!
+const initialPlay = () => {
+  if (!bgmStarted) {
+    bgmStarted = true;
+    audio.play().then(()=>{
+      discI.style.animation='spin 8s linear infinite';
+      bgmLbl.textContent='Music On';
+    }).catch(()=>{
+      // 브라우저가 아직 허용 안 해준 상태면 에러 무시
+      bgmStarted = false;
+    });
   }
-});
+  // 한 번 틀어졌으면 더 이상 이 기능이 작동하지 않도록 이벤트 지우기
+  if (bgmStarted) {
+    ['touchstart','click','scroll'].forEach(evt => document.removeEventListener(evt, initialPlay));
+  }
+};
+// 화면 터치나 스크롤 감지 대기
+['touchstart','click','scroll'].forEach(evt => document.addEventListener(evt, initialPlay, {passive:true}));
+
+// 버튼을 직접 눌러서 켜고 끄는 기능
+function toggleBgm(e) {
+  if (e) e.stopPropagation();
+  bgmStarted = true; // 직접 눌렀으니 자동재생은 이제 필요 없음
+  if (audio.paused) {
+    audio.play().then(()=>{
+      discI.style.animation='spin 8s linear infinite';
+      bgmLbl.textContent='Music On';
+    }).catch(()=>{});
+  } else {
+    audio.pause();
+    discI.style.animation='none';
+    bgmLbl.textContent='Music Off';
+  }
+}
+document.getElementById('bgm-btn').addEventListener('click', toggleBgm);
+
+// 데스크톱 등 허용된 환경이라면 들어오자마자 바로 재생 시도
+initialPlay();
+
 
 /* PARALLAX */
 window.addEventListener('scroll',()=>{
