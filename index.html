@@ -52,15 +52,24 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 @keyframes spin{100%{transform:rotate(360deg)}}
 
 /* ── HERO ── */
-.hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
-.hero-photo{position:absolute;inset:0;background-color:#0E0C0A;background-image:url('IMG_1033.jpeg');background-size:cover;background-position:center 30%;transform-origin:center;will-change:transform;}
-.hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,12,10,.04) 0%,rgba(14,12,10,.18) 38%,rgba(14,12,10,.72) 72%,rgba(14,12,10,.96) 100%);}
-#snow-c{position:absolute;inset:0;pointer-events:none;z-index:5;}
-.hero-body{position:absolute;bottom:0;left:0;right:0;padding:0 32px 52px;text-align:center;color:var(--white);z-index:10;}
-.hero-body>*{animation:fadeUp 1s ease forwards;opacity:0;}
-.hero-lead{animation-delay:.3s!important;font-size:13.5px;font-weight:300;line-height:2.1;color:rgba(253,250,245,.6);margin-bottom:32px;letter-spacing:.04em;font-family:'Noto Serif KR',serif;}
-.hero-names{animation-delay:.65s!important;font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;letter-spacing:.18em;color:var(--white);line-height:1;margin-bottom:32px;}
-.hero-names .hrt{font-size:20px;color:var(--gold-lt);vertical-align:middle;margin:0 2px;font-family:sans-serif;}
+.hero {position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
+.hero-photo {
+  position:absolute;
+  inset:0;
+  /* 이미지 대신 깊이감 있는 블랙 단색 적용 */
+  background-color: #0E0C0A; 
+  background-image: none; 
+}
+/* 단색일 때 텍스트가 더 돋보이도록 베일(음영) 강도 조절 */
+.hero-veil {
+  position:absolute;
+  inset:0;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(14, 12, 10, 0.4) 60%, 
+    rgba(14, 12, 10, 0.95) 100%
+  );
+}
 
 /* ── 예식 일시·장소 인포박스 ── */
 .hero-info-box{animation-delay:.9s!important;display:inline-block;padding:20px 32px;border:1px solid rgba(181,146,74,.38);position:relative;margin-bottom:0;}
