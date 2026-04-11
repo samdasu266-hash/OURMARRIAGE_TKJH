@@ -121,7 +121,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .contact-tel:active{background:rgba(253,250,245,.1);}
 .contact-tel i{font-size:12px;color:var(--gold-lt);}
 .contact-note{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:rgba(253,250,245,.45);text-align:center;margin-top:20px;line-height:2;font-weight:300;word-break:keep-all;}
-/* 당일 연락 안내 박스 */
 .contact-day-note{background:rgba(181,146,74,.1);border:1px solid rgba(181,146,74,.28);border-radius:6px;padding:16px 20px;margin-top:20px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:2;color:rgba(253,250,245,.7);font-weight:300;text-align:center;word-break:keep-all;}
 .contact-day-note strong{color:rgba(253,250,245,.9);font-weight:500;}
 
@@ -133,7 +132,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .cday{text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;color:var(--ink);padding:9px 0;}
 .cday.s{color:#C04B30;}.cday.sa{color:var(--muted);}
 .cday.w{background:var(--ink);color:var(--white);font-weight:500;position:relative;border-radius:50%;}
-/* [수정] absolute 텍스트 버그 해결. content를 비우고 position:absolute 지정 */
 .cday.w::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:3px;height:3px;background:var(--gold-lt);border-radius:50%;}
 .dday-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;text-align:center;color:var(--muted);margin-top:36px;font-weight:300;letter-spacing:.04em;}
 .dday-t strong{color:var(--gold);font-size:19px;font-family:'Cormorant Garamond',serif;font-weight:600;margin:0 4px;}
@@ -145,7 +143,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .order-time{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gold);min-width:52px;letter-spacing:.04em;padding-top:2px;}
 .order-txt{font-family:'Noto Sans KR',sans-serif;font-size:15px;color:var(--ink);font-weight:400;line-height:1.6;}
 .order-sub{font-size:12.5px;color:var(--muted);display:block;margin-top:5px;font-weight:300;line-height:1.8;word-break:keep-all;}
-/* 입실 강조 */
 .order-list li.highlight .order-time{color:var(--ink);}
 .order-list li.highlight .order-txt{color:var(--ink);}
 .order-list li.highlight{background:var(--bg2);margin:0 -8px;padding:16px 8px;border-radius:4px;border-bottom:none;}
@@ -180,7 +177,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 /* ── LOCATION ── */
 .map-wrap{position:relative;width:100%;height:256px;margin-bottom:20px;}
 .map-f{width:100%;height:100%;border:.5px solid var(--line);overflow:hidden;display:block;}
-/* 두 손가락 오버레이 */
 .map-overlay{position:absolute;inset:0;background:rgba(26,23,20,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:opacity .3s;z-index:2;}
 .map-overlay i{font-size:26px;color:rgba(253,250,245,.85);}
 .map-overlay p{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:rgba(253,250,245,.85);font-weight:400;letter-spacing:.04em;text-align:center;line-height:2;}
@@ -201,7 +197,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .bus-r{border-left:2px solid var(--line);padding-left:20px;margin-bottom:22px;}
 .bus-r.on{border-left-color:var(--ink);}
 .bus-r-t{font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;color:var(--ink);margin-bottom:10px;}
-/* 귀환 버스 박스 */
 .bus-return{background:rgba(181,146,74,.07);border:1px solid rgba(181,146,74,.28);border-radius:6px;padding:18px 20px;margin-top:18px;}
 .bus-return-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .bus-return p{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:2.1;color:var(--ink);font-weight:300;}
@@ -271,7 +266,11 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <p id="loader-text">사진을 안전하게 업로드하고 있습니다...</p>
 </div>
 
-<audio id="bgm" loop preload="auto"><source src="Film_Love.mp3" type="audio/mpeg"></audio>
+<!-- 🎶 BGM 설정: 깃허브에 있는 Film_Love.mp3 정확하게 삽입 완료! 
+     브라우저가 허용하면 즉시 재생되도록 autoplay 속성도 추가했어. -->
+<audio id="bgm" loop preload="auto" autoplay>
+  <source src="Film_Love.mp3" type="audio/mpeg">
+</audio>
 
 <div class="wrap">
 
@@ -405,7 +404,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <li>
       <span class="order-time">13:10</span>
       <div class="order-txt">본식 시작
-        <!-- [수정] "파로스홀 2층"을 "2층 파로스홀"로 변경 -->
         <span class="order-sub">2층 파로스홀</span>
       </div>
     </li>
@@ -774,53 +772,60 @@ function initDday(){
   else el.textContent='축복 속에 결혼식을 무사히 마쳤습니다';
 }
 
-/* ── BGM (자동재생 적용) ── */
-const audio=document.getElementById('bgm');
-const discI=document.getElementById('disc-i');
-const bgmLbl=document.getElementById('bgm-lbl');
-audio.volume=0.35;
+/* ── [최종 개선] BGM (스마트 자동재생 로직) ── */
+const audio = document.getElementById('bgm');
+const discI = document.getElementById('disc-i');
+const bgmLbl = document.getElementById('bgm-lbl');
+audio.volume = 0.35;
 let bgmStarted = false;
 
-// 모바일 브라우저 보안 정책(Autoplay 차단)을 우회하기 위해
-// 사용자가 화면을 스크롤하거나 첫 터치를 하는 순간 바로 노래를 틀어주는 마법의 코드!
-const initialPlay = () => {
-  if (!bgmStarted) {
-    bgmStarted = true;
-    audio.play().then(()=>{
-      discI.style.animation='spin 8s linear infinite';
-      bgmLbl.textContent='Music On';
-    }).catch(()=>{
-      // 브라우저가 아직 허용 안 해준 상태면 에러 무시
-      bgmStarted = false;
-    });
-  }
-  // 한 번 틀어졌으면 더 이상 이 기능이 작동하지 않도록 이벤트 지우기
-  if (bgmStarted) {
-    ['touchstart','click','scroll'].forEach(evt => document.removeEventListener(evt, initialPlay));
+// UI 상태 업데이트 함수
+const updateBgmUI = (isPlaying) => {
+  if (isPlaying) {
+    discI.style.animation = 'spin 8s linear infinite';
+    bgmLbl.textContent = 'Music On';
+  } else {
+    discI.style.animation = 'none';
+    bgmLbl.textContent = 'Music Off';
   }
 };
-// 화면 터치나 스크롤 감지 대기
-['touchstart','click','scroll'].forEach(evt => document.addEventListener(evt, initialPlay, {passive:true}));
 
-// 버튼을 직접 눌러서 켜고 끄는 기능
-function toggleBgm(e) {
-  if (e) e.stopPropagation();
-  bgmStarted = true; // 직접 눌렀으니 자동재생은 이제 필요 없음
+// 첫 터치/스크롤 시 오디오 재생을 시도하는 함수
+const startAudio = () => {
+  if (bgmStarted) return;
+  audio.play().then(() => {
+    bgmStarted = true;
+    updateBgmUI(true);
+    // 한 번 성공하면 화면 터치 감지용 이벤트 리스너들을 모두 지워줌
+    ['touchstart', 'click', 'scroll'].forEach(evt => document.removeEventListener(evt, startAudio));
+  }).catch(() => {
+    // 브라우저 정책 등에 의해 아직 막혀있으면 그냥 넘어감 (에러 메시지 숨김)
+  });
+};
+
+// 1단계: 브라우저가 자동재생을 허용하는지 즉시 테스트 (PC 환경 등)
+audio.play().then(() => {
+  bgmStarted = true;
+  updateBgmUI(true);
+}).catch(() => {
+  // 2단계: 브라우저가 자동재생을 막았다면(모바일 등), 하객의 첫 번째 움직임을 기다림
+  ['touchstart', 'click', 'scroll'].forEach(evt => document.addEventListener(evt, startAudio, {passive:true}));
+});
+
+// 사용자가 직접 음악 버튼을 눌렀을 때의 동작
+document.getElementById('bgm-btn').addEventListener('click', (e) => {
+  e.stopPropagation(); // 버튼 누른 게 화면 터치로 이중 인식되지 않게 막음
+  bgmStarted = true; // 수동으로 조작했으니 자동재생 대기는 끝
+  
   if (audio.paused) {
-    audio.play().then(()=>{
-      discI.style.animation='spin 8s linear infinite';
-      bgmLbl.textContent='Music On';
-    }).catch(()=>{});
+    audio.play()
+      .then(() => updateBgmUI(true))
+      .catch(() => toast('🎵 음악 파일을 찾을 수 없습니다. (경로 확인)'));
   } else {
     audio.pause();
-    discI.style.animation='none';
-    bgmLbl.textContent='Music Off';
+    updateBgmUI(false);
   }
-}
-document.getElementById('bgm-btn').addEventListener('click', toggleBgm);
-
-// 데스크톱 등 허용된 환경이라면 들어오자마자 바로 재생 시도
-initialPlay();
+});
 
 
 /* PARALLAX */
