@@ -27,6 +27,7 @@
                         'sans': ['"Noto Sans KR"', 'sans-serif']
                     },
                     colors: { 
+                        /* 에르메스 럭셔리 팔레트 */
                         'hermes-bg': '#FDFBF7',      
                         'hermes-text': '#2C2621',    
                         'hermes-orange': '#E35D20',  
@@ -65,7 +66,6 @@
         
         .hero-text-shadow { text-shadow: 0 2px 10px rgba(253, 251, 247, 0.9), 0 0 20px rgba(253, 251, 247, 0.8); }
 
-        /* RSVP 내부 커스텀 스크롤바 */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #D5CCC3; border-radius: 4px; }
@@ -77,108 +77,114 @@
 
     <div class="mobile-container">
         
+        <!-- BGM 컨트롤러 -->
         <div class="fixed top-5 right-5 z-[500]">
             <button id="bgm-btn" class="bg-hermes-bg/90 backdrop-blur-sm px-4 py-2.5 rounded-sm shadow-sm border border-hermes-line flex items-center space-x-2 transition-all active:scale-95">
                 <i class="fas fa-compact-disc text-[16px] text-hermes-text" id="disc-icon"></i>
-                <span id="bgm-status" class="text-[10px] font-medium tracking-widest text-hermes-text font-sans uppercase">Music Off</span>
+                <span id="bgm-status" class="text-[10px] font-bold tracking-widest text-hermes-text font-sans uppercase">Music Off</span>
             </button>
         </div>
 
+        <!-- 메인 커버 -->
         <section class="relative w-full overflow-hidden flex flex-col items-center justify-center bg-cover bg-center" style="height: 100vh; height: 100dvh; background-image: linear-gradient(to bottom, rgba(44, 38, 33, 0) 0%, rgba(44, 38, 33, 0.2) 50%, rgba(253, 251, 247, 0.9) 85%, rgba(253, 251, 247, 1) 100%), url('IMG_1033.jpeg');">
             <div id="snow-container" class="absolute inset-0 pointer-events-none z-10"></div>
             
             <div class="absolute bottom-16 flex flex-col items-center text-center px-6 w-full z-20">
-                <p class="text-[16px] leading-relaxed mb-10 font-normal hero-text-shadow break-keep text-hermes-text tracking-wide">
+                <p class="text-[16px] leading-relaxed mb-10 font-bold hero-text-shadow break-keep text-hermes-text tracking-wide">
                     가장 뜨거웠던 여름날 만난 두 사람,<br>이제 하얀 눈꽃 아래서 영원을 약속합니다.
                 </p>
                 <div class="space-y-4">
-                    <h1 class="text-[40px] font-bold tracking-[0.25em] text-hermes-text hero-text-shadow ml-3">태광 <span class="text-hermes-orange text-2xl mx-2 font-sans opacity-90">♥</span> 지현</h1>
-                    <div class="h-[1px] w-10 bg-hermes-text mx-auto my-6 opacity-40"></div>
-                    <p class="text-[15px] font-sans font-medium text-hermes-text tracking-[0.25em] uppercase hero-text-shadow">2027. 01. 30 SAT 13:10</p>
-                    <p class="text-[15.5px] font-normal text-hermes-text tracking-widest hero-text-shadow">남양주 파로스컨벤션 2층 파로스홀</p>
+                    <h1 class="text-[40px] font-extrabold tracking-[0.25em] text-hermes-text hero-text-shadow ml-3">태광 <span class="text-hermes-orange text-2xl mx-2 font-sans opacity-90">♥</span> 지현</h1>
+                    <div class="h-[1px] w-12 bg-hermes-text mx-auto my-6 opacity-40"></div>
+                    <p class="text-[15px] font-sans font-bold text-hermes-text tracking-[0.25em] uppercase hero-text-shadow">2027. 01. 30 SAT 13:10</p>
+                    <p class="text-[15.5px] font-bold text-hermes-text tracking-widest hero-text-shadow">남양주 파로스컨벤션 2층 파로스홀</p>
                 </div>
             </div>
         </section>
 
+        <!-- 초대 문구 -->
         <section class="py-28 px-8 text-center border-b border-hermes-line">
-            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-16 font-medium uppercase ml-2">Invitation</h2>
-            <div class="space-y-9 text-[16px] leading-[2.3] text-hermes-text break-keep font-normal">
+            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-16 font-bold uppercase ml-2">Invitation</h2>
+            <div class="space-y-9 text-[17px] leading-[2.3] text-hermes-text break-keep font-medium">
                 <p>하나는 유연하고, 하나는 단단한 편이라<br>함께일 때 가장 잘 어울리는 사이가 되었습니다.</p>
                 <p>웃음이 필요할 땐 장난으로,<br>힘이 필요할 때 든든한 버팀목이 되어<br>서로의 부족함을 채우며 살아가겠습니다.</p>
                 <p>저희 두 사람의 시작을<br>귀한 걸음으로 축복해 주신다면<br>그 마음 오래도록 간직하겠습니다.</p>
             </div>
             
-            <div class="mt-24 space-y-7 text-[17px] text-hermes-text">
+            <div class="mt-24 space-y-7 text-[18px] text-hermes-text">
                 <div class="flex items-center justify-center space-x-4">
-                    <span class="font-normal">박유경 · 김기옥</span> <span class="text-hermes-muted text-[14px] font-light">의 장남</span> <span class="text-[20px] font-bold ml-1">태광</span>
+                    <span class="font-bold text-[17px]">박유경 · 김기옥</span> <span class="text-hermes-muted text-[14.5px] font-normal">의 장남</span> <span class="text-[21px] font-bold ml-1">태광</span>
                 </div>
                 <div class="flex items-center justify-center space-x-4">
-                    <span class="font-normal">이기영 · 지백현</span> <span class="text-hermes-muted text-[14px] font-light">의 차녀</span> <span class="text-[20px] font-bold ml-1">지현</span>
+                    <span class="font-bold text-[17px]">이기영 · 지백현</span> <span class="text-hermes-muted text-[14.5px] font-normal">의 차녀</span> <span class="text-[21px] font-bold ml-1">지현</span>
                 </div>
             </div>
         </section>
 
+        <!-- 달력 -->
         <section class="py-24 px-8 text-center border-b border-hermes-line">
-            <h2 class="text-[15px] font-sans tracking-[0.3em] text-hermes-text mb-14 font-medium uppercase">2027. 01. 30</h2>
+            <h2 class="text-[16px] font-sans tracking-[0.3em] text-hermes-text mb-14 font-bold uppercase">2027. 01. 30</h2>
             <div class="max-w-[320px] mx-auto p-4">
-                <div class="grid grid-cols-7 gap-2 text-[12px] mb-8 text-hermes-muted font-sans font-normal uppercase tracking-widest border-b border-hermes-line pb-4">
+                <div class="grid grid-cols-7 gap-2 text-[12px] mb-8 text-hermes-muted font-sans font-bold uppercase tracking-widest border-b border-hermes-line pb-4">
                     <div class="text-[#C84B31]">S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div class="text-hermes-text">S</div>
                 </div>
-                <div class="grid grid-cols-7 gap-y-7 gap-x-2 text-[16px] text-hermes-text font-normal font-sans">
+                <div class="grid grid-cols-7 gap-y-7 gap-x-2 text-[16px] text-hermes-text font-bold font-sans">
                     <div></div><div></div><div></div><div></div><div></div><div>1</div><div>2</div>
                     <div class="text-[#C84B31]">3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div>
                     <div class="text-[#C84B31]">10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div>
                     <div class="text-[#C84B31]">17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div>
                     <div class="text-[#C84B31]">24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div>
-                    <div class="bg-hermes-orange text-white rounded-sm w-8 h-8 flex items-center justify-center mx-auto -mt-1 text-[15px] font-bold shadow-sm">30</div>
+                    <div class="bg-hermes-orange text-white rounded-sm w-8 h-8 flex items-center justify-center mx-auto -mt-1 text-[15px] shadow-sm">30</div>
                     <div class="text-[#C84B31]">31</div>
                 </div>
             </div>
             <div class="mt-14">
-                <p id="dday" class="text-[15px] tracking-wide font-normal text-hermes-text font-sans"></p>
+                <p id="dday" class="text-[16px] tracking-wide font-medium text-hermes-text font-sans"></p>
             </div>
         </section>
 
+        <!-- 참석 의사 전달 버튼 -->
         <section class="py-24 px-8 text-center bg-[#F7F4EF] border-b border-hermes-line">
-            <h2 class="text-[11px] font-sans tracking-[0.5em] text-hermes-orange mb-10 font-medium uppercase">R . S . V . P</h2>
-            <p class="text-[15.5px] leading-[2.0] mb-12 text-hermes-text break-keep font-normal">귀한 걸음 해주시는 분들을 모시기에<br>부족함이 없도록,<br>참석 여부와 전세버스 탑승 계획을 여쭙습니다.</p>
-            <button onclick="openRsvpModal()" class="w-full bg-hermes-text text-hermes-bg py-4 rounded-sm font-sans font-medium tracking-[0.15em] text-[15px] active:scale-95 transition-all shadow-sm">참석 의사 전달하기</button>
+            <h2 class="text-[11px] font-sans tracking-[0.5em] text-hermes-orange mb-10 font-bold uppercase">R . S . V . P</h2>
+            <p class="text-[16px] leading-[1.9] mb-12 text-hermes-text break-keep font-medium">귀한 걸음 해주시는 분들을 모시기에<br>부족함이 없도록,<br>참석 여부와 전세버스 탑승 계획을 여쭙습니다.</p>
+            <button onclick="openRsvpModal()" class="w-full bg-hermes-text text-hermes-bg py-4.5 rounded-sm font-sans font-bold tracking-[0.15em] text-[15px] active:scale-95 transition-all shadow-md">참석 의사 전달하기</button>
         </section>
 
-        <!-- ★ 갤러리 (자바스크립트 버그 완전 삭제, 순수 HTML 네이티브 로딩으로 무조건 뜸) ★ -->
+        <!-- ★ 갤러리 (JS 에러 원천 차단. 100% 렌더링 보장) ★ -->
         <section class="pt-24 pb-16 px-5 text-center border-b border-hermes-line">
-            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-14 font-medium uppercase ml-2">Gallery</h2>
+            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-14 font-bold uppercase ml-2">Gallery</h2>
             <div class="grid grid-cols-3 gap-1.5" id="gallery-grid"></div>
-            <p class="text-[13px] text-hermes-muted mt-10 font-sans tracking-wide font-normal">사진을 터치하시면 크게 보실 수 있습니다.</p>
+            <p class="text-[13px] text-hermes-muted mt-10 font-sans tracking-wide font-medium">사진을 터치하시면 크게 보실 수 있습니다.</p>
         </section>
 
+        <!-- 오시는 길 -->
         <section class="pt-24 pb-0 px-6 border-b border-hermes-line">
-            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-12 text-center font-medium uppercase ml-2">Location</h2>
-            <h3 class="text-[20px] font-bold mb-4 text-center text-hermes-text">파로스컨벤션 2층 파로스홀</h3>
-            <p class="text-[15px] text-center mb-12 text-hermes-muted leading-relaxed font-sans font-normal">경기 남양주시 다산순환로 20<br>다산현대프리미어캠퍼스몰 <span class="font-medium text-hermes-text border-b border-hermes-text pb-0.5">E동 2층</span></p>
+            <h2 class="text-[11px] font-sans tracking-[0.4em] text-hermes-orange mb-12 text-center font-bold uppercase ml-2">Location</h2>
+            <h3 class="text-[21px] font-bold mb-4 text-center text-hermes-text">파로스컨벤션 2층 파로스홀</h3>
+            <p class="text-[16px] text-center mb-12 text-hermes-muted leading-relaxed font-sans font-medium">경기 남양주시 다산순환로 20<br>다산현대프리미어캠퍼스몰 <span class="font-bold text-hermes-text border-b border-hermes-text pb-0.5">E동 2층</span></p>
             
             <div class="w-full h-72 bg-[#F2EDE5] rounded-sm mb-10 overflow-hidden border border-hermes-line block">
                 <iframe src="https://maps.google.com/maps?q=%EB%82%A8%EC%96%91%EC%A3%BC%20%ED%8C%8C%EB%A1%9C%EC%8A%A4%EC%BB%A8%EB%B2%A4%EC%85%98&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="예식장 지도"></iframe>
             </div>
             
             <div class="grid grid-cols-3 gap-2 mb-16 font-sans">
-                <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="bg-[#FEE500] py-3.5 rounded-sm text-[#191919] text-center font-medium text-[14px] active:scale-95 transition-all border border-[#E5CD00]/50 tracking-wide">카카오맵</a>
-                <a href="https://m.map.naver.com/search2/search.naver?query=남양주 파로스컨벤션" target="_blank" class="bg-[#03C75A] py-3.5 rounded-sm text-white text-center font-medium text-[14px] active:scale-95 transition-all border border-[#02B04F]/50 tracking-wide">네이버지도</a>
-                <button onclick="openTmap()" class="bg-[#222222] py-3.5 rounded-sm text-white font-medium text-[14px] active:scale-95 transition-all tracking-wide">티맵</button>
+                <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="bg-[#FEE500] py-3.5 rounded-sm text-[#191919] text-center font-bold text-[14px] active:scale-95 transition-all border border-[#E5CD00]/50 tracking-wide">카카오맵</a>
+                <a href="https://m.map.naver.com/search2/search.naver?query=남양주 파로스컨벤션" target="_blank" class="bg-[#03C75A] py-3.5 rounded-sm text-white text-center font-bold text-[14px] active:scale-95 transition-all border border-[#02B04F]/50 tracking-wide">네이버지도</a>
+                <button onclick="openTmap()" class="bg-[#222222] py-3.5 rounded-sm text-white font-bold text-[14px] active:scale-95 transition-all tracking-wide">티맵</button>
             </div>
             
-            <div class="space-y-12 text-[15px] mb-12 text-left pb-10 text-hermes-text font-sans font-normal">
+            <div class="space-y-12 text-[15.5px] mb-12 text-left pb-10 text-hermes-text font-sans font-medium">
                 <div>
-                    <h4 class="font-bold mb-4 text-[16px] text-hermes-text border-b border-hermes-line pb-2 inline-block">지하철 안내</h4>
+                    <h4 class="font-bold mb-4 text-[17px] text-hermes-text border-b border-hermes-text pb-2 inline-block">지하철 안내</h4>
                     <p class="leading-[1.8] mt-3 pl-2">구리역 7번 출구 (8호선, 경의중앙선)<br>· 예식 당일 7번 출구 앞 <span class="font-bold text-hermes-orange">약 15분 간격 셔틀버스</span> 운행</p>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4 text-[16px] text-hermes-text border-b border-hermes-line pb-2 inline-block">자가용 및 주차 안내</h4>
+                    <h4 class="font-bold mb-4 text-[17px] text-hermes-text border-b border-hermes-text pb-2 inline-block">자가용 및 주차 안내</h4>
                     <div class="leading-[1.8] mt-3 space-y-3 pl-2">
                         <p>· 내비게이션 <span class="font-bold underline underline-offset-2">"남양주 파로스컨벤션"</span> 검색</p>
-                        <div class="bg-[#F7F4EF] p-4.5 rounded-sm border border-hermes-line text-[14px]">
-                            <p class="font-medium mb-2 text-hermes-text">※ 가장 가까운 주차 방법</p>
+                        <div class="bg-[#F7F4EF] p-4.5 rounded-sm border border-hermes-line text-[14.5px]">
+                            <p class="font-bold mb-2 text-hermes-text">※ 가장 가까운 주차 방법</p>
                             <p class="mb-1 text-hermes-muted">1. 주차장 진입 시 반드시 <span class="font-bold text-[#C84B31]">GATE 2</span> 확인</p>
                             <p class="mb-1 text-hermes-muted">2. <span class="font-bold text-hermes-text">지하 3~4층 E동 구역</span> 주차</p>
                             <p class="text-hermes-muted">3. <span class="font-bold text-hermes-text">E동 전용 엘리베이터</span> 탑승 (2층)</p>
@@ -188,30 +194,31 @@
                 </div>
 
                 <div>
-                    <h4 class="font-bold mb-4 text-[16px] text-hermes-text border-b border-hermes-line pb-2 inline-block">전세버스 안내</h4>
+                    <h4 class="font-bold mb-4 text-[17px] text-hermes-text border-b border-hermes-text pb-2 inline-block">전세버스 안내</h4>
                     <div class="mt-4 space-y-6 pl-2">
-                        <div class="pl-4 border-l-[2px] border-hermes-text">
-                            <p class="font-bold text-[15px] mb-2">[ 전주 노선 ]</p>
-                            <div class="text-[14.5px] leading-[1.8] space-y-1 text-hermes-muted">
+                        <div class="pl-4 border-l-[3px] border-hermes-text">
+                            <p class="font-bold text-[16px] mb-2">[ 전주 노선 ]</p>
+                            <div class="text-[15px] leading-[1.8] space-y-1 text-hermes-muted">
                                 <p>· 일시: 1월 30일(토) <span class="font-bold text-hermes-text">오전 8시 30분 정시 출발</span></p>
-                                <p>· 장소: <span class="font-medium text-hermes-text">전북특별자치도청 앞</span></p>
-                                <p>· 인솔: 홍길동 <a href="tel:010-9999-9999" class="font-medium text-hermes-text underline underline-offset-2 ml-1">010-9999-9999</a></p>
+                                <p>· 장소: <span class="font-bold text-hermes-text">전북특별자치도청 앞</span></p>
+                                <p>· 인솔: 홍길동 <a href="tel:010-9999-9999" class="font-bold text-hermes-text underline underline-offset-2 ml-1">010-9999-9999</a></p>
                             </div>
                         </div>
-                        <div class="pl-4 border-l-[2px] border-hermes-line">
-                            <p class="font-bold text-[15px] mb-2 text-hermes-muted">[ 원주 노선 ]</p>
-                            <p class="text-[14.5px] leading-[1.8] text-hermes-muted">현재 대절 여부를 조사 중입니다. 참석 정보 전달 시 체크해 주시면 확정 시 개별 안내해 드리겠습니다.</p>
+                        <div class="pl-4 border-l-[3px] border-hermes-line">
+                            <p class="font-bold text-[16px] mb-2 text-hermes-muted">[ 원주 노선 ]</p>
+                            <p class="text-[15px] leading-[1.8] text-hermes-muted">현재 대절 여부를 조사 중입니다. 참석 정보 전달 시 체크해 주시면 확정 시 개별 안내해 드리겠습니다.</p>
                         </div>
                     </div>
-                    <div class="mt-8 text-[14px] leading-[1.8] text-hermes-muted break-keep">
-                        여럿이 함께 이용하는 버스이므로 <span class="text-hermes-orange font-medium">정시 출발</span> 예정입니다. 원활한 진행을 위해 <span class="font-medium text-hermes-text">출발 10분 전</span>까지 도착하여 탑승해 주시기를 정중히 부탁드립니다.
+                    <div class="mt-8 text-[14.5px] leading-[1.8] text-hermes-muted break-keep">
+                        여럿이 함께 이용하는 버스이므로 <span class="text-hermes-orange font-bold">정시 출발</span> 예정입니다. 원활한 진행을 위해 <span class="font-bold text-hermes-text">출발 10분 전</span>까지 도착하여 탑승해 주시기를 정중히 부탁드립니다.
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- 8. 축하 마음 전하기 -->
         <section class="pt-20 pb-20 px-6 text-center border-b border-hermes-line bg-[#F7F4EF]">
-            <h2 class="text-[11px] font-sans tracking-[0.5em] text-hermes-orange mb-12 font-medium uppercase ml-2">Registry</h2>
+            <h2 class="text-[11px] font-sans tracking-[0.5em] text-hermes-orange mb-12 font-bold uppercase ml-2">Registry</h2>
             <div class="space-y-4 text-left font-sans">
                 <div class="border border-hermes-line rounded-sm overflow-hidden bg-white">
                     <button onclick="toggleAccordion('groom')" class="w-full px-5 py-5 flex justify-between items-center font-medium text-[15px] text-hermes-text hover:bg-gray-50 transition-colors">
@@ -220,16 +227,16 @@
                     </button>
                     <div id="groom" class="hidden px-5 py-6 border-t border-hermes-line space-y-6 bg-[#FCFAF6]">
                         <div class="flex justify-between items-center">
-                            <div><p class="text-[12.5px] text-hermes-muted font-normal mb-1">혼주 박유경</p><p class="font-bold text-[14.5px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-[12px] border border-hermes-line px-3.5 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
+                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">혼주 박유경</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
+                            <button onclick="copyToClipboard('000000000000')" class="text-[12.5px] border border-hermes-line px-4 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div><p class="text-[12.5px] text-hermes-muted font-normal mb-1">혼주 김기옥</p><p class="font-bold text-[14.5px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-[12px] border border-hermes-line px-3.5 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
+                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">혼주 김기옥</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
+                            <button onclick="copyToClipboard('000000000000')" class="text-[12.5px] border border-hermes-line px-4 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
                         </div>
                         <div class="flex justify-between items-center border-t border-hermes-line pt-5">
-                            <div><p class="text-[12.5px] text-hermes-muted font-normal mb-1">신랑 박태광</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">신한 110-305-227134</p></div>
-                            <button onclick="copyToClipboard('110305227134')" class="text-[12px] border border-hermes-text px-3.5 py-2 rounded-sm font-medium bg-hermes-text text-white active:bg-gray-800 transition-all">복사</button>
+                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">신랑 박태광</p><p class="font-bold text-[16px] tracking-wide text-hermes-text">신한 110-305-227134</p></div>
+                            <button onclick="copyToClipboard('110305227134')" class="text-[12.5px] border border-hermes-text px-4 py-2 rounded-sm font-medium bg-hermes-text text-white active:bg-gray-800 transition-all">복사</button>
                         </div>
                     </div>
                 </div>
@@ -240,16 +247,16 @@
                     </button>
                     <div id="bride" class="hidden px-5 py-6 border-t border-hermes-line space-y-6 bg-[#FCFAF6]">
                         <div class="flex justify-between items-center">
-                            <div><p class="text-[12.5px] text-hermes-muted font-normal mb-1">혼주 이기영</p><p class="font-bold text-[14.5px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
-                            <button onclick="copyToClipboard('000000000000')" class="text-[12px] border border-hermes-line px-3.5 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
+                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">혼주 이기영</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">신한 000-000-000000</p></div>
+                            <button onclick="copyToClipboard('000000000000')" class="text-[12.5px] border border-hermes-line px-4 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div><p class="text-[12.5px] text-hermes-muted font-normal mb-1">혼주 지백현</p><p class="font-bold text-[14.5px] tracking-wide text-hermes-text">농협 301-0089-9502-11</p></div>
-                            <button onclick="copyToClipboard('3010089950211')" class="text-[12px] border border-hermes-line px-3.5 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
+                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">혼주 지백현</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">농협 301-0089-9502-11</p></div>
+                            <button onclick="copyToClipboard('3010089950211')" class="text-[12.5px] border border-hermes-line px-4 py-2 rounded-sm font-medium bg-white active:bg-gray-100 text-hermes-muted transition-all">복사</button>
                         </div>
                         <div class="flex justify-between items-center border-t border-hermes-line pt-5">
-                            <div><p class="text-[12.5px] text-hermes-muted font-normal mb-1">신부 이지현</p><p class="font-bold text-[15px] tracking-wide text-hermes-text">신한 110-477-676185</p></div>
-                            <button onclick="copyToClipboard('110477676185')" class="text-[12px] border border-hermes-text px-3.5 py-2 rounded-sm font-medium bg-hermes-text text-white active:bg-gray-800 transition-all">복사</button>
+                            <div><p class="text-[13px] text-hermes-muted font-medium mb-1">신부 이지현</p><p class="font-bold text-[16px] tracking-wide text-hermes-text">신한 110-477-676185</p></div>
+                            <button onclick="copyToClipboard('110477676185')" class="text-[12.5px] border border-hermes-text px-4 py-2 rounded-sm font-medium bg-hermes-text text-white active:bg-gray-800 transition-all">복사</button>
                         </div>
                     </div>
                 </div>
@@ -263,24 +270,23 @@
                     <p class="text-[11px] tracking-[0.4em] font-bold text-hermes-orange uppercase mb-2">Memory</p>
                     <h3 class="text-[18px] font-bold text-hermes-text tracking-tight">사진 공유하기</h3>
                 </div>
-                <p class="text-[14px] leading-[1.8] text-hermes-muted mb-8 break-keep font-medium">
+                <p class="text-[14.5px] leading-[1.8] text-hermes-muted mb-8 break-keep font-medium">
                     예식 당일, 하객분들의 따뜻한 시선으로 담아주신<br>저희의 예쁜 순간들을 아래 버튼을 통해 전해 주시면<br>소중히 간직하겠습니다.
                 </p>
                 
                 <input type="file" id="photo-upload" accept="image/*,video/*" multiple class="hidden">
-                <button id="upload-btn" class="flex items-center justify-center w-full bg-hermes-bg text-hermes-text py-4 rounded-sm font-bold tracking-wide text-[14px] border border-hermes-line active:bg-gray-100 transition-all shadow-sm">
+                <button id="upload-btn" class="flex items-center justify-center w-full bg-hermes-bg text-hermes-text py-4 rounded-sm font-bold tracking-wide text-[14.5px] border border-hermes-line active:bg-gray-100 transition-all shadow-sm">
                     <i id="upload-icon" class="fas fa-camera mr-2 text-hermes-orange"></i> 
                     <span id="upload-text">사진 / 영상 올려주기</span>
                 </button>
             </div>
         </section>
 
-        <!-- 10. 푸터 (문구 업데이트) -->
+        <!-- 10. 푸터 (프라이드 문구 완벽 적용) -->
         <section class="pt-24 pb-32 px-10 text-center bg-hermes-text text-hermes-bg">
             <div class="max-w-[340px] mx-auto space-y-8">
                 <div class="h-[1px] w-8 bg-hermes-muted mx-auto"></div>
-                <!-- ★ 신부님이 직접 코딩까지 했다는 프라이드 문구 적용 ★ -->
-                <p class="text-[14.5px] leading-[2.1] font-light break-keep font-batang italic text-white/80">소중한 분들을 모시는 설레는 마음을 담아,<br>기획부터 디자인, 코딩, 배포까지<br>신부가 직접 완성했습니다.<br>축복해주시는 그 진심 오래도록 간직하겠습니다.</p>
+                <p class="text-[14.5px] leading-[2.1] font-light break-keep font-batang italic text-white/80">소중한 분들을 모시는 설레는 마음을 담아,<br><span class="font-medium text-white">기획부터 디자인, 코딩, 배포까지<br>신부가 직접 완성했습니다.</span><br>축복해주시는 그 진심 오래도록 간직하겠습니다.</p>
                 <div class="h-[1px] w-8 bg-hermes-muted mx-auto"></div>
             </div>
             
@@ -292,22 +298,22 @@
                     <i class="fas fa-link text-sm mr-2 text-white/60"></i> 청첩장 주소 복사하기
                 </button>
             </div>
-            <p class="mt-24 text-[10px] text-hermes-muted tracking-[0.4em] font-sans font-medium uppercase">Taekwang & Jihyun</p>
+            <p class="mt-24 text-[10px] text-hermes-muted tracking-[0.4em] font-sans font-bold uppercase">Taekwang & Jihyun</p>
         </section>
 
-        <!-- ★ 11. 참석 정보 모달 (구조 전면 재설계: 버튼을 내부로 이동) ★ -->
+        <!-- ★ 11. 참석 정보 모달 (전송 버튼 폼 최하단 배치 완료 - 무조건 스크롤 유도) ★ -->
         <div id="rsvp-modal" class="fixed inset-0 z-[600] flex items-center justify-center bg-[#1A1614]/80 backdrop-blur-sm hidden px-4 py-8">
             <div class="bg-hermes-bg w-full max-w-[380px] rounded-sm shadow-2xl flex flex-col max-h-[85vh] relative overflow-hidden font-sans border border-hermes-line">
                 
-                <!-- 상단 헤더 고정 -->
+                <!-- 상단 헤더만 고정 -->
                 <div class="bg-hermes-bg z-20 flex justify-between items-center px-6 py-4 border-b border-hermes-line shrink-0">
-                    <h3 class="text-[16px] font-bold text-hermes-text tracking-wide">참석 정보 전달</h3>
+                    <h3 class="text-[16.5px] font-bold text-hermes-text tracking-wide">참석 정보 전달</h3>
                     <button type="button" onclick="closeRsvpModal()" class="p-2 -mr-2 active:bg-gray-200 rounded-full transition-all"><i class="fas fa-times text-xl text-hermes-muted"></i></button>
                 </div>
                 
-                <!-- 본문 스크롤 영역 (이 안에 전송 버튼까지 싹 다 넣어서 스크롤을 강제 유도함) -->
+                <!-- 폼 전체 스크롤 영역 -->
                 <div class="overflow-y-auto px-6 py-6 overscroll-contain flex-1 bg-white">
-                    <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="space-y-6 text-[14px] text-hermes-text font-normal">
+                    <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="space-y-7 text-[14.5px] text-hermes-text font-normal">
                         
                         <div class="grid grid-cols-2 gap-4 items-start">
                             <div>
@@ -315,28 +321,28 @@
                                 <div class="flex space-x-1.5">
                                     <div class="flex-1 relative">
                                         <input type="radio" id="side-groom" name="side" value="신랑측" class="peer hidden" required>
-                                        <label for="side-groom" class="block w-full text-center border border-hermes-line py-2.5 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[13.5px]">신랑</label>
+                                        <label for="side-groom" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[13.5px]">신랑</label>
                                     </div>
                                     <div class="flex-1 relative">
                                         <input type="radio" id="side-bride" name="side" value="신부측" class="peer hidden" required>
-                                        <label for="side-bride" class="block w-full text-center border border-hermes-line py-2.5 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[13.5px]">신부</label>
+                                        <label for="side-bride" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[13.5px]">신부</label>
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">성함</label>
-                                <input type="text" name="name" class="w-full border border-hermes-line rounded-sm py-2.5 px-3 focus:border-hermes-text transition-all outline-none font-medium text-[14px] text-center bg-hermes-bg" required placeholder="이름 입력">
+                                <input type="text" name="name" class="w-full border border-hermes-line rounded-sm py-3 px-3 focus:border-hermes-text transition-all outline-none font-medium text-[14px] text-center bg-hermes-bg" required placeholder="이름 입력">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">동반 인원</label>
-                                <select name="companion" class="w-full border border-hermes-line py-2.5 px-2 rounded-sm bg-hermes-bg font-normal text-[13px] outline-none"><option value="1명 (본인만)">본인 (1명)</option><option value="2명">2명</option><option value="3명">3명</option><option value="4명">4명</option><option value="5명 이상">5명 이상</option></select>
+                                <select name="companion" class="w-full border border-hermes-line py-3 px-2 rounded-sm bg-hermes-bg font-normal text-[13.5px] outline-none"><option value="1명 (본인만)">본인 (1명)</option><option value="2명">2명</option><option value="3명">3명</option><option value="4명">4명</option><option value="5명 이상">5명 이상</option></select>
                             </div>
                             <div>
                                 <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">어린이(식권)</label>
-                                <select name="child" class="w-full border border-hermes-line py-2.5 px-2 rounded-sm bg-hermes-bg font-normal text-[13px] outline-none"><option value="해당 없음">없음</option><option value="1명">1명</option><option value="2명">2명</option><option value="3명 이상">3명 이상</option></select>
+                                <select name="child" class="w-full border border-hermes-line py-3 px-2 rounded-sm bg-hermes-bg font-normal text-[13.5px] outline-none"><option value="해당 없음">없음</option><option value="1명">1명</option><option value="2명">2명</option><option value="3명 이상">3명 이상</option></select>
                             </div>
                         </div>
 
@@ -345,37 +351,36 @@
                             <div class="flex space-x-2">
                                 <div class="flex-1 relative">
                                     <input type="radio" id="attend-yes" name="attend" value="참석" class="peer hidden" onchange="toggleBusSection()" checked>
-                                    <label for="attend-yes" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[13.5px] font-medium">참석합니다</label>
+                                    <label for="attend-yes" class="block w-full text-center border border-hermes-line py-3.5 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[14px] font-medium">참석합니다</label>
                                 </div>
                                 <div class="flex-1 relative">
                                     <input type="radio" id="attend-no" name="attend" value="마음만" class="peer hidden" onchange="toggleBusSection()">
-                                    <label for="attend-no" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[13.5px] font-medium">마음만 전해요</label>
+                                    <label for="attend-no" class="block w-full text-center border border-hermes-line py-3.5 rounded-sm cursor-pointer peer-checked:bg-hermes-text peer-checked:border-hermes-text peer-checked:text-white transition-all text-[14px] font-medium">마음만 전해요</label>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 스크롤을 내려야만 이 부분이 보임 -->
                         <div id="bus-section-container">
                             <label class="block mb-2 font-medium text-hermes-muted text-[12px] uppercase tracking-widest">전세버스 탑승</label>
                             <div class="grid grid-cols-3 gap-1.5">
                                 <div class="relative">
                                     <input type="radio" id="bus-no" name="bus" value="이용안함" class="peer hidden" checked>
-                                    <label for="bus-no" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[12.5px] font-medium">안 함</label>
+                                    <label for="bus-no" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[13px] font-medium">안 함</label>
                                 </div>
                                 <div class="relative">
                                     <input type="radio" id="bus-jj" name="bus" value="전주탑승" class="peer hidden">
-                                    <label for="bus-jj" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[12.5px] font-medium">전주 노선</label>
+                                    <label for="bus-jj" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[13px] font-medium">전주 노선</label>
                                 </div>
                                 <div class="relative">
                                     <input type="radio" id="bus-wj" name="bus" value="원주탑승" class="peer hidden">
-                                    <label for="bus-wj" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[12.5px] font-medium">원주 노선</label>
+                                    <label for="bus-wj" class="block w-full text-center border border-hermes-line py-3 rounded-sm cursor-pointer peer-checked:bg-[#EFECE6] peer-checked:border-hermes-text transition-all text-[13px] font-medium">원주 노선</label>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- ★ 스크롤을 강제하기 위해 전송 버튼을 폼 제일 마지막으로 이동 ★ -->
-                        <div class="pt-4 pb-2">
-                            <button type="submit" class="w-full bg-hermes-text text-white py-3.5 rounded-sm font-medium tracking-[0.15em] transition-all active:scale-95 text-[14.5px]">전송하기</button>
+                        <!-- ★ 스크롤의 끝(종착점)에 전송 버튼 배치. 스크롤 안 하면 전송 불가 ★ -->
+                        <div class="pt-6 pb-2">
+                            <button type="submit" class="w-full bg-hermes-text text-white py-4 rounded-sm font-bold tracking-[0.15em] transition-all active:scale-95 text-[15px]">전송하기</button>
                         </div>
                     </form>
                 </div>
@@ -390,10 +395,10 @@
         const galleryImages = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg'];
         let currentImgIndex = 0; let scrollPosition = 0;
         
-        // ★ 1. 갤러리 로딩 에러 100% 완전 해결 ★
-        // 복잡한 JS 옵저버 지우고 순수 HTML5 <img> 태그 직접 주입
+        // ★ 갤러리 로딩 에러 원천 차단 (가장 안전한 HTML5 img 삽입 방식) ★
         function initGallery() { 
             const grid = document.getElementById('gallery-grid'); 
+            grid.innerHTML = ''; // 초기화
             galleryImages.forEach((src, idx) => { 
                 const wrapper = document.createElement('div'); 
                 wrapper.className = "aspect-square cursor-pointer rounded-sm border border-hermes-line overflow-hidden bg-[#F5F2EC]"; 
@@ -401,8 +406,9 @@
                 
                 const img = document.createElement('img');
                 img.src = src;
-                img.loading = "lazy";
-                img.className = "w-full h-full object-cover"; // 투명도 꼼수(opacity-0) 없이 바로 뜨게 함
+                img.className = "w-full h-full object-cover"; 
+                // 네이티브 지연 로딩 속성만 남기고 CSS 기교(opacity)는 모두 버림. 무조건 뜹니다.
+                img.loading = "lazy"; 
                 
                 wrapper.appendChild(img);
                 grid.appendChild(wrapper); 
@@ -424,7 +430,6 @@
             if (dx > 60) { currentImgIndex = (currentImgIndex - 1 + galleryImages.length) % galleryImages.length; updateModalImage(); }
         }, { passive: true });
 
-        // 시네마틱 눈내림
         function createSnowflakes() { 
             const container = document.getElementById('snow-container'); 
             if(!container) return;
@@ -451,30 +456,48 @@
             if(isHidden) { content.classList.remove('hidden'); icon.style.transform = 'rotate(45deg)'; } 
         }
         
+        // ★ BGM 로직 모바일 충돌 (InvalidStateError) 완벽 해결 ★
         const audio = document.getElementById('wedding-bgm'); 
         const discIcon = document.getElementById('disc-icon'); 
         const bgmStatus = document.getElementById('bgm-status'); 
         let isFirstPlay = true;
         
+        // 오디오 객체가 로드된 후 볼륨 설정
+        audio.volume = 0.35; 
+        
         function initBgmPlayback() { 
             if (!isFirstPlay) return; 
-            audio.currentTime = 128; audio.volume = 0.35; 
-            audio.play().then(() => { 
-                isFirstPlay = false; discIcon.classList.add('spin'); bgmStatus.innerText = "Music On"; 
-            }).catch(() => { }); 
+            // play() 자체가 Promise를 반환하므로 안전하게 캐치해야 전체 스크립트가 멈추지 않음.
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isFirstPlay = false; 
+                    discIcon.classList.add('spin'); 
+                    bgmStatus.innerText = "Music On"; 
+                }).catch(error => {
+                    // 자동재생이 브라우저 정책상 막힌 경우 무시함 (에러 뿜지 않음)
+                    console.log("자동재생이 차단되었습니다. 버튼을 눌러 재생해주세요.");
+                });
+            }
         }
         
-        ['touchstart', 'click', 'scroll'].forEach(evt => {
-            document.addEventListener(evt, initBgmPlayback, { once: true, passive: true });
+        // 터치 및 클릭 이벤트로 안전하게 활성화 (에러 주범인 scroll은 제거)
+        ['touchstart', 'click'].forEach(evt => {
+            document.body.addEventListener(evt, initBgmPlayback, { once: true, passive: true });
         });
 
         document.getElementById('bgm-btn').addEventListener('click', (e) => { 
             e.stopPropagation(); 
             if (audio.paused) { 
-                if(isFirstPlay) { audio.currentTime = 128; audio.volume = 0.35; isFirstPlay = false; }
-                audio.play(); discIcon.classList.add('spin'); bgmStatus.innerText = "Music On"; 
+                audio.play().then(() => {
+                    discIcon.classList.add('spin'); 
+                    bgmStatus.innerText = "Music On"; 
+                    isFirstPlay = false;
+                }).catch(err => console.log(err));
             } else { 
-                audio.pause(); discIcon.classList.remove('spin'); bgmStatus.innerText = "Music Off"; 
+                audio.pause(); 
+                discIcon.classList.remove('spin'); 
+                bgmStatus.innerText = "Music Off"; 
             } 
         });
 
@@ -554,8 +577,8 @@
         
         function handleRSVPSubmit(event) { 
             event.preventDefault(); 
-            // 캐시 초기화 키 변경
-            if (localStorage.getItem('rsvp_sent_hermes_modal_fix')) { alert('이미 참석 정보를 전달하셨습니다. 감사합니다.'); closeRsvpModal(); return; } 
+            // 잦은 수정으로 인한 캐시 문제 방지용 새 키 발급 (에르메스 무결점 에디션)
+            if (localStorage.getItem('rsvp_sent_hermes_flawless_v1')) { alert('이미 참석 정보를 전달하셨습니다. 감사합니다.'); closeRsvpModal(); return; } 
             
             const form = event.target; 
             const data = new FormData(form); 
@@ -566,7 +589,7 @@
             
             fetch(googleSheetUrl, { method: "POST", mode: "no-cors", body: data })
             .then(() => { 
-                localStorage.setItem('rsvp_sent_hermes_modal_fix', 'true'); 
+                localStorage.setItem('rsvp_sent_hermes_flawless_v1', 'true'); 
                 closeRsvpModal(); 
                 showToast('참석 정보가 성공적으로 전달되었습니다.'); 
             }).catch(() => { 
@@ -578,7 +601,7 @@
         }
         
         function shareKakao() { if (typeof Kakao === 'undefined' || !Kakao.isInitialized()) { try { Kakao.init('11b4645eacca1144dac2f2f2316a7a3f'); } catch(e) { copyPageUrl(); return; } } Kakao.Share.sendDefault({ objectType: 'feed', content: { title: '태광 ♥ 지현 결혼합니다', description: '2027년 1월 30일(토) 낮 1시 10분 · 남양주 파로스컨벤션', imageUrl: 'https://ourmarriage-tkjh.vercel.app/IMG_1033.jpeg', link: { mobileWebUrl: 'https://ourmarriage-tkjh.vercel.app/', webUrl: 'https://ourmarriage-tkjh.vercel.app/' } }, buttons: [{ title: '청첩장 보기', link: { mobileWebUrl: 'https://ourmarriage-tkjh.vercel.app/', webUrl: 'https://ourmarriage-tkjh.vercel.app/' } }] }); }
-        function initDday() { const wedding = new Date('2027-01-30T00:00:00'); const today = new Date(); today.setHours(0, 0, 0, 0); const diff = Math.ceil((wedding - today) / 86400000); const el = document.getElementById('dday'); if (diff > 0) el.innerHTML = `저희의 결혼식이 <span class="font-bold text-hermes-orange text-[16px] mx-1">${diff}</span>일 남았습니다.`; else if (diff === 0) el.innerHTML = `저희의 결혼식이 <span class="font-bold text-hermes-orange text-[16px] mx-1">오늘</span>입니다.`; else el.innerHTML = `축복 속에 결혼식을 무사히 마쳤습니다.`; }
+        function initDday() { const wedding = new Date('2027-01-30T00:00:00'); const today = new Date(); today.setHours(0, 0, 0, 0); const diff = Math.ceil((wedding - today) / 86400000); const el = document.getElementById('dday'); if (diff > 0) el.innerHTML = `저희의 결혼식이 <span class="font-bold text-hermes-orange text-[17px] mx-1">${diff}</span>일 남았습니다.`; else if (diff === 0) el.innerHTML = `저희의 결혼식이 <span class="font-bold text-hermes-orange text-[17px] mx-1">오늘</span>입니다.`; else el.innerHTML = `축복 속에 결혼식을 무사히 마쳤습니다.`; }
         
         window.addEventListener('DOMContentLoaded', () => { 
             createSnowflakes(); initGallery(); initDday(); 
