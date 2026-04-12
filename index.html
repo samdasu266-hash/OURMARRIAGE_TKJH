@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,48 +9,60 @@
 <title>태광 ♥ 지현 결혼합니다</title>
 <meta name="theme-color" content="#0E0C0A">
 
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+  (function() {
+    var today = new Date();
+    var showStart = new Date('2026-10-01T00:00:00+09:00');
+    var showEnd = new Date('2027-01-31T00:00:00+09:00');
+    if (today >= showEnd) {
+      document.documentElement.classList.add('post-wedding');
+    } else if (today < showStart) {
+      document.documentElement.classList.add('pre-wedding-mask');
+    }
+  })();
+</script>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+/* ── RESET & VARIABLES ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ink:#1A1714;--cream:#F7F2EA;--gold:#B5924A;--gold-lt:#D4B07A;--muted:#8A7D72;--line:#E2D9CC;--bg2:#F0EBE1;--white:#FDFAF5;}
 
-:root{
-  --ink:#1A1714;
-  --cream:#F7F2EA;
-  --gold:#B5924A;
-  --gold-lt:#D4B07A;
-  --muted:#8A7D72;
-  --line:#E2D9CC;
-  --bg2:#F0EBE1;
-  --white:#FDFAF5;
-}
-
+/* ── LAYOUT BASE ── */
 html,body{width:100%;background:#D0CBC3;overscroll-behavior-y:none;}
 body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
 .wrap{width:100%;max-width:430px;background:var(--cream);min-height:100vh;position:relative;box-shadow:0 0 80px rgba(0,0,0,0.18);overflow-x:hidden;}
 
-/* ── TOAST ── */
+/* ── PRIVACY UTILS ── */
+.post-wedding .hide-privacy { display: none !important; }
+
+/* ── TOAST & LOADER ── */
 #toast{visibility:hidden;position:fixed;z-index:2000;left:50%;bottom:36px;transform:translateX(-50%);background:var(--ink);color:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;letter-spacing:.05em;padding:15px 28px;white-space:nowrap;border-bottom:2px solid var(--gold);box-shadow:0 8px 28px rgba(0,0,0,.22);border-radius:4px;}
 #toast.show{visibility:visible;animation:toastIn .35s ease,toastOut .35s ease 2.5s forwards;}
 @keyframes toastIn{from{bottom:10px;opacity:0}to{bottom:36px;opacity:1}}
 @keyframes toastOut{from{bottom:36px;opacity:1}to{bottom:10px;opacity:0}}
 
-/* ── GLOBAL LOADER ── */
 #loader-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(14,12,10,.85);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);flex-direction:column;align-items:center;justify-content:center;color:var(--white);}
 #loader-overlay.active{display:flex;}
 .spinner{border:3px solid rgba(253,250,245,.2);border-top:3px solid var(--gold);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin-bottom:20px;}
+@keyframes spin{100%{transform:rotate(360deg)}}
 #loader-text{font-family:'Noto Sans KR',sans-serif;font-size:14px;letter-spacing:.05em;font-weight:300;}
 
-/* ── BGM ── */
+/* ── BGM BUTTON ── */
 .bgm-btn{position:fixed;bottom:24px;left:18px;z-index:500;background:rgba(247,242,234,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;}
 .bgm-btn:active{transform:scale(.95);}
 .bgm-btn i{font-size:13px;color:var(--ink);}
 .bgm-btn span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);font-weight:500;}
-@keyframes spin{100%{transform:rotate(360deg)}}
 
-/* ── HERO ── */
+/* ── SCROLL TO TOP ── */
+#top-btn{display:none;position:fixed;bottom:24px;right:18px;z-index:500;width:44px;height:44px;border-radius:50%;background:rgba(247,242,234,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);cursor:pointer;color:var(--ink);font-size:14px;transition:opacity .3s,transform .2s;box-shadow:0 4px 16px rgba(0,0,0,.12);align-items:center;justify-content:center;}
+#top-btn.visible{display:flex;}
+#top-btn:active{transform:scale(.92);}
+
+/* ── HERO SECTION ── */
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
 .hero-photo{position:absolute;inset:0;background-color:#0E0C0A;background-image:none;}
 .hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(14,12,10,.4) 60%,rgba(14,12,10,.95) 100%);}
@@ -61,8 +72,6 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .hero-lead{animation-delay:.3s!important;font-size:13.5px;font-weight:300;line-height:2.1;color:rgba(253,250,245,.8);margin-bottom:32px;letter-spacing:.04em;font-family:'Noto Serif KR',serif;}
 .hero-names{animation-delay:.65s!important;font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;letter-spacing:.18em;color:var(--white);line-height:1;margin-bottom:32px;}
 .hero-names .hrt{font-size:26px;color:var(--gold-lt);vertical-align:middle;margin:0 2px;font-family:sans-serif;}
-
-/* ── 예식 일시·장소 인포박스 ── */
 .hero-info-box{animation-delay:.9s!important;display:inline-block;padding:20px 32px;border:1px solid rgba(181,146,74,.38);position:relative;margin-bottom:0;}
 .hero-info-box::before{content:'';position:absolute;top:-1px;left:-1px;width:10px;height:10px;border-top:1px solid rgba(181,146,74,.7);border-left:1px solid rgba(181,146,74,.7);}
 .hero-info-box::after{content:'';position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-bottom:1px solid rgba(181,146,74,.7);border-right:1px solid rgba(181,146,74,.7);}
@@ -72,31 +81,18 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .hero-venue{font-family:'Noto Sans KR',sans-serif;font-size:14px;letter-spacing:.1em;color:rgba(253,250,245,.82);font-weight:400;}
 .hero-venue-sub{font-family:'Noto Sans KR',sans-serif;font-size:12px;letter-spacing:.08em;color:rgba(253,250,245,.45);font-weight:300;margin-top:4px;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── SNOWFLAKE ── */
 .sf{position:absolute;border-radius:50%;background:rgba(255,255,255,.88);pointer-events:none;animation:sf linear infinite;box-shadow:0 0 5px rgba(255,255,255,.5);}
 @keyframes sf{0%{transform:translate3d(0,-10px,0);opacity:0}10%{opacity:.85}90%{opacity:.85}100%{transform:translate3d(var(--sx),100vh,0);opacity:0}}
 
-/* ── ORNAMENT RULE ── */
+/* ── COMMON SECTIONS & ORNAMENTS ── */
+section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .orn{display:flex;align-items:center;justify-content:center;margin:0 auto;}
 .orn::before,.orn::after{content:'';flex:1;height:.5px;background:var(--gold);opacity:.5;}
 .orn::before{background:linear-gradient(to right,transparent,var(--gold));}
 .orn::after{background:linear-gradient(to left,transparent,var(--gold));}
 .orn i{font-size:7px;color:var(--gold);margin:0 14px;opacity:.8;transform:rotate(45deg);}
-
-/* ── SECTION BASE ── */
-section{padding:80px 32px;border-bottom:.5px solid var(--line);}
-
-/* ── LABEL ── */
 .lbl{font-family:'Cormorant Garamond',serif;font-size:12.5px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;display:block;text-align:center;margin-bottom:36px;line-height:1.4;}
 .lbl-kr{display:block;font-family:'Noto Serif KR',serif;font-size:13px;color:var(--muted);letter-spacing:.15em;font-weight:400;margin-top:8px;text-transform:none;}
-
-/* ── 예식일 안내 레이블 ── */
-.lbl-cal{display:block;text-align:center;margin-bottom:36px;}
-.lbl-cal-main{font-family:'Noto Serif KR',serif;font-size:16px;letter-spacing:.32em;color:var(--gold);font-weight:400;display:block;margin-bottom:8px;}
-.lbl-cal-sub{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase;display:block;}
-
-/* ── SCROLL REVEAL ── */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease;}
 .rv.in{opacity:1;transform:none;}
 .rv.d1{transition-delay:.1s;}.rv.d2{transition-delay:.2s;}.rv.d3{transition-delay:.3s;}
@@ -120,19 +116,10 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .story-ttl{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:8px;}
 .story-desc{font-family:'Noto Sans KR',sans-serif;font-size:13.5px;line-height:2.2;color:var(--muted);font-weight:300;word-break:keep-all;}
 
-/* ── 연락처 섹션 ── */
-.contact-sec{background:var(--ink);padding:60px 32px;}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
-.contact-card{background:rgba(253,250,245,.06);border:1px solid rgba(253,250,245,.12);border-radius:8px;padding:20px 16px;text-align:center;}
-.contact-role{font-family:'Noto Sans KR',sans-serif;font-size:11px;letter-spacing:.2em;color:rgba(181,146,74,.9);font-weight:500;margin-bottom:8px;display:block;}
-.contact-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--white);margin-bottom:14px;display:block;letter-spacing:.05em;}
-.contact-tel{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:transparent;border:1px solid rgba(253,250,245,.2);border-radius:6px;padding:12px 8px;color:rgba(253,250,245,.8);font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s;letter-spacing:.03em;}
-.contact-tel:active{background:rgba(253,250,245,.1);}
-.contact-tel i{font-size:12px;color:var(--gold-lt);}
-.contact-day-note{background:rgba(181,146,74,.1);border:1px solid rgba(181,146,74,.28);border-radius:6px;padding:16px 20px;margin-top:20px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:2;color:rgba(253,250,245,.7);font-weight:300;text-align:center;word-break:keep-all;}
-.contact-day-note strong{color:rgba(253,250,245,.9);font-weight:500;}
-
 /* ── CALENDAR ── */
+.lbl-cal{display:block;text-align:center;margin-bottom:36px;}
+.lbl-cal-main{font-family:'Noto Serif KR',serif;font-size:16px;letter-spacing:.32em;color:var(--gold);font-weight:400;display:block;margin-bottom:8px;}
+.lbl-cal-sub{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase;display:block;}
 .cal-wrap{max-width:296px;margin:0 auto;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
 .cday-lbl{text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:10px;letter-spacing:.12em;color:var(--muted);font-weight:500;padding-bottom:18px;text-transform:uppercase;}
@@ -144,18 +131,18 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .dday-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;text-align:center;color:var(--muted);margin-top:36px;font-weight:300;letter-spacing:.04em;}
 .dday-t strong{color:var(--gold);font-size:19px;font-family:'Cormorant Garamond',serif;font-weight:600;margin:0 4px;}
 
-/* ── 식순 안내 ── */
+/* ── PROGRAM ── */
 .order-list{list-style:none;max-width:310px;margin:0 auto;}
 .order-list li{display:flex;align-items:flex-start;gap:18px;padding:16px 0;border-bottom:.5px dashed var(--line);}
 .order-list li:last-child{border-bottom:none;}
 .order-time{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gold);min-width:52px;letter-spacing:.04em;padding-top:2px;}
 .order-txt{font-family:'Noto Sans KR',sans-serif;font-size:15px;color:var(--ink);font-weight:400;line-height:1.6;}
-.order-sub{font-size:12.5px;color:var(--muted);display:block;margin-top:5px;font-weight:300;line-height:1.8;word-break:keep-all;}
+.order-sub{font-size:13px;color:var(--muted);display:block;margin-top:5px;font-weight:300;line-height:1.8;word-break:keep-all;}
 .order-list li.highlight .order-time{color:var(--ink);}
 .order-list li.highlight .order-txt{color:var(--ink);}
 .order-list li.highlight{background:var(--bg2);margin:0 -8px;padding:16px 8px;border-radius:4px;border-bottom:none;}
 
-/* ── RSVP SECTION ── */
+/* ── RSVP ── */
 .rsvp-sec{background:var(--ink);}
 .rsvp-sec .lbl{color:var(--gold-lt);}
 .rsvp-sec .lbl-kr{color:rgba(253,250,245,.6);}
@@ -182,7 +169,7 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 #modal-img{max-width:100%;max-height:85vh;object-fit:contain;}
 #img-modal .m-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:rgba(253,250,245,.4);letter-spacing:.14em;white-space:nowrap;}
 
-/* ── LOCATION ── */
+/* ── LOCATION & TRANSPORTATION ── */
 .map-wrap{position:relative;width:100%;height:320px;margin-bottom:20px;}
 .map-f{width:100%;height:100%;border:.5px solid var(--line);overflow:hidden;display:block;}
 .map-overlay{position:absolute;inset:0;background:rgba(26,23,20,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:opacity .3s;z-index:2;}
@@ -196,20 +183,27 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .mbtn.na{background:#03C75A;color:#fff;}
 .mbtn.tm{background:var(--ink);color:var(--white);border:.5px solid var(--line);}
 
-.t-title{font-family:'Cormorant Garamond',serif;font-size:18.5px;font-weight:400;color:var(--ink);margin-bottom:14px;letter-spacing:.04em;padding-bottom:10px;border-bottom:.5px solid var(--line);}
-.t-body{font-family:'Noto Sans KR',sans-serif;font-size:15px;line-height:2.2;color:var(--muted);font-weight:300;}
-.t-body strong{color:var(--ink);font-weight:500;}
-.t-body .ac{color:var(--gold);font-weight:500;}
-.t-note{background:var(--bg2);border-left:3px solid var(--gold);padding:18px;margin:16px 0;font-size:14.5px;line-height:2.1;font-family:'Noto Sans KR',sans-serif;}
+.trans-box { background: var(--white); border: 0.5px solid var(--line); border-radius: 8px; padding: 22px 20px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.015); }
+.trans-hdr { font-family: 'Noto Sans KR', sans-serif; font-size: 15.5px; font-weight: 500; color: var(--ink); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; border-bottom: .5px solid var(--line); padding-bottom: 12px;}
+.trans-hdr i { color: var(--gold); font-size: 14px;}
+.badge { display: inline-block; padding: 3px 7px; border-radius: 4px; font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 500; color: #fff; margin-right: 6px; vertical-align: text-bottom; letter-spacing: 0.02em;}
+.bdg-8 { background: #E6186C; }
+.bdg-kj { background: #77C4A3; }
+.bdg-bus-g { background: #53B332; }
+.bdg-bus-r { background: #E60012; }
+.trans-row { display: flex; align-items: flex-start; margin-bottom: 16px; font-size: 14.5px; line-height: 1.6; color: var(--ink); font-family: 'Noto Sans KR', sans-serif; font-weight:400; word-break: keep-all;}
+.trans-row:last-child { margin-bottom: 0; }
+.trans-row .dot { color: var(--gold); margin-right: 10px; font-weight: bold; font-size: 16px; line-height: 1.4;}
+.trans-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; font-weight: 300; line-height: 1.8;}
+
 .bus-r{border-left:2px solid var(--line);padding-left:20px;margin-bottom:22px;}
 .bus-r.on{border-left-color:var(--ink);}
 .bus-r-t{font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;color:var(--ink);margin-bottom:10px;}
-.bus-return{background:rgba(181,146,74,.07);border:1px solid rgba(181,146,74,.28);border-radius:6px;padding:18px 20px;margin-top:18px;}
+.bus-return{background:rgba(181,146,74,.07);border:1px solid rgba(181,146,74,.28);border-radius:6px;padding:18px 20px;}
 .bus-return-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .bus-return p{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:2.1;color:var(--ink);font-weight:300;}
 
-/* ── 주차 동선 비주얼 ── */
-.pk-card{background:var(--white);border:.5px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+.pk-card{background:var(--white);border:.5px solid var(--line);border-radius:8px;overflow:hidden;}
 .pk-step{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;}
 .pk-step+.pk-step{border-top:.5px solid var(--line);}
 .pk-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;flex-shrink:0;margin-top:1px;}
@@ -241,14 +235,13 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .kpay-btn{display:inline-flex;align-items:center;gap:4px;padding:9px 12px;background:#FEE500;border:none;border-radius:4px;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:600;color:#191600;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
 .kpay-btn:active{opacity:.75;}
 
-/* ── PHOTO SHARE ── */
+/* ── PHOTO SHARE & FOOTER ── */
 .share-card{background:var(--white);border:.5px solid var(--line);padding:40px 28px;text-align:center;}
 .share-p{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:2.2;color:var(--muted);font-weight:300;word-break:keep-all;margin-bottom:28px;}
 .up-btn{width:100%;background:var(--cream);border:.5px solid var(--line);padding:18px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);letter-spacing:.1em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;border-radius:4px;}
 .up-btn:active{transform:scale(.98);background:var(--bg2);}
 .up-btn i{color:var(--gold);font-size:16px;}
 
-/* ── FOOTER ── */
 footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 .foot-quote{font-family:'Noto Serif KR',serif;font-size:14.5px;line-height:2.5;color:rgba(253,250,245,.6);font-weight:300;word-break:keep-all;margin-bottom:52px;}
 .foot-quote strong{color:rgba(253,250,245,.9);font-weight:400;}
@@ -288,7 +281,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <p id="loader-text">사진을 안전하게 업로드하고 있습니다...</p>
 </div>
 
-<audio id="bgm" loop preload="auto" autoplay>
+<audio id="bgm" loop preload="metadata" autoplay>
   <source src="Film_Love.mp3" type="audio/mpeg">
 </audio>
 
@@ -296,7 +289,12 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <button class="bgm-btn" id="bgm-btn">
   <i class="fas fa-compact-disc" id="disc-i"></i>
-  <span id="bgm-lbl">Music Off</span>
+  <span id="bgm-lbl">음악 켜기</span>
+</button>
+
+<!-- ★ 수정: 스크롤 상단 복귀 버튼 추가 ★ -->
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">
+  <i class="fas fa-chevron-up"></i>
 </button>
 
 <!-- ── HERO ── -->
@@ -352,28 +350,24 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </span>
   <div class="story-wrap rv">
     <div class="story-line"></div>
-
     <div class="story-node">
       <div class="story-nd"></div>
       <p class="story-when">2025 · Summer</p>
       <p class="story-ttl">처음 만난 여름</p>
       <p class="story-desc">가장 뜨거웠던 여름,<br>두 사람이 처음 만났습니다.</p>
     </div>
-
     <div class="story-node">
       <div class="story-nd"></div>
       <p class="story-when">수원화성 행궁동</p>
       <p class="story-ttl">세 시간이나 일찍</p>
       <p class="story-desc">사귀기로 한 첫날, 설레는 마음에<br>약속보다 세 시간이나 일찍 만났습니다.<br>가는 길에 준비해 간 과일을 나눠 먹으며<br>행궁동 골목을 함께 거닐었습니다.</p>
     </div>
-
     <div class="story-node">
       <div class="story-nd"></div>
       <p class="story-when">어디서든 함께</p>
       <p class="story-ttl">비가 와도 괜찮아</p>
       <p class="story-desc">여행을 떠나면 어김없이 비가 내렸지만,<br>빗속에서도 둘이 함께라면<br>어디든 즐거운 곳이 되었습니다.</p>
     </div>
-
     <div class="story-node">
       <div class="story-nd final"></div>
       <p class="story-when">2027 · 01 · 30</p>
@@ -383,36 +377,8 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
-<!-- ── CONTACT ── -->
-<div class="contact-sec rv">
-  <span class="lbl" style="color:var(--gold-lt);margin-bottom:28px;">
-    Contact
-    <span class="lbl-kr" style="color:rgba(253,250,245,.5);">연락처 안내</span>
-  </span>
-  <div class="contact-grid">
-    <div class="contact-card">
-      <span class="contact-role">신랑</span>
-      <span class="contact-name">박태광</span>
-      <a href="tel:010-****-7536" class="contact-tel">
-        <i class="fas fa-phone"></i> 010-****-7536
-      </a>
-    </div>
-    <div class="contact-card">
-      <span class="contact-role">신부</span>
-      <span class="contact-name">이지현</span>
-      <a href="tel:010-****-2290" class="contact-tel">
-        <i class="fas fa-phone"></i> 010-****-2290
-      </a>
-    </div>
-  </div>
-  <div class="contact-day-note">
-    <strong>예식 당일에는 신랑·신부가<br>연락을 받기 어려울 수 있습니다.</strong><br>
-    당일 긴급 문의는 혼주께 연락해 주시면<br>더욱 신속하게 도움을 드릴 수 있습니다.
-  </div>
-</div>
-
 <!-- ── CALENDAR ── -->
-<section style="background:var(--bg2);">
+<section style="background:var(--white);">
   <div class="lbl-cal rv">
     <span class="lbl-cal-main">예식일 안내</span>
     <span class="lbl-cal-sub">2027 &nbsp;·&nbsp; January</span>
@@ -440,7 +406,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </section>
 
 <!-- ── PROGRAM ── -->
-<section>
+<section style="background:var(--bg2);">
   <span class="lbl rv">
     Program
     <span class="lbl-kr">예식 순서 안내</span>
@@ -449,10 +415,14 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <li>
       <span class="order-time">12:30</span>
       <div class="order-txt">하객 입장 및 식사
-        <span class="order-sub">뷔페 식사는 예식 전·후 모두 이용하실 수 있습니다</span>
+        <span class="order-sub">뷔페 식사는 예식 전·후 모두 이용하실 수 있습니다.</span>
+        <span class="order-sub" style="background:var(--white); padding:14px 16px; border-radius:6px; border:.5px solid var(--line); margin-top:12px;">
+          <span style="color:var(--gold);font-weight:500;display:flex;align-items:center;gap:6px;margin-bottom:6px;"><i class="fas fa-wine-glass"></i> 여유로운 연회</span>
+          정성껏 준비한 만찬과 함께 곁들이실 수 있도록 와인, 생맥주 등 다채로운 주류를 넉넉하게 준비했습니다. 편안하게 축배를 즐기시며 자리를 빛내주시면 감사하겠습니다.
+        </span>
       </div>
     </li>
-    <li class="highlight">
+    <li class="highlight" style="margin-top:8px;">
       <span class="order-time">13:05</span>
       <div class="order-txt">홀 내 입실 완료
         <span class="order-sub">원활한 예식 진행을 위해 본식 시작 5분 전까지<br>파로스홀에 입실해 주시면 대단히 감사하겠습니다.</span>
@@ -511,7 +481,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <p class="m-hint">← 좌우 스와이프로 이동 &nbsp;·&nbsp; 아래로 내리면 닫힙니다</p>
 </div>
 
-<!-- ── LOCATION ── -->
+<!-- ── LOCATION & TRANSPORTATION ── -->
 <section>
   <span class="lbl rv">
     Location
@@ -523,7 +493,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     다산현대프리미어캠퍼스몰 <strong style="color:var(--ink);font-weight:500;">E동 2층</strong>
   </p>
 
-  <!-- ★ 구글맵 iframe 차단 오류를 완벽하게 방지하는 공식 Embed 주소로 교체 ★ -->
   <div class="map-wrap rv">
     <div class="map-overlay" id="map-overlay" onclick="enableMap()">
       <i class="fas fa-hand-pointer"></i>
@@ -533,13 +502,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
       id="map-iframe"
       class="map-f"
       src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%20%EB%82%A8%EC%96%91%EC%A3%BC%EC%8B%9C%20%EB%8B%A4%EC%82%B0%EC%88%9C%ED%99%98%EB%A1%9C%2020%20%ED%8C%8C%EB%A1%9C%EC%8A%A4%EC%BB%A8%EB%B2%A4%EC%85%98&t=&z=15&ie=UTF8&iwloc=&output=embed"
-      width="100%"
-      height="100%"
-      style="border:0;"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      title="예식장 위치 — 남양주 파로스컨벤션">
+      width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="예식장 위치">
     </iframe>
   </div>
 
@@ -549,57 +512,76 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <button onclick="openTmap()" class="mbtn tm">티맵</button>
   </div>
 
-  <div class="rv" style="margin-bottom:36px;">
-    <p class="t-title">지하철 안내</p>
-    <div class="t-body">
-      구리역 7번 출구 (8호선 · 경의중앙선)<br>
-      예식 당일 7번 출구 앞에서 <span class="ac">약 15분 간격</span>으로<br>
-      셔틀버스가 운행됩니다.
+  <div class="trans-box rv" style="margin-top:40px;">
+    <div class="trans-hdr"><i class="fas fa-train-subway"></i>지하철 및 셔틀버스 이용시</div>
+    <div class="trans-row">
+      <span class="dot">·</span>
+      <div>
+        <div style="margin-bottom:4px;"><span class="badge bdg-8">8호선</span><span class="badge bdg-kj">경의중앙</span> <strong>구리역</strong> 7번 출구</div>
+        <div class="trans-desc">- 예식 당일 <strong>셔틀버스 운행</strong> (약 15분 간격)</div>
+        <div class="trans-desc">- [버스] 79, 95번 → [도농고앞] 하차</div>
+      </div>
+    </div>
+    <div class="trans-row">
+      <span class="dot">·</span>
+      <div>
+        <div style="margin-bottom:4px;"><span class="badge bdg-8">8호선</span> <strong>다산역</strong> 4번 출구</div>
+        <div class="trans-desc">- [버스] 79, 95번 → [도농고앞] 하차</div>
+      </div>
+    </div>
+    <div class="trans-row">
+      <span class="dot">·</span>
+      <div>
+        <div style="margin-bottom:4px;"><span class="badge bdg-kj">경의중앙</span> <strong>도농역</strong></div>
+        <div class="trans-desc">- 2번 출구 → [버스] 땡큐50 → [도농고] 하차</div>
+        <div class="trans-desc">- [도보시] 1번 출구 도보 15분</div>
+      </div>
     </div>
   </div>
 
-  <div class="rv" style="margin-bottom:36px;">
-    <p class="t-title">자가용 및 주차 안내</p>
-    <div class="t-body">
-      <p style="margin-bottom:16px;">내비게이션 <strong>"남양주 파로스컨벤션"</strong> 으로 검색해 주세요.</p>
+  <div class="trans-box rv">
+    <div class="trans-hdr"><i class="fas fa-bus"></i>시내 및 광역버스 이용시</div>
+    <div class="trans-row">
+      <span class="dot">·</span>
+      <div>
+        <div style="margin-bottom:8px;"><strong>도농고앞 정류장 하차</strong> <span style="font-size:12.5px;color:var(--muted);">(23092, 23093)</span></div>
+        <div style="margin-bottom:6px;"><span class="badge bdg-bus-g">일반버스</span> 79, 95, 땡큐12, 땡큐50<br><span style="font-size:12.5px;color:var(--muted);margin-left:58px;">(도농고 하차)</span></div>
+        <div><span class="badge bdg-bus-r">직행버스</span> 1006<br><span style="font-size:12.5px;color:var(--muted);margin-left:58px;">(현대프리미엄아울렛 하차)</span></div>
+      </div>
+    </div>
+  </div>
 
-      <!-- ★ 실제 운전자 방향(화면상 왼쪽으로 꺾임)에 맞춘 새로운 주차 동선 다이어그램 ★ -->
+  <div class="trans-box rv">
+    <div class="trans-hdr"><i class="fas fa-car"></i>자가용 및 주차장 안내</div>
+    <div class="trans-row">
+      <span class="dot">·</span>
+      <div>
+        <div>내비게이션 : <strong>"다산순환로 20"</strong> 또는 <strong>"파로스컨벤션"</strong> 입력</div>
+        <div class="trans-desc">- [건물명 검색] 다산현대프리미어캠퍼스몰 E동</div>
+      </div>
+    </div>
+
+    <div style="margin: 20px 0 16px;">
       <svg viewBox="0 0 300 230" style="width:100%;display:block;margin-bottom:12px;border-radius:8px;border:.5px solid var(--line);background:#F7F2EA;" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="arr-r" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#C04B30"/></marker>
           <marker id="arr-b" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1A1714"/></marker>
           <marker id="arr-g" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#B5924A"/></marker>
         </defs>
-
-        <!-- 도로 -->
         <rect x="0" y="195" width="300" height="35" fill="#D0CBC3"/>
         <text x="150" y="217" text-anchor="middle" font-size="11" fill="#8A7D72" font-weight="bold" letter-spacing="2">다산순환로</text>
-
-        <!-- 건물 테두리 -->
         <rect x="12" y="12" width="276" height="183" rx="6" fill="#F0EBE1" stroke="#E2D9CC" stroke-width="1"/>
-
-        <!-- GATE 2 -->
         <rect x="180" y="183" width="60" height="24" rx="4" fill="#1A1714"/>
         <text x="210" y="199" text-anchor="middle" font-size="11" fill="#FDFAF5" font-weight="bold" letter-spacing="1">GATE 2</text>
-
-        <!-- 진입 화살표 (도로에서 위로 진입) -->
         <path d="M 210 183 L 210 145 L 160 145" fill="none" stroke="#C04B30" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#arr-r)"/>
         <text x="225" y="160" font-size="10" fill="#C04B30" font-weight="bold">진입</text>
-
-        <!-- 좌회전 화살표 (운전자 기준 물리적 왼쪽) -->
         <path d="M 145 145 L 100 145" fill="none" stroke="#1A1714" stroke-width="2.5" marker-end="url(#arr-b)"/>
         <text x="150" y="135" text-anchor="middle" font-size="11" fill="#1A1714" font-weight="bold">계속 좌회전 ↺</text>
-
-        <!-- E동 지하주차장 -->
         <rect x="25" y="105" width="70" height="70" rx="5" fill="#F7F2EA" stroke="#B5924A" stroke-width="1.5"/>
         <text x="60" y="135" text-anchor="middle" font-size="13" fill="#B5924A" font-weight="bold">E동</text>
         <text x="60" y="155" text-anchor="middle" font-size="11" fill="#8A7D72">B3·B4</text>
-
-        <!-- 엘리베이터 이동 -->
         <path d="M 60 105 L 60 60 L 105 60" fill="none" stroke="#B5924A" stroke-width="2" stroke-dasharray="4,4" stroke-linejoin="round" marker-end="url(#arr-g)"/>
         <text x="80" y="52" text-anchor="middle" font-size="10" fill="#B5924A" font-weight="bold">E동 전용 엘리베이터</text>
-
-        <!-- 2층 파로스홀 -->
         <rect x="110" y="35" width="150" height="45" rx="5" fill="#1A1714"/>
         <text x="185" y="62" text-anchor="middle" font-size="14" fill="#FDFAF5" font-weight="bold" letter-spacing="1">2층 파로스홀 도착</text>
       </svg>
@@ -627,38 +609,56 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
           </div>
         </div>
       </div>
+    </div>
 
-      <p style="margin-top:8px;"><strong>2시간 무료 주차</strong> (이후 30분당 1,500원)</p>
+    <div class="trans-row">
+      <span class="dot">·</span>
+      <div>
+        <div style="margin-bottom:6px;"><strong>파로스컨벤션 전용 주차장</strong> <span style="font-size:12.5px;color:var(--muted);">(동시 2,500대 수용)</span></div>
+        <div class="trans-desc" style="color:var(--ink); font-weight:400;">- 2시간 무료 주차 (이후 30분당 1,500원)</div>
+        <div class="trans-desc" style="color:#C04B30; font-weight:500; line-height:1.7; margin-top:6px;">
+          - [안내] 주차장이 매우 넓어 헤매실 수 있습니다. 반드시 지하 3·4층 <strong style="text-decoration:underline;text-underline-offset:2px;">E동 구역</strong>에 주차하셔야 파로스홀을 쉽게 찾으실 수 있습니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="trans-row" style="margin-top:20px;">
+      <span class="dot">·</span>
+      <div>
+        <div style="margin-bottom:6px;"><strong style="color:var(--ink);">주말 교통 혼잡 안내</strong></div>
+        <div class="trans-desc" style="color:var(--ink); font-weight:400;">- 예식장 맞은편 <strong>현대프리미엄아울렛 SPACE1</strong> 진입 차량으로 인해 주말 도로가 다소 혼잡할 수 있습니다.</div>
+        <div class="trans-desc" style="color:var(--ink); font-weight:400;">- 자가용을 이용하시는 경우, 교통 상황을 고려하여 평소보다 조금 더 여유 있게 출발하시기를 권해드립니다.</div>
+      </div>
     </div>
   </div>
 
-  <div class="rv">
-    <p class="t-title">전세버스 안내</p>
-    <div class="t-body">
-      <div class="bus-r on" style="margin-bottom:18px;">
-        <p class="bus-r-t">전주 노선</p>
-        <p>일시 : 1월 30일(토) <span class="ac">오전 8시 30분 정시 출발</span></p>
-        <p>장소 : <strong>전북특별자치도청 앞</strong></p>
-        <p>인솔 : 홍길동 &nbsp;<a href="tel:010-9999-9999" style="color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px;">010-9999-9999</a></p>
-      </div>
-      <div class="bus-r" style="margin-bottom:18px;">
-        <p class="bus-r-t" style="color:var(--muted);">원주 노선</p>
-        <p style="color:var(--muted);">하객분들의 편의를 위해 운행 여부를 검토 중입니다.<br>참석 의사 전달 시 원주 탑승을 체크해 주시면,<br>확정되는 대로 개별적으로 안내해 드리겠습니다.</p>
-      </div>
-      <div class="bus-return">
-        <p class="bus-return-t"><i class="fas fa-rotate-left"></i> 귀가 버스 안내</p>
-        <p>예식 종료 후 충분한 여유를 두어<br><strong>오후 3시경</strong> 현장에서 전주 방면으로 출발 예정입니다.<br>예식장 앞 버스 앞에서 인솔자의 안내에 따라<br>탑승해 주시면 감사하겠습니다.</p>
-      </div>
-      <p style="margin-top:20px;font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:2.1;color:var(--muted);word-break:keep-all;">
-        여러 하객분들이 함께 이용하시는 만큼 정시에 출발할 예정입니다.<br>
-        원활한 출발을 위해 <strong style="color:var(--ink);">출발 10분 전</strong>까지 도착하여 탑승해 주시면 대단히 감사하겠습니다.
-      </p>
+  <div class="trans-box rv">
+    <div class="trans-hdr"><i class="fas fa-route"></i>전세버스 및 귀가 버스</div>
+    <div class="bus-r on" style="margin-bottom:18px;">
+      <p class="bus-r-t">전주 노선</p>
+      <div class="trans-desc" style="color:var(--ink); margin-bottom:4px;">일시 : 1월 30일(토) <span style="color:var(--gold); font-weight:500;">오전 8시 30분 정시 출발</span></div>
+      <div class="trans-desc" style="color:var(--ink); margin-bottom:4px;">장소 : <strong>전북특별자치도청 앞</strong></div>
+      <div class="trans-desc" style="color:var(--ink);">인솔 : 홍길동 &nbsp;<a href="tel:010-9999-9999" style="color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px;">010-9999-9999</a></div>
     </div>
+    
+    <div class="bus-r" style="margin-bottom:24px;">
+      <p class="bus-r-t" style="color:var(--muted);">원주 노선</p>
+      <div class="trans-desc">하객분들의 편의를 위해 운행 여부를 검토 중입니다.<br>참석 의사 전달 시 원주 탑승을 체크해 주시면,<br>확정되는 대로 개별적으로 안내해 드리겠습니다.</div>
+    </div>
+    
+    <div class="bus-return">
+      <p class="bus-return-t"><i class="fas fa-rotate-left"></i> 귀가 버스 안내</p>
+      <p style="margin-bottom:12px;">예식 종료 후 충분한 여유를 두어<br><strong>오후 3시경</strong> 현장에서 전주 방면으로 출발 예정입니다.<br>예식장 앞 버스 앞에서 인솔자의 안내에 따라<br>탑승해 주시면 감사하겠습니다.</p>
+    </div>
+    
+    <p style="margin-top:16px; font-family:'Noto Sans KR',sans-serif; font-size:13.5px; line-height:2.1; color:var(--muted); word-break:keep-all;">
+      여러 하객분들이 함께 이용하시는 만큼 정시에 출발할 예정입니다. 원활한 출발을 위해 <strong style="color:var(--ink);">출발 10분 전</strong>까지 도착하여 탑승해 주시면 대단히 감사하겠습니다.
+    </p>
   </div>
 </section>
 
 <!-- ── REGISTRY ── -->
-<section class="reg-sec">
+<section class="reg-sec hide-privacy">
   <span class="lbl rv">
     Registry
     <span class="lbl-kr">마음 전하실 곳</span>
@@ -756,11 +756,12 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </section>
 
 <!-- ── FOOTER ── -->
+<!-- ★ 수정: 자기 자랑 느낌의 문구를 고급스럽게 다듬음 ★ -->
 <footer>
   <div class="orn" style="margin-bottom:40px;"><i class="fas fa-diamond" style="font-size:7px;color:rgba(181,146,74,.5);margin:0 14px;"></i></div>
   <p class="foot-quote">
-    소중한 분들을 모시는 설레는 마음을 담아,<br>
-    <strong>기획부터 디자인, 코딩, 배포까지<br>신부가 직접 완성했습니다.</strong><br>
+    소중한 분들을 모시는 설레는 마음을 담아<br>
+    <strong>사랑으로 직접 만든 청첩장입니다.</strong><br>
     귀한 걸음으로 축복해 주시는 그 마음,<br>평생 소중히 간직하겠습니다.
   </p>
   <div class="orn" style="margin-bottom:40px;"><i class="fas fa-diamond" style="font-size:7px;color:rgba(181,146,74,.5);margin:0 14px;"></i></div>
@@ -844,11 +845,26 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <script>
 const GAS='https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
-
 const IMGS=['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg'];
 let ci=0, sy=0;
 
-// ★ 신부측 카카오페이 송금 링크 적용 확인 완료 ★
+document.addEventListener("DOMContentLoaded", function() {
+  if (document.documentElement.classList.contains('pre-wedding-mask')) {
+    document.querySelectorAll('.acc-num:not(.missing)').forEach(function(el) {
+      el.textContent = '10월 1일부터 확인 가능합니다';
+      el.style.fontSize = '13px';
+      el.style.color = 'var(--muted)';
+      el.style.letterSpacing = '0';
+    });
+    document.querySelectorAll('.acc-btns button, .acc-btns a').forEach(function(btn) {
+      btn.style.opacity = '0.35';
+      btn.style.cursor = 'not-allowed';
+      btn.removeAttribute('href');
+      btn.onclick = function(e) { e.preventDefault(); };
+    });
+  }
+});
+
 const KPAY_LINKS = {
   groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
   bride:  'https://qr.kakaopay.com/Ej8IMVKSM',
@@ -893,8 +909,21 @@ document.getElementById('modal-ta').addEventListener('touchend',e=>{
   if(dx>60){ci=(ci-1+IMGS.length)%IMGS.length;updModal();}
 },{passive:true});
 
-function lock(){ sy=window.pageYOffset; document.body.style.cssText+=';overflow:hidden;position:fixed;top:-'+sy+'px;width:100%;'; }
-function unlock(){ document.body.style.removeProperty('overflow'); document.body.style.removeProperty('position'); document.body.style.removeProperty('top'); document.body.style.removeProperty('width'); window.scrollTo(0,sy); }
+/* ★ 수정: cssText += 대신 개별 style 속성으로 안전하게 처리 ★ */
+function lock(){
+  sy=window.pageYOffset;
+  document.body.style.overflow='hidden';
+  document.body.style.position='fixed';
+  document.body.style.top='-'+sy+'px';
+  document.body.style.width='100%';
+}
+function unlock(){
+  document.body.style.removeProperty('overflow');
+  document.body.style.removeProperty('position');
+  document.body.style.removeProperty('top');
+  document.body.style.removeProperty('width');
+  window.scrollTo(0,sy);
+}
 
 function initSnow(){
   const c=document.getElementById('snow-c');
@@ -920,9 +949,15 @@ const bgmLbl=document.getElementById('bgm-lbl');
 audio.volume=0.35;
 let bgmStarted=false;
 
+/* ★ 수정: 현재 상태가 아닌 다음 액션을 명확히 표시 ★ */
 const updateBgmUI=(isPlaying)=>{
-  if(isPlaying){discI.style.animation='spin 8s linear infinite';bgmLbl.textContent='Music On';}
-  else{discI.style.animation='none';bgmLbl.textContent='Music Off';}
+  if(isPlaying){
+    discI.style.animation='spin 8s linear infinite';
+    bgmLbl.textContent='음악 끄기';
+  } else {
+    discI.style.animation='none';
+    bgmLbl.textContent='음악 켜기';
+  }
 };
 
 const startAudio=()=>{
@@ -940,9 +975,11 @@ document.getElementById('bgm-btn').addEventListener('click',(e)=>{
   else{audio.pause();updateBgmUI(false);}
 });
 
+/* ★ 수정: 스크롤 이벤트에 상단 복귀 버튼 가시성 통합 ★ */
 window.addEventListener('scroll',()=>{
   const p=document.getElementById('hero-photo'),y=window.pageYOffset;
-  if(y<window.innerHeight)p.style.transform=`scale(1.05) translateY(${y*.28}px)`;
+  if(y<window.innerHeight) p.style.transform=`scale(1.05) translateY(${y*.28}px)`;
+  document.getElementById('top-btn').classList.toggle('visible', y>300);
 },{passive:true});
 
 const ro=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:.1});
@@ -955,7 +992,11 @@ function toggleAcc(id){
   if(!isOpen){body.style.display='block';btn.classList.add('open');icon.style.transform='rotate(45deg)';}
 }
 
-function enableMap(){ document.getElementById('map-overlay').classList.add('hidden'); }
+/* ★ 수정: 지도 활성화 후 제스처 힌트 토스트 표시 ★ */
+function enableMap(){
+  document.getElementById('map-overlay').classList.add('hidden');
+  setTimeout(()=>toast('두 손가락으로 지도를 이동하실 수 있습니다'), 400);
+}
 
 function openTmap(){
   if(!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){alert('티맵은 스마트폰에서 이용해 주세요.');return;}
@@ -971,7 +1012,7 @@ function handleRsvpOutsideClick(e){ if(!e.target.closest('.m-box')){closeRsvp();
 function submitRsvp(e){
   e.preventDefault();
   if(localStorage.getItem('rsvp_v2')){
-    if(!confirm('이미 참석 정보를 전달해 주신 적이 있습니다.\n내용을 수정하여 다시 전송하시겠습니까?\n(마지막으로 전송하신 내용으로 접수됩니다.)')){closeRsvp();return;}
+    if(!confirm('이미 참석 정보를 전달해 주신 적이 있습니다.\n수정하여 다시 전송하시겠습니까?')){closeRsvp();return;}
   }
   const btn=document.getElementById('sub-btn');
   btn.textContent='전송 중...'; btn.disabled=true;
@@ -986,7 +1027,16 @@ const upBtn=document.getElementById('up-btn');
 const loaderOverlay=document.getElementById('loader-overlay');
 const loaderText=document.getElementById('loader-text');
 
-upBtn.addEventListener('click',()=>photoUp.click());
+upBtn.addEventListener('click',() => {
+  const uploadStartDate = new Date('2027-01-30T00:00:00+09:00');
+  const now = new Date();
+  if (now < uploadStartDate) {
+    toast('사진 업로드는 예식 당일(1월 30일)부터 가능합니다. 📸');
+    return;
+  }
+  photoUp.click();
+});
+
 photoUp.addEventListener('change',async e=>{
   const files=e.target.files; if(!files.length)return;
   const MAX=10*1024*1024; let big=false,ok=0;
@@ -1003,9 +1053,12 @@ photoUp.addEventListener('change',async e=>{
       }catch(err){console.error(err);}
     }
   }finally{loaderOverlay.classList.remove('active');unlock();photoUp.value='';}
-  if(big){alert('10MB가 넘는 고화질 파일이 포함되어 있습니다.\n구글 드라이브로 직접 연결해 드릴 테니 그곳에 올려주시면 감사하겠습니다!');window.open('https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link','_blank');}
-  else if(ok>0){toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);}
-  else{toast('선택된 사진이 없습니다.');}
+  /* ★ 수정: 용량 초과 안내 문구를 더 친근하게 변경 ★ */
+  if(big){
+    toast('일부 사진이 10MB를 초과해 구글 드라이브로 연결합니다.');
+    setTimeout(()=>window.open('https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link','_blank'),600);
+  } else if(ok>0){toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);}
+  else{toast('선택된 파일이 없습니다.');}
 });
 
 function toB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.readAsDataURL(f);r.onload=()=>res(r.result);r.onerror=rej;});}
@@ -1013,12 +1066,28 @@ function toB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.read
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.className='show';setTimeout(()=>t.className='',3000);}
 
 function cpCopy(num,label){
+  if(document.documentElement.classList.contains('pre-wedding-mask')) return;
   const cb=()=>toast((label||num)+' 복사되었습니다.');
   if(navigator.clipboard){navigator.clipboard.writeText(num).then(cb);}
   else{const el=document.createElement('textarea');el.value=num;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);cb();}
 }
 
-function cpUrl(){const u=window.location.href;if(navigator.clipboard){navigator.clipboard.writeText(u).then(()=>toast('청첩장 주소가 복사되었습니다.'));}else cpCopy(u);}
+/* ★ 수정: else 분기에서 cpCopy 대신 독립적인 복사 로직 사용 ★ */
+function cpUrl(){
+  const u=window.location.href;
+  const cb=()=>toast('청첩장 주소가 복사되었습니다.');
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(u).then(cb);
+  } else {
+    const el=document.createElement('textarea');
+    el.value=u;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    cb();
+  }
+}
 
 function shareKakao(){
   if(typeof Kakao==='undefined'){cpUrl();return;}
