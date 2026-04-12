@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -79,7 +80,7 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .hero-date-sub{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.32em;color:rgba(253,250,245,.55);margin-bottom:12px;font-weight:300;}
 .hero-divider{width:24px;height:.5px;background:var(--gold-lt);opacity:.55;margin:0 auto 12px;}
 .hero-venue{font-family:'Noto Sans KR',sans-serif;font-size:14px;letter-spacing:.1em;color:rgba(253,250,245,.82);font-weight:400;}
-.hero-venue-sub{font-family:'Noto Sans KR',sans-serif;font-size:12px;letter-spacing:.08em;color:rgba(253,250,245,.45);font-weight:300;margin-top:4px;}
+.hero-venue-sub{font-family:'Noto Sans KR',sans-serif;font-size:12px;letter-spacing:.08em;color:rgba(253,250,245,.65);font-weight:300;margin-top:4px;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 .sf{position:absolute;border-radius:50%;background:rgba(255,255,255,.88);pointer-events:none;animation:sf linear infinite;box-shadow:0 0 5px rgba(255,255,255,.5);}
 @keyframes sf{0%{transform:translate3d(0,-10px,0);opacity:0}10%{opacity:.85}90%{opacity:.85}100%{transform:translate3d(var(--sx),100vh,0);opacity:0}}
@@ -92,7 +93,7 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .orn::after{background:linear-gradient(to left,transparent,var(--gold));}
 .orn i{font-size:7px;color:var(--gold);margin:0 14px;opacity:.8;transform:rotate(45deg);}
 
-/* ── [수정 1] 섹션 헤더: 한글 크게, 영문 작게 ── */
+/* ── 섹션 헤더 ── */
 .lbl{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:36px;gap:8px;}
 .lbl-kr{font-family:'Noto Serif KR',serif;font-size:19px;color:var(--ink);letter-spacing:.06em;font-weight:500;}
 .lbl-en{font-family:'Cormorant Garamond',serif;font-size:11.5px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;}
@@ -111,10 +112,10 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 
 /* ── STORY TIMELINE ── */
 .story-wrap{position:relative;padding-left:28px;}
-.story-line{position:absolute;left:5px;top:16px;bottom:16px;width:.5px;background:var(--line);}
+.story-line{position:absolute;left:10px;top:12px;bottom:12px;width:1px;background:var(--line);z-index:0;}
 .story-node{position:relative;margin-bottom:38px;}
 .story-node:last-child{margin-bottom:0;}
-.story-nd{position:absolute;left:-23px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--cream);border:1.5px solid var(--gold-lt);}
+.story-nd{position:absolute;left:-23px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--cream);border:1.5px solid var(--gold-lt);z-index:1;}
 .story-nd.final{background:var(--gold);border-color:var(--gold);}
 .story-when{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.25em;color:var(--gold);margin-bottom:6px;}
 .story-ttl{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:8px;}
@@ -135,6 +136,11 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .dday-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;text-align:center;color:var(--muted);margin-top:36px;font-weight:300;letter-spacing:.04em;}
 .dday-t strong{color:var(--gold);font-size:19px;font-family:'Cormorant Garamond',serif;font-weight:600;margin:0 4px;}
 
+.cal-btn-wrap { display: flex; justify-content: center; margin-top: 24px; }
+.cal-btn { background: var(--white); border: 1px solid var(--line); color: var(--ink); padding: 11px 22px; border-radius: 30px; font-family: 'Noto Sans KR', sans-serif; font-size: 13.5px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); letter-spacing: 0.05em; }
+.cal-btn:active { transform: scale(0.96); background: var(--cream); }
+.cal-btn i { color: var(--gold); font-size: 15px; }
+
 /* ── PROGRAM ── */
 .order-list{list-style:none;max-width:310px;margin:0 auto;}
 .order-list li{display:flex;align-items:flex-start;gap:18px;padding:16px 0;border-bottom:.5px dashed var(--line);}
@@ -145,8 +151,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .order-list li.highlight .order-time{color:var(--ink);}
 .order-list li.highlight .order-txt{color:var(--ink);}
 .order-list li.highlight{background:var(--bg2);margin:0 -8px;padding:16px 8px;border-radius:4px;border-bottom:none;}
-
-/* ── [수정 3] 뷔페 강조 박스 ── */
 .buffet-highlight{display:block;margin-top:10px;padding:11px 14px;background:rgba(181,146,74,.1);border:.5px solid rgba(181,146,74,.35);border-radius:5px;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;color:var(--ink);font-weight:400;line-height:1.8;}
 .buffet-highlight strong{color:var(--gold);}
 
@@ -246,17 +250,14 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 /* ── PHOTO SHARE & FOOTER ── */
 .share-card{background:var(--white);border:.5px solid var(--line);padding:40px 28px;text-align:center;}
 .share-p{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:2.2;color:var(--muted);font-weight:300;word-break:keep-all;margin-bottom:28px;}
-.up-btn{width:100%;background:var(--cream);border:.5px solid var(--line);padding:18px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);letter-spacing:.1em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;border-radius:4px;}
+.up-btn{width:100%;background:var(--cream);border:.5px solid var(--line);padding:16px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);letter-spacing:.05em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;border-radius:4px;}
 .up-btn:active{transform:scale(.98);background:var(--bg2);}
 .up-btn i{color:var(--gold);font-size:16px;}
 
 footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 .foot-quote{font-family:'Noto Serif KR',serif;font-size:14.5px;line-height:2.5;color:rgba(253,250,245,.6);font-weight:300;word-break:keep-all;margin-bottom:36px;}
 .foot-quote strong{color:rgba(253,250,245,.9);font-weight:400;}
-
-/* ── [수정 2] 푸터 크레딧 문구 ── */
 .foot-credit{font-family:'Noto Serif KR',serif;font-size:11px;font-style:italic;color:rgba(253,250,245,.22);letter-spacing:.06em;margin-bottom:52px;line-height:2;}
-
 .foot-share{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:272px;margin:0 auto 12px;padding:16px 20px;background:transparent;border:1px solid rgba(253,250,245,.2);color:rgba(253,250,245,.8);font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;letter-spacing:.1em;cursor:pointer;transition:all .2s;border-radius:30px;}
 .foot-share:hover{border-color:rgba(253,250,245,.4);color:var(--white);}
 .foot-share:active{transform:scale(.98);}
@@ -278,7 +279,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 .frg input:checked+label{background:var(--ink);border-color:var(--ink);color:var(--white);font-weight:500;}
 .fi{width:100%;border:1px solid var(--line);background:var(--cream);padding:14px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;color:var(--ink);outline:none;transition:border-color .2s;text-align:center;border-radius:4px;}
 .fi:focus{border-color:var(--gold);}
-.fs{width:100%;border:1px solid var(--line);background:var(--cream);padding:14px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;color:var(--ink);outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A7D72'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:var(--cream);border-radius:4px;}
+.fs{width:100%;border:1px solid var(--line);background:var(--cream);padding:14px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;color:var(--ink);outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A7D72'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:var(--cream);border-radius:4px; text-align:center; text-align-last:center;}
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .sub-btn{width:100%;background:var(--ink);color:var(--white);border:none;padding:18px;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;letter-spacing:.2em;cursor:pointer;transition:opacity .2s;margin-top:10px;border-radius:4px;}
 .sub-btn:disabled{opacity:.55;cursor:not-allowed;}
@@ -320,15 +321,14 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
       <p class="hero-date">2027년 1월 30일 토요일 낮 1시 10분</p>
       <p class="hero-date-sub">2027 · 01 · 30 &nbsp;Sat &nbsp;13:10</p>
       <div class="hero-divider"></div>
-      <p class="hero-venue">남양주 파로스컨벤션</p>
-      <p class="hero-venue-sub">2층 파로스홀</p>
+      <p class="hero-venue">파로스컨벤션</p>
+      <p class="hero-venue-sub">2층 단독홀 파로스홀</p>
     </div>
   </div>
 </section>
 
 <!-- ── INVITATION ── -->
 <section>
-  <!-- [수정 1] 한글 크게, 영문 작게 -->
   <span class="lbl rv">
     <span class="lbl-kr">소중한 분들을 초대합니다</span>
     <span class="lbl-en">Invitation</span>
@@ -415,6 +415,13 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </div>
   </div>
   <p class="dday-t rv" id="dday"></p>
+  
+  <div class="cal-btn-wrap rv">
+    <!-- ★ 수정: 모달 없이 바로 기기 판별하는 스마트 로직으로 변경 -->
+    <button class="cal-btn" onclick="addSmartCalendar()">
+      <i class="far fa-calendar-check"></i> 캘린더에 일정 추가
+    </button>
+  </div>
 </section>
 
 <!-- ── PROGRAM ── -->
@@ -427,7 +434,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <li>
       <span class="order-time">12:30</span>
       <div class="order-txt">하객 입장 및 식사
-        <!-- [수정 3] 뷔페 전·후 안내 강조 -->
         <span class="buffet-highlight">
           🍽 뷔페 식사는 예식 <strong>전·후 모두</strong> 이용하실 수 있습니다
         </span>
@@ -446,7 +452,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <li>
       <span class="order-time">13:10</span>
       <div class="order-txt">본식 시작
-        <span class="order-sub">2층 파로스홀</span>
+        <span class="order-sub">2층 단독홀 파로스홀</span>
       </div>
     </li>
     <li>
@@ -502,7 +508,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <span class="lbl-kr">오시는 길</span>
     <span class="lbl-en">Location</span>
   </span>
-  <h3 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;text-align:center;letter-spacing:.05em;margin-bottom:8px;">파로스컨벤션 2층 파로스홀</h3>
+  <h3 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;text-align:center;letter-spacing:.05em;margin-bottom:8px;">파로스컨벤션 2층 단독홀 파로스홀</h3>
   <p class="rv" style="font-family:'Noto Sans KR',sans-serif;font-size:15px;color:var(--muted);text-align:center;margin-bottom:32px;line-height:2.1;font-weight:300;">
     경기 남양주시 다산순환로 20<br>
     다산현대프리미어캠퍼스몰 <strong style="color:var(--ink);font-weight:500;">E동 2층</strong>
@@ -568,11 +574,12 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
   <div class="trans-box rv">
     <div class="trans-hdr"><i class="fas fa-car"></i>자가용 및 주차장 안내</div>
+    
     <div class="trans-row">
       <span class="dot">·</span>
       <div>
-        <div>내비게이션 : <strong>"다산순환로 20"</strong> 또는 <strong>"파로스컨벤션"</strong> 입력</div>
-        <div class="trans-desc">- [건물명 검색] 다산현대프리미어캠퍼스몰 E동</div>
+        <div>내비게이션 검색</div>
+        <div class="trans-desc" style="color:var(--ink); font-weight:500; font-size:15px; margin-top:4px;">"다산순환로 20" 또는 "파로스컨벤션"</div>
       </div>
     </div>
 
@@ -605,22 +612,22 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <div class="pk-step">
           <div class="pk-num n1">①</div>
           <div>
-            <p class="pk-main"><span class="red">GATE 2</span> 로 진입</p>
-            <p class="pk-detail">반드시 2번 게이트로 진입해 주세요</p>
+            <p class="pk-main"><span class="red">GATE 2</span> 진입</p>
+            <p class="pk-detail">반드시 2번 게이트로 들어오세요</p>
           </div>
         </div>
         <div class="pk-step">
           <div class="pk-num n2">②</div>
           <div>
-            <p class="pk-main">계속 <strong>좌회전</strong>하며 내려가기</p>
-            <p class="pk-detail">지하 3층 또는 지하 4층<br>E동 구역에 주차해 주세요</p>
+            <p class="pk-main">지하 3·4층 <strong style="text-decoration:underline;text-underline-offset:2px;">E동 구역</strong> 주차</p>
+            <p class="pk-detail">진입 후 계속 좌회전하여 내려오세요</p>
           </div>
         </div>
         <div class="pk-step">
           <div class="pk-num n3">③</div>
           <div>
-            <p class="pk-main">E동 전용 엘리베이터 → 2층</p>
-            <p class="pk-detail">E동 엘리베이터로 올라오시면<br>2층 파로스홀이 나옵니다</p>
+            <p class="pk-main">E동 전용 엘리베이터 탑승</p>
+            <p class="pk-detail">2층 파로스홀로 바로 연결됩니다</p>
           </div>
         </div>
       </div>
@@ -629,21 +636,19 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <div class="trans-row">
       <span class="dot">·</span>
       <div>
-        <div style="margin-bottom:6px;"><strong>파로스컨벤션 전용 주차장</strong> <span style="font-size:12.5px;color:var(--muted);">(동시 2,500대 수용)</span></div>
-        <div class="trans-desc" style="color:var(--ink); font-weight:400;">- 2시간 무료 주차 (이후 30분당 1,500원)</div>
-        <div class="trans-desc" style="color:#C04B30; font-weight:500; line-height:1.7; margin-top:6px;">
-          - [안내] 주차장이 매우 넓어 헤매실 수 있습니다. 반드시 지하 3·4층 <strong style="text-decoration:underline;text-underline-offset:2px;">E동 구역</strong>에 주차하셔야 파로스홀을 쉽게 찾으실 수 있습니다.
-        </div>
+        <div style="margin-bottom:6px;"><strong>무료 주차 안내</strong></div>
+        <div class="trans-desc" style="color:var(--ink); font-weight:400;">2시간 무료 <span style="font-size:12.5px;color:var(--muted);">(이후 30분당 1,500원 추가)</span></div>
       </div>
     </div>
 
-    <div class="trans-row" style="margin-top:20px;">
-      <span class="dot">·</span>
-      <div>
-        <div style="margin-bottom:6px;"><strong style="color:var(--ink);">주말 교통 혼잡 안내</strong></div>
-        <div class="trans-desc" style="color:var(--ink); font-weight:400;">- 예식장 맞은편 <strong>현대프리미엄아울렛 SPACE1</strong> 진입 차량으로 인해 주말 도로가 다소 혼잡할 수 있습니다.</div>
-        <div class="trans-desc" style="color:var(--ink); font-weight:400;">- 자가용을 이용하시는 경우, 교통 상황을 고려하여 평소보다 조금 더 여유 있게 출발하시기를 권해드립니다.</div>
-      </div>
+    <div style="background:rgba(192, 75, 48, 0.05); border:1px solid rgba(192, 75, 48, 0.2); border-radius:6px; padding:16px 18px; margin-top:24px;">
+      <p style="font-family:'Noto Sans KR',sans-serif; font-size:13.5px; font-weight:600; color:#C04B30; margin-bottom:8px;">
+        <i class="fas fa-exclamation-circle"></i> 하객분들께 드리는 당부 말씀
+      </p>
+      <ul style="padding-left:14px; margin:0; font-family:'Noto Sans KR',sans-serif; font-size:13px; line-height:1.8; color:var(--ink); font-weight:300;">
+        <li style="margin-bottom:6px;">건물이 매우 넓어 다른 구역(A~D동)에 주차하시면 파로스홀을 찾기 어렵습니다. <strong style="color:#C04B30; font-weight:500;">반드시 E동 구역에 주차</strong>해 주세요.</li>
+        <li>캠퍼스몰 전체 주차 공간(2,500대)을 공유하므로 넉넉합니다. 단, 주말에는 <strong>예식장 맞은편 아울렛(현대프리미엄아울렛 SPACE1)</strong> 진입 차량으로 도로가 혼잡할 수 있으니 <strong>조금 여유 있게 출발</strong>해 주시면 감사합니다.</li>
+      </ul>
     </div>
   </div>
 
@@ -663,7 +668,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     
     <div class="bus-return">
       <p class="bus-return-t"><i class="fas fa-rotate-left"></i> 귀가 버스 안내</p>
-      <p style="margin-bottom:12px;">예식 종료 후 충분한 여유를 두어<br><strong>오후 3시경</strong> 현장에서 전주 방면으로 출발 예정입니다.<br>예식장 앞 버스 앞에서 인솔자의 안내에 따라<br>탑승해 주시면 감사하겠습니다.</p>
+      <p style="margin-bottom:12px;">예식 종료 후 충분한 여유를 두어<br><strong>오후 3시경</strong> 현장에서 전주 방면으로 출발 예정입니다.<br>인솔자의 안내에 따라 버스에<br>탑승해 주시면 감사하겠습니다.</p>
     </div>
     
     <p style="margin-top:16px; font-family:'Noto Sans KR',sans-serif; font-size:13.5px; line-height:2.1; color:var(--muted); word-break:keep-all;">
@@ -763,10 +768,24 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
       <span class="lbl-en">Memory</span>
     </span>
     <p class="share-p" style="margin-top:24px;">예식 당일, 하객분들의 따뜻한 시선으로 담아주신<br>소중한 순간들을 아래 버튼을 통해<br>보내 주시면 정말 기쁘게 간직하겠습니다.</p>
-    <button class="up-btn" id="up-btn">
-      <i class="fas fa-camera"></i>
-      <span id="up-txt">사진 · 영상 보내주기</span>
-    </button>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+      <button class="up-btn" id="up-btn" style="padding:15px;">
+        <i class="fas fa-camera"></i>
+        <span style="font-size:14px;">간편하게 보내기 (10MB 이하)</span>
+      </button>
+      <button class="up-btn" id="drive-btn" style="padding:15px; background: var(--white); border-color: rgba(181,146,74,0.4);">
+        <i class="fab fa-google-drive" style="color:var(--gold);"></i>
+        <span style="font-size:14px;">고화질 원본 보내기 (구글 드라이브)</span>
+      </button>
+    </div>
+
+    <div style="background: rgba(181,146,74,0.06); border: 0.5px solid rgba(181,146,74,0.2); border-radius: 6px; padding: 14px 16px; text-align: left;">
+      <p style="font-family:'Noto Sans KR',sans-serif; font-size: 12.5px; color: var(--ink); font-weight: 400; line-height: 1.7; word-break: keep-all; letter-spacing: -0.02em;">
+        <i class="fas fa-info-circle" style="color: var(--gold); margin-right: 4px; font-size: 12px;"></i>
+        <strong>동영상이나 고화질 원본 사진</strong>은 용량 제한이 없는 <strong style="color: var(--gold);">구글 드라이브</strong> 버튼을 이용해 주시면 감사하겠습니다.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -774,7 +793,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 <footer>
   <div class="orn" style="margin-bottom:40px;"><i class="fas fa-diamond" style="font-size:7px;color:rgba(181,146,74,.5);margin:0 14px;"></i></div>
 
-  <!-- [수정 2] 푸터 문구: 신부의 정성 + 손님 편의 중심 + 고급스럽게 -->
   <p class="foot-quote">
     낯선 길도, 낯선 자리도 편안하게 느끼실 수 있도록<br>
     오시는 한 분 한 분을 떠올리며<br>
@@ -1021,7 +1039,6 @@ function openTmap(){
 function openRsvp(){ document.getElementById('rsvp-modal').classList.add('open'); lock(); }
 function closeRsvp(){ document.getElementById('rsvp-modal').classList.remove('open'); document.getElementById('rsvp-form').reset(); document.getElementById('bus-sec').style.display='block'; unlock(); }
 function toggleBus(){ document.getElementById('bus-sec').style.display=document.querySelector('input[name="attend"]:checked').value==='마음만'?'none':'block'; }
-
 function handleRsvpOutsideClick(e){ if(!e.target.closest('.m-box')){closeRsvp();} }
 
 function submitRsvp(e){
@@ -1037,19 +1054,66 @@ function submitRsvp(e){
     .finally(()=>{btn.textContent='전송하기';btn.disabled=false;});
 }
 
-const photoUp=document.getElementById('photo-up');
-const upBtn=document.getElementById('up-btn');
-const loaderOverlay=document.getElementById('loader-overlay');
-const loaderText=document.getElementById('loader-text');
+// ★ 10점 만점 스마트 원클릭 캘린더 추가 로직 ★
+function addSmartCalendar() {
+  const ua = navigator.userAgent.toLowerCase();
+  // 모바일 기기(아이폰, 아이패드) 및 Mac 판별
+  const isIOS = /iphone|ipad|ipod|mac/.test(ua);
 
-upBtn.addEventListener('click',() => {
+  // 공통 캘린더 데이터 (메모 내용 완벽 반영)
+  const title = "태광 ♥ 지현 결혼식";
+  const loc = "경기 남양주시 다산순환로 20 파로스컨벤션";
+  const desc = "지하철:구리역 7번출구 셔틀 운행/주차 : GATE 2로 진입하여 지하 3~4층까지 계속 좌회전하여 E동 근처 주차";
+  
+  if (isIOS) {
+    // 1. 아이폰/Mac용 (Apple Calendar - 다운로드 없이 앱 다이렉트 호출 유도)
+    const icsMSG = 
+      "BEGIN:VCALENDAR\n" +
+      "VERSION:2.0\n" +
+      "PRODID:-//Taekwang and Jihyun Wedding//EN\n" +
+      "CALSCALE:GREGORIAN\n" +
+      "BEGIN:VEVENT\n" +
+      "DTSTART:20270130T041000Z\n" +
+      "DTEND:20270130T061000Z\n" +
+      "SUMMARY:" + title + "\n" +
+      "LOCATION:" + loc + "\n" +
+      "DESCRIPTION:" + desc + "\n" +
+      "END:VEVENT\n" +
+      "END:VCALENDAR";
+      
+    // iOS 사파리에서 가장 매끄럽게 '일정 추가' 팝업을 띄우는 방식
+    window.location.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(icsMSG);
+  } else {
+    // 2. 안드로이드/PC용 (Google Calendar)
+    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20270130T041000Z/20270130T061000Z&location=${encodeURIComponent(loc)}&details=${encodeURIComponent(desc)}`;
+    window.open(googleUrl, '_blank');
+  }
+}
+
+const checkUploadDate = () => {
   const uploadStartDate = new Date('2027-01-30T00:00:00+09:00');
   const now = new Date();
   if (now < uploadStartDate) {
     toast('사진 업로드는 예식 당일(1월 30일)부터 가능합니다. 📸');
-    return;
+    return false;
   }
-  photoUp.click();
+  return true;
+};
+
+const photoUp=document.getElementById('photo-up');
+const upBtn=document.getElementById('up-btn');
+const driveBtn=document.getElementById('drive-btn');
+const loaderOverlay=document.getElementById('loader-overlay');
+const loaderText=document.getElementById('loader-text');
+
+upBtn.addEventListener('click',() => {
+  if (checkUploadDate()) photoUp.click();
+});
+
+driveBtn.addEventListener('click', () => {
+  if (checkUploadDate()) {
+    window.open('https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link','_blank');
+  }
 });
 
 photoUp.addEventListener('change',async e=>{
@@ -1058,7 +1122,9 @@ photoUp.addEventListener('change',async e=>{
   lock(); loaderOverlay.classList.add('active');
   try{
     for(let i=0;i<files.length;i++){
-      const f=files[i]; if(f.size>MAX){big=true;continue;}
+      const f=files[i]; 
+      if(f.size>MAX){big=true;continue;}
+      
       loaderText.textContent=`사진을 안전하게 업로드하고 있습니다... (${i+1}/${files.length})`;
       try{
         const b64=await toB64(f);
@@ -1068,11 +1134,16 @@ photoUp.addEventListener('change',async e=>{
       }catch(err){console.error(err);}
     }
   }finally{loaderOverlay.classList.remove('active');unlock();photoUp.value='';}
-  if(big){
-    toast('일부 사진이 10MB를 초과해 구글 드라이브로 연결합니다.');
-    setTimeout(()=>window.open('https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link','_blank'),600);
-  } else if(ok>0){toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);}
-  else{toast('선택된 파일이 없습니다.');}
+  
+  if (big && ok > 0) {
+    toast(`${ok}장 저장 완료! 10MB가 넘는 사진/영상은 구글 드라이브를 이용해 주세요.`);
+  } else if (big && ok === 0) {
+    toast('용량이 10MB를 초과합니다. 아래 구글 드라이브 버튼을 이용해 주세요!');
+  } else if (ok > 0) {
+    toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);
+  } else {
+    toast('선택된 파일이 없습니다.');
+  }
 });
 
 function toB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.readAsDataURL(f);r.onload=()=>res(r.result);r.onerror=rej;});}
