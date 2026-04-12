@@ -53,16 +53,14 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 
 /* ── HERO ── */
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
-.hero-photo{position:absolute;inset:0;background-color:#0E0C0A;background-image:none;} /* 이미지 제거 및 딥 미드나잇 블랙 단색 적용 */
+.hero-photo{position:absolute;inset:0;background-color:#0E0C0A;background-image:none;}
 .hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(14,12,10,.4) 60%,rgba(14,12,10,.95) 100%);}
 #snow-c{position:absolute;inset:0;pointer-events:none;z-index:5;}
 .hero-body{position:absolute;bottom:0;left:0;right:0;padding:0 32px 52px;text-align:center;color:var(--white);z-index:10;}
 .hero-body>*{animation:fadeUp 1s ease forwards;opacity:0;}
-.hero-lead{animation-delay:.3s!important;font-size:13.5px;font-weight:300;line-height:2.1;color:rgba(253,250,245,.8);margin-bottom:32px;letter-spacing:.04em;font-family:'Noto Serif KR',serif;} /* 단색 배경에 맞춰 문구 밝기 살짝 올림 */
+.hero-lead{animation-delay:.3s!important;font-size:13.5px;font-weight:300;line-height:2.1;color:rgba(253,250,245,.8);margin-bottom:32px;letter-spacing:.04em;font-family:'Noto Serif KR',serif;}
 .hero-names{animation-delay:.65s!important;font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;letter-spacing:.18em;color:var(--white);line-height:1;margin-bottom:32px;}
 .hero-names .hrt{font-size:26px;color:var(--gold-lt);vertical-align:middle;margin:0 2px;font-family:sans-serif;}
-
-
 
 /* ── 예식 일시·장소 인포박스 ── */
 .hero-info-box{animation-delay:.9s!important;display:inline-block;padding:20px 32px;border:1px solid rgba(181,146,74,.38);position:relative;margin-bottom:0;}
@@ -110,6 +108,17 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .fam-par{font-size:15px;color:var(--muted);font-weight:300;}
 .fam-rel{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);font-weight:300;}
 .fam-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ink);letter-spacing:.08em;}
+
+/* ── STORY TIMELINE ── */
+.story-wrap{position:relative;padding-left:28px;}
+.story-line{position:absolute;left:5px;top:16px;bottom:16px;width:.5px;background:var(--line);}
+.story-node{position:relative;margin-bottom:38px;}
+.story-node:last-child{margin-bottom:0;}
+.story-nd{position:absolute;left:-23px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--cream);border:1.5px solid var(--gold-lt);}
+.story-nd.final{background:var(--gold);border-color:var(--gold);}
+.story-when{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.25em;color:var(--gold);margin-bottom:6px;}
+.story-ttl{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:8px;}
+.story-desc{font-family:'Noto Sans KR',sans-serif;font-size:13.5px;line-height:2.2;color:var(--muted);font-weight:300;word-break:keep-all;}
 
 /* ── 연락처 섹션 ── */
 .contact-sec{background:var(--ink);padding:60px 32px;}
@@ -173,15 +182,13 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 #modal-img{max-width:100%;max-height:85vh;object-fit:contain;}
 #img-modal .m-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:rgba(253,250,245,.4);letter-spacing:.14em;white-space:nowrap;}
 
-/* ── LOCATION (지도 완벽 수술) ── */
+/* ── LOCATION ── */
 .map-wrap{position:relative;width:100%;height:320px;margin-bottom:20px;}
 .map-f{width:100%;height:100%;border:.5px solid var(--line);overflow:hidden;display:block;}
 .map-overlay{position:absolute;inset:0;background:rgba(26,23,20,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:opacity .3s;z-index:2;}
 .map-overlay i{font-size:26px;color:rgba(253,250,245,.85);}
 .map-overlay p{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:rgba(253,250,245,.85);font-weight:400;letter-spacing:.04em;text-align:center;line-height:2;}
 .map-overlay.hidden{opacity:0;pointer-events:none;}
-
-/* 지도 버튼 네이티브 a태그로 교체 (팝업 차단 원천 해결) */
 .map-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:40px;}
 .mbtn{padding:14px 6px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:500;text-align:center;cursor:pointer;transition:opacity .2s;text-decoration:none;display:block;border:none;border-radius:4px;}
 .mbtn:active{opacity:.75;}
@@ -201,6 +208,18 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .bus-return-t{font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .bus-return p{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:2.1;color:var(--ink);font-weight:300;}
 
+/* ── 주차 동선 비주얼 ── */
+.pk-card{background:var(--white);border:.5px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+.pk-step{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;}
+.pk-step+.pk-step{border-top:.5px solid var(--line);}
+.pk-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;flex-shrink:0;margin-top:1px;}
+.pk-num.n1{background:var(--ink);color:var(--white);}
+.pk-num.n2{background:var(--bg2);color:var(--muted);border:.5px solid var(--line);}
+.pk-num.n3{background:var(--gold);color:var(--white);}
+.pk-main{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.pk-main .red{color:#C04B30;}
+.pk-detail{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);font-weight:300;line-height:1.9;}
+
 /* ── REGISTRY ── */
 .reg-sec{background:var(--bg2);}
 .acc-item{border:.5px solid var(--line);margin-bottom:10px;overflow:hidden;border-radius:4px;}
@@ -215,12 +234,15 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .acc-lbl{font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--muted);font-weight:400;margin-bottom:6px;letter-spacing:.04em;}
 .acc-num{font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;color:var(--ink);letter-spacing:.08em;}
 .acc-num.missing{color:#C04B30;font-size:13px;font-weight:400;letter-spacing:.02em;}
-.copy-btn{padding:9px 18px;border:.5px solid var(--line);background:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;border-radius:4px;}
+.acc-btns{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.copy-btn{padding:9px 14px;border:.5px solid var(--line);background:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;border-radius:4px;}
 .copy-btn.f{background:var(--ink);color:var(--white);border-color:var(--ink);}
 .copy-btn:active{transform:scale(.96);}
+.kpay-btn{display:inline-flex;align-items:center;gap:4px;padding:9px 12px;background:#FEE500;border:none;border-radius:4px;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:600;color:#191600;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
+.kpay-btn:active{opacity:.75;}
 
 /* ── PHOTO SHARE ── */
-.share-card{background:var(--white);border:.5px solid var(--line);padding:40px 28px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.02);}
+.share-card{background:var(--white);border:.5px solid var(--line);padding:40px 28px;text-align:center;}
 .share-p{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:2.2;color:var(--muted);font-weight:300;word-break:keep-all;margin-bottom:28px;}
 .up-btn{width:100%;background:var(--cream);border:.5px solid var(--line);padding:18px;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);letter-spacing:.1em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;border-radius:4px;}
 .up-btn:active{transform:scale(.98);background:var(--bg2);}
@@ -277,6 +299,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <span id="bgm-lbl">Music Off</span>
 </button>
 
+<!-- ── HERO ── -->
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
   <div class="hero-photo" id="hero-photo"></div>
   <div class="hero-veil"></div>
@@ -294,6 +317,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
+<!-- ── INVITATION ── -->
 <section>
   <span class="lbl rv">
     Invitation
@@ -320,6 +344,46 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
+<!-- ── STORY TIMELINE ── -->
+<section style="background:var(--bg2);">
+  <span class="lbl rv">
+    Story
+    <span class="lbl-kr">우리의 이야기</span>
+  </span>
+  <div class="story-wrap rv">
+    <div class="story-line"></div>
+
+    <div class="story-node">
+      <div class="story-nd"></div>
+      <p class="story-when">2025 · Summer</p>
+      <p class="story-ttl">처음 만난 여름</p>
+      <p class="story-desc">가장 뜨거웠던 여름,<br>두 사람이 처음 만났습니다.</p>
+    </div>
+
+    <div class="story-node">
+      <div class="story-nd"></div>
+      <p class="story-when">수원화성 행궁동</p>
+      <p class="story-ttl">세 시간이나 일찍</p>
+      <p class="story-desc">사귀기로 한 첫날, 설레는 마음에<br>약속보다 세 시간이나 일찍 만났습니다.<br>가는 길에 준비해 간 과일을 나눠 먹으며<br>행궁동 골목을 함께 거닐었습니다.</p>
+    </div>
+
+    <div class="story-node">
+      <div class="story-nd"></div>
+      <p class="story-when">어디서든 함께</p>
+      <p class="story-ttl">비가 와도 괜찮아</p>
+      <p class="story-desc">여행을 떠나면 어김없이 비가 내렸지만,<br>빗속에서도 둘이 함께라면<br>어디든 즐거운 곳이 되었습니다.</p>
+    </div>
+
+    <div class="story-node">
+      <div class="story-nd final"></div>
+      <p class="story-when">2027 · 01 · 30</p>
+      <p class="story-ttl">영원을 약속합니다</p>
+      <p class="story-desc">함께일 때 가장 잘 어울리는 두 사람,<br>이제 하나가 됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
 <div class="contact-sec rv">
   <span class="lbl" style="color:var(--gold-lt);margin-bottom:28px;">
     Contact
@@ -347,6 +411,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </div>
 
+<!-- ── CALENDAR ── -->
 <section style="background:var(--bg2);">
   <div class="lbl-cal rv">
     <span class="lbl-cal-main">예식일 안내</span>
@@ -374,6 +439,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <p class="dday-t rv" id="dday"></p>
 </section>
 
+<!-- ── PROGRAM ── -->
 <section>
   <span class="lbl rv">
     Program
@@ -416,6 +482,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </p>
 </section>
 
+<!-- ── RSVP ── -->
 <section class="rsvp-sec">
   <span class="lbl rv">
     R · S · V · P
@@ -425,6 +492,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <button class="btn-ghost rv" onclick="openRsvp()">참석 여부 전달하기</button>
 </section>
 
+<!-- ── GALLERY ── -->
 <section>
   <span class="lbl rv">
     Gallery
@@ -443,6 +511,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <p class="m-hint">← 좌우 스와이프로 이동 &nbsp;·&nbsp; 아래로 내리면 닫힙니다</p>
 </div>
 
+<!-- ── LOCATION ── -->
 <section>
   <span class="lbl rv">
     Location
@@ -454,16 +523,16 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     다산현대프리미어캠퍼스몰 <strong style="color:var(--ink);font-weight:500;">E동 2층</strong>
   </p>
 
+  <!-- ★ 구글맵 iframe 차단 오류를 완벽하게 방지하는 공식 Embed 주소로 교체 ★ -->
   <div class="map-wrap rv">
     <div class="map-overlay" id="map-overlay" onclick="enableMap()">
       <i class="fas fa-hand-pointer"></i>
       <p>터치하여 지도를 확인하세요<br><span style="font-size:12px;opacity:.7;">두 손가락으로 이동 · 확대하실 수 있습니다</span></p>
     </div>
-    <!-- ★ 지도 에러 개선 완료 (URL 인코딩 및 최적 파라미터 적용) ★ -->
     <iframe
       id="map-iframe"
       class="map-f"
-      src="https://maps.google.com/maps?q=%EB%82%A8%EC%96%91%EC%A3%BC%20%ED%8C%8C%EB%A1%9C%EC%8A%A4%EC%BB%A8%EB%B2%A4%EC%85%98&t=&z=16&ie=UTF8&iwloc=&output=embed"
+      src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%20%EB%82%A8%EC%96%91%EC%A3%BC%EC%8B%9C%20%EB%8B%A4%EC%82%B0%EC%88%9C%ED%99%98%EB%A1%9C%2020%20%ED%8C%8C%EB%A1%9C%EC%8A%A4%EC%BB%A8%EB%B2%A4%EC%85%98&t=&z=15&ie=UTF8&iwloc=&output=embed"
       width="100%"
       height="100%"
       style="border:0;"
@@ -474,7 +543,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </iframe>
   </div>
 
-  <!-- ★ 팝업 차단 원천 해결 (네이티브 a태그 사용) ★ -->
   <div class="map-btns rv">
     <a href="https://map.kakao.com/link/search/남양주 파로스컨벤션" target="_blank" class="mbtn ka">카카오맵</a>
     <a href="https://m.map.naver.com/search2/search.naver?query=남양주 파로스컨벤션" target="_blank" class="mbtn na">네이버지도</a>
@@ -493,14 +561,73 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <div class="rv" style="margin-bottom:36px;">
     <p class="t-title">자가용 및 주차 안내</p>
     <div class="t-body">
-      <p style="margin-bottom:10px;">내비게이션 <strong>"남양주 파로스컨벤션"</strong> 으로 검색해 주세요.</p>
-      <div class="t-note">
-        <p style="font-weight:500;margin-bottom:10px;color:var(--ink);font-family:'Noto Sans KR',sans-serif;">주차 동선 안내</p>
-        <p>① 반드시 <strong style="color:#C04B30;">GATE 2</strong> 로 진입해 주세요.</p>
-        <p style="margin-top:6px;">② 진입 후 <strong>계속 좌회전</strong>하여 내려가시면<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>지하 3층 또는 지하 4층 E동 구역</strong>이 나옵니다.</p>
-        <p style="margin-top:6px;">③ E동 구역에 주차 후<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>E동 전용 엘리베이터</strong>로 2층으로 올라오세요.</p>
-        <p style="margin-top:10px;font-size:13px;color:var(--muted);">주차장이 넓어 혼잡할 수 있으니<br>GATE 2 진입 후 좌회전 방향을 기억해 주시면 감사하겠습니다.</p>
+      <p style="margin-bottom:16px;">내비게이션 <strong>"남양주 파로스컨벤션"</strong> 으로 검색해 주세요.</p>
+
+      <!-- ★ 실제 운전자 방향(화면상 왼쪽으로 꺾임)에 맞춘 새로운 주차 동선 다이어그램 ★ -->
+      <svg viewBox="0 0 300 230" style="width:100%;display:block;margin-bottom:12px;border-radius:8px;border:.5px solid var(--line);background:#F7F2EA;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-r" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#C04B30"/></marker>
+          <marker id="arr-b" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1A1714"/></marker>
+          <marker id="arr-g" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#B5924A"/></marker>
+        </defs>
+
+        <!-- 도로 -->
+        <rect x="0" y="195" width="300" height="35" fill="#D0CBC3"/>
+        <text x="150" y="217" text-anchor="middle" font-size="11" fill="#8A7D72" font-weight="bold" letter-spacing="2">다산순환로</text>
+
+        <!-- 건물 테두리 -->
+        <rect x="12" y="12" width="276" height="183" rx="6" fill="#F0EBE1" stroke="#E2D9CC" stroke-width="1"/>
+
+        <!-- GATE 2 -->
+        <rect x="180" y="183" width="60" height="24" rx="4" fill="#1A1714"/>
+        <text x="210" y="199" text-anchor="middle" font-size="11" fill="#FDFAF5" font-weight="bold" letter-spacing="1">GATE 2</text>
+
+        <!-- 진입 화살표 (도로에서 위로 진입) -->
+        <path d="M 210 183 L 210 145 L 160 145" fill="none" stroke="#C04B30" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#arr-r)"/>
+        <text x="225" y="160" font-size="10" fill="#C04B30" font-weight="bold">진입</text>
+
+        <!-- 좌회전 화살표 (운전자 기준 물리적 왼쪽) -->
+        <path d="M 145 145 L 100 145" fill="none" stroke="#1A1714" stroke-width="2.5" marker-end="url(#arr-b)"/>
+        <text x="150" y="135" text-anchor="middle" font-size="11" fill="#1A1714" font-weight="bold">계속 좌회전 ↺</text>
+
+        <!-- E동 지하주차장 -->
+        <rect x="25" y="105" width="70" height="70" rx="5" fill="#F7F2EA" stroke="#B5924A" stroke-width="1.5"/>
+        <text x="60" y="135" text-anchor="middle" font-size="13" fill="#B5924A" font-weight="bold">E동</text>
+        <text x="60" y="155" text-anchor="middle" font-size="11" fill="#8A7D72">B3·B4</text>
+
+        <!-- 엘리베이터 이동 -->
+        <path d="M 60 105 L 60 60 L 105 60" fill="none" stroke="#B5924A" stroke-width="2" stroke-dasharray="4,4" stroke-linejoin="round" marker-end="url(#arr-g)"/>
+        <text x="80" y="52" text-anchor="middle" font-size="10" fill="#B5924A" font-weight="bold">E동 전용 엘리베이터</text>
+
+        <!-- 2층 파로스홀 -->
+        <rect x="110" y="35" width="150" height="45" rx="5" fill="#1A1714"/>
+        <text x="185" y="62" text-anchor="middle" font-size="14" fill="#FDFAF5" font-weight="bold" letter-spacing="1">2층 파로스홀 도착</text>
+      </svg>
+
+      <div class="pk-card">
+        <div class="pk-step">
+          <div class="pk-num n1">①</div>
+          <div>
+            <p class="pk-main"><span class="red">GATE 2</span> 로 진입</p>
+            <p class="pk-detail">반드시 2번 게이트로 진입해 주세요</p>
+          </div>
+        </div>
+        <div class="pk-step">
+          <div class="pk-num n2">②</div>
+          <div>
+            <p class="pk-main">계속 <strong>좌회전</strong>하며 내려가기</p>
+            <p class="pk-detail">지하 3층 또는 지하 4층<br>E동 구역에 주차해 주세요</p>
+          </div>
+        </div>
+        <div class="pk-step">
+          <div class="pk-num n3">③</div>
+          <div>
+            <p class="pk-main">E동 전용 엘리베이터 → 2층</p>
+            <p class="pk-detail">E동 엘리베이터로 올라오시면<br>2층 파로스홀이 나옵니다</p>
+          </div>
+        </div>
       </div>
+
       <p style="margin-top:8px;"><strong>2시간 무료 주차</strong> (이후 30분당 1,500원)</p>
     </div>
   </div>
@@ -518,12 +645,10 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <p class="bus-r-t" style="color:var(--muted);">원주 노선</p>
         <p style="color:var(--muted);">하객분들의 편의를 위해 운행 여부를 검토 중입니다.<br>참석 의사 전달 시 원주 탑승을 체크해 주시면,<br>확정되는 대로 개별적으로 안내해 드리겠습니다.</p>
       </div>
-
       <div class="bus-return">
         <p class="bus-return-t"><i class="fas fa-rotate-left"></i> 귀가 버스 안내</p>
         <p>예식 종료 후 충분한 여유를 두어<br><strong>오후 3시경</strong> 현장에서 전주 방면으로 출발 예정입니다.<br>예식장 앞 버스 앞에서 인솔자의 안내에 따라<br>탑승해 주시면 감사하겠습니다.</p>
       </div>
-
       <p style="margin-top:20px;font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:2.1;color:var(--muted);word-break:keep-all;">
         여러 하객분들이 함께 이용하시는 만큼 정시에 출발할 예정입니다.<br>
         원활한 출발을 위해 <strong style="color:var(--ink);">출발 10분 전</strong>까지 도착하여 탑승해 주시면 대단히 감사하겠습니다.
@@ -532,6 +657,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
+<!-- ── REGISTRY ── -->
 <section class="reg-sec">
   <span class="lbl rv">
     Registry
@@ -547,23 +673,30 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <div class="acc-row">
           <div>
             <p class="acc-lbl">혼주 박유경</p>
-            <p class="acc-num missing">⚠ 계좌번호 미기재 — 입력이 필요합니다</p>
+            <p class="acc-num missing">⚠ 계좌번호 미기재</p>
           </div>
-          <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
+          <div class="acc-btns">
+            <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
+          </div>
         </div>
         <div class="acc-row">
           <div>
             <p class="acc-lbl">혼주 김기옥</p>
-            <p class="acc-num missing">⚠ 계좌번호 미기재 — 입력이 필요합니다</p>
+            <p class="acc-num missing">⚠ 계좌번호 미기재</p>
           </div>
-          <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
+          <div class="acc-btns">
+            <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
+          </div>
         </div>
         <div class="acc-row">
           <div>
             <p class="acc-lbl">신랑 박태광</p>
             <p class="acc-num">신한 110-305-227134</p>
           </div>
-          <button class="copy-btn f" onclick="cpCopy('110305227134','신한은행 110-305-227134')">복사하기</button>
+          <div class="acc-btns">
+            <button class="kpay-btn" onclick="openKakao('groom')">카카오페이</button>
+            <button class="copy-btn f" onclick="cpCopy('110305227134','신한은행 110-305-227134')">복사</button>
+          </div>
         </div>
       </div>
     </div>
@@ -576,29 +709,37 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <div class="acc-row">
           <div>
             <p class="acc-lbl">혼주 이기영</p>
-            <p class="acc-num missing">⚠ 계좌번호 미기재 — 입력이 필요합니다</p>
+            <p class="acc-num missing">⚠ 계좌번호 미기재</p>
           </div>
-          <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
+          <div class="acc-btns">
+            <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
+          </div>
         </div>
         <div class="acc-row">
           <div>
             <p class="acc-lbl">혼주 지백현</p>
             <p class="acc-num">농협 301-0089-9502-11</p>
           </div>
-          <button class="copy-btn" onclick="cpCopy('3010089950211','농협 301-0089-9502-11')">복사하기</button>
+          <div class="acc-btns">
+            <button class="copy-btn" onclick="cpCopy('3010089950211','농협 301-0089-9502-11')">복사</button>
+          </div>
         </div>
         <div class="acc-row">
           <div>
             <p class="acc-lbl">신부 이지현</p>
             <p class="acc-num">신한 110-477-676185</p>
           </div>
-          <button class="copy-btn f" onclick="cpCopy('110477676185','신한은행 110-477-676185')">복사하기</button>
+          <div class="acc-btns">
+            <button class="kpay-btn" onclick="openKakao('bride')">카카오페이</button>
+            <button class="copy-btn f" onclick="cpCopy('110477676185','신한은행 110-477-676185')">복사</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── PHOTO SHARE ── -->
 <section>
   <input type="file" id="photo-up" accept="image/*,video/*" multiple style="display:none;">
   <div class="share-card rv">
@@ -614,6 +755,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
+<!-- ── FOOTER ── -->
 <footer>
   <div class="orn" style="margin-bottom:40px;"><i class="fas fa-diamond" style="font-size:7px;color:rgba(181,146,74,.5);margin:0 14px;"></i></div>
   <p class="foot-quote">
@@ -627,6 +769,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <p class="foot-copy">Taekwang &amp; Jihyun &nbsp;·&nbsp; 2027</p>
 </footer>
 
+<!-- ── RSVP MODAL ── -->
 <div id="rsvp-modal" onclick="handleRsvpOutsideClick(event)">
   <div class="m-box">
     <div class="m-head">
@@ -697,13 +840,28 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </div>
 
-</div>
+</div><!-- /.wrap -->
 
 <script>
 const GAS='https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
 const IMGS=['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg'];
 let ci=0, sy=0;
+
+// ★ 신부측 카카오페이 송금 링크 적용 확인 완료 ★
+const KPAY_LINKS = {
+  groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
+  bride:  'https://qr.kakaopay.com/Ej8IMVKSM',
+};
+
+function openKakao(who) {
+  const url = KPAY_LINKS[who];
+  if (!url || url.includes('LINK_HERE')) {
+    toast('카카오페이 링크를 아직 설정하지 않았습니다.');
+    return;
+  }
+  window.open(url, '_blank');
+}
 
 function initGallery(){
   const g=document.getElementById('gal-grid');
@@ -723,9 +881,7 @@ function closeImg(){ document.getElementById('img-modal').classList.remove('acti
 function updModal(){ document.getElementById('modal-img').src=IMGS[ci]; document.getElementById('modal-pnum').textContent=`${ci+1} / ${IMGS.length}`; }
 
 function handleImgOutsideClick(e){
-  if(!e.target.closest('#modal-img') && !e.target.closest('.m-close')){
-    closeImg();
-  }
+  if(!e.target.closest('#modal-img')&&!e.target.closest('.m-close')){closeImg();}
 }
 
 let tx=0,ty=0;
@@ -758,76 +914,51 @@ function initDday(){
   else el.textContent='축복 속에 결혼식을 무사히 마쳤습니다';
 }
 
-const audio = document.getElementById('bgm');
-const discI = document.getElementById('disc-i');
-const bgmLbl = document.getElementById('bgm-lbl');
-audio.volume = 0.35;
-let bgmStarted = false;
+const audio=document.getElementById('bgm');
+const discI=document.getElementById('disc-i');
+const bgmLbl=document.getElementById('bgm-lbl');
+audio.volume=0.35;
+let bgmStarted=false;
 
-const updateBgmUI = (isPlaying) => {
-  if (isPlaying) {
-    discI.style.animation = 'spin 8s linear infinite';
-    bgmLbl.textContent = 'Music On';
-  } else {
-    discI.style.animation = 'none';
-    bgmLbl.textContent = 'Music Off';
-  }
+const updateBgmUI=(isPlaying)=>{
+  if(isPlaying){discI.style.animation='spin 8s linear infinite';bgmLbl.textContent='Music On';}
+  else{discI.style.animation='none';bgmLbl.textContent='Music Off';}
 };
 
-const startAudio = () => {
-  if (bgmStarted) return;
-  audio.play().then(() => {
-    bgmStarted = true;
-    updateBgmUI(true);
-    ['touchstart', 'click', 'scroll'].forEach(evt => document.removeEventListener(evt, startAudio));
-  }).catch(() => {});
+const startAudio=()=>{
+  if(bgmStarted)return;
+  audio.play().then(()=>{bgmStarted=true;updateBgmUI(true);['touchstart','click','scroll'].forEach(e=>document.removeEventListener(e,startAudio));}).catch(()=>{});
 };
 
-audio.play().then(() => {
-  bgmStarted = true;
-  updateBgmUI(true);
-}).catch(() => {
-  ['touchstart', 'click', 'scroll'].forEach(evt => document.addEventListener(evt, startAudio, {passive:true}));
+audio.play().then(()=>{bgmStarted=true;updateBgmUI(true);}).catch(()=>{
+  ['touchstart','click','scroll'].forEach(e=>document.addEventListener(e,startAudio,{passive:true}));
 });
 
-document.getElementById('bgm-btn').addEventListener('click', (e) => {
-  e.stopPropagation();
-  bgmStarted = true;
-  if (audio.paused) {
-    audio.play()
-      .then(() => updateBgmUI(true))
-      .catch(() => toast('🎵 음악 파일을 찾을 수 없습니다. (경로 확인)'));
-  } else {
-    audio.pause();
-    updateBgmUI(false);
-  }
+document.getElementById('bgm-btn').addEventListener('click',(e)=>{
+  e.stopPropagation(); bgmStarted=true;
+  if(audio.paused){audio.play().then(()=>updateBgmUI(true)).catch(()=>toast('🎵 음악 파일을 찾을 수 없습니다.'));}
+  else{audio.pause();updateBgmUI(false);}
 });
 
 window.addEventListener('scroll',()=>{
-  const p=document.getElementById('hero-photo'), y=window.pageYOffset;
-  if(y<window.innerHeight) p.style.transform=`scale(1.05) translateY(${y*.28}px)`;
+  const p=document.getElementById('hero-photo'),y=window.pageYOffset;
+  if(y<window.innerHeight)p.style.transform=`scale(1.05) translateY(${y*.28}px)`;
 },{passive:true});
 
 const ro=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
 function toggleAcc(id){
-  const body=document.getElementById(id), btn=document.getElementById(id+'-btn'), icon=document.getElementById(id+'-i');
+  const body=document.getElementById(id),btn=document.getElementById(id+'-btn'),icon=document.getElementById(id+'-i');
   const isOpen=body.style.display==='block';
-  ['gr','br'].forEach(k=>{ document.getElementById(k).style.display='none'; document.getElementById(k+'-btn').classList.remove('open'); document.getElementById(k+'-i').style.transform=''; });
-  if(!isOpen){ body.style.display='block'; btn.classList.add('open'); icon.style.transform='rotate(45deg)'; }
+  ['gr','br'].forEach(k=>{document.getElementById(k).style.display='none';document.getElementById(k+'-btn').classList.remove('open');document.getElementById(k+'-i').style.transform='';});
+  if(!isOpen){body.style.display='block';btn.classList.add('open');icon.style.transform='rotate(45deg)';}
 }
 
-function enableMap(){
-  document.getElementById('map-overlay').classList.add('hidden');
-}
+function enableMap(){ document.getElementById('map-overlay').classList.add('hidden'); }
 
-/* ★ 스크립트로 앱을 여는 꼼수(팝업 차단) 삭제 -> 직접 a 태그로 앱 유도 ★ */
 function openTmap(){
-  if(!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){
-    alert('티맵은 스마트폰에서 이용해 주세요.');
-    return;
-  }
+  if(!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){alert('티맵은 스마트폰에서 이용해 주세요.');return;}
   window.location.href='tmap://search?name='+encodeURIComponent('남양주 파로스컨벤션');
 }
 
@@ -835,25 +966,19 @@ function openRsvp(){ document.getElementById('rsvp-modal').classList.add('open')
 function closeRsvp(){ document.getElementById('rsvp-modal').classList.remove('open'); document.getElementById('rsvp-form').reset(); document.getElementById('bus-sec').style.display='block'; unlock(); }
 function toggleBus(){ document.getElementById('bus-sec').style.display=document.querySelector('input[name="attend"]:checked').value==='마음만'?'none':'block'; }
 
-function handleRsvpOutsideClick(e){
-  if(!e.target.closest('.m-box')){
-    closeRsvp();
-  }
-}
+function handleRsvpOutsideClick(e){ if(!e.target.closest('.m-box')){closeRsvp();} }
 
 function submitRsvp(e){
   e.preventDefault();
   if(localStorage.getItem('rsvp_v2')){
-    if(!confirm('이미 참석 정보를 전달해 주신 적이 있습니다.\n내용을 수정하여 다시 전송하시겠습니까?\n(마지막으로 전송하신 내용으로 접수됩니다.)')){
-      closeRsvp(); return;
-    }
+    if(!confirm('이미 참석 정보를 전달해 주신 적이 있습니다.\n내용을 수정하여 다시 전송하시겠습니까?\n(마지막으로 전송하신 내용으로 접수됩니다.)')){closeRsvp();return;}
   }
   const btn=document.getElementById('sub-btn');
   btn.textContent='전송 중...'; btn.disabled=true;
   fetch(GAS,{method:'POST',mode:'no-cors',body:new FormData(e.target)})
-    .then(()=>{ localStorage.setItem('rsvp_v2','1'); closeRsvp(); toast('참석 정보가 성공적으로 전달되었습니다. 감사합니다!'); })
+    .then(()=>{localStorage.setItem('rsvp_v2','1');closeRsvp();toast('참석 정보가 성공적으로 전달되었습니다. 감사합니다!');})
     .catch(()=>alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'))
-    .finally(()=>{ btn.textContent='전송하기'; btn.disabled=false; });
+    .finally(()=>{btn.textContent='전송하기';btn.disabled=false;});
 }
 
 const photoUp=document.getElementById('photo-up');
@@ -864,47 +989,36 @@ const loaderText=document.getElementById('loader-text');
 upBtn.addEventListener('click',()=>photoUp.click());
 photoUp.addEventListener('change',async e=>{
   const files=e.target.files; if(!files.length)return;
-  const MAX=10*1024*1024; let big=false, ok=0;
-  lock();
-  loaderOverlay.classList.add('active');
-
-  try {
+  const MAX=10*1024*1024; let big=false,ok=0;
+  lock(); loaderOverlay.classList.add('active');
+  try{
     for(let i=0;i<files.length;i++){
-      const f=files[i];
-      if(f.size>MAX){big=true;continue;}
+      const f=files[i]; if(f.size>MAX){big=true;continue;}
       loaderText.textContent=`사진을 안전하게 업로드하고 있습니다... (${i+1}/${files.length})`;
       try{
         const b64=await toB64(f);
         const fd=new FormData();
-        fd.append('action','upload'); fd.append('fileName',f.name); fd.append('mimeType',f.type); fd.append('fileData',b64.split(',')[1]);
-        await fetch(GAS,{method:'POST',mode:'no-cors',body:fd});
-        ok++;
+        fd.append('action','upload');fd.append('fileName',f.name);fd.append('mimeType',f.type);fd.append('fileData',b64.split(',')[1]);
+        await fetch(GAS,{method:'POST',mode:'no-cors',body:fd}); ok++;
       }catch(err){console.error(err);}
     }
-  } finally {
-    loaderOverlay.classList.remove('active');
-    unlock();
-    photoUp.value='';
-  }
-
-  if(big){
-    alert('10MB가 넘는 고화질 파일이 포함되어 있습니다.\n구글 드라이브로 직접 연결해 드릴 테니 그곳에 올려주시면 감사하겠습니다!');
-    window.open('https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link','_blank');
-  } else if(ok>0){ toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`); }
-  else{ toast('선택된 사진이 없습니다.'); }
+  }finally{loaderOverlay.classList.remove('active');unlock();photoUp.value='';}
+  if(big){alert('10MB가 넘는 고화질 파일이 포함되어 있습니다.\n구글 드라이브로 직접 연결해 드릴 테니 그곳에 올려주시면 감사하겠습니다!');window.open('https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link','_blank');}
+  else if(ok>0){toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);}
+  else{toast('선택된 사진이 없습니다.');}
 });
 
 function toB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.readAsDataURL(f);r.onload=()=>res(r.result);r.onerror=rej;});}
 
-function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.className='show'; setTimeout(()=>t.className='',3000); }
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.className='show';setTimeout(()=>t.className='',3000);}
 
-function cpCopy(num, label){
+function cpCopy(num,label){
   const cb=()=>toast((label||num)+' 복사되었습니다.');
   if(navigator.clipboard){navigator.clipboard.writeText(num).then(cb);}
   else{const el=document.createElement('textarea');el.value=num;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);cb();}
 }
 
-function cpUrl(){ const u=window.location.href; if(navigator.clipboard){navigator.clipboard.writeText(u).then(()=>toast('청첩장 주소가 복사되었습니다.'));}else cpCopy(u); }
+function cpUrl(){const u=window.location.href;if(navigator.clipboard){navigator.clipboard.writeText(u).then(()=>toast('청첩장 주소가 복사되었습니다.'));}else cpCopy(u);}
 
 function shareKakao(){
   if(typeof Kakao==='undefined'){cpUrl();return;}
@@ -912,7 +1026,7 @@ function shareKakao(){
   Kakao.Share.sendDefault({objectType:'feed',content:{title:'태광 ♥ 지현 결혼합니다',description:'2027년 1월 30일(토) 낮 1시 10분 · 남양주 파로스컨벤션',imageUrl:'https://ourmarriage-tkjh.vercel.app/IMG_1033.jpeg',link:{mobileWebUrl:'https://ourmarriage-tkjh.vercel.app/',webUrl:'https://ourmarriage-tkjh.vercel.app/'}},buttons:[{title:'청첩장 보기',link:{mobileWebUrl:'https://ourmarriage-tkjh.vercel.app/',webUrl:'https://ourmarriage-tkjh.vercel.app/'}}]});
 }
 
-document.addEventListener('DOMContentLoaded',()=>{ initSnow(); initGallery(); initDday(); });
+document.addEventListener('DOMContentLoaded',()=>{initSnow();initGallery();initDday();});
 </script>
 </body>
 </html>
