@@ -3,24 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<meta property="og:title" content="태광 ❤️ 지현 결혼합니다">
+<meta property="og:title" content="태광 ♥ 지현 결혼합니다">
 <meta property="og:description" content="2027년 1월 30일(토) 낮 1시 10분 남양주 파로스컨벤션">
 <meta property="og:image" content="IMG_1033.jpeg">
 <title>태광 ❤️ 지현 결혼합니다</title>
 <meta name="theme-color" content="#0E0C0A">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' dominant-baseline='central' text-anchor='middle' font-size='80'>🤍</text></svg>">
+<!-- ★ 추가된 디테일: PC 브라우저 탭(파비콘) 및 아이폰 홈 화면 아이콘 설정 ★ -->
+<link rel="icon" href="IMG_1033.jpeg" type="image/jpeg">
+<link rel="shortcut icon" href="IMG_1033.jpeg" type="image/jpeg">
 <link rel="apple-touch-icon" href="IMG_1033.jpeg">
 
 <script>
   (function() {
     var today = new Date();
-    var showStart = new Date('2026-10-01T00:00:00+09:00');
+    // 예식일 기준 60일 전 자동 계산
+    var weddingDate = new Date('2027-01-30T13:10:00+09:00');
+    var showStart = new Date(weddingDate);
+    showStart.setDate(weddingDate.getDate() - 60);
+    showStart.setHours(0, 0, 0, 0); // 해당 일자 자정부터 오픈
+    
     var showEnd = new Date('2027-01-31T00:00:00+09:00');
+    
     if (today >= showEnd) {
       document.documentElement.classList.add('post-wedding');
     } else if (today < showStart) {
       document.documentElement.classList.add('pre-wedding-mask');
+      // 안내 문구 자동 생성 (12월 1일부터 확인 가능합니다)
+      window.__regOpenMsg = (showStart.getMonth() + 1) + '월 ' + showStart.getDate() + '일부터 확인 가능합니다';
     }
   })();
 </script>
@@ -888,8 +898,9 @@ let ci=0, sy=0;
 
 document.addEventListener("DOMContentLoaded", function() {
   if (document.documentElement.classList.contains('pre-wedding-mask')) {
+    var msg = window.__regOpenMsg || '예식 60일 전부터 확인 가능합니다';
     document.querySelectorAll('.acc-num:not(.missing)').forEach(function(el) {
-      el.textContent = '10월 1일부터 확인 가능합니다';
+      el.textContent = msg;
       el.style.fontSize = '13px';
       el.style.color = 'var(--muted)';
       el.style.letterSpacing = '0';
