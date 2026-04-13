@@ -1009,6 +1009,19 @@ document.getElementById('bgm-btn').addEventListener('click',(e)=>{
   else{audio.pause();updateBgmUI(false);}
 });
 
+// 화면 꺼지거나 다른 탭으로 이동 시 일시정지
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    audio.pause();
+    updateBgmUI(false);
+  } else {
+    // 탭 복귀 시 — 원래 재생 중이었던 경우만 다시 재생
+    if (bgmStarted) {
+      audio.play().then(() => updateBgmUI(true)).catch(() => {});
+    }
+  }
+});
+
 window.addEventListener('scroll',()=>{
   const p=document.getElementById('hero-photo'),y=window.pageYOffset;
   if(y<window.innerHeight) p.style.transform=`scale(1.05) translateY(${y*.28}px)`;
