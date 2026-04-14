@@ -9,10 +9,10 @@
 <title>태광 ❤️ 지현 결혼합니다</title>
 <meta name="theme-color" content="#0E0C0A">
 
-<!-- ★ 추가된 디테일: PC 브라우저 탭(파비콘) 및 아이폰 홈 화면 아이콘 설정 ★ -->
-<link rel="icon" href="IMG_1033.jpeg" type="image/jpeg">
-<link rel="shortcut icon" href="IMG_1033.jpeg" type="image/jpeg">
-<link rel="apple-touch-icon" href="IMG_1033.jpeg">
+<!-- ★ 파비콘 🤍 이모지로 변경 ★ -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤍</text></svg>">
+<link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤍</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤍</text></svg>">
 
 <script>
   (function() {
@@ -443,10 +443,16 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </span>
   <ul class="order-list rv">
     <li>
-      <span class="order-time">12:30</span>
-      <div class="order-txt">하객 입장 및 식사
+      <span class="order-time">12:10</span>
+      <div class="order-txt">축의대 준비 및 하객 맞이
+        <span class="order-sub">예식 1시간 전부터 축의대 세팅이 시작됩니다.<br>조금 여유를 두고 오셔서 편안하게 인사 나누시면 좋습니다.</span>
+      </div>
+    </li>
+    <li>
+      <span class="order-time">12:40</span>
+      <div class="order-txt">식사 시작
         <span class="buffet-highlight">
-          🍽 뷔페 식사는 예식 <strong>전·후 모두</strong> 이용하실 수 있습니다
+          🍽 뷔페 식사는 <strong>12:40부터 14:40까지 (2시간)</strong> 이용하실 수 있습니다.
         </span>
         <span class="order-sub" style="background:var(--white); padding:14px 16px; border-radius:6px; border:.5px solid var(--line); margin-top:12px;">
           <span style="color:var(--gold);font-weight:500;display:flex;align-items:center;gap:6px;margin-bottom:6px;"><i class="fas fa-wine-glass"></i> 여유로운 연회</span>
@@ -519,7 +525,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <span class="lbl-kr">오시는 길</span>
     <span class="lbl-en">Location</span>
   </span>
-  <h3 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;text-align:center;letter-spacing:.05em;margin-bottom:8px;">파로스컨벤션 2층 단독홀 파로스홀</h3>
+  <h3 class="rv" style="font-family:'Noto Serif KR',serif;font-size:21px;font-weight:500;text-align:center;letter-spacing:.05em;margin-bottom:8px;">파로스컨벤션 2층 단독홀 파로스홀</h3>
   <p class="rv" style="font-family:'Noto Sans KR',sans-serif;font-size:15px;color:var(--muted);text-align:center;margin-bottom:32px;line-height:2.1;font-weight:300;">
     경기 남양주시 다산순환로 20<br>
     다산현대프리미어캠퍼스몰 <strong style="color:var(--ink);font-weight:500;">E동 2층</strong>
@@ -1022,6 +1028,25 @@ document.getElementById('bgm-btn').addEventListener('click',(e)=>{
   else{audio.pause();updateBgmUI(false);}
 });
 
+// ★ 페이지 이탈(탭 이동, 브라우저 최소화) 시 BGM 끄고, 돌아오면 다시 켜기 로직 추가 ★
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    if (!audio.paused) {
+      audio.pause();
+      audio._wasPlayingBeforeHidden = true; // 돌아왔을 때 다시 재생하기 위한 플래그
+      updateBgmUI(false);
+    } else {
+      audio._wasPlayingBeforeHidden = false;
+    }
+  } else {
+    if (audio._wasPlayingBeforeHidden) {
+      audio.play().then(() => {
+        updateBgmUI(true);
+      }).catch(() => {});
+    }
+  }
+});
+
 window.addEventListener('scroll',()=>{
   const p=document.getElementById('hero-photo'),y=window.pageYOffset;
   if(y<window.innerHeight) p.style.transform=`scale(1.05) translateY(${y*.28}px)`;
@@ -1066,7 +1091,6 @@ function submitRsvp(e){
     .finally(()=>{btn.textContent='전송하기';btn.disabled=false;});
 }
 
-// ★ 모달을 없애고 버튼 클릭 한 번으로 모든 게 해결되는 궁극의 캘린더 로직 ★
 function addSmartCalendar() {
   const ua = navigator.userAgent.toLowerCase();
   const isIOS = /iphone|ipad|ipod|mac/.test(ua);
@@ -1076,7 +1100,6 @@ function addSmartCalendar() {
   const desc = "지하철:구리역 7번출구 셔틀 운행 / 주차: GATE 2로 진입하여 지하 3~4층까지 계속 좌회전하여 E동 근처 주차";
   
   if (isIOS) {
-    // 아이폰, Mac: 팝업창 없이 애플 캘린더 '새로운 이벤트 추가' 화면으로 바로 다이렉트 점프
     const icsMSG = 
       "BEGIN:VCALENDAR\n" +
       "VERSION:2.0\n" +
@@ -1093,7 +1116,6 @@ function addSmartCalendar() {
       
     window.location.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(icsMSG);
   } else {
-    // 안드로이드, PC: 바로 구글 캘린더 앱 또는 웹으로 연결
     const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20270130T041000Z/20270130T061000Z&location=${encodeURIComponent(loc)}&details=${encodeURIComponent(desc)}`;
     window.open(googleUrl, '_blank');
   }
