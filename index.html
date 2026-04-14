@@ -481,7 +481,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <li>
       <span class="order-time">15:00</span>
       <div class="order-txt">전세버스 귀환 출발
-        <span class="order-sub">전주 노선 출발 예정<br>충분한 시간 여유를 두고 진행됩니다</span>
+        <span class="order-sub">3시 전주 노선 출발 예정<br>충분한 시간 여유를 두고 진행됩니다</span>
       </div>
     </li>
   </ul>
@@ -592,82 +592,63 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <div class="trans-box rv">
     <div class="trans-hdr"><i class="fas fa-car"></i>자가용 및 주차장 안내</div>
     
-    <div class="trans-row">
-      <span class="dot">·</span>
+<!-- 내비게이션 검색 -->
+    <div style="display:flex;align-items:center;gap:10px;background:var(--bg2);border:.5px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:22px;">
+      <div style="width:28px;height:28px;border-radius:50%;background:rgba(181,146,74,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">📍</div>
       <div>
-        <div>내비게이션 검색</div>
-        <div class="trans-desc" style="color:var(--ink); font-weight:500; font-size:15px; margin-top:4px;">"다산순환로 20" 또는 "파로스컨벤션"</div>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:11px;color:var(--muted);letter-spacing:.08em;margin-bottom:3px;">내비게이션 검색</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:600;color:var(--ink);">"다산순환로 20" 또는 "파로스컨벤션"</p>
       </div>
     </div>
 
-    <div style="margin: 20px 0 16px;">
-      <svg viewBox="0 0 300 230" style="width:100%;display:block;margin-bottom:12px;border-radius:8px;border:.5px solid var(--line);background:#F7F2EA;" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arr-r" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#C04B30"/></marker>
-          <marker id="arr-b" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1A1714"/></marker>
-          <marker id="arr-g" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#B5924A"/></marker>
-        </defs>
-        <rect x="0" y="195" width="300" height="35" fill="#D0CBC3"/>
-        <text x="150" y="217" text-anchor="middle" font-size="11" fill="#8A7D72" font-weight="bold" letter-spacing="2">다산순환로</text>
-        <rect x="12" y="12" width="276" height="183" rx="6" fill="#F0EBE1" stroke="#E2D9CC" stroke-width="1"/>
-        <rect x="180" y="183" width="60" height="24" rx="4" fill="#1A1714"/>
-        <text x="210" y="199" text-anchor="middle" font-size="11" fill="#FDFAF5" font-weight="bold" letter-spacing="1">GATE 2</text>
-        <path d="M 210 183 L 210 145 L 160 145" fill="none" stroke="#C04B30" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#arr-r)"/>
-        <text x="225" y="160" font-size="10" fill="#C04B30" font-weight="bold">진입</text>
-        <path d="M 145 145 L 100 145" fill="none" stroke="#1A1714" stroke-width="2.5" marker-end="url(#arr-b)"/>
-        <text x="150" y="135" text-anchor="middle" font-size="11" fill="#1A1714" font-weight="bold">계속 좌회전 ↺</text>
-        <rect x="25" y="105" width="70" height="70" rx="5" fill="#F7F2EA" stroke="#B5924A" stroke-width="1.5"/>
-        <text x="60" y="135" text-anchor="middle" font-size="13" fill="#B5924A" font-weight="bold">E동</text>
-        <text x="60" y="155" text-anchor="middle" font-size="11" fill="#8A7D72">B3·B4</text>
-        <path d="M 60 105 L 60 60 L 105 60" fill="none" stroke="#B5924A" stroke-width="2" stroke-dasharray="4,4" stroke-linejoin="round" marker-end="url(#arr-g)"/>
-        <text x="80" y="52" text-anchor="middle" font-size="10" fill="#B5924A" font-weight="bold">E동 전용 엘리베이터</text>
-        <rect x="110" y="35" width="150" height="45" rx="5" fill="#1A1714"/>
-        <text x="185" y="62" text-anchor="middle" font-size="14" fill="#FDFAF5" font-weight="bold" letter-spacing="1">2층 파로스홀 도착</text>
-      </svg>
-
-      <div class="pk-card">
-        <div class="pk-step">
-          <div class="pk-num n1">①</div>
-          <div>
-            <p class="pk-main"><span class="red">GATE 2</span> 진입</p>
-            <p class="pk-detail">반드시 2번 게이트로 들어오세요</p>
-          </div>
+    <!-- 3단계 플로우 -->
+    <div style="display:flex;align-items:flex-start;margin-bottom:22px;">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;">
+        <div style="width:50px;height:50px;border-radius:50%;background:#C04B30;display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:10px;">
+          <span style="font-family:'Noto Sans KR',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.75);letter-spacing:.04em;">GATE</span>
+          <span style="font-family:'Noto Sans KR',sans-serif;font-size:20px;font-weight:700;color:#fff;line-height:1;">2</span>
         </div>
-        <div class="pk-step">
-          <div class="pk-num n2">②</div>
-          <div>
-            <p class="pk-main">지하 3·4층 <strong style="text-decoration:underline;text-underline-offset:2px;">E동 구역</strong> 주차</p>
-            <p class="pk-detail">진입 후 계속 좌회전하여 내려오세요</p>
-          </div>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:3px;line-height:1.4;">2번 게이트<br>진입</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:11px;color:var(--muted);font-weight:300;line-height:1.6;">반드시<br>GATE 2로</p>
+      </div>
+      <div style="flex-shrink:0;padding-top:18px;color:var(--line);font-size:22px;margin:0 2px;">›</div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;">
+        <div style="width:50px;height:50px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:10px;gap:2px;">
+          <span style="font-size:15px;color:#fff;">🅿</span>
+          <span style="font-family:'Noto Sans KR',sans-serif;font-size:9px;color:rgba(255,255,255,.7);">B3·B4</span>
         </div>
-        <div class="pk-step">
-          <div class="pk-num n3">③</div>
-          <div>
-            <p class="pk-main">E동 전용 엘리베이터 탑승</p>
-            <p class="pk-detail">2층 파로스홀로 바로 연결됩니다</p>
-          </div>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:3px;line-height:1.4;">E동 구역<br>주차</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:11px;color:var(--muted);font-weight:300;line-height:1.6;">계속 좌회전<br>하며 하강</p>
+      </div>
+      <div style="flex-shrink:0;padding-top:18px;color:var(--line);font-size:22px;margin:0 2px;">›</div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;">
+        <div style="width:50px;height:50px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:10px;gap:2px;">
+          <span style="font-size:15px;color:#fff;">🛗</span>
+          <span style="font-family:'Noto Sans KR',sans-serif;font-size:9px;color:rgba(255,255,255,.8);">2F</span>
         </div>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:3px;line-height:1.4;">E동 엘리베이터<br>탑승</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:11px;color:var(--muted);font-weight:300;line-height:1.6;">2층 파로스컨벤션<br>바로 연결</p>
       </div>
     </div>
 
-    <div class="trans-row">
-      <span class="dot">·</span>
-      <div>
-        <div style="margin-bottom:6px;"><strong>무료 주차 안내</strong></div>
-        <div class="trans-desc" style="color:var(--ink); font-weight:400;">2시간 무료 <span style="font-size:12.5px;color:var(--muted);">(이후 30분당 1,500원 추가)</span></div>
-      </div>
+    <!-- 무료 주차 -->
+    <div style="display:flex;align-items:center;gap:10px;border:.5px solid rgba(181,146,74,.35);border-radius:6px;padding:11px 14px;margin-bottom:16px;background:rgba(181,146,74,.06);">
+      <span style="font-size:16px;">🅿</span>
+      <p style="font-family:'Noto Sans KR',sans-serif;font-size:13.5px;color:var(--ink);"><strong>2시간 무료</strong> &nbsp;<span style="color:var(--muted);font-size:12px;">· 이후 30분당 1,500원 추가</span></p>
     </div>
 
-    <div style="background:rgba(192, 75, 48, 0.05); border:1px solid rgba(192, 75, 48, 0.2); border-radius:6px; padding:16px 18px; margin-top:24px;">
-      <p style="font-family:'Noto Sans KR',sans-serif; font-size:13.5px; font-weight:600; color:#C04B30; margin-bottom:8px;">
-        <i class="fas fa-exclamation-circle"></i> 하객분들께 드리는 당부 말씀
-      </p>
-      <ul style="padding-left:14px; margin:0; font-family:'Noto Sans KR',sans-serif; font-size:13px; line-height:1.8; color:var(--ink); font-weight:300;">
-        <li style="margin-bottom:6px;">건물이 매우 넓어 다른 구역(A~D동)에 주차하시면 파로스홀을 찾기 어렵습니다. <strong style="color:#C04B30; font-weight:500;">반드시 E동 구역에 주차</strong>해 주세요.</li>
-        <li>캠퍼스몰 전체 주차 공간(2,500대)을 공유하므로 넉넉합니다. 단, 주말에는 <strong>예식장 맞은편 아울렛(현대프리미엄아울렛 SPACE1)</strong> 진입 차량으로 도로가 혼잡할 수 있으니 <strong>조금 여유 있게 출발</strong>해 주시면 감사합니다.</li>
-      </ul>
+    <!-- 당부 말씀 -->
+    <div style="background:rgba(192,75,48,.05);border:1px solid rgba(192,75,48,.2);border-radius:8px;padding:16px;">
+      <p style="font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:600;color:#C04B30;margin-bottom:12px;display:flex;align-items:center;gap:6px;"><i class="fas fa-triangle-exclamation"></i> 하객분들께 드리는 당부 말씀</p>
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">
+        <span style="width:18px;height:18px;border-radius:50%;background:#C04B30;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px;">1</span>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:12.5px;color:var(--ink);font-weight:300;line-height:1.8;word-break:keep-all;">A~D동 주차 시 예식장을 찾기가 어렵습니다. <strong style="color:#C04B30;font-weight:500;">반드시 E동 구역에 주차</strong>해 주세요.</p>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <span style="width:18px;height:18px;border-radius:50%;background:rgba(192,75,48,.12);display:flex;align-items:center;justify-content:center;font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:700;color:#C04B30;flex-shrink:0;margin-top:1px;">2</span>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:12.5px;color:var(--ink);font-weight:300;line-height:1.8;word-break:keep-all;">주말 아울렛 진입 차량으로 도로가 혼잡할 수 있으니 <strong style="font-weight:500;">조금 여유 있게 출발</strong>해 주시면 감사합니다.</p>
+      </div>
     </div>
-  </div>
 
   <div class="trans-box rv">
     <div class="trans-hdr"><i class="fas fa-route"></i>전세버스 및 귀가 버스</div>
