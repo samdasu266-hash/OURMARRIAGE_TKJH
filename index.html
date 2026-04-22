@@ -86,6 +86,7 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 /* ── HERO SECTION ── */
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
 .hero-photo{position:absolute;inset:0;background-color:#0E0C0A;will-change:transform;}
+.hero-photo video{width:100%;height:100%;object-fit:cover;display:block;}
 .hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(14,12,10,.4) 60%,rgba(14,12,10,.95) 100%);}
 #snow-c{position:absolute;inset:0;pointer-events:none;z-index:5;}
 .hero-body{position:absolute;bottom:0;left:0;right:0;padding:0 32px 52px;text-align:center;color:var(--white);z-index:10;}
@@ -346,7 +347,11 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <!-- ── HERO ── -->
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
-  <div class="hero-photo" id="hero-photo"></div>
+<div class="hero-photo" id="hero-photo">
+  <video autoplay muted loop playsinline preload="auto">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+</div>
   <div class="hero-veil"></div>
   <div id="snow-c"></div>
   <div class="hero-body">
