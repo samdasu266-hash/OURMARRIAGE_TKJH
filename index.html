@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- ★ 다크모드 강제 해제 (항상 밝고 예쁜 톤 유지) ★ -->
 <meta name="color-scheme" content="light only">
-<!-- ★ 검색엔진 수집 차단 (프라이버시 보호) ★ -->
 <meta name="robots" content="noindex, nofollow">
 
-<!-- ★ 공유 시 썸네일 및 링크 (절대경로 적용) ★ -->
 <meta property="og:url" content="https://ourmarriage-tkjh.vercel.app/">
 <meta property="og:title" content="태광 ❤️ 지현 결혼합니다">
 <meta property="og:description" content="2027년 1월 30일(토) 낮 1시 10분 남양주 파로스컨벤션">
@@ -17,7 +14,6 @@
 <title>태광 ❤️ 지현 결혼합니다</title>
 <meta name="theme-color" content="#F9F7F3">
 
-<!-- 파비콘 및 아이콘 설정 -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.35em%22 font-size=%2275%22>🤍</text></svg>">
 <link rel="apple-touch-icon" href="https://ourmarriage-tkjh.vercel.app/IMG_1033.jpeg">
 
@@ -46,20 +42,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* ── RESET & VARIABLES ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{--ink:#1A1714;--cream:#F7F2EA;--gold:#B5924A;--gold-lt:#D4B07A;--muted:#6E6259;--line:#E2D9CC;--bg2:#F0EBE1;--white:#FDFAF5;}
 
-/* ── LAYOUT BASE ── */
 html{scroll-behavior:smooth;}
 html,body{width:100%;background:#D0CBC3;overscroll-behavior-y:none;}
 body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
 .wrap{width:100%;max-width:430px;background:var(--cream);min-height:100vh;position:relative;box-shadow:0 0 80px rgba(0,0,0,0.18);overflow-x:hidden;}
 
-/* ── PRIVACY UTILS ── */
 .post-wedding .hide-privacy{display:none !important;}
 
-/* ── TOAST & LOADER ── */
 #toast{visibility:hidden;position:fixed;z-index:2000;left:50%;bottom:max(36px, env(safe-area-inset-bottom + 36px));transform:translateX(-50%);background:var(--ink);color:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;letter-spacing:.05em;padding:15px 28px;white-space:nowrap;border-bottom:2px solid var(--gold);box-shadow:0 8px 28px rgba(0,0,0,.22);border-radius:4px;}
 #toast.show{visibility:visible;animation:toastIn .35s ease,toastOut .35s ease 2.5s forwards;}
 @keyframes toastIn{from{bottom:10px;opacity:0}to{bottom:max(36px, env(safe-area-inset-bottom + 36px));opacity:1}}
@@ -71,20 +63,17 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 @keyframes spin{100%{transform:rotate(360deg)}}
 #loader-text{font-family:'Noto Sans KR',sans-serif;font-size:14px;letter-spacing:.05em;font-weight:300;text-align:center;line-height:1.6;}
 
-/* ── BGM BUTTON (우측 상단으로 이동) ── */
-.bgm-btn{position:fixed;top:max(24px, env(safe-area-inset-top + 24px));right:18px;z-index:500;background:rgba(247,242,234,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(181,146,74,.3);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s, background .3s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.bgm-btn{position:fixed;bottom:max(24px, env(safe-area-inset-bottom + 24px));left:18px;z-index:500;background:rgba(247,242,234,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(181,146,74,.3);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s, background .3s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
 .bgm-btn:hover{background:rgba(247,242,234,.95);}
 .bgm-btn:active{transform:scale(.95);}
 .bgm-btn i{font-size:13px;color:var(--ink);}
 .bgm-btn span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);font-weight:500;}
 .disc-spinning{animation:spin 8s linear infinite;}
 
-/* ── SCROLL TO TOP ── */
 #top-btn{display:none;position:fixed;bottom:max(24px, env(safe-area-inset-bottom + 24px));right:18px;z-index:500;width:44px;height:44px;border-radius:50%;background:rgba(247,242,234,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);cursor:pointer;color:var(--ink);font-size:14px;transition:opacity .3s,transform .2s;box-shadow:0 4px 16px rgba(0,0,0,.12);align-items:center;justify-content:center;}
 #top-btn.visible{display:flex;}
 #top-btn:active{transform:scale(.92);}
 
-/* ── HERO SECTION ── */
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
 .hero-photo{position:absolute;inset:0;background-color:#0E0C0A;will-change:transform;}
 .hero-photo video{width:100%;height:100%;object-fit:cover;display:block;}
@@ -114,7 +103,6 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .sf{position:absolute;border-radius:50%;background:rgba(255,255,255,.88);pointer-events:none;animation:sf linear infinite;box-shadow:0 0 5px rgba(255,255,255,.5);}
 @keyframes sf{0%{transform:translate3d(0,-10px,0);opacity:0}10%{opacity:.85}90%{opacity:.85}100%{transform:translate3d(var(--sx),100vh,0);opacity:0}}
 
-/* ── COMMON SECTIONS & ORNAMENTS ── */
 section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .orn{display:flex;align-items:center;justify-content:center;margin:0 auto;}
 .orn::before,.orn::after{content:'';flex:1;height:.5px;background:var(--gold-lt);opacity:.5;}
@@ -122,7 +110,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .orn::after{background:linear-gradient(to left,transparent,var(--gold-lt));}
 .orn i{font-size:7px;color:var(--gold-lt);margin:0 14px;opacity:.8;transform:rotate(45deg);}
 
-/* ── 섹션 헤더 ── */
 .lbl{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:36px;gap:8px;}
 .lbl-kr{font-family:'Noto Serif KR',serif;font-size:19px;color:var(--ink);letter-spacing:.06em;font-weight:500;}
 .lbl-en{font-family:'Cormorant Garamond',serif;font-size:11.5px;letter-spacing:.5em;color:var(--gold-lt);text-transform:uppercase;}
@@ -131,7 +118,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .rv.in{opacity:1;transform:none;}
 .rv.d1{transition-delay:.1s;}.rv.d2{transition-delay:.2s;}.rv.d3{transition-delay:.3s;}
 
-/* ── INVITATION ── */
 .inv-text{font-family:'Noto Serif KR',serif;font-size:17px;line-height:2.7;font-weight:300;color:var(--ink);text-align:center;word-break:keep-all;}
 .inv-families{margin-top:52px;text-align:center;}
 .fam-row{display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
@@ -139,7 +125,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .fam-rel{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);font-weight:300;}
 .fam-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ink);letter-spacing:.08em;}
 
-/* ── STORY TIMELINE ── */
 .story-wrap{position:relative;padding-left:28px;}
 .story-line{position:absolute;left:10px;top:12px;bottom:12px;width:1px;background:var(--line);z-index:0;}
 .story-node{position:relative;margin-bottom:38px;}
@@ -150,7 +135,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .story-ttl{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:8px;}
 .story-desc{font-family:'Noto Sans KR',sans-serif;font-size:13.5px;line-height:2.2;color:var(--muted);font-weight:300;word-break:keep-all;}
 
-/* ── CALENDAR ── */
 .lbl-cal{display:block;text-align:center;margin-bottom:36px;}
 .lbl-cal-main{font-family:'Noto Serif KR',serif;font-size:16px;letter-spacing:.32em;color:var(--gold);font-weight:400;display:block;margin-bottom:8px;}
 .lbl-cal-sub{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase;display:block;}
@@ -170,7 +154,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .cal-btn:active { transform: scale(0.96); background: var(--cream); }
 .cal-btn i { color: var(--gold-lt); font-size: 15px; }
 
-/* ── PROGRAM ── */
 .order-list{list-style:none;max-width:310px;margin:0 auto;}
 .order-list li{display:flex;align-items:flex-start;gap:18px;padding:16px 0;border-bottom:.5px dashed var(--line);}
 .order-list li:last-child{border-bottom:none;}
@@ -183,7 +166,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .buffet-highlight{display:block;margin-top:10px;padding:11px 14px;background:rgba(181,146,74,.1);border:.5px solid rgba(181,146,74,.35);border-radius:5px;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;color:var(--ink);font-weight:400;line-height:1.8;}
 .buffet-highlight strong{color:var(--gold);}
 
-/* ── RSVP ── */
 .rsvp-sec{background:var(--ink);}
 .rsvp-sec .lbl-kr{color:rgba(253,250,245,.92);}
 .rsvp-sec .lbl-en{color:var(--gold-lt);}
@@ -192,8 +174,7 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .btn-ghost:hover{background:rgba(181,146,74,.15);border-color:var(--gold-lt);}
 .btn-ghost:active{transform:scale(.98);}
 
-/* ── GALLERY (4x5 배열) ── */
-.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;} /* 4열 배열로 수정 */
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;} 
 .gal-item{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;background:var(--bg2);}
 .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1);display:block;}
 .gal-item:hover img{transform:scale(1.07);}
@@ -201,7 +182,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .gal-item:hover::after{background:rgba(181,146,74,.1);}
 .gal-hint{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);text-align:center;margin-top:24px;font-weight:300;letter-spacing:.1em;}
 
-/* ── IMAGE MODAL ── */
 #img-modal{display:none;position:fixed;inset:0;z-index:900;background:rgba(10,8,7,.97);flex-direction:column;align-items:center;justify-content:center;}
 #img-modal.active{display:flex;}
 #img-modal .m-close{position:absolute;top:max(20px, env(safe-area-inset-top + 20px));right:20px;color:rgba(253,250,245,.55);font-size:24px;cursor:pointer;padding:12px;background:none;border:none;}
@@ -210,7 +190,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 #modal-img{max-width:100%;max-height:85vh;object-fit:contain;}
 #img-modal .m-hint{position:absolute;bottom:max(28px, env(safe-area-inset-bottom + 28px));left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:rgba(253,250,245,.4);letter-spacing:.14em;white-space:nowrap;}
 
-/* ── LOCATION & TRANSPORTATION ── */
 .map-wrap{position:relative;width:100%;height:320px;margin-bottom:20px;}
 .map-f{width:100%;height:100%;border:.5px solid var(--line);overflow:hidden;display:block;}
 .map-overlay{position:absolute;inset:0;background:rgba(26,23,20,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:opacity .3s;z-index:2;}
@@ -255,7 +234,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .pk-main .red{color:#C04B30;}
 .pk-detail{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);font-weight:300;line-height:1.9;}
 
-/* ── REGISTRY ── */
 .reg-sec{background:var(--bg2);}
 .acc-item{border:.5px solid var(--line);margin-bottom:10px;overflow:hidden;border-radius:4px;}
 .acc-btn{width:100%;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;background:var(--white);border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);transition:background .2s;}
@@ -276,11 +254,9 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .kpay-btn{display:inline-flex;align-items:center;gap:4px;padding:9px 12px;background:#FEE500;border:none;border-radius:4px;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:600;color:#191600;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
 .kpay-btn:active{opacity:.75;}
 
-/* ── PHOTO SHARE & FOOTER ── */
 .share-card{background:var(--white);border:.5px solid var(--line);padding:40px 28px;text-align:center;}
 .share-p{font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:2.2;color:var(--muted);font-weight:300;word-break:keep-all;margin-bottom:28px;}
 
-/* 새롭게 변경된 나란히 배치되는 사진 공유 버튼 스타일 */
 .share-btn-group { display: flex; gap: 10px; margin-bottom: 16px; justify-content: center; }
 .share-btn-outline { flex: 1; background: transparent; border: 1px solid rgba(181, 146, 74, 0.4); color: var(--gold); padding: 18px 10px; font-family: 'Noto Sans KR', sans-serif; font-size: 13.5px; font-weight: 500; letter-spacing: 0.02em; cursor: pointer; border-radius: 4px; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
 .share-btn-outline i { font-size: 20px; }
@@ -295,12 +271,11 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 .foot-share:active{transform:scale(.98);}
 .foot-copy{margin-top:60px;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.4em;color:rgba(253,250,245,.3);text-transform:uppercase;}
 
-/* ── RSVP MODAL ── */
 #rsvp-modal{display:none;position:fixed;inset:0;z-index:600;background:rgba(14,12,10,.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px 16px;}
 #rsvp-modal.open{display:flex;}
 .m-box{background:var(--cream);width:100%;max-width:380px;max-height:88vh;display:flex;flex-direction:column;border:.5px solid var(--line);box-shadow:0 28px 64px rgba(0,0,0,.32);border-radius:8px;overflow:hidden;}
 .m-head{padding:22px 24px;border-bottom:.5px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--cream);flex-shrink:0;}
-.m-head h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--ink);letter-spacing:.1em;}
+.m-head h3{font-family:'Noto Serif KR',serif;font-size:19px;font-weight:500;color:var(--ink);letter-spacing:.05em;}
 .m-head button{background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;padding:4px;}
 .m-scroll{overflow-y:auto;padding:24px;flex:1;background:var(--white);overscroll-behavior:contain;}
 .fg{margin-bottom:24px;}
@@ -317,7 +292,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 .sub-btn:disabled{opacity:.55;cursor:not-allowed;}
 .sub-btn:active{opacity:.8;}
 
-/* ★ 인쇄용(Print) 최적화 CSS 추가 ★ */
 @media print {
   #bgm-btn, #top-btn, .map-overlay, .map-btns, .cal-btn-wrap, .btn-ghost, .acc-btn, .share-card, .foot-share, #rsvp-modal, #img-modal, #toast, #loader-overlay { display: none !important; }
   .hero-photo { background-image: none !important; }
@@ -349,7 +323,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <i class="fas fa-chevron-up"></i>
 </button>
 
-<!-- ── HERO ── -->
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
 <div class="hero-photo" id="hero-photo">
   <video autoplay muted loop playsinline preload="auto">
@@ -373,7 +346,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
-<!-- ── INVITATION ── -->
 <section>
   <span class="lbl rv">
     <span class="lbl-kr">소중한 분들을 초대합니다</span>
@@ -400,7 +372,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
-<!-- ── STORY TIMELINE ── -->
 <section style="background:var(--bg2);">
   <span class="lbl rv">
     <span class="lbl-kr">우리의 이야기</span>
@@ -435,7 +406,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
-<!-- ── CALENDAR ── -->
 <section style="background:var(--white);">
   <div class="lbl-cal rv">
     <span class="lbl-cal-main">예식일 안내</span>
@@ -468,7 +438,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
-<!-- ── PROGRAM ── -->
 <section style="background:var(--bg2);">
   <span class="lbl rv">
     <span class="lbl-kr">예식 순서 안내</span>
@@ -523,7 +492,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </p>
 </section>
 
-<!-- ── LOCATION & TRANSPORTATION ── -->
 <section>
   <span class="lbl rv">
     <span class="lbl-kr">오시는 길</span>
@@ -554,7 +522,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <button onclick="openTmap()" class="mbtn tm">티맵</button>
   </div>
 
-  <!-- 지하철 및 셔틀버스 -->
   <div class="trans-box rv" style="margin-top:40px;">
     <div class="trans-hdr"><i class="fas fa-train-subway"></i>지하철 및 셔틀버스 이용시</div>
     <div class="trans-row">
@@ -582,7 +549,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </div>
   </div>
 
-  <!-- 시내 및 광역버스 -->
   <div class="trans-box rv">
     <div class="trans-hdr"><i class="fas fa-bus"></i>시내 및 광역버스 이용시</div>
     
@@ -611,7 +577,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </div>
   </div>
 
-  <!-- 자가용 및 주차장 -->
   <div class="trans-box rv">
     <div class="trans-hdr"><i class="fas fa-car"></i>자가용 및 주차장 안내</div>
     <div class="trans-row">
@@ -691,7 +656,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </div>
   </div>
 
-  <!-- 전세버스 안내 -->
   <div class="trans-box rv">
     <div class="trans-hdr"><i class="fas fa-bus-alt"></i>전세버스 안내 (전주)</div>
     
@@ -718,7 +682,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
-<!-- ── RSVP ── -->
 <section class="rsvp-sec">
   <span class="lbl rv">
     <span class="lbl-kr">참석 의사 전달</span>
@@ -728,7 +691,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <button class="btn-ghost rv" onclick="openRsvp()">참석 여부 전달하기</button>
 </section>
 
-<!-- ── GALLERY ── -->
 <section>
   <span class="lbl rv">
     <span class="lbl-kr">우리의 예쁜 순간들</span>
@@ -747,7 +709,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <p class="m-hint">← 좌우 스와이프로 이동 &nbsp;·&nbsp; 아래로 내리면 닫힙니다</p>
 </div>
 
-<!-- ── REGISTRY ── -->
 <section class="reg-sec hide-privacy">
   <span class="lbl rv">
     <span class="lbl-kr">마음 전하실 곳</span>
@@ -829,7 +790,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
-<!-- ── PHOTO SHARE ── -->
 <section>
   <input type="file" id="photo-up" accept="image/*,video/*" multiple style="display:none;">
   <div class="share-card rv">
@@ -839,7 +799,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </span>
     <p class="share-p" style="margin-top:24px;">예식 당일, 하객분들의 따뜻한 시선으로 담아주신<br>소중한 순간들을 아래 버튼을 통해<br>보내 주시면 감사히 간직하겠습니다.</p>
     
-    <!-- 나란히 배치된 아웃라인 버튼 그룹 -->
     <div class="share-btn-group">
       <button class="share-btn-outline" id="up-btn">
         <i class="fas fa-camera"></i>
@@ -860,7 +819,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
   <div class="orn" style="margin-bottom:40px;"><i class="fas fa-diamond" style="font-size:7px;color:rgba(181,146,74,.5);margin:0 14px;"></i></div>
   <p class="foot-quote">
@@ -878,7 +836,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <p class="foot-copy">Taekwang &amp; Jihyun &nbsp;·&nbsp; 2027</p>
 </footer>
 
-<!-- ── RSVP MODAL ── -->
 <div id="rsvp-modal" onclick="handleRsvpOutsideClick(event)">
   <div class="m-box">
     <div class="m-head">
@@ -958,7 +915,6 @@ document.addEventListener('keydown', e => {
 
 const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
-// 갤러리 이미지 배열 확장 (20장)
 const IMGS = [
   '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg',
   '6.jpg','7.jpg','8.jpg','9.jpg','10.jpg',
@@ -967,7 +923,6 @@ const IMGS = [
 ];
 let ci = 0, sy = 0;
 
-/* ── GALLERY ── */
 function initGallery() {
   const g = document.getElementById('gal-grid');
   g.innerHTML = '';
@@ -981,7 +936,6 @@ function initGallery() {
   });
 }
 
-/* ── IMAGE MODAL ── */
 function openImg(i) { ci = i; updModal(); document.getElementById('img-modal').classList.add('active'); lock(); }
 function closeImg() { document.getElementById('img-modal').classList.remove('active'); unlock(); }
 function updModal() {
@@ -1004,7 +958,6 @@ document.getElementById('modal-ta').addEventListener('touchend', e => {
   if (dx > 60) { ci = (ci - 1 + IMGS.length) % IMGS.length; updModal(); }
 }, { passive: true });
 
-// PC 키보드 갤러리 지원
 window.addEventListener('keydown', e => {
   const modal = document.getElementById('img-modal');
   if (modal.classList.contains('active')) {
@@ -1014,7 +967,6 @@ window.addEventListener('keydown', e => {
   }
 });
 
-/* ── BODY SCROLL LOCK ── */
 function lock() {
   sy = window.pageYOffset;
   document.body.style.cssText += `overflow:hidden;position:fixed;top:-${sy}px;width:100%;`;
@@ -1024,7 +976,6 @@ function unlock() {
   window.scrollTo(0, sy);
 }
 
-/* ── SNOW ── */
 function initSnow() {
   const c = document.getElementById('snow-c');
   for (let i = 0; i < 18; i++) {
@@ -1036,7 +987,6 @@ function initSnow() {
   }
 }
 
-/* ── D-DAY ── */
 function initDday() {
   const w = new Date('2027-01-30T00:00:00');
   const t = new Date(); t.setHours(0, 0, 0, 0);
@@ -1047,7 +997,6 @@ function initDday() {
   else el.textContent = '축복 속에 결혼식을 무사히 마쳤습니다';
 }
 
-/* ── BGM ── */
 const audio = document.getElementById('bgm');
 const discI = document.getElementById('disc-i');
 const bgmLbl = document.getElementById('bgm-lbl');
@@ -1055,7 +1004,6 @@ audio.volume = 0.35;
 let bgmStarted = false;
 let bgmWasPlaying = false; 
 
-// BGM 파일 로드 실패 방어
 audio.onerror = () => { console.warn("BGM 파일을 불러올 수 없습니다."); };
 
 const updateBgmUI = (isPlaying) => {
@@ -1094,7 +1042,6 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-/* ── PARALLAX & SCROLL ── */
 window.addEventListener('scroll', () => {
   const p = document.getElementById('hero-photo');
   const y = window.pageYOffset;
@@ -1102,13 +1049,11 @@ window.addEventListener('scroll', () => {
   document.getElementById('top-btn').classList.toggle('visible', y > 300);
 }, { passive: true });
 
-/* ── REVEAL ON SCROLL ── */
 const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
 }, { threshold: .1 });
 document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-/* ── ACCORDION ── */
 function toggleAcc(id) {
   const body = document.getElementById(id);
   const isOpen = body.style.display === 'block';
@@ -1124,7 +1069,6 @@ function toggleAcc(id) {
   }
 }
 
-/* ── MAP ── */
 function enableMap() {
   document.getElementById('map-overlay').classList.add('hidden');
   setTimeout(() => toast('두 손가락으로 지도를 이동하실 수 있습니다'), 400);
@@ -1134,7 +1078,6 @@ function openTmap() {
   window.location.href = 'tmap://search?name=' + encodeURIComponent('남양주 파로스컨벤션');
 }
 
-/* ── RSVP MODAL ── */
 function openRsvp() { document.getElementById('rsvp-modal').classList.add('open'); lock(); }
 function closeRsvp() {
   document.getElementById('rsvp-modal').classList.remove('open');
@@ -1156,7 +1099,6 @@ function submitRsvp(e) {
   const btn = document.getElementById('sub-btn');
   btn.textContent = '전송 중...'; btn.disabled = true;
 
-  // 타임아웃을 적용한 Fetch 로직 (무한 로딩 방지)
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 8000); // 8초 초과 시 취소
 
@@ -1173,7 +1115,6 @@ function submitRsvp(e) {
     .finally(() => { btn.textContent = '전송하기'; btn.disabled = false; });
 }
 
-/* ── CALENDAR ── */
 function addSmartCalendar() {
   const ua = navigator.userAgent.toLowerCase();
   const isIOS = /iphone|ipad|ipod|mac/.test(ua);
@@ -1193,7 +1134,6 @@ function addSmartCalendar() {
   }
 }
 
-/* ── KAKAO PAY ── */
 const KPAY_LINKS = {
   groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
   bride: 'https://qr.kakaopay.com/Ej8IMVKSM',
@@ -1204,7 +1144,6 @@ function openKakao(who) {
   window.open(url, '_blank');
 }
 
-/* ── PHOTO UPLOAD ── */
 const checkUploadDate = () => {
   if (new Date() < new Date('2027-01-30T00:00:00+09:00')) {
     toast('사진 업로드는 예식 당일(1월 30일)부터 가능합니다. 📸');
@@ -1230,7 +1169,6 @@ photoUp.addEventListener('change', async e => {
   lock(); loaderOverlay.classList.add('active');
   loaderText.textContent = `사진을 안전하게 업로드하고 있습니다...`;
 
-  // 병렬 업로드 최적화 (Promise.allSettled)
   try {
     const uploadPromises = Array.from(files).map(async (f) => {
       if (f.size > MAX) { big = true; return; }
@@ -1258,7 +1196,6 @@ function toB64(f) {
   return new Promise((res, rej) => { const r = new FileReader(); r.readAsDataURL(f); r.onload = () => res(r.result); r.onerror = rej; });
 }
 
-/* ── UTILS ── */
 function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.className = 'show';
@@ -1302,7 +1239,6 @@ function shareKakao() {
   });
 }
 
-/* ── PRE-WEDDING MASK (계좌번호 숨김) ── */
 document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
 
