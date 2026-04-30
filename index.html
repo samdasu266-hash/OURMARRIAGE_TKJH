@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,11 +21,10 @@
 <script>
   (function() {
     var today = new Date();
-    // 예식일 기준 60일 전 자동 계산
     var weddingDate = new Date('2027-01-30T13:10:00+09:00');
     var showStart = new Date(weddingDate);
     showStart.setDate(weddingDate.getDate() - 60);
-    showStart.setHours(0, 0, 0, 0); // 해당 일자 자정 오픈
+    showStart.setHours(0, 0, 0, 0);
     
     var showEnd = new Date('2027-01-31T00:00:00+09:00');
 
@@ -52,25 +52,124 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 
 .post-wedding .hide-privacy{display:none !important;}
 
-#toast{visibility:hidden;position:fixed;z-index:2000;left:50%;bottom:max(36px, env(safe-area-inset-bottom + 36px));transform:translateX(-50%);background:var(--ink);color:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:400;letter-spacing:.05em;padding:15px 28px;white-space:nowrap;border-bottom:2px solid var(--gold);box-shadow:0 8px 28px rgba(0,0,0,.22);border-radius:4px;}
-#toast.show{visibility:visible;animation:toastIn .35s ease,toastOut .35s ease 2.5s forwards;}
-@keyframes toastIn{from{bottom:10px;opacity:0}to{bottom:max(36px, env(safe-area-inset-bottom + 36px));opacity:1}}
-@keyframes toastOut{from{bottom:max(36px, env(safe-area-inset-bottom + 36px));opacity:1}to{bottom:10px;opacity:0}}
+/* ── 수정된 토스트 팝업 CSS (Transform 및 문법 오류 수정) ── */
+#toast {
+  visibility: hidden;
+  position: fixed;
+  z-index: 2000;
+  left: 50%;
+  /* iOS Safe Area 지원을 위한 올바른 calc 연산식 */
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 36px); 
+  transform: translate(-50%, 20px); /* 20px 아래로 내려가 있는 상태로 시작 */
+  opacity: 0;
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: .05em;
+  padding: 15px 28px;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 8px 28px rgba(0,0,0,.22);
+  border-radius: 4px;
+  /* 부드러운 전환 효과 (60fps GPU 가속) */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
+}
 
-#loader-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(14,12,10,.85);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);flex-direction:column;align-items:center;justify-content:center;color:var(--white);}
+#toast.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0); /* 정위치로 스르륵 올라옴 */
+}
+
+/* ── 업로드 오버레이 ── */
+#loader-overlay{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(14,12,10,.80);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:24px 20px;
+}
 #loader-overlay.active{display:flex;}
-.spinner{border:3px solid rgba(253,250,245,.2);border-top:3px solid var(--gold-lt);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin-bottom:20px;}
-@keyframes spin{100%{transform:rotate(360deg)}}
-#loader-text{font-family:'Noto Sans KR',sans-serif;font-size:14px;letter-spacing:.05em;font-weight:300;text-align:center;line-height:1.6;}
 
-.bgm-btn{position:fixed;bottom:max(24px, env(safe-area-inset-bottom + 24px));left:18px;z-index:500;background:rgba(247,242,234,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(181,146,74,.3);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s, background .3s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.upl-card{
+  background:#fff;border-radius:18px;width:100%;max-width:360px;
+  padding:28px 24px 24px;box-shadow:0 24px 60px rgba(0,0,0,.35);
+  max-height:80vh;display:flex;flex-direction:column;
+}
+.upl-header{text-align:center;margin-bottom:20px;flex-shrink:0;}
+.upl-title{
+  font-family:'Noto Sans KR',sans-serif;font-size:16px;font-weight:600;
+  color:var(--ink);line-height:1.6;margin-bottom:6px;
+}
+.upl-total-count{
+  font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;
+  color:var(--ink);letter-spacing:.05em;display:block;margin-bottom:12px;
+}
+.upl-notice{
+  font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:400;
+  color:#555;line-height:2;word-break:keep-all;
+  background:#f7f7f7;border-radius:10px;padding:14px 16px;
+}
+.upl-notice strong{color:var(--ink);}
+
+/* 업로드 파일 그리드 */
+#upload-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+  overflow-y:auto;margin-top:16px;flex:1;
+}
+.upl-item{
+  position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;
+  background:#e5e5e5;flex-shrink:0;
+}
+.upl-thumb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.upl-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.upl-thumb i{font-size:22px;color:#aaa;}
+.upl-status{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.3);
+}
+.upl-status.upl-done{background:rgba(34,197,94,.82);}
+.upl-status.upl-done i{font-size:22px;color:#fff;font-weight:900;}
+.upl-status.upl-fail{background:rgba(192,75,48,.75);}
+.upl-status.upl-fail i{font-size:20px;color:#fff;}
+.upl-status.upl-skip{background:rgba(192,75,48,.65);}
+
+/* 개별 파일 스피너 */
+@keyframes spin{100%{transform:rotate(360deg)}}
+.upl-spinner-sm{
+  width:22px;height:22px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.3);border-top:3px solid #fff;
+  animation:spin .8s linear infinite;
+}
+
+/* 용량 초과 뱃지 */
+.upl-oversize-badge{
+  position:absolute;bottom:4px;left:0;right:0;text-align:center;
+  font-family:'Noto Sans KR',sans-serif;font-size:9px;font-weight:600;
+  color:#fff;background:rgba(192,75,48,.85);padding:2px 4px;
+  letter-spacing:.02em;
+}
+
+/* 진행바 */
+.upl-progress-bar-wrap{
+  height:4px;background:#eee;border-radius:2px;margin-top:14px;flex-shrink:0;overflow:hidden;
+}
+.upl-progress-bar{
+  height:100%;background:linear-gradient(to right,var(--gold-lt),var(--gold));
+  border-radius:2px;transition:width .4s ease;width:0%;
+}
+
+/* ── UI 요소 문법 오류(env) 모두 수정 ── */
+.spinner{border:3px solid rgba(253,250,245,.2);border-top:3px solid var(--gold-lt);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin-bottom:20px;}
+
+.bgm-btn{position:fixed;bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);left:18px;z-index:500;background:rgba(247,242,234,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(181,146,74,.3);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s, background .3s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
 .bgm-btn:hover{background:rgba(247,242,234,.95);}
 .bgm-btn:active{transform:scale(.95);}
 .bgm-btn i{font-size:13px;color:var(--ink);}
 .bgm-btn span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);font-weight:500;}
 .disc-spinning{animation:spin 8s linear infinite;}
 
-#top-btn{display:none;position:fixed;bottom:max(24px, env(safe-area-inset-bottom + 24px));right:18px;z-index:500;width:44px;height:44px;border-radius:50%;background:rgba(247,242,234,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);cursor:pointer;color:var(--ink);font-size:14px;transition:opacity .3s,transform .2s;box-shadow:0 4px 16px rgba(0,0,0,.12);align-items:center;justify-content:center;}
+#top-btn{display:none;position:fixed;bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);right:18px;z-index:500;width:44px;height:44px;border-radius:50%;background:rgba(247,242,234,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);cursor:pointer;color:var(--ink);font-size:14px;transition:opacity .3s,transform .2s;box-shadow:0 4px 16px rgba(0,0,0,.12);align-items:center;justify-content:center;}
 #top-btn.visible{display:flex;}
 #top-btn:active{transform:scale(.92);}
 
@@ -182,13 +281,14 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .gal-item:hover::after{background:rgba(181,146,74,.1);}
 .gal-hint{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);text-align:center;margin-top:24px;font-weight:300;letter-spacing:.1em;}
 
+/* ── 모달 위치 env 오류 수정 ── */
 #img-modal{display:none;position:fixed;inset:0;z-index:900;background:rgba(10,8,7,.97);flex-direction:column;align-items:center;justify-content:center;}
 #img-modal.active{display:flex;}
-#img-modal .m-close{position:absolute;top:max(20px, env(safe-area-inset-top + 20px));right:20px;color:rgba(253,250,245,.55);font-size:24px;cursor:pointer;padding:12px;background:none;border:none;}
-#modal-pnum{position:absolute;top:max(26px, env(safe-area-inset-top + 26px));left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.32em;color:rgba(253,250,245,.5);}
+#img-modal .m-close{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 20px);right:20px;color:rgba(253,250,245,.55);font-size:24px;cursor:pointer;padding:12px;background:none;border:none;}
+#modal-pnum{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 26px);left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.32em;color:rgba(253,250,245,.5);}
 #modal-ta{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:64px 16px;}
 #modal-img{max-width:100%;max-height:85vh;object-fit:contain;}
-#img-modal .m-hint{position:absolute;bottom:max(28px, env(safe-area-inset-bottom + 28px));left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:rgba(253,250,245,.4);letter-spacing:.14em;white-space:nowrap;}
+#img-modal .m-hint{position:absolute;bottom:calc(env(safe-area-inset-bottom, 0px) + 28px);left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:rgba(253,250,245,.4);letter-spacing:.14em;white-space:nowrap;}
 
 .map-wrap{position:relative;width:100%;height:320px;margin-bottom:20px;}
 .map-f{width:100%;height:100%;border:.5px solid var(--line);overflow:hidden;display:block;}
@@ -303,9 +403,24 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 <body>
 
 <div id="toast"></div>
+
+<!-- ── 업로드 오버레이 ── -->
 <div id="loader-overlay">
-  <div class="spinner"></div>
-  <p id="loader-text">사진을 안전하게 업로드하고 있습니다...</p>
+  <div class="upl-card">
+    <div class="upl-header">
+      <p class="upl-title">업로드가 진행중입니다.</p>
+      <span class="upl-total-count" id="upload-count">0 / 0</span>
+      <div class="upl-notice">
+        사진을 올리는 동안<br>
+        <strong>이 페이지를 그대로 유지해주세요.</strong><br><br>
+        화면이 꺼지면<br>업로드가 중단될 수 있어요.
+      </div>
+    </div>
+    <div class="upl-progress-bar-wrap">
+      <div class="upl-progress-bar" id="upload-progress-bar"></div>
+    </div>
+    <div id="upload-grid"></div>
+  </div>
 </div>
 
 <audio id="bgm" loop preload="metadata" autoplay>
@@ -325,7 +440,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
 <div class="hero-photo" id="hero-photo">
-  <video autoplay muted loop playsinline preload="auto">
+  <video autoplay muted loop playsinline preload="metadata">
     <source src="hero.mp4" type="video/mp4">
   </video>
 </div>
@@ -706,7 +821,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <div id="modal-ta">
     <img id="modal-img" src="" alt="">
   </div>
-  <p class="m-hint">← 좌우 스와이프로 이동 &nbsp;·&nbsp; 아래로 내리면 닫힙니다</p>
+  <p class="m-hint">← 좌우 스와이프로 이동 &nbsp;·&nbsp; 위아래로 내리면 닫힙니다</p>
 </div>
 
 <section class="reg-sec hide-privacy">
@@ -907,12 +1022,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </div><!-- /.wrap -->
 
 <script>
-// 보안/보호 스크립트 (우클릭 차단 및 개발자 도구 단축키 방지)
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
-});
-
 const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
 const IMGS = [
@@ -931,7 +1040,7 @@ function initGallery() {
     d.className = 'gal-item';
     d.onclick = () => openImg(i);
     const im = document.createElement('img');
-    im.src = src; im.loading = 'lazy'; im.alt = '웨딩 사진 ' + (i + 1);
+    im.src = src; im.loading = 'lazy'; im.decoding = 'async'; im.alt = '웨딩 사진 ' + (i + 1);
     d.appendChild(im); g.appendChild(d);
   });
 }
@@ -953,7 +1062,7 @@ document.getElementById('modal-ta').addEventListener('touchstart', e => {
 document.getElementById('modal-ta').addEventListener('touchend', e => {
   const dx = e.changedTouches[0].screenX - tx;
   const dy = e.changedTouches[0].screenY - ty;
-  if (dy > 100 && Math.abs(dy) > Math.abs(dx)) { closeImg(); return; }
+  if (Math.abs(dy) > 100 && Math.abs(dy) > Math.abs(dx)) { closeImg(); return; }
   if (dx < -60) { ci = (ci + 1) % IMGS.length; updModal(); }
   if (dx > 60) { ci = (ci - 1 + IMGS.length) % IMGS.length; updModal(); }
 }, { passive: true });
@@ -988,9 +1097,21 @@ function initSnow() {
 }
 
 function initDday() {
-  const w = new Date('2027-01-30T00:00:00');
-  const t = new Date(); t.setHours(0, 0, 0, 0);
-  const d = Math.round((w - t) / 86400000);
+  const now = new Date();
+  const kstFormatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Seoul',
+      year: 'numeric', month: '2-digit', day: '2-digit'
+  });
+  const parts = kstFormatter.formatToParts(now);
+  const mo = parts.find(p => p.type === 'month').value;
+  const da = parts.find(p => p.type === 'day').value;
+  const ye = parts.find(p => p.type === 'year').value;
+  
+  const kstMidnight = new Date(`${ye}-${mo}-${da}T00:00:00+09:00`);
+  const wDate = new Date('2027-01-30T00:00:00+09:00');
+  
+  const d = Math.round((wDate - kstMidnight) / 86400000);
+  
   const el = document.getElementById('dday');
   if (d > 0) el.innerHTML = `결혼식까지 <strong>${d}</strong>일 남았습니다`;
   else if (d === 0) el.innerHTML = `결혼식이 <strong>오늘</strong>입니다`;
@@ -1002,7 +1123,7 @@ const discI = document.getElementById('disc-i');
 const bgmLbl = document.getElementById('bgm-lbl');
 audio.volume = 0.35;
 let bgmStarted = false;
-let bgmWasPlaying = false; 
+let bgmWasPlaying = false;
 
 audio.onerror = () => { console.warn("BGM 파일을 불러올 수 없습니다."); };
 
@@ -1100,12 +1221,12 @@ function submitRsvp(e) {
   btn.textContent = '전송 중...'; btn.disabled = true;
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 8000); // 8초 초과 시 취소
+  const timeoutId = setTimeout(() => controller.abort(), 15000);
 
   fetch(GAS, { method: 'POST', mode: 'no-cors', body: new FormData(e.target), signal: controller.signal })
-    .then(() => { 
+    .then(() => {
       clearTimeout(timeoutId);
-      localStorage.setItem('rsvp_v2', '1'); closeRsvp(); toast('참석 정보가 성공적으로 전달되었습니다. 감사합니다!'); 
+      localStorage.setItem('rsvp_v2', '1'); closeRsvp(); toast('참석 정보가 성공적으로 전달되었습니다. 감사합니다!');
     })
     .catch((err) => {
       clearTimeout(timeoutId);
@@ -1158,48 +1279,151 @@ document.getElementById('drive-btn').addEventListener('click', () => {
   if (checkUploadDate()) window.open('https://drive.google.com/drive/folders/1uV3gloGmxupYt-HBKiygfjPePSMNK7JR?usp=share_link', '_blank');
 });
 
-const loaderOverlay = document.getElementById('loader-overlay');
-const loaderText = document.getElementById('loader-text');
-
 photoUp.addEventListener('change', async e => {
-  const files = e.target.files;
+  const files = Array.from(e.target.files);
   if (!files.length) return;
-  const MAX = 10 * 1024 * 1024;
-  let big = false, ok = 0;
-  lock(); loaderOverlay.classList.add('active');
-  loaderText.textContent = `사진을 안전하게 업로드하고 있습니다...`;
 
-  try {
-    const uploadPromises = Array.from(files).map(async (f) => {
-      if (f.size > MAX) { big = true; return; }
-      try {
-        const b64 = await toB64(f);
-        const fd = new FormData();
-        fd.append('action', 'upload'); fd.append('fileName', f.name);
-        fd.append('mimeType', f.type); fd.append('fileData', b64.split(',')[1]);
-        await fetch(GAS, { method: 'POST', mode: 'no-cors', body: fd });
-        ok++;
-      } catch (err) { console.error(err); }
-    });
-    await Promise.allSettled(uploadPromises);
-  } finally {
-    loaderOverlay.classList.remove('active'); unlock(); photoUp.value = '';
+  const MAX = 10 * 1024 * 1024;
+  const validFiles = files.filter(f => f.size <= MAX);
+  const bigFiles   = files.filter(f => f.size >  MAX);
+
+  const grid     = document.getElementById('upload-grid');
+  const countEl  = document.getElementById('upload-count');
+  const progBar  = document.getElementById('upload-progress-bar');
+  grid.innerHTML = '';
+  progBar.style.width = '0%';
+
+  const objectURLs = [];
+  const itemEls = files.map(f => {
+    const item   = document.createElement('div');
+    item.className = 'upl-item';
+
+    const thumb  = document.createElement('div');
+    thumb.className = 'upl-thumb';
+
+    if (f.type.startsWith('image/')) {
+      const url = URL.createObjectURL(f);
+      objectURLs.push(url);
+      const img = document.createElement('img');
+      img.src = url;
+      thumb.appendChild(img);
+    } else {
+      thumb.style.background = '#2a2a2a';
+      thumb.innerHTML = '<i class="fas fa-video" style="color:#aaa;font-size:22px;"></i>';
+    }
+
+    const status = document.createElement('div');
+    status.className = 'upl-status';
+
+    if (f.size > MAX) {
+      status.classList.add('upl-skip');
+      status.innerHTML = '<i class="fas fa-times" style="color:#fff;font-size:18px;"></i>';
+      const badge = document.createElement('div');
+      badge.className = 'upl-oversize-badge';
+      badge.textContent = '용량초과';
+      item.appendChild(badge);
+    } else {
+      status.style.background = 'rgba(0,0,0,0.15)';
+    }
+
+    item.appendChild(thumb);
+    item.appendChild(status);
+    grid.appendChild(item);
+    return { item, status, file: f, tooBig: f.size > MAX };
+  });
+
+  countEl.textContent = `0 / ${validFiles.length}`;
+
+  lock();
+  document.getElementById('loader-overlay').classList.add('active');
+
+  let ok = 0;
+
+  for (let i = 0; i < itemEls.length; i++) {
+    const { status, file, tooBig } = itemEls[i];
+    if (tooBig) continue;
+
+    status.style.background = 'rgba(0,0,0,0.45)';
+    status.innerHTML = '<div class="upl-spinner-sm"></div>';
+
+    try {
+      let b64 = await toB64(file);
+      const fd  = new FormData();
+      fd.append('action',   'upload');
+      fd.append('fileName',  file.name);
+      fd.append('mimeType',  file.type);
+      fd.append('fileData',  b64.split(',')[1]);
+      
+      b64 = null; 
+
+      await fetch(GAS, { method: 'POST', mode: 'no-cors', body: fd });
+
+      ok++;
+      status.className = 'upl-status upl-done';
+      status.innerHTML = '<i class="fas fa-check" style="color:#fff;font-size:20px;font-weight:900;"></i>';
+    } catch (err) {
+      status.className = 'upl-status upl-fail';
+      status.innerHTML = '<i class="fas fa-times" style="color:#fff;font-size:18px;"></i>';
+    }
+
+    countEl.textContent = `${ok} / ${validFiles.length}`;
+    progBar.style.width = `${Math.round((ok / validFiles.length) * 100)}%`;
   }
-  
-  if (big && ok > 0) toast(`${ok}장 저장 완료! 10MB가 넘는 사진/영상은 구글 드라이브를 이용해 주세요.`);
-  else if (big && ok === 0) toast('용량이 10MB를 초과합니다. 아래 구글 드라이브 버튼을 이용해 주세요!');
-  else if (ok > 0) toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);
-  else toast('선택된 파일이 없습니다.');
+
+  await new Promise(r => setTimeout(r, 900));
+
+  document.getElementById('loader-overlay').classList.remove('active');
+  unlock();
+  photoUp.value = '';
+
+  objectURLs.forEach(u => URL.revokeObjectURL(u));
+
+  if (bigFiles.length > 0 && ok > 0) {
+    toast(`${ok}장 저장 완료! 10MB가 넘는 사진/영상은 구글 드라이브를 이용해 주세요.`);
+  } else if (bigFiles.length > 0 && ok === 0) {
+    toast('용량이 10MB를 초과합니다. 아래 구글 드라이브 버튼을 이용해 주세요!');
+  } else if (ok > 0) {
+    toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);
+  } else {
+    toast('선택된 파일이 없습니다.');
+  }
 });
 
 function toB64(f) {
-  return new Promise((res, rej) => { const r = new FileReader(); r.readAsDataURL(f); r.onload = () => res(r.result); r.onerror = rej; });
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.readAsDataURL(f);
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+  });
 }
 
+// ── 수정된 토스트 팝업 제어 로직 (부드러운 전환 및 연속 클릭 방어) ──
+let toastTimer;
 function toast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'show';
-  setTimeout(() => t.className = '', 3000);
+  
+  if (t.classList.contains('show')) {
+    // 1. 이미 떠있다면 먼저 부드럽게 숨김
+    t.classList.remove('show');
+    clearTimeout(toastTimer);
+    
+    // 2. CSS transition(0.4초)이 끝날 때쯤 문구를 바꾸고 다시 띄움
+    setTimeout(() => {
+      t.textContent = msg;
+      t.classList.add('show');
+      toastTimer = setTimeout(() => {
+        t.classList.remove('show');
+      }, 2500);
+    }, 400); 
+  } else {
+    // 안 떠있을 때는 즉시 띄움
+    t.textContent = msg;
+    t.classList.add('show');
+    toastTimer = setTimeout(() => {
+      t.classList.remove('show');
+    }, 2500);
+  }
 }
 
 function cpCopy(num, label) {
