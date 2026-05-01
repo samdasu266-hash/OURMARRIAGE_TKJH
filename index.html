@@ -52,7 +52,7 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 
 .post-wedding .hide-privacy{display:none !important;}
 
-/* 토스트 팝업 CSS */
+/* 토스트 팝업 */
 #toast {
   visibility: hidden;
   position: fixed;
@@ -74,57 +74,24 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   border-radius: 4px;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
 }
-
-#toast.show {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
+#toast.show { visibility: visible; opacity: 1; transform: translate(-50%, 0); }
 
 /* 업로드 오버레이 */
-#loader-overlay{
-  display:none;position:fixed;inset:0;z-index:9999;
-  background:rgba(14,12,10,.80);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  align-items:center;justify-content:center;padding:24px 20px;
-}
+#loader-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(14,12,10,.80);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px 20px;}
 #loader-overlay.active{display:flex;}
-
-.upl-card{
-  background:#fff;border-radius:18px;width:100%;max-width:360px;
-  padding:28px 24px 24px;box-shadow:0 24px 60px rgba(0,0,0,.35);
-  max-height:80vh;display:flex;flex-direction:column;
-}
+.upl-card{background:#fff;border-radius:18px;width:100%;max-width:360px;padding:28px 24px 24px;box-shadow:0 24px 60px rgba(0,0,0,.35);max-height:80vh;display:flex;flex-direction:column;}
 .upl-header{text-align:center;margin-bottom:20px;flex-shrink:0;}
-.upl-title{
-  font-family:'Noto Sans KR',sans-serif;font-size:16px;font-weight:600;
-  color:var(--ink);line-height:1.6;margin-bottom:6px;
-}
-.upl-total-count{
-  font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;
-  color:var(--ink);letter-spacing:.05em;display:block;margin-bottom:12px;
-}
-.upl-notice{
-  font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:400;
-  color:#555;line-height:2;word-break:keep-all;
-  background:#f7f7f7;border-radius:10px;padding:14px 16px;
-}
+.upl-title{font-family:'Noto Sans KR',sans-serif;font-size:16px;font-weight:600;color:var(--ink);line-height:1.6;margin-bottom:6px;}
+.upl-total-count{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--ink);letter-spacing:.05em;display:block;margin-bottom:12px;}
+.upl-notice{font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:400;color:#555;line-height:2;word-break:keep-all;background:#f7f7f7;border-radius:10px;padding:14px 16px;}
 .upl-notice strong{color:var(--ink);}
 
-#upload-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
-  overflow-y:auto;margin-top:16px;flex:1;
-}
-.upl-item{
-  position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;
-  background:#e5e5e5;flex-shrink:0;
-}
+#upload-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;overflow-y:auto;margin-top:16px;flex:1;}
+.upl-item{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:#e5e5e5;flex-shrink:0;}
 .upl-thumb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 .upl-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 .upl-thumb i{font-size:22px;color:#aaa;}
-.upl-status{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,.3);
-}
+.upl-status{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);}
 .upl-status.upl-done{background:rgba(34,197,94,.82);}
 .upl-status.upl-done i{font-size:22px;color:#fff;font-weight:900;}
 .upl-status.upl-fail{background:rgba(192,75,48,.75);}
@@ -132,26 +99,10 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .upl-status.upl-skip{background:rgba(192,75,48,.65);}
 
 @keyframes spin{100%{transform:rotate(360deg)}}
-.upl-spinner-sm{
-  width:22px;height:22px;border-radius:50%;
-  border:3px solid rgba(255,255,255,.3);border-top:3px solid #fff;
-  animation:spin .8s linear infinite;
-}
-
-.upl-oversize-badge{
-  position:absolute;bottom:4px;left:0;right:0;text-align:center;
-  font-family:'Noto Sans KR',sans-serif;font-size:9px;font-weight:600;
-  color:#fff;background:rgba(192,75,48,.85);padding:2px 4px;
-  letter-spacing:.02em;
-}
-
-.upl-progress-bar-wrap{
-  height:4px;background:#eee;border-radius:2px;margin-top:14px;flex-shrink:0;overflow:hidden;
-}
-.upl-progress-bar{
-  height:100%;background:linear-gradient(to right,var(--gold-lt),var(--gold));
-  border-radius:2px;transition:width .4s ease;width:0%;
-}
+.upl-spinner-sm{width:22px;height:22px;border-radius:50%;border:3px solid rgba(255,255,255,.3);border-top:3px solid #fff;animation:spin .8s linear infinite;}
+.upl-oversize-badge{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:9px;font-weight:600;color:#fff;background:rgba(192,75,48,.85);padding:2px 4px;letter-spacing:.02em;}
+.upl-progress-bar-wrap{height:4px;background:#eee;border-radius:2px;margin-top:14px;flex-shrink:0;overflow:hidden;}
+.upl-progress-bar{height:100%;background:linear-gradient(to right,var(--gold-lt),var(--gold));border-radius:2px;transition:width .4s ease;width:0%;}
 
 .spinner{border:3px solid rgba(253,250,245,.2);border-top:3px solid var(--gold-lt);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin-bottom:20px;}
 
@@ -169,21 +120,12 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
 .hero-photo{position:absolute;inset:0;background-color:#0E0C0A;will-change:transform;}
 
-/* ── 모바일 환경 비디오 컨트롤 버튼 강제 숨김 및 터치 무시 처리 ── */
+/* 동영상 배경화 완벽 처리 (재생버튼 무조건 숨김 및 터치 무시) */
 .hero-photo video {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  pointer-events: none; /* 터치를 아예 무시하여 배경처럼 동작하게 함 */
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  pointer-events: none;
 }
-/* iOS 웹킷 네이티브 재생버튼 강제 숨김 */
-.hero-photo video::-webkit-media-controls,
-.hero-photo video::-webkit-media-controls-start-playback-button,
-.hero-photo video::-webkit-media-controls-play-button {
-  display: none !important;
-  -webkit-appearance: none !important;
-}
+.hero-photo video::-webkit-media-controls { display: none !important; }
 
 .hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(14,12,10,.4) 60%,rgba(26,18,14,.92) 100%);}
 #snow-c{position:absolute;inset:0;pointer-events:none;z-index:5;}
@@ -447,8 +389,8 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
 <div class="hero-photo" id="hero-photo">
-  <!-- 비디오 속성은 원래 작성하신 깔끔한 코드로 되돌렸습니다. -->
-  <video id="hero-vid" autoplay muted loop playsinline preload="auto">
+  <!-- 가장 강력하고 순수한 HTML5 비디오 배경화 -->
+  <video autoplay muted loop playsinline>
     <source src="hero.mp4" type="video/mp4">
   </video>
 </div>
@@ -843,34 +785,11 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <span>신랑측 계좌번호 보기</span>
         <i class="fas fa-plus" id="gr-i"></i>
       </button>
+      <!-- 개선 1: 하드코딩된 계좌정보 제거, 로딩 스피너 적용 -->
       <div class="acc-body" id="gr">
-        <div class="acc-row">
-          <div>
-            <p class="acc-lbl">혼주 박유경</p>
-            <p class="acc-num missing">⚠ 계좌번호 미기재</p>
-          </div>
-          <div class="acc-btns">
-            <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
-          </div>
-        </div>
-        <div class="acc-row">
-          <div>
-            <p class="acc-lbl">혼주 김기옥</p>
-            <p class="acc-num missing">⚠ 계좌번호 미기재</p>
-          </div>
-          <div class="acc-btns">
-            <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
-          </div>
-        </div>
-        <div class="acc-row">
-          <div>
-            <p class="acc-lbl">신랑 박태광</p>
-            <p class="acc-num">신한 110-305-227134</p>
-          </div>
-          <div class="acc-btns">
-            <button class="kpay-btn" onclick="openKakao('groom')">카카오페이</button>
-            <button class="copy-btn f" onclick="cpCopy('110305227134','신한은행 110-305-227134')">복사</button>
-          </div>
+        <div style="text-align:center;padding:20px 0;font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">
+          <i class="fas fa-circle-notch fa-spin" style="margin-bottom:8px;display:block;font-size:20px;color:var(--gold-lt);"></i>
+          불러오는 중...
         </div>
       </div>
     </div>
@@ -879,34 +798,11 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <span>신부측 계좌번호 보기</span>
         <i class="fas fa-plus" id="br-i"></i>
       </button>
+      <!-- 개선 1: 하드코딩된 계좌정보 제거, 로딩 스피너 적용 -->
       <div class="acc-body" id="br">
-        <div class="acc-row">
-          <div>
-            <p class="acc-lbl">혼주 이기영</p>
-            <p class="acc-num missing">⚠ 계좌번호 미기재</p>
-          </div>
-          <div class="acc-btns">
-            <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
-          </div>
-        </div>
-        <div class="acc-row">
-          <div>
-            <p class="acc-lbl">혼주 지백현</p>
-            <p class="acc-num">농협 301-0089-9502-11</p>
-          </div>
-          <div class="acc-btns">
-            <button class="copy-btn" onclick="cpCopy('3010089950211','농협 301-0089-9502-11')">복사</button>
-          </div>
-        </div>
-        <div class="acc-row">
-          <div>
-            <p class="acc-lbl">신부 이지현</p>
-            <p class="acc-num">신한 110-477-676185</p>
-          </div>
-          <div class="acc-btns">
-            <button class="kpay-btn" onclick="openKakao('bride')">카카오페이</button>
-            <button class="copy-btn f" onclick="cpCopy('110477676185','신한은행 110-477-676185')">복사</button>
-          </div>
+        <div style="text-align:center;padding:20px 0;font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">
+          <i class="fas fa-circle-notch fa-spin" style="margin-bottom:8px;display:block;font-size:20px;color:var(--gold-lt);"></i>
+          불러오는 중...
         </div>
       </div>
     </div>
@@ -1183,19 +1079,91 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: .1 });
 document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-function toggleAcc(id) {
+// ── 개선 1 & 2: 계좌번호 GAS Fetch 비동기 처리 ──
+const KPAY_LINKS = {
+  groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
+  bride:  'https://qr.kakaopay.com/Ej8IMVKSM',
+};
+
+let accountsCache = null;
+
+async function loadAccounts() {
+  if (accountsCache) return accountsCache;
+  try {
+    const res = await fetch(GAS + '?action=getAccounts');
+    accountsCache = await res.json();
+    return accountsCache;
+  } catch (e) {
+    return null;
+  }
+}
+
+function renderAccountRows(list) {
+  return list.map(item => {
+    if (!item.number) {
+      return `
+        <div class="acc-row">
+          <div>
+            <p class="acc-lbl">${item.label}</p>
+            <p class="acc-num missing">⚠ 계좌번호 미기재</p>
+          </div>
+          <div class="acc-btns">
+            <button class="copy-btn" disabled style="opacity:.35;cursor:not-allowed;">미기재</button>
+          </div>
+        </div>`;
+    }
+    const kakaoBtn = item.kakao
+      ? `<button class="kpay-btn" onclick="openKakao('${item.kakao}')">카카오페이</button>`
+      : '';
+    const isFull = item.kakao ? 'f' : '';
+    return `
+      <div class="acc-row">
+        <div>
+          <p class="acc-lbl">${item.label}</p>
+          <p class="acc-num">${item.display}</p>
+        </div>
+        <div class="acc-btns">
+          ${kakaoBtn}
+          <button class="copy-btn ${isFull}" onclick="cpCopy('${item.number}','${item.bank} ${item.display}')">복사</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+async function toggleAcc(id) {
   const body = document.getElementById(id);
   const isOpen = body.style.display === 'block';
+
   ['gr', 'br'].forEach(k => {
     document.getElementById(k).style.display = 'none';
     document.getElementById(k + '-btn').classList.remove('open');
     document.getElementById(k + '-i').style.transform = '';
   });
-  if (!isOpen) {
-    body.style.display = 'block';
-    document.getElementById(id + '-btn').classList.add('open');
-    document.getElementById(id + '-i').style.transform = 'rotate(45deg)';
+
+  if (isOpen) return;
+
+  body.style.display = 'block';
+  document.getElementById(id + '-btn').classList.add('open');
+  document.getElementById(id + '-i').style.transform = 'rotate(45deg)';
+
+  if (body.dataset.loaded === '1') return;
+
+  const data = await loadAccounts();
+
+  if (!data) {
+    body.innerHTML = `<p style="font-family:'Noto Sans KR',sans-serif;font-size:13.5px;color:#C04B30;padding:16px;text-align:center;">불러오기 실패. 잠시 후 다시 시도해주세요.</p>`;
+    return;
   }
+
+  const list = id === 'gr' ? data.groom : data.bride;
+  body.innerHTML = renderAccountRows(list);
+  body.dataset.loaded = '1';
+}
+
+function openKakao(who) {
+  const url = KPAY_LINKS[who];
+  if (!url || url.includes('LINK_HERE')) { toast('카카오페이 링크를 아직 설정하지 않았습니다.'); return; }
+  window.open(url, '_blank');
 }
 
 function enableMap() {
@@ -1220,10 +1188,18 @@ function toggleBus() {
 }
 function handleRsvpOutsideClick(e) { if (!e.target.closest('.m-box')) { closeRsvp(); } }
 
+// ── 개선 3: 이름 기반 RSVP 로컬스토리지 저장 ──
 function submitRsvp(e) {
   e.preventDefault();
-  if (localStorage.getItem('rsvp_v2')) {
-    if (!confirm('이미 참석 정보를 전달해 주신 적이 있습니다.\n수정하여 다시 전송하시겠습니까?')) { closeRsvp(); return; }
+  
+  const nameVal = document.getElementById('nm').value.trim();
+  const rsvpKey = 'rsvp_v2_' + nameVal;
+
+  if (localStorage.getItem(rsvpKey)) {
+    if (!confirm(`"${nameVal}"님은 이미 참석 정보를 전달하셨습니다.\n수정하여 다시 전송하시겠습니까?`)) { 
+      closeRsvp(); 
+      return; 
+    }
   }
   const btn = document.getElementById('sub-btn');
   btn.textContent = '전송 중...'; btn.disabled = true;
@@ -1234,7 +1210,9 @@ function submitRsvp(e) {
   fetch(GAS, { method: 'POST', mode: 'no-cors', body: new FormData(e.target), signal: controller.signal })
     .then(() => {
       clearTimeout(timeoutId);
-      localStorage.setItem('rsvp_v2', '1'); closeRsvp(); toast('참석 정보가 성공적으로 전달되었습니다. 감사합니다!');
+      localStorage.setItem(rsvpKey, '1'); 
+      closeRsvp(); 
+      toast('참석 정보가 성공적으로 전달되었습니다. 감사합니다!');
     })
     .catch((err) => {
       clearTimeout(timeoutId);
@@ -1263,19 +1241,18 @@ function addSmartCalendar() {
   }
 }
 
-const KPAY_LINKS = {
-  groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
-  bride: 'https://qr.kakaopay.com/Ej8IMVKSM',
-};
-function openKakao(who) {
-  const url = KPAY_LINKS[who];
-  if (!url || url.includes('LINK_HERE')) { toast('카카오페이 링크를 아직 설정하지 않았습니다.'); return; }
-  window.open(url, '_blank');
-}
-
+// ── 개선 4: 업로드 마감일 (예식 후 7일) 설정 ──
 const checkUploadDate = () => {
-  if (new Date() < new Date('2027-01-30T00:00:00+09:00')) {
+  const now = new Date();
+  const weddingStart  = new Date('2027-01-30T00:00:00+09:00');
+  const uploadDeadline = new Date('2027-02-06T23:59:59+09:00'); 
+
+  if (now < weddingStart) {
     toast('사진 업로드는 예식 당일(1월 30일)부터 가능합니다. 📸');
+    return false;
+  }
+  if (now > uploadDeadline) {
+    toast('사진 업로드 기간이 종료되었습니다. (2월 6일까지 가능했습니다)');
     return false;
   }
   return true;
@@ -1456,8 +1433,6 @@ function shareKakao() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
-
-  // 비디오 강제 재생 로직은 모두 제거했습니다. 원래 작성하신 HTML 속성만으로 안전하게 돌아갑니다.
 
   if (document.documentElement.classList.contains('pre-wedding-mask')) {
     var msg = window.__regOpenMsg || '예식 60일 전부터 확인 가능합니다';
