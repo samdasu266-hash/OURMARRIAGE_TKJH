@@ -52,15 +52,14 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 
 .post-wedding .hide-privacy{display:none !important;}
 
-/* ── 수정된 토스트 팝업 CSS (Transform 및 문법 오류 수정) ── */
+/* 토스트 팝업 CSS */
 #toast {
   visibility: hidden;
   position: fixed;
   z-index: 2000;
   left: 50%;
-  /* iOS Safe Area 지원을 위한 올바른 calc 연산식 */
   bottom: calc(env(safe-area-inset-bottom, 0px) + 36px); 
-  transform: translate(-50%, 20px); /* 20px 아래로 내려가 있는 상태로 시작 */
+  transform: translate(-50%, 20px);
   opacity: 0;
   background: var(--ink);
   color: var(--white);
@@ -73,17 +72,16 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   border-bottom: 2px solid var(--gold);
   box-shadow: 0 8px 28px rgba(0,0,0,.22);
   border-radius: 4px;
-  /* 부드러운 전환 효과 (60fps GPU 가속) */
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
 }
 
 #toast.show {
   visibility: visible;
   opacity: 1;
-  transform: translate(-50%, 0); /* 정위치로 스르륵 올라옴 */
+  transform: translate(-50%, 0);
 }
 
-/* ── 업로드 오버레이 ── */
+/* 업로드 오버레이 */
 #loader-overlay{
   display:none;position:fixed;inset:0;z-index:9999;
   background:rgba(14,12,10,.80);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
@@ -112,7 +110,6 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 }
 .upl-notice strong{color:var(--ink);}
 
-/* 업로드 파일 그리드 */
 #upload-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
   overflow-y:auto;margin-top:16px;flex:1;
@@ -134,7 +131,6 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .upl-status.upl-fail i{font-size:20px;color:#fff;}
 .upl-status.upl-skip{background:rgba(192,75,48,.65);}
 
-/* 개별 파일 스피너 */
 @keyframes spin{100%{transform:rotate(360deg)}}
 .upl-spinner-sm{
   width:22px;height:22px;border-radius:50%;
@@ -142,7 +138,6 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   animation:spin .8s linear infinite;
 }
 
-/* 용량 초과 뱃지 */
 .upl-oversize-badge{
   position:absolute;bottom:4px;left:0;right:0;text-align:center;
   font-family:'Noto Sans KR',sans-serif;font-size:9px;font-weight:600;
@@ -150,7 +145,6 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   letter-spacing:.02em;
 }
 
-/* 진행바 */
 .upl-progress-bar-wrap{
   height:4px;background:#eee;border-radius:2px;margin-top:14px;flex-shrink:0;overflow:hidden;
 }
@@ -159,7 +153,6 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   border-radius:2px;transition:width .4s ease;width:0%;
 }
 
-/* ── UI 요소 문법 오류(env) 모두 수정 ── */
 .spinner{border:3px solid rgba(253,250,245,.2);border-top:3px solid var(--gold-lt);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin-bottom:20px;}
 
 .bgm-btn{position:fixed;bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);left:18px;z-index:500;background:rgba(247,242,234,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(181,146,74,.3);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s, background .3s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
@@ -281,7 +274,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .gal-item:hover::after{background:rgba(181,146,74,.1);}
 .gal-hint{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);text-align:center;margin-top:24px;font-weight:300;letter-spacing:.1em;}
 
-/* ── 모달 위치 env 오류 수정 ── */
 #img-modal{display:none;position:fixed;inset:0;z-index:900;background:rgba(10,8,7,.97);flex-direction:column;align-items:center;justify-content:center;}
 #img-modal.active{display:flex;}
 #img-modal .m-close{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 20px);right:20px;color:rgba(253,250,245,.55);font-size:24px;cursor:pointer;padding:12px;background:none;border:none;}
@@ -404,7 +396,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <div id="toast"></div>
 
-<!-- ── 업로드 오버레이 ── -->
 <div id="loader-overlay">
   <div class="upl-card">
     <div class="upl-header">
@@ -440,7 +431,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
 <div class="hero-photo" id="hero-photo">
-  <video autoplay muted loop playsinline preload="metadata">
+  <video id="hero-vid" autoplay muted loop playsinline preload="auto">
     <source src="hero.mp4" type="video/mp4">
   </video>
 </div>
@@ -1398,32 +1389,24 @@ function toB64(f) {
   });
 }
 
-// ── 수정된 토스트 팝업 제어 로직 (부드러운 전환 및 연속 클릭 방어) ──
+// ── 10점 만점짜리 토스트 팝업 제어 로직 ──
 let toastTimer;
 function toast(msg) {
   const t = document.getElementById('toast');
   
-  if (t.classList.contains('show')) {
-    // 1. 이미 떠있다면 먼저 부드럽게 숨김
+  // 1. 문구를 즉시 바꿉니다.
+  t.textContent = msg;
+  
+  // 2. 팝업을 화면에 띄웁니다.
+  t.classList.add('show');
+  
+  // 3. 기존에 설정된 타이머를 취소합니다. (연속 클릭 방어 핵심 로직)
+  clearTimeout(toastTimer);
+  
+  // 4. 마지막 클릭 시점을 기준으로 2.5초 뒤에 팝업이 내려가도록 새 타이머를 설정합니다.
+  toastTimer = setTimeout(() => {
     t.classList.remove('show');
-    clearTimeout(toastTimer);
-    
-    // 2. CSS transition(0.4초)이 끝날 때쯤 문구를 바꾸고 다시 띄움
-    setTimeout(() => {
-      t.textContent = msg;
-      t.classList.add('show');
-      toastTimer = setTimeout(() => {
-        t.classList.remove('show');
-      }, 2500);
-    }, 400); 
-  } else {
-    // 안 떠있을 때는 즉시 띄움
-    t.textContent = msg;
-    t.classList.add('show');
-    toastTimer = setTimeout(() => {
-      t.classList.remove('show');
-    }, 2500);
-  }
+  }, 2500);
 }
 
 function cpCopy(num, label) {
@@ -1465,6 +1448,15 @@ function shareKakao() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
+
+  const heroVid = document.getElementById('hero-vid');
+  if (heroVid) {
+    heroVid.play().catch(() => {
+      document.addEventListener('touchstart', () => { heroVid.play(); }, { once: true, passive: true });
+      document.addEventListener('click', () => { heroVid.play(); }, { once: true, passive: true });
+      document.addEventListener('scroll', () => { heroVid.play(); }, { once: true, passive: true });
+    });
+  }
 
   if (document.documentElement.classList.contains('pre-wedding-mask')) {
     var msg = window.__regOpenMsg || '예식 60일 전부터 확인 가능합니다';
