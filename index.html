@@ -130,7 +130,7 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
 .hero-photo{position:absolute;inset:0;background-color:#0E0C0A;will-change:transform;}
 
-/* iOS 및 모바일 브라우저의 기본 재생 버튼 100% 숨김 처리 */
+/* ── iOS 거대 재생버튼 및 모든 컨트롤 완벽 삭제 ── */
 .hero-photo video {
   width: 100%; height: 100%; object-fit: cover; display: block;
   pointer-events: none; /* 하객 터치 무시 (배경으로만 동작) */
@@ -143,7 +143,7 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   opacity: 0 !important;
 }
 
-/* ── 저전력 모드 재생 힌트 오버레이 (기본 숨김) ── */
+/* ── 전역 터치를 위한 힌트 오버레이 (버튼 자체 클릭 방지) ── */
 .vid-play-hint {
   position: absolute;
   inset: 0;
@@ -151,11 +151,11 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  pointer-events: none; /* 핵심: 오버레이가 터치를 막지 않고 바닥(document)으로 통과시킴 */
   background: transparent;
   transition: opacity .4s ease;
 }
-.vid-play-hint.hidden { opacity: 0; pointer-events: none; }
+.vid-play-hint.hidden { opacity: 0; }
 .vid-play-hint-inner {
   display: flex;
   flex-direction: column;
@@ -442,8 +442,8 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </div>
   <div class="hero-veil"></div>
   
-  <!-- ── 저전력 모드 시에만 나타나는 재생 힌트 오버레이 (기본 숨김) ── -->
-  <div class="vid-play-hint hidden" id="vid-hint" onclick="forcePlayVid()">
+  <!-- ── 1. 오버레이 자체는 터치를 통과시키도록 수정 (pointer-events: none 적용됨) ── -->
+  <div class="vid-play-hint hidden" id="vid-hint">
     <div class="vid-play-hint-inner">
       <i class="fas fa-play"></i>
       <span>터치하여 시작</span>
@@ -574,7 +574,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
       <span class="order-time">12:40</span>
       <div class="order-txt">식사 시작
         <span class="buffet-highlight">
-          🍽 뷔페 식사는 <strong>12:40부터 14:40까지 (2시간)</strong> 이용하실 수 있습니다.
+          🍽 뷔페 식 식사는 <strong>12:40부터 14:40까지 (2시간)</strong> 이용하실 수 있습니다.
         </span>
         <span class="order-sub" style="background:var(--white);padding:14px 16px;border-radius:6px;border:.5px solid var(--line);margin-top:12px;">
           <span style="color:var(--ink);font-weight:500;display:flex;align-items:center;gap:6px;margin-bottom:6px;"><i class="fas fa-wine-glass" style="color:var(--gold-lt);"></i> 여유로운 연회</span>
@@ -979,6 +979,18 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </div><!-- /.wrap -->
 
 <script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (
+    e.key === 'F12' || 
+    (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+    (e.ctrlKey && e.key === 'u') || 
+    (e.metaKey && e.altKey && e.key === 'I')
+  ) {
+    e.preventDefault();
+  }
+});
+
 const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
 const IMGS = [
@@ -1132,7 +1144,7 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: .1 });
 document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-// ── 계좌번호 GAS Pre-fetching ──
+// ── 계좌번호 GAS Pre-fetching 로직 ──
 const KPAY_LINKS = {
   groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
   bride:  'https://qr.kakaopay.com/Ej8IMVKSM',
@@ -1505,36 +1517,41 @@ function shareKakao() {
   });
 }
 
-function forcePlayVid() {
-  const heroVid = document.getElementById('hero-vid');
-  const vidHint = document.getElementById('vid-hint');
-  if (!heroVid) return;
-  heroVid.play().then(() => {
-    vidHint.classList.add('hidden');
-  }).catch(() => {});
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
   prefetchAccounts(); 
 
-  // ── 완벽히 제어되는 저전력 모드 재생 힌트 ──
+  // ── 10점 만점: 아무데나 터치해도 강제 재생 (저전력 모드 완벽 대응) ──
   const heroVid = document.getElementById('hero-vid');
   const vidHint = document.getElementById('vid-hint');
 
-  if (heroVid && vidHint) {
-    // 1. 영상이 재생을 시작하면 즉시 힌트 숨김 (정상 모드에서는 로드 직후 바로 숨겨짐)
+  if (heroVid) {
+    let isPlaying = false;
+
+    // 영상이 실제로 재생되기 시작하면 상태 업데이트 및 힌트 숨김
     heroVid.addEventListener('playing', () => {
-      vidHint.classList.add('hidden');
+      isPlaying = true;
+      if (vidHint) vidHint.classList.add('hidden');
     });
 
-    // 2. 약간의 딜레이 후 브라우저가 영상을 스스로 틀지 못했는지 검사
-    //    만약 멈춰있다면(paused), 저전력 모드이므로 그때만 힌트를 보여줌
+    // 0.4초 대기 후 아직도 멈춰있다면(저전력 모드) 힌트 표시
     setTimeout(() => {
-      if (heroVid.paused) {
+      if (heroVid.paused && vidHint) {
         vidHint.classList.remove('hidden');
       }
-    }, 400); // 0.4초의 판단 시간
+    }, 400);
+
+    // 화면 전역(아무 곳이나) 터치/클릭/스크롤 시 비디오 재생 시도
+    const tryGlobalPlay = () => {
+      if (!isPlaying && heroVid.paused) {
+        heroVid.play().catch(() => {});
+      }
+    };
+
+    // 스크롤, 터치, 클릭 등 사용자의 모든 첫 액션에서 재생을 밀어붙임 (진정한 자동재생 UX)
+    ['touchstart', 'click', 'scroll'].forEach(evt => {
+      document.addEventListener(evt, tryGlobalPlay, { passive: true });
+    });
   }
 
   if (document.documentElement.classList.contains('pre-wedding-mask')) {
