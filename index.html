@@ -18,31 +18,18 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.35em%22 font-size=%2275%22>🤍</text></svg>">
 <link rel="apple-touch-icon" href="https://ourmarriage-tkjh.vercel.app/IMG_1033.jpeg">
 
-<script>
-  (function() {
-    var today = new Date();
-    var weddingDate = new Date('2027-01-30T13:10:00+09:00');
-    var showStart = new Date(weddingDate);
-    showStart.setDate(weddingDate.getDate() - 60);
-    showStart.setHours(0, 0, 0, 0);
-    
-    var showEnd = new Date('2027-01-31T00:00:00+09:00');
-
-    if (today >= showEnd) {
-      document.documentElement.classList.add('post-wedding');
-    } else if (today < showStart) {
-      document.documentElement.classList.add('pre-wedding-mask');
-      window.__regOpenMsg = (showStart.getMonth() + 1) + '월 ' + showStart.getDate() + '일부터 확인 가능합니다';
-    }
-  })();
-</script>
-
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+/* 텍스트 선택(드래그) 방지 */
+*,*::before,*::after{
+  box-sizing:border-box;margin:0;padding:0;
+  -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;
+}
+input, textarea, select { -webkit-user-select:auto;-moz-user-select:auto;-ms-user-select:auto;user-select:auto; }
+
 :root{--ink:#1A1714;--cream:#F7F2EA;--gold:#B5924A;--gold-lt:#D4B07A;--muted:#6E6259;--line:#E2D9CC;--bg2:#F0EBE1;--white:#FDFAF5;}
 
 html{scroll-behavior:smooth;}
@@ -50,9 +37,7 @@ html,body{width:100%;background:#D0CBC3;overscroll-behavior-y:none;}
 body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
 .wrap{width:100%;max-width:430px;background:var(--cream);min-height:100vh;position:relative;box-shadow:0 0 80px rgba(0,0,0,0.18);overflow-x:hidden;}
 
-.post-wedding .hide-privacy{display:none !important;}
-
-/* 토스트 팝업 */
+/* 토스트 팝업 CSS */
 #toast {
   visibility: hidden;
   position: fixed;
@@ -74,7 +59,12 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   border-radius: 4px;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
 }
-#toast.show { visibility: visible; opacity: 1; transform: translate(-50%, 0); }
+
+#toast.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
 
 /* 업로드 오버레이 */
 #loader-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(14,12,10,.80);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px 20px;}
@@ -126,6 +116,43 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   pointer-events: none;
 }
 .hero-photo video::-webkit-media-controls { display: none !important; }
+
+/* ── 저전력 모드 재생 유도 오버레이 ── */
+.vid-play-hint {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  transition: opacity .4s ease;
+}
+.vid-play-hint.hidden { opacity: 0; pointer-events: none; }
+.vid-play-hint-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: rgba(14,12,10,.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(181,146,74,.35);
+  border-radius: 50px;
+  padding: 14px 24px;
+}
+.vid-play-hint-inner i {
+  font-size: 22px;
+  color: rgba(253,250,245,.9);
+}
+.vid-play-hint-inner span {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: rgba(253,250,245,.8);
+  font-weight: 300;
+}
 
 .hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(14,12,10,.4) 60%,rgba(26,18,14,.92) 100%);}
 #snow-c{position:absolute;inset:0;pointer-events:none;z-index:5;}
@@ -389,12 +416,21 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
 <div class="hero-photo" id="hero-photo">
-  <!-- 가장 강력하고 순수한 HTML5 비디오 배경화 -->
-  <video autoplay muted loop playsinline>
+  <!-- poster 제거, preload 추가 -->
+  <video id="hero-vid" autoplay muted loop playsinline preload="auto">
     <source src="hero.mp4" type="video/mp4">
   </video>
 </div>
   <div class="hero-veil"></div>
+  
+  <!-- 저전력 모드 재생 힌트 (자동재생 성공 시 즉시 숨김) -->
+  <div class="vid-play-hint hidden" id="vid-hint" onclick="forcePlayVid()">
+    <div class="vid-play-hint-inner">
+      <i class="fas fa-play"></i>
+      <span>터치하여 시작</span>
+    </div>
+  </div>
+
   <div id="snow-c"></div>
   <div class="hero-body">
     <p class="hero-lead">눈부시게 푸르던 여름날 서로를 알아본 우리,<br>하얀 눈꽃 아래서 영원을 약속합니다.</p>
@@ -785,7 +821,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <span>신랑측 계좌번호 보기</span>
         <i class="fas fa-plus" id="gr-i"></i>
       </button>
-      <!-- 개선 1: 하드코딩된 계좌정보 제거, 로딩 스피너 적용 -->
       <div class="acc-body" id="gr">
         <div style="text-align:center;padding:20px 0;font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">
           <i class="fas fa-circle-notch fa-spin" style="margin-bottom:8px;display:block;font-size:20px;color:var(--gold-lt);"></i>
@@ -798,7 +833,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
         <span>신부측 계좌번호 보기</span>
         <i class="fas fa-plus" id="br-i"></i>
       </button>
-      <!-- 개선 1: 하드코딩된 계좌정보 제거, 로딩 스피너 적용 -->
       <div class="acc-body" id="br">
         <div style="text-align:center;padding:20px 0;font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">
           <i class="fas fa-circle-notch fa-spin" style="margin-bottom:8px;display:block;font-size:20px;color:var(--gold-lt);"></i>
@@ -1079,22 +1113,25 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: .1 });
 document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-// ── 개선 1 & 2: 계좌번호 GAS Fetch 비동기 처리 ──
+// ── 개선 2: 계좌번호 GAS Pre-fetching (페이지 로딩 즉시 백그라운드 호출) ──
 const KPAY_LINKS = {
   groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
   bride:  'https://qr.kakaopay.com/Ej8IMVKSM',
 };
 
 let accountsCache = null;
+let isFetchingAccounts = false;
 
-async function loadAccounts() {
-  if (accountsCache) return accountsCache;
+async function prefetchAccounts() {
+  if (accountsCache || isFetchingAccounts) return;
+  isFetchingAccounts = true;
   try {
     const res = await fetch(GAS + '?action=getAccounts');
     accountsCache = await res.json();
-    return accountsCache;
   } catch (e) {
-    return null;
+    console.error("Failed to prefetch accounts", e);
+  } finally {
+    isFetchingAccounts = false;
   }
 }
 
@@ -1130,6 +1167,7 @@ function renderAccountRows(list) {
   }).join('');
 }
 
+// ── 개선 3: 아코디언 오픈 시 엄격한 날짜 검증 로직 추가 (D-60 ~ D+7) ──
 async function toggleAcc(id) {
   const body = document.getElementById(id);
   const isOpen = body.style.display === 'block';
@@ -1146,16 +1184,39 @@ async function toggleAcc(id) {
   document.getElementById(id + '-btn').classList.add('open');
   document.getElementById(id + '-i').style.transform = 'rotate(45deg)';
 
-  if (body.dataset.loaded === '1') return;
+  // 날짜 검증 (실시간 체크)
+  const now = new Date();
+  const wDate = new Date('2027-01-30T00:00:00+09:00');
+  
+  const openDate = new Date(wDate);
+  openDate.setDate(wDate.getDate() - 60);
+  openDate.setHours(0, 0, 0, 0); // 예식 60일 전 자정
+  
+  const closeDate = new Date('2027-02-06T23:59:59+09:00'); // 예식 후 7일 자정 (업로드 기한과 동일)
 
-  const data = await loadAccounts();
-
-  if (!data) {
-    body.innerHTML = `<p style="font-family:'Noto Sans KR',sans-serif;font-size:13.5px;color:#C04B30;padding:16px;text-align:center;">불러오기 실패. 잠시 후 다시 시도해주세요.</p>`;
+  if (now < openDate) {
+    body.innerHTML = `<div style="text-align:center;padding:24px 16px;"><p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">${openDate.getMonth()+1}월 ${openDate.getDate()}일부터 확인 가능합니다.</p></div>`;
+    return;
+  } else if (now > closeDate) {
+    body.innerHTML = `<div style="text-align:center;padding:24px 16px;"><p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">마음 전하실 곳 안내가 종료되었습니다.</p></div>`;
     return;
   }
 
-  const list = id === 'gr' ? data.groom : data.bride;
+  // 렌더링 로직
+  if (body.dataset.loaded === '1') return;
+
+  if (!accountsCache) {
+    // 혹시라도 백그라운드 로딩이 덜 끝났는데 사용자가 먼저 눌렀다면 기다림
+    body.innerHTML = `<div style="text-align:center;padding:20px 0;"><i class="fas fa-circle-notch fa-spin" style="margin-bottom:8px;display:block;font-size:20px;color:var(--gold-lt);"></i>불러오는 중...</div>`;
+    await prefetchAccounts(); 
+  }
+
+  if (!accountsCache) {
+    body.innerHTML = `<p style="text-align:center;color:#C04B30;padding:16px;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;">불러오기 실패. 잠시 후 다시 시도해주세요.</p>`;
+    return;
+  }
+
+  const list = id === 'gr' ? accountsCache.groom : accountsCache.bride;
   body.innerHTML = renderAccountRows(list);
   body.dataset.loaded = '1';
 }
@@ -1188,7 +1249,6 @@ function toggleBus() {
 }
 function handleRsvpOutsideClick(e) { if (!e.target.closest('.m-box')) { closeRsvp(); } }
 
-// ── 개선 3: 이름 기반 RSVP 로컬스토리지 저장 ──
 function submitRsvp(e) {
   e.preventDefault();
   
@@ -1241,7 +1301,6 @@ function addSmartCalendar() {
   }
 }
 
-// ── 개선 4: 업로드 마감일 (예식 후 7일) 설정 ──
 const checkUploadDate = () => {
   const now = new Date();
   const weddingStart  = new Date('2027-01-30T00:00:00+09:00');
@@ -1395,7 +1454,6 @@ function toast(msg) {
 }
 
 function cpCopy(num, label) {
-  if (document.documentElement.classList.contains('pre-wedding-mask')) return;
   const cb = () => toast((label || num) + ' 복사되었습니다.');
   if (navigator.clipboard) { navigator.clipboard.writeText(num).then(cb); }
   else {
@@ -1431,19 +1489,57 @@ function shareKakao() {
   });
 }
 
+function forcePlayVid() {
+  const heroVid = document.getElementById('hero-vid');
+  const vidHint = document.getElementById('vid-hint');
+  if (!heroVid) return;
+  heroVid.play()
+    .then(() => vidHint.classList.add('hidden'))
+    .catch(() => {});
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
+  prefetchAccounts(); // 페이지 진입 즉시 백그라운드에서 계좌번호 로딩 시작!
 
-  if (document.documentElement.classList.contains('pre-wedding-mask')) {
-    var msg = window.__regOpenMsg || '예식 60일 전부터 확인 가능합니다';
-    document.querySelectorAll('.acc-num:not(.missing)').forEach(el => {
-      el.textContent = msg;
-      el.style.cssText = 'font-size:13px;color:var(--muted);letter-spacing:0;';
-    });
-    document.querySelectorAll('.acc-btns button, .acc-btns a').forEach(btn => {
-      btn.style.cssText = 'opacity:.35;cursor:not-allowed;';
-      btn.removeAttribute('href');
-      btn.onclick = e => e.preventDefault();
+  // 저전력 모드 대응 비디오 재생 로직
+  const heroVid = document.getElementById('hero-vid');
+  const vidHint = document.getElementById('vid-hint');
+
+  if (heroVid) {
+    let isPlaying = false;
+
+    const onPlaySuccess = () => {
+      isPlaying = true;
+      vidHint.classList.add('hidden');
+    };
+
+    const onPlayFail = () => {
+      if (!isPlaying) vidHint.classList.remove('hidden');
+    };
+
+    const tryPlay = () => {
+      if (isPlaying) return;
+      heroVid.play()
+        .then(onPlaySuccess)
+        .catch(onPlayFail);
+    };
+
+    tryPlay();
+
+    const retryEvents = ['touchstart', 'pointerdown', 'scroll', 'click'];
+    const retryPlay = () => { if (!isPlaying) tryPlay(); };
+    retryEvents.forEach(evt =>
+      document.addEventListener(evt, retryPlay, { passive: true })
+    );
+
+    heroVid.addEventListener('playing', () => {
+      onPlaySuccess();
+      retryEvents.forEach(evt => document.removeEventListener(evt, retryPlay));
+    }, { once: true });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && !isPlaying) tryPlay();
     });
   }
 });
