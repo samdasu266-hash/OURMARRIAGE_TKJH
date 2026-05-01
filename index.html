@@ -130,10 +130,10 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
 .hero-photo{position:absolute;inset:0;background-color:#0E0C0A;will-change:transform;}
 
-/* ── iOS 거대 재생버튼 및 모든 컨트롤 완벽 삭제 (목숨 걸고 차단) ── */
+/* iOS 및 모바일 브라우저의 기본 재생 버튼 100% 숨김 처리 */
 .hero-photo video {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  pointer-events: none; /* 터치 인식 차단 */
+  pointer-events: none; /* 하객 터치 무시 (배경으로만 동작) */
 }
 .hero-photo video::-webkit-media-controls,
 .hero-photo video::-webkit-media-controls-start-playback-button,
@@ -141,6 +141,37 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   display: none !important;
   -webkit-appearance: none !important;
   opacity: 0 !important;
+}
+
+/* ── 저전력 모드 재생 힌트 오버레이 (기본 숨김) ── */
+.vid-play-hint {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  transition: opacity .4s ease;
+}
+.vid-play-hint.hidden { opacity: 0; pointer-events: none; }
+.vid-play-hint-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: rgba(14,12,10,.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(181,146,74,.35);
+  border-radius: 50px;
+  padding: 14px 24px;
+}
+.vid-play-hint-inner i { font-size: 22px; color: rgba(253,250,245,.9); }
+.vid-play-hint-inner span {
+  font-family: 'Noto Sans KR', sans-serif; font-size: 12px;
+  letter-spacing: .12em; color: rgba(253,250,245,.8); font-weight: 300;
 }
 
 .hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(14,12,10,.4) 60%,rgba(26,18,14,.92) 100%);}
@@ -405,14 +436,19 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
 <div class="hero-photo" id="hero-photo">
-  <!-- poster 제거 완료 -->
   <video id="hero-vid" autoplay muted loop playsinline preload="auto">
     <source src="hero.mp4" type="video/mp4">
   </video>
 </div>
   <div class="hero-veil"></div>
   
-  <!-- 지저분한 안내 오버레이 완전 제거 완료 -->
+  <!-- ── 저전력 모드 시에만 나타나는 재생 힌트 오버레이 (기본 숨김) ── -->
+  <div class="vid-play-hint hidden" id="vid-hint" onclick="forcePlayVid()">
+    <div class="vid-play-hint-inner">
+      <i class="fas fa-play"></i>
+      <span>터치하여 시작</span>
+    </div>
+  </div>
 
   <div id="snow-c"></div>
   <div class="hero-body">
@@ -943,8 +979,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </div><!-- /.wrap -->
 
 <script>
-// 쓸데없는 F12 차단 코드 모두 철거 완료 (순정 브라우저 동작 보장)
-
 const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
 const IMGS = [
@@ -1098,7 +1132,7 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: .1 });
 document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-// ── 계좌번호 GAS Pre-fetching 로직 ──
+// ── 계좌번호 GAS Pre-fetching ──
 const KPAY_LINKS = {
   groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
   bride:  'https://qr.kakaopay.com/Ej8IMVKSM',
@@ -1471,40 +1505,48 @@ function shareKakao() {
   });
 }
 
+function forcePlayVid() {
+  const heroVid = document.getElementById('hero-vid');
+  const vidHint = document.getElementById('vid-hint');
+  if (!heroVid) return;
+  heroVid.play().then(() => {
+    vidHint.classList.add('hidden');
+  }).catch(() => {});
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
-  prefetchAccounts(); // 페이지 진입 즉시 백그라운드에서 계좌번호 로딩 시작!
+  prefetchAccounts(); 
 
-  // ── 저전력 모드에서도 재생버튼 숨기고, 첫 터치 시 조용히 재생 ──
+  // ── 완벽히 제어되는 저전력 모드 재생 힌트 ──
   const heroVid = document.getElementById('hero-vid');
+  const vidHint = document.getElementById('vid-hint');
 
-  if (heroVid) {
-    let isPlaying = false;
-
-    const tryPlay = () => {
-      if (isPlaying) return;
-      heroVid.play()
-        .then(() => { isPlaying = true; })
-        .catch(() => {});
-    };
-
-    tryPlay(); // 1차 시도 (일반 모드는 여기서 바로 성공)
-
-    // 2차 시도 (저전력 모드인 경우, 하객이 스크롤을 하거나 화면을 만질 때 조용히 재생시킴)
-    const retryEvents = ['touchstart', 'pointerdown', 'scroll', 'click'];
-    const retryPlay = () => { if (!isPlaying) tryPlay(); };
-    retryEvents.forEach(evt =>
-      document.addEventListener(evt, retryPlay, { passive: true })
-    );
-
-    // 재생에 성공하면 불필요한 이벤트 리스너 제거
+  if (heroVid && vidHint) {
+    // 1. 영상이 재생을 시작하면 즉시 힌트 숨김 (정상 모드에서는 로드 직후 바로 숨겨짐)
     heroVid.addEventListener('playing', () => {
-      isPlaying = true;
-      retryEvents.forEach(evt => document.removeEventListener(evt, retryPlay));
-    }, { once: true });
+      vidHint.classList.add('hidden');
+    });
 
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && !isPlaying) tryPlay();
+    // 2. 약간의 딜레이 후 브라우저가 영상을 스스로 틀지 못했는지 검사
+    //    만약 멈춰있다면(paused), 저전력 모드이므로 그때만 힌트를 보여줌
+    setTimeout(() => {
+      if (heroVid.paused) {
+        vidHint.classList.remove('hidden');
+      }
+    }, 400); // 0.4초의 판단 시간
+  }
+
+  if (document.documentElement.classList.contains('pre-wedding-mask')) {
+    var msg = window.__regOpenMsg || '예식 60일 전부터 확인 가능합니다';
+    document.querySelectorAll('.acc-num:not(.missing)').forEach(el => {
+      el.textContent = msg;
+      el.style.cssText = 'font-size:13px;color:var(--muted);letter-spacing:0;';
+    });
+    document.querySelectorAll('.acc-btns button, .acc-btns a').forEach(btn => {
+      btn.style.cssText = 'opacity:.35;cursor:not-allowed;';
+      btn.removeAttribute('href');
+      btn.onclick = e => e.preventDefault();
     });
   }
 });
