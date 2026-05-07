@@ -151,7 +151,7 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none; /* 핵심: 오버레이가 터치를 막지 않고 바닥(document)으로 통과시킴 */
+  pointer-events: none;
   background: transparent;
   transition: opacity .4s ease;
 }
@@ -345,10 +345,10 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .acc-num{font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;color:var(--ink);letter-spacing:.08em;}
 .acc-num.missing{color:#C04B30;font-size:13px;font-weight:400;letter-spacing:.02em;}
 .acc-btns{display:flex;gap:6px;align-items:center;flex-shrink:0;}
-.copy-btn{padding:9px 14px;border:.5px solid var(--line);background:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;border-radius:4px;}
+.copy-btn{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 14px;border:.5px solid var(--line);background:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;border-radius:4px;}
 .copy-btn.f{background:var(--ink);color:var(--white);border-color:var(--ink);}
 .copy-btn:active{transform:scale(.96);}
-.kpay-btn{display:inline-flex;align-items:center;gap:4px;padding:9px 12px;background:#FEE500;border:none;border-radius:4px;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:600;color:#191600;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
+.kpay-btn{display:inline-flex;align-items:center;justify-content:center;height:34px;gap:4px;padding:0 12px;background:#FEE500;border:none;border-radius:4px;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:600;color:#191600;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
 .kpay-btn:active{opacity:.75;}
 
 .share-card{background:var(--white);border:.5px solid var(--line);padding:40px 28px;text-align:center;}
@@ -436,13 +436,12 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
 <div class="hero-photo" id="hero-photo">
-  <video id="hero-vid" autoplay muted loop playsinline preload="auto">
+  <video id="hero-vid" autoplay muted loop playsinline preload="auto" style="background-color: #0E0C0A;">
     <source src="hero.mp4" type="video/mp4">
   </video>
 </div>
   <div class="hero-veil"></div>
   
-  <!-- ── 1. 오버레이 자체는 터치를 통과시키도록 수정 (pointer-events: none 적용됨) ── -->
   <div class="vid-play-hint hidden" id="vid-hint">
     <div class="vid-play-hint-inner">
       <i class="fas fa-play"></i>
@@ -574,11 +573,11 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
       <span class="order-time">12:40</span>
       <div class="order-txt">식사 시작
         <span class="buffet-highlight">
-          🍽 뷔페 식 식사는 <strong>12:40부터 14:40까지 (2시간)</strong> 이용하실 수 있습니다.
+          🍽 식사는 <strong>12:40부터 14:40까지(2시간)</strong> 이용하실 수 있습니다.
         </span>
         <span class="order-sub" style="background:var(--white);padding:14px 16px;border-radius:6px;border:.5px solid var(--line);margin-top:12px;">
-          <span style="color:var(--ink);font-weight:500;display:flex;align-items:center;gap:6px;margin-bottom:6px;"><i class="fas fa-wine-glass" style="color:var(--gold-lt);"></i> 여유로운 연회</span>
-          연회장에는 식사와 함께 곁들이기 좋은 와인과 생맥주가 넉넉히 준비되어 있습니다. 기쁜 날, 편안한 마음으로 축배를 나누며 즐겨주시면 감사하겠습니다.
+          <span style="color:var(--ink);font-weight:500;display:flex;align-items:center;gap:6px;margin-bottom:6px;"><i class="fas fa-wine-glass" style="color:var(--gold-lt);"></i>연회 안내</span>
+          연회장에는 식사와 함께 곁들이기 좋은 와인과 생맥주가 준비되어 있습니다. 기쁜 날, 편안한 마음으로 즐겨주세요.
         </span>
       </div>
     </li>
@@ -781,15 +780,15 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     
     <div class="bus-r on" style="margin-bottom:20px;">
       <p class="bus-r-t" style="font-size:14px; color:var(--gold-lt);">출발 안내</p>
-      <div class="trans-desc" style="color:var(--ink); margin-bottom:5px;">일시 : 1월 30일(토) <strong>오전 8시 30분 정시 출발</strong></div>
-      <div class="trans-desc" style="color:var(--ink); margin-bottom:5px;">장소 : <strong>전북특별자치도청 앞</strong></div>
+      <div class="trans-desc" style="color:var(--ink); margin-bottom:5px;">일시 : 1월 30일(토) <strong>오전 8시 45분 정시 출발</strong></div>
+      <div class="trans-desc" style="color:var(--ink); margin-bottom:5px;">장소 : <strong>전북특별자치도청 남문</strong></div>
       <div class="trans-desc" style="color:var(--ink);">인솔 : 홍길동 &nbsp;<a href="tel:010-9999-9999" style="color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px;">010-9999-9999</a></div>
     </div>
     
     <div class="bus-r" style="margin-bottom:24px; border-left-color:var(--gold-lt);">
       <p class="bus-r-t" style="font-size:14px; color:var(--gold-lt);">귀가 안내</p>
       <p style="font-family:'Noto Sans KR',sans-serif; font-size:14px; line-height:1.9; color:var(--ink); font-weight:300; margin:0;">
-        예식 종료 후 충분한 여유를 두어<br><strong>오후 3시경</strong> 현장에서 전주 방면으로 출발 예정입니다.<br>인솔자의 안내에 따라 탑승해 주세요.
+        예식 종료 후 <strong>오후 3시경</strong> 남양주에서 전주 방면으로 출발 예정입니다. 인솔자의 안내에 따라 탑승해 주세요.
       </p>
     </div>
     
@@ -979,6 +978,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </div><!-- /.wrap -->
 
 <script>
+// 개발자 도구 방지용 (프리뷰를 위해 유지)
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
   if (
@@ -993,12 +993,8 @@ document.addEventListener('keydown', e => {
 
 const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
-const IMGS = [
-  '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg',
-  '6.jpg','7.jpg','8.jpg','9.jpg','10.jpg',
-  '11.jpg','12.jpg','13.jpg','14.jpg','15.jpg',
-  '16.jpg','17.jpg','18.jpg','19.jpg','20.jpg'
-];
+// 사진 프리뷰를 위해 로컬 파일 대신 무난한 더미 색상으로 대체 (에러 방지용)
+const IMGS = Array.from({length: 20}).map((_, i) => `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23E2D9CC'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='24' fill='%236E6259'%3EPhoto ${i+1}%3C/text%3E%3C/svg%3E`);
 let ci = 0, sy = 0;
 
 function initGallery() {
@@ -1082,9 +1078,9 @@ function initDday() {
   const d = Math.round((wDate - kstMidnight) / 86400000);
   
   const el = document.getElementById('dday');
-  if (d > 0) el.innerHTML = `결혼식까지 <strong>${d}</strong>일 남았습니다`;
-  else if (d === 0) el.innerHTML = `결혼식이 <strong>오늘</strong>입니다`;
-  else el.textContent = '축복 속에 결혼식을 무사히 마쳤습니다';
+  if (d > 0) el.innerHTML = `🤍 결혼식까지 <strong>${d}</strong> 일 남았습니다 🤍`;
+  else if (d === 0) el.innerHTML = `🤍 결혼식이 <strong style="color:var(--gold);font-size:22px;font-family:'Noto Serif KR',serif;">오늘</strong> 입니다 🤍`;
+  else el.innerHTML = `🤍 축복 속에 결혼식을 무사히 마쳤습니다 🤍`;
 }
 
 const audio = document.getElementById('bgm');
@@ -1144,12 +1140,7 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: .1 });
 document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-// ── 계좌번호 GAS Pre-fetching 로직 ──
-const KPAY_LINKS = {
-  groom: 'https://qr.kakaopay.com/GROOM_LINK_HERE',
-  bride:  'https://qr.kakaopay.com/Ej8IMVKSM',
-};
-
+// ── 계좌번호 GAS 연동 ──
 let accountsCache = null;
 let isFetchingAccounts = false;
 
@@ -1198,7 +1189,7 @@ function renderAccountRows(list) {
   }).join('');
 }
 
-// ── 아코디언 오픈 시 날짜 검증 로직 (D-60 ~ D+7) ──
+// ── 아코디언 오픈 시 날짜 검증 로직 ──
 async function toggleAcc(id) {
   const body = document.getElementById(id);
   const isOpen = body.style.display === 'block';
@@ -1215,7 +1206,7 @@ async function toggleAcc(id) {
   document.getElementById(id + '-btn').classList.add('open');
   document.getElementById(id + '-i').style.transform = 'rotate(45deg)';
 
-  const now = new Date();
+  const now = new Date(); 
   const wDate = new Date('2027-01-30T00:00:00+09:00');
   
   const openDate = new Date(wDate);
@@ -1249,8 +1240,7 @@ async function toggleAcc(id) {
   body.dataset.loaded = '1';
 }
 
-function openKakao(who) {
-  const url = KPAY_LINKS[who];
+function openKakao(url) {
   if (!url || url.includes('LINK_HERE')) { toast('카카오페이 링크를 아직 설정하지 않았습니다.'); return; }
   window.open(url, '_blank');
 }
@@ -1521,34 +1511,29 @@ document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
   prefetchAccounts(); 
 
-  // ── 10점 만점: 아무데나 터치해도 강제 재생 (저전력 모드 완벽 대응) ──
   const heroVid = document.getElementById('hero-vid');
   const vidHint = document.getElementById('vid-hint');
 
   if (heroVid) {
     let isPlaying = false;
 
-    // 영상이 실제로 재생되기 시작하면 상태 업데이트 및 힌트 숨김
     heroVid.addEventListener('playing', () => {
       isPlaying = true;
       if (vidHint) vidHint.classList.add('hidden');
     });
 
-    // 0.4초 대기 후 아직도 멈춰있다면(저전력 모드) 힌트 표시
     setTimeout(() => {
       if (heroVid.paused && vidHint) {
         vidHint.classList.remove('hidden');
       }
     }, 400);
 
-    // 화면 전역(아무 곳이나) 터치/클릭/스크롤 시 비디오 재생 시도
     const tryGlobalPlay = () => {
       if (!isPlaying && heroVid.paused) {
         heroVid.play().catch(() => {});
       }
     };
 
-    // 스크롤, 터치, 클릭 등 사용자의 모든 첫 액션에서 재생을 밀어붙임 (진정한 자동재생 UX)
     ['touchstart', 'click', 'scroll'].forEach(evt => {
       document.addEventListener(evt, tryGlobalPlay, { passive: true });
     });
