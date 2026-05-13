@@ -116,19 +116,26 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 
 .spinner{border:3px solid rgba(253,250,245,.2);border-top:3px solid var(--gold-lt);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin-bottom:20px;}
 
-.bgm-btn{position:fixed;bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);left:18px;z-index:500;background:rgba(247,242,234,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(181,146,74,.3);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s, background .3s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.bgm-btn{position:fixed;bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);left:18px;z-index:500;background:rgba(247,242,234,.85);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(181,146,74,.3);padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:transform .2s, background .3s;font-family:'Noto Sans KR',sans-serif;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
 .bgm-btn:hover{background:rgba(247,242,234,.95);}
 .bgm-btn:active{transform:scale(.95);}
 .bgm-btn i{font-size:13px;color:var(--ink);}
 .bgm-btn span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);font-weight:500;}
 .disc-spinning{animation:spin 8s linear infinite;}
 
-#top-btn{display:none;position:fixed;bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);right:18px;z-index:500;width:44px;height:44px;border-radius:50%;background:rgba(247,242,234,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);cursor:pointer;color:var(--ink);font-size:14px;transition:opacity .3s,transform .2s;box-shadow:0 4px 16px rgba(0,0,0,.12);align-items:center;justify-content:center;}
+#top-btn{display:none;position:fixed;bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);right:18px;z-index:500;width:44px;height:44px;border-radius:50%;background:rgba(247,242,234,.92);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid var(--line);cursor:pointer;color:var(--ink);font-size:14px;transition:opacity .3s,transform .2s;box-shadow:0 4px 16px rgba(0,0,0,.12);align-items:center;justify-content:center;}
 #top-btn.visible{display:flex;}
 #top-btn:active{transform:scale(.92);}
 
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
-.hero-photo{position:absolute;inset:0;background-color:#0E0C0A;will-change:transform;}
+.hero-photo{
+position:absolute;
+inset:0;
+background-color:#0E0C0A;
+will-change:transform;
+transform:translateZ(0);
+backface-visibility:hidden;
+}
 
 /* ── iOS 거대 재생버튼 및 모든 컨트롤 완벽 삭제 ── */
 .hero-photo video {
@@ -141,37 +148,6 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   display: none !important;
   -webkit-appearance: none !important;
   opacity: 0 !important;
-}
-
-/* ── 전역 터치를 위한 힌트 오버레이 (버튼 자체 클릭 방지) ── */
-.vid-play-hint {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  background: transparent;
-  transition: opacity .4s ease;
-}
-.vid-play-hint.hidden { opacity: 0; }
-.vid-play-hint-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  background: rgba(14,12,10,.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(181,146,74,.35);
-  border-radius: 50px;
-  padding: 14px 24px;
-}
-.vid-play-hint-inner i { font-size: 22px; color: rgba(253,250,245,.9); }
-.vid-play-hint-inner span {
-  font-family: 'Noto Sans KR', sans-serif; font-size: 12px;
-  letter-spacing: .12em; color: rgba(253,250,245,.8); font-weight: 300;
 }
 
 .hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(14,12,10,.4) 60%,rgba(26,18,14,.92) 100%);}
@@ -419,7 +395,14 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   </div>
 </div>
 
-<audio id="bgm" loop preload="metadata" autoplay>
+<audio
+  id="bgm"
+  loop
+  autoplay
+  playsinline
+  webkit-playsinline
+  preload="auto"
+>
   <source src="Film_Love.mp3" type="audio/mpeg">
 </audio>
 
@@ -436,19 +419,29 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
 <div class="hero-photo" id="hero-photo">
-  <video id="hero-vid" autoplay muted loop playsinline preload="auto" style="background-color: #0E0C0A;">
+
+
+
+<video
+  id="hero-vid"
+  autoplay
+  muted
+  loop
+  playsinline
+  webkit-playsinline
+  preload="auto"
+  disablepictureinpicture
+  disableremoteplayback
+  poster="IMG_1033.jpeg"
+  style="background-color:#0E0C0A;"
+>
+
+
     <source src="hero.mp4" type="video/mp4">
   </video>
 </div>
   <div class="hero-veil"></div>
   
-  <div class="vid-play-hint hidden" id="vid-hint">
-    <div class="vid-play-hint-inner">
-      <i class="fas fa-play"></i>
-      <span>터치하여 시작</span>
-    </div>
-  </div>
-
   <div id="snow-c"></div>
   <div class="hero-body">
     <p class="hero-lead">눈부시게 푸르던 여름날 서로를 알아본 우리,<br>하얀 눈꽃 아래서 영원을 약속합니다.</p>
@@ -1512,7 +1505,7 @@ document.addEventListener('DOMContentLoaded', () => {
   prefetchAccounts(); 
 
   const heroVid = document.getElementById('hero-vid');
-  const vidHint = document.getElementById('vid-hint');
+  
 
   if (heroVid) {
     let isPlaying = false;
@@ -1553,5 +1546,158 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+
+<script>
+const bgm = document.getElementById('bgm');
+const heroVid = document.getElementById('hero-vid');
+const disc = document.getElementById('disc-i');
+const bgmLabel = document.getElementById('bgm-lbl');
+const bgmBtn = document.getElementById('bgm-btn');
+
+
+
+
+let mediaStarted = false;
+
+async function () {
+  if (mediaStarted) return;
+  mediaStarted = true;
+
+  try {
+    await heroVid.play();
+  } catch (e) {
+    console.log('video autoplay blocked');
+  }
+
+
+try {
+  await bgm.play();
+  disc.classList.add('disc-spinning');
+  bgmLabel.textContent = '음악 끄기';
+} catch (e) {
+  console.log('audio autoplay blocked');
+}
+vidHint.classList.add('hidden');
+
+
+}
+
+ , { once: true });
+, { once: true });
+
+bgmBtn.addEventListener('click', async () => {
+  if (bgm.paused) {
+    try {
+      await bgm.play();
+      disc.classList.add('disc-spinning');
+      bgmLabel.textContent = '음악 끄기';
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
+    bgm.pause();
+    disc.classList.remove('disc-spinning');
+    bgmLabel.textContent = '음악 켜기';
+  }
+});
+</script>
+<script>
+const bgm = document.getElementById('bgm');
+const heroVid = document.getElementById('hero-vid');
+
+const disc = document.getElementById('disc-i');
+const bgmLabel = document.getElementById('bgm-lbl');
+
+let mediaStarted = false;
+
+/* 자동재생 시도 */
+async function tryAutoPlay() {
+
+  // VIDEO
+  try {
+    heroVid.muted = true;
+    heroVid.setAttribute('muted', '');
+    await heroVid.play();
+  } catch(e) {}
+
+  // AUDIO
+  try {
+    await bgm.play();
+
+    disc.classList.add('disc-spinning');
+    bgmLabel.textContent = '음악 끄기';
+
+    mediaStarted = true;
+
+  } catch(e) {
+
+    // iOS 저전력모드 등으로 실패한 경우
+    bgmLabel.textContent = '음악 켜기';
+
+  }
+}
+
+/* 첫 사용자 터치 시 강제 재생 */
+async function forceStartMedia() {
+
+  if (mediaStarted) return;
+
+  try {
+
+    await heroVid.play();
+    await bgm.play();
+
+    disc.classList.add('disc-spinning');
+    bgmLabel.textContent = '음악 끄기';
+
+    mediaStarted = true;
+
+  } catch(e) {}
+
+}
+
+/* 가능한 모든 타이밍에서 자동재생 시도 */
+window.addEventListener('load', tryAutoPlay);
+window.addEventListener('pageshow', tryAutoPlay);
+document.addEventListener('DOMContentLoaded', tryAutoPlay);
+
+/* 첫 터치 즉시 재생 */
+window.addEventListener(
+  'touchstart',
+  forceStartMedia,
+  { once:true, passive:true }
+);
+
+window.addEventListener(
+  'click',
+  forceStartMedia,
+  { once:true }
+);
+
+/* BGM 버튼 */
+document.getElementById('bgm-btn').addEventListener('click', async () => {
+
+  if (bgm.paused) {
+
+    try {
+      await bgm.play();
+
+      disc.classList.add('disc-spinning');
+      bgmLabel.textContent = '음악 끄기';
+
+    } catch(e) {}
+
+  } else {
+
+    bgm.pause();
+
+    disc.classList.remove('disc-spinning');
+    bgmLabel.textContent = '음악 켜기';
+
+  }
+
+});
+</script>
+
 </body>
 </html>
