@@ -1246,7 +1246,16 @@ let accountsCache = null;
 let isFetchingAccounts = false;
 
 async function prefetchAccounts() {
-  if (accountsCache || isFetchingAccounts) return;
+  if (accountsCache) return;
+  // 이미 fetch 중이면 완료될 때까지 대기
+  if (isFetchingAccounts) {
+    await new Promise(resolve => {
+      const check = setInterval(() => {
+        if (!isFetchingAccounts) { clearInterval(check); resolve(); }
+      }, 100);
+    });
+    return;
+  }
   isFetchingAccounts = true;
   try {
     const res = await fetch(GAS + '?action=getAccounts');
@@ -1258,6 +1267,7 @@ async function prefetchAccounts() {
   }
 }
 
+  
 function renderAccountRows(list) {
   return list.map(item => {
     if (!item.number) {
@@ -1389,6 +1399,7 @@ function submitRsvp(e) {
     .then(() => {
       clearTimeout(timeoutId);
       localStorage.setItem(rsvpKey, '1'); 
+      localStorage.setItem('rsvp_done', '1');
       closeRsvp(); 
       toast('참석 정보가 성공적으로 전달되었습니다. 감사합니다!');
     })
@@ -1669,6 +1680,30 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.onclick = e => e.preventDefault();
     });
   }
+// ── RSVP 자동 팝업 ──
+  (function () {
+    if (localStorage.getItem('rsvp_done')) return;
+
+    let triggered = false;
+
+    const rsvpObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !triggered) {
+          triggered = true;
+          rsvpObserver.disconnect();
+          setTimeout(() => {
+            if (!document.getElementById('rsvp-modal').classList.contains('open')) {
+              openRsvp();
+            }
+          }, 800);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    const rsvpSec = document.querySelector('.rsvp-sec');
+    if (rsvpSec) rsvpObserver.observe(rsvpSec);
+  })();
+
 });
 </script>
 </body>
