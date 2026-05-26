@@ -271,20 +271,37 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .btn-ghost:hover{background:rgba(181,146,74,.15);border-color:var(--gold-lt);}
 .btn-ghost:active{transform:scale(.98);}
 
-.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;} 
+/* ═══ 갤러리: blur → loaded 전환 ═══ */
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
 .gal-item{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;background:var(--bg2);}
-.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1);display:block;}
+.gal-item img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s cubic-bezier(.16,1,.3,1), filter .4s ease;
+  filter:blur(6px);         /* 로드 전: 흐릿하게 */
+  will-change:filter;
+}
+.gal-item img.loaded{
+  filter:blur(0);            /* 로드 완료: 선명하게 */
+}
 .gal-item:hover img{transform:scale(1.07);}
 .gal-item::after{content:'';position:absolute;inset:0;background:rgba(181,146,74,0);transition:background .35s ease;pointer-events:none;}
 .gal-item:hover::after{background:rgba(181,146,74,.1);}
 .gal-hint{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);text-align:center;margin-top:24px;font-weight:300;letter-spacing:.1em;}
 
+/* ═══ 모달: 페이드인 전환 ═══ */
 #img-modal{display:none;position:fixed;inset:0;z-index:900;background:rgba(10,8,7,.97);flex-direction:column;align-items:center;justify-content:center;}
 #img-modal.active{display:flex;}
 #img-modal .m-close{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 20px);right:20px;color:rgba(253,250,245,.55);font-size:24px;cursor:pointer;padding:12px;background:none;border:none;}
 #modal-pnum{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 26px);left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.32em;color:rgba(253,250,245,.5);}
 #modal-ta{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:64px 16px;}
-#modal-img{max-width:100%;max-height:85vh;object-fit:contain;}
+#modal-img{
+  max-width:100%;max-height:85vh;object-fit:contain;
+  transition:opacity .35s ease;   /* 페이드인 */
+  opacity:0;                       /* 로드 전: 투명 */
+}
+#modal-img.modal-img-loaded{
+  opacity:1;                       /* 로드 완료: 표시 */
+}
 #img-modal .m-hint{position:absolute;bottom:calc(env(safe-area-inset-bottom, 0px) + 28px);left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:rgba(253,250,245,.4);letter-spacing:.14em;white-space:nowrap;}
 
 .map-wrap{position:relative;width:100%;height:320px;margin-bottom:20px;}
@@ -978,7 +995,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </div><!-- /.wrap -->
 
 <script>
-// 개발자 도구 방지용 (프리뷰를 위해 유지)
+// 개발자 도구 방지용
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
   if (
@@ -993,31 +1010,39 @@ document.addEventListener('keydown', e => {
 
 const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
+// ════════════════════════════════════════════════════════
+// 갤러리 이미지 목록
+// thumb : 그리드 표시용 썸네일 (thumbs/ 폴더, WebP 권장)
+//         → Squoosh(squoosh.app)에서 400×400px / WebP 75%로 저장
+// full  : 모달 표시용 원본  (full/ 폴더, WebP 권장)
+//         → Squoosh에서 최장변 1200px / WebP 85%로 저장
+// ════════════════════════════════════════════════════════
 const IMGS = [
-  '1.jpg',
-  '2.jpg',
-  '3.jpg',
-  '4.jpg',
-  '5.jpg',
-  '6.jpg',
-  '7.jpg',
-  '8.jpg',
-  '9.jpg',
-  '10.jpg',
-  '11.jpg',
-  '12.jpg',
-  '13.jpg',
-  '14.jpg',
-  '15.jpg',
-  '16.jpg',
-  '17.jpg',
-  '18.jpg',
-  '19.jpg',
-  '20.jpg'
+  { thumb: 'thumbs/1.webp',  full: 'full/1.webp'  },
+  { thumb: 'thumbs/2.webp',  full: 'full/2.webp'  },
+  { thumb: 'thumbs/3.webp',  full: 'full/3.webp'  },
+  { thumb: 'thumbs/4.webp',  full: 'full/4.webp'  },
+  { thumb: 'thumbs/5.webp',  full: 'full/5.webp'  },
+  { thumb: 'thumbs/6.webp',  full: 'full/6.webp'  },
+  { thumb: 'thumbs/7.webp',  full: 'full/7.webp'  },
+  { thumb: 'thumbs/8.webp',  full: 'full/8.webp'  },
+  { thumb: 'thumbs/9.webp',  full: 'full/9.webp'  },
+  { thumb: 'thumbs/10.webp', full: 'full/10.webp' },
+  { thumb: 'thumbs/11.webp', full: 'full/11.webp' },
+  { thumb: 'thumbs/12.webp', full: 'full/12.webp' },
+  { thumb: 'thumbs/13.webp', full: 'full/13.webp' },
+  { thumb: 'thumbs/14.webp', full: 'full/14.webp' },
+  { thumb: 'thumbs/15.webp', full: 'full/15.webp' },
+  { thumb: 'thumbs/16.webp', full: 'full/16.webp' },
+  { thumb: 'thumbs/17.webp', full: 'full/17.webp' },
+  { thumb: 'thumbs/18.webp', full: 'full/18.webp' },
+  { thumb: 'thumbs/19.webp', full: 'full/19.webp' },
+  { thumb: 'thumbs/20.webp', full: 'full/20.webp' },
 ];
 
 let ci = 0, sy = 0;
 
+// ── 갤러리 초기화: 썸네일 사용 + blur → loaded 전환 ──
 function initGallery() {
   const g = document.getElementById('gal-grid');
   g.innerHTML = '';
@@ -1025,18 +1050,54 @@ function initGallery() {
     const d = document.createElement('div');
     d.className = 'gal-item';
     d.onclick = () => openImg(i);
+
     const im = document.createElement('img');
-    im.src = src; im.loading = 'lazy'; im.decoding = 'async'; im.alt = '웨딩 사진 ' + (i + 1);
-    d.appendChild(im); g.appendChild(d);
+    im.src = src.thumb;          // 썸네일 사용 (용량 작음)
+    im.loading = 'lazy';
+    im.decoding = 'async';
+    im.alt = '웨딩 사진 ' + (i + 1);
+
+    // 이미 캐시된 경우 즉시 loaded 처리
+    if (im.complete && im.naturalWidth > 0) {
+      im.classList.add('loaded');
+    } else {
+      im.addEventListener('load',  () => im.classList.add('loaded'),  { once: true });
+      im.addEventListener('error', () => im.classList.add('loaded'),  { once: true }); // 에러도 blur 해제
+    }
+
+    d.appendChild(im);
+    g.appendChild(d);
   });
 }
 
-function openImg(i) { ci = i; updModal(); document.getElementById('img-modal').classList.add('active'); lock(); }
+// ── 모달 열기: 인접 이미지 프리로드 추가 ──
+function openImg(i) {
+  ci = i;
+  updModal();
+
+  // 이전·다음 이미지 미리 다운로드 → 스와이프 시 즉시 표시
+  [i - 1, i + 1].forEach(idx => {
+    if (idx >= 0 && idx < IMGS.length) new Image().src = IMGS[idx].full;
+  });
+
+  document.getElementById('img-modal').classList.add('active');
+  lock();
+}
+
 function closeImg() { document.getElementById('img-modal').classList.remove('active'); unlock(); }
+
+// ── 모달 이미지 교체: full 이미지 + 페이드인 ──
 function updModal() {
-  document.getElementById('modal-img').src = IMGS[ci];
+  const img = document.getElementById('modal-img');
+  img.classList.remove('modal-img-loaded');   // 교체 전 투명 처리
+
+  img.addEventListener('load',  () => img.classList.add('modal-img-loaded'), { once: true });
+  img.addEventListener('error', () => img.classList.add('modal-img-loaded'), { once: true });
+
+  img.src = IMGS[ci].full;                    // 원본(full) 이미지 사용
   document.getElementById('modal-pnum').textContent = `${ci + 1} / ${IMGS.length}`;
 }
+
 function handleImgOutsideClick(e) {
   if (!e.target.closest('#modal-img') && !e.target.closest('.m-close')) { closeImg(); }
 }
@@ -1210,7 +1271,6 @@ function renderAccountRows(list) {
   }).join('');
 }
 
-// ── 아코디언 오픈 시 날짜 검증 로직 ──
 async function toggleAcc(id) {
   const body = document.getElementById(id);
   const isOpen = body.style.display === 'block';
