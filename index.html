@@ -133,7 +133,7 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 /* ── iOS 거대 재생버튼 및 모든 컨트롤 완벽 삭제 ── */
 .hero-photo video {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  pointer-events: none; /* 하객 터치 무시 (배경으로만 동작) */
+  pointer-events: none;
 }
 .hero-photo video::-webkit-media-controls,
 .hero-photo video::-webkit-media-controls-start-playback-button,
@@ -143,7 +143,7 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
   opacity: 0 !important;
 }
 
-/* ── 전역 터치를 위한 힌트 오버레이 (버튼 자체 클릭 방지) ── */
+/* ── 전역 터치를 위한 힌트 오버레이 ── */
 .vid-play-hint {
   position: absolute;
   inset: 0;
@@ -271,18 +271,22 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .btn-ghost:hover{background:rgba(181,146,74,.15);border-color:var(--gold-lt);}
 .btn-ghost:active{transform:scale(.98);}
 
-/* ═══ 갤러리: blur → loaded 전환 ═══ */
+/* ═══════════════════════════════════════════════════════
+   갤러리
+   [수정 1] will-change: filter → 로드 완료 전(.loaded 없는 상태)에만 적용
+            GPU 레이어를 20장 동시 생성하지 않고, blur 해제 후 즉시 반납
+   ═══════════════════════════════════════════════════════ */
 .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
 .gal-item{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;background:var(--bg2);}
 .gal-item img{
   width:100%;height:100%;object-fit:cover;display:block;
   transition:transform .6s cubic-bezier(.16,1,.3,1), filter .4s ease;
-  filter:blur(6px);         /* 로드 전: 흐릿하게 */
-  will-change:filter;
+  filter:blur(6px);
+  /* [수정 1] will-change를 전체가 아닌, 아직 로드 안 된 이미지에만 부여 */
 }
-.gal-item img.loaded{
-  filter:blur(0);            /* 로드 완료: 선명하게 */
-}
+/* 로드 전에만 GPU 레이어 생성 → 로드 완료 시 자동 반납 */
+.gal-item img:not(.loaded){ will-change: filter; }
+.gal-item img.loaded{ filter:blur(0); }
 .gal-item:hover img{transform:scale(1.07);}
 .gal-item::after{content:'';position:absolute;inset:0;background:rgba(181,146,74,0);transition:background .35s ease;pointer-events:none;}
 .gal-item:hover::after{background:rgba(181,146,74,.1);}
@@ -296,12 +300,10 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 #modal-ta{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:64px 16px;}
 #modal-img{
   max-width:100%;max-height:85vh;object-fit:contain;
-  transition:opacity .35s ease;   /* 페이드인 */
-  opacity:0;                       /* 로드 전: 투명 */
+  transition:opacity .35s ease;
+  opacity:0;
 }
-#modal-img.modal-img-loaded{
-  opacity:1;                       /* 로드 완료: 표시 */
-}
+#modal-img.modal-img-loaded{ opacity:1; }
 #img-modal .m-hint{position:absolute;bottom:calc(env(safe-area-inset-bottom, 0px) + 28px);left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:rgba(253,250,245,.4);letter-spacing:.14em;white-space:nowrap;}
 
 .map-wrap{position:relative;width:100%;height:320px;margin-bottom:20px;}
@@ -1012,37 +1014,41 @@ const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0
 
 // ════════════════════════════════════════════════════════
 // 갤러리 이미지 목록
-// thumb : 그리드 표시용 썸네일 (thumbs/ 폴더, WebP 권장)
-//         → Squoosh(squoosh.app)에서 400×400px / WebP 75%로 저장
-// full  : 모달 표시용 원본  (full/ 폴더, WebP 권장)
-//         → Squoosh에서 최장변 1200px / WebP 85%로 저장
+//
+// thumb : 썸네일용 (thumbs/ 폴더) — 400×400px / JPG 75% 권장
+// full  : 모달 원본 (full/ 폴더)  — 최장변 1200px / JPG 85% 권장
+//
+// [수정] 확장자 .webp → .jpg (변환 작업 불필요, 호환성 100%)
 // ════════════════════════════════════════════════════════
 const IMGS = [
-  { thumb: 'thumbs/1.webp',  full: 'full/1.webp'  },
-  { thumb: 'thumbs/2.webp',  full: 'full/2.webp'  },
-  { thumb: 'thumbs/3.webp',  full: 'full/3.webp'  },
-  { thumb: 'thumbs/4.webp',  full: 'full/4.webp'  },
-  { thumb: 'thumbs/5.webp',  full: 'full/5.webp'  },
-  { thumb: 'thumbs/6.webp',  full: 'full/6.webp'  },
-  { thumb: 'thumbs/7.webp',  full: 'full/7.webp'  },
-  { thumb: 'thumbs/8.webp',  full: 'full/8.webp'  },
-  { thumb: 'thumbs/9.webp',  full: 'full/9.webp'  },
-  { thumb: 'thumbs/10.webp', full: 'full/10.webp' },
-  { thumb: 'thumbs/11.webp', full: 'full/11.webp' },
-  { thumb: 'thumbs/12.webp', full: 'full/12.webp' },
-  { thumb: 'thumbs/13.webp', full: 'full/13.webp' },
-  { thumb: 'thumbs/14.webp', full: 'full/14.webp' },
-  { thumb: 'thumbs/15.webp', full: 'full/15.webp' },
-  { thumb: 'thumbs/16.webp', full: 'full/16.webp' },
-  { thumb: 'thumbs/17.webp', full: 'full/17.webp' },
-  { thumb: 'thumbs/18.webp', full: 'full/18.webp' },
-  { thumb: 'thumbs/19.webp', full: 'full/19.webp' },
-  { thumb: 'thumbs/20.webp', full: 'full/20.webp' },
+  { thumb: 'thumbs/1.jpg',  full: 'full/1.jpg'  },
+  { thumb: 'thumbs/2.jpg',  full: 'full/2.jpg'  },
+  { thumb: 'thumbs/3.jpg',  full: 'full/3.jpg'  },
+  { thumb: 'thumbs/4.jpg',  full: 'full/4.jpg'  },
+  { thumb: 'thumbs/5.jpg',  full: 'full/5.jpg'  },
+  { thumb: 'thumbs/6.jpg',  full: 'full/6.jpg'  },
+  { thumb: 'thumbs/7.jpg',  full: 'full/7.jpg'  },
+  { thumb: 'thumbs/8.jpg',  full: 'full/8.jpg'  },
+  { thumb: 'thumbs/9.jpg',  full: 'full/9.jpg'  },
+  { thumb: 'thumbs/10.jpg', full: 'full/10.jpg' },
+  { thumb: 'thumbs/11.jpg', full: 'full/11.jpg' },
+  { thumb: 'thumbs/12.jpg', full: 'full/12.jpg' },
+  { thumb: 'thumbs/13.jpg', full: 'full/13.jpg' },
+  { thumb: 'thumbs/14.jpg', full: 'full/14.jpg' },
+  { thumb: 'thumbs/15.jpg', full: 'full/15.jpg' },
+  { thumb: 'thumbs/16.jpg', full: 'full/16.jpg' },
+  { thumb: 'thumbs/17.jpg', full: 'full/17.jpg' },
+  { thumb: 'thumbs/18.jpg', full: 'full/18.jpg' },
+  { thumb: 'thumbs/19.jpg', full: 'full/19.jpg' },
+  { thumb: 'thumbs/20.jpg', full: 'full/20.jpg' },
 ];
 
 let ci = 0, sy = 0;
 
-// ── 갤러리 초기화: 썸네일 사용 + blur → loaded 전환 ──
+// ══════════════════════════════════════════════════════════
+// [수정 2] initGallery: loading / decoding 을 src 보다 먼저 설정
+//          기존 코드는 src 이후에 lazy 속성을 붙여 효과가 없었음
+// ══════════════════════════════════════════════════════════
 function initGallery() {
   const g = document.getElementById('gal-grid');
   g.innerHTML = '';
@@ -1052,17 +1058,19 @@ function initGallery() {
     d.onclick = () => openImg(i);
 
     const im = document.createElement('img');
-    im.src = src.thumb;          // 썸네일 사용 (용량 작음)
-    im.loading = 'lazy';
-    im.decoding = 'async';
-    im.alt = '웨딩 사진 ' + (i + 1);
 
-    // 이미 캐시된 경우 즉시 loaded 처리
+    // ✅ 속성을 src 보다 반드시 먼저 선언해야 lazy loading이 동작함
+    im.loading  = 'lazy';
+    im.decoding = 'async';
+    im.alt      = '웨딩 사진 ' + (i + 1);
+    im.src      = src.thumb;   // ← 마지막에 src 할당
+
+    // 이미 캐시된 경우 즉시 blur 해제
     if (im.complete && im.naturalWidth > 0) {
       im.classList.add('loaded');
     } else {
-      im.addEventListener('load',  () => im.classList.add('loaded'),  { once: true });
-      im.addEventListener('error', () => im.classList.add('loaded'),  { once: true }); // 에러도 blur 해제
+      im.addEventListener('load',  () => im.classList.add('loaded'), { once: true });
+      im.addEventListener('error', () => im.classList.add('loaded'), { once: true });
     }
 
     d.appendChild(im);
@@ -1070,31 +1078,42 @@ function initGallery() {
   });
 }
 
-// ── 모달 열기: 인접 이미지 프리로드 추가 ──
+// ── 모달 열기: 인접 이미지 프리로드 ──
 function openImg(i) {
   ci = i;
   updModal();
-
-  // 이전·다음 이미지 미리 다운로드 → 스와이프 시 즉시 표시
-  [i - 1, i + 1].forEach(idx => {
-    if (idx >= 0 && idx < IMGS.length) new Image().src = IMGS[idx].full;
-  });
-
   document.getElementById('img-modal').classList.add('active');
   lock();
 }
 
 function closeImg() { document.getElementById('img-modal').classList.remove('active'); unlock(); }
 
-// ── 모달 이미지 교체: full 이미지 + 페이드인 ──
+// ══════════════════════════════════════════════════════════
+// [수정 3] updModal:
+//   ① src 변경 후 캐시된 이미지는 load 이벤트가 발생하지 않을 수 있어
+//      img.complete 즉시 체크로 확실히 표시
+//   ② 스와이프할 때마다 인접 이미지를 미리 내려받아
+//      다음 사진이 즉시 표시되도록 개선
+// ══════════════════════════════════════════════════════════
 function updModal() {
   const img = document.getElementById('modal-img');
-  img.classList.remove('modal-img-loaded');   // 교체 전 투명 처리
+  img.classList.remove('modal-img-loaded');  // 교체 전: 투명
 
   img.addEventListener('load',  () => img.classList.add('modal-img-loaded'), { once: true });
   img.addEventListener('error', () => img.classList.add('modal-img-loaded'), { once: true });
 
-  img.src = IMGS[ci].full;                    // 원본(full) 이미지 사용
+  img.src = IMGS[ci].full;
+
+  // ✅ 캐시된 이미지는 load 이벤트가 오지 않으므로 즉시 확인
+  if (img.complete && img.naturalWidth > 0) {
+    img.classList.add('modal-img-loaded');
+  }
+
+  // ✅ 스와이프마다 이전·다음 이미지를 미리 다운로드
+  [ci - 1, ci + 1].forEach(idx => {
+    if (idx >= 0 && idx < IMGS.length) new Image().src = IMGS[idx].full;
+  });
+
   document.getElementById('modal-pnum').textContent = `${ci + 1} / ${IMGS.length}`;
 }
 
