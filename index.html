@@ -1400,22 +1400,40 @@ function submitRsvp(e) {
     .finally(() => { btn.textContent = '전송하기'; btn.disabled = false; });
 }
 
+
 function addSmartCalendar() {
   const ua = navigator.userAgent.toLowerCase();
-  const isIOS = /iphone|ipad|ipod|mac/.test(ua);
+  const isKakao = ua.includes('kakaotalk');
+  const isIOS   = /iphone|ipad|ipod|mac/.test(ua); // mac 유지
+
   const title = '태광 ♥ 지현 결혼식';
-  const loc = '경기 남양주시 다산순환로 20 파로스컨벤션';
-  const desc = '지하철:구리역 7번출구 셔틀 운행 / 주차: GATE 2로 진입하여 지하 3~4층까지 계속 좌회전하여 E동 근처 주차';
+  const loc   = '경기 남양주시 다산순환로 20 파로스컨벤션';
+  const desc  = '지하철:구리역 7번출구 셔틀 운행 / 주차: GATE 2로 진입하여 지하 3~4층까지 계속 좌회전하여 E동 근처 주차';
+
+  const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE`
+    + `&text=${encodeURIComponent(title)}`
+    + `&dates=20270130T041000Z/20270130T061000Z`
+    + `&location=${encodeURIComponent(loc)}`
+    + `&details=${encodeURIComponent(desc)}`;
+
+  if (isKakao) {
+    window.open(googleUrl, '_blank');
+    toast('기본 브라우저에서 구글 캘린더가 열립니다 📅');
+    return;
+  }
+
   if (isIOS) {
     const ics = [
-      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Taekwang and Jihyun Wedding//EN', 'CALSCALE:GREGORIAN',
-      'BEGIN:VEVENT', 'DTSTART:20270130T041000Z', 'DTEND:20270130T061000Z',
+      'BEGIN:VCALENDAR', 'VERSION:2.0',
+      'PRODID:-//Taekwang and Jihyun Wedding//EN', 'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      'DTSTART:20270130T041000Z', 'DTEND:20270130T061000Z',
       'SUMMARY:' + title, 'LOCATION:' + loc, 'DESCRIPTION:' + desc,
       'END:VEVENT', 'END:VCALENDAR'
     ].join('\n');
     window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
   } else {
-    window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20270130T041000Z/20270130T061000Z&location=${encodeURIComponent(loc)}&details=${encodeURIComponent(desc)}`, '_blank');
+    window.open(googleUrl, '_blank');
   }
 }
 
