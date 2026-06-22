@@ -130,48 +130,9 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .hero{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;}
 .hero-photo{position:absolute;inset:0;background-color:#0E0C0A;will-change:transform;}
 
-/* ── iOS 거대 재생버튼 및 모든 컨트롤 완벽 삭제 ── */
-.hero-photo video {
+/* ── 히어로 이미지 ── */
+.hero-photo img {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  pointer-events: none;
-}
-.hero-photo video::-webkit-media-controls,
-.hero-photo video::-webkit-media-controls-start-playback-button,
-.hero-photo video::-webkit-media-controls-overlay-play-button {
-  display: none !important;
-  -webkit-appearance: none !important;
-  opacity: 0 !important;
-}
-
-/* ── 전역 터치를 위한 힌트 오버레이 ── */
-.vid-play-hint {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  background: transparent;
-  transition: opacity .4s ease;
-}
-.vid-play-hint.hidden { opacity: 0; }
-.vid-play-hint-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  background: rgba(14,12,10,.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(181,146,74,.35);
-  border-radius: 50px;
-  padding: 14px 24px;
-}
-.vid-play-hint-inner i { font-size: 22px; color: rgba(253,250,245,.9); }
-.vid-play-hint-inner span {
-  font-family: 'Noto Sans KR', sans-serif; font-size: 12px;
-  letter-spacing: .12em; color: rgba(253,250,245,.8); font-weight: 300;
 }
 
 .hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(14,12,10,.4) 60%,rgba(26,18,14,.92) 100%);}
@@ -271,20 +232,13 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .btn-ghost:hover{background:rgba(181,146,74,.15);border-color:var(--gold-lt);}
 .btn-ghost:active{transform:scale(.98);}
 
-/* ═══════════════════════════════════════════════════════
-   갤러리
-   [수정 1] will-change: filter → 로드 완료 전(.loaded 없는 상태)에만 적용
-            GPU 레이어를 20장 동시 생성하지 않고, blur 해제 후 즉시 반납
-   ═══════════════════════════════════════════════════════ */
 .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
 .gal-item{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;background:var(--bg2);}
 .gal-item img{
   width:100%;height:100%;object-fit:cover;display:block;
   transition:transform .6s cubic-bezier(.16,1,.3,1), filter .4s ease;
   filter:blur(6px);
-  /* [수정 1] will-change를 전체가 아닌, 아직 로드 안 된 이미지에만 부여 */
 }
-/* 로드 전에만 GPU 레이어 생성 → 로드 완료 시 자동 반납 */
 .gal-item img:not(.loaded){ will-change: filter; }
 .gal-item img.loaded{ filter:blur(0); }
 .gal-item:hover img{transform:scale(1.07);}
@@ -292,7 +246,6 @@ section{padding:80px 32px;border-bottom:.5px solid var(--line);}
 .gal-item:hover::after{background:rgba(181,146,74,.1);}
 .gal-hint{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--muted);text-align:center;margin-top:24px;font-weight:300;letter-spacing:.1em;}
 
-/* ═══ 모달: 페이드인 전환 ═══ */
 #img-modal{display:none;position:fixed;inset:0;z-index:900;background:rgba(10,8,7,.97);flex-direction:column;align-items:center;justify-content:center;}
 #img-modal.active{display:flex;}
 #img-modal .m-close{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 20px);right:20px;color:rgba(253,250,245,.55);font-size:24px;cursor:pointer;padding:12px;background:none;border:none;}
@@ -454,20 +407,11 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
 </button>
 
 <section style="padding:0;border:none;height:100vh;height:100dvh;position:relative;overflow:hidden;">
-<div class="hero-photo" id="hero-photo">
-  <video id="hero-vid" autoplay muted loop playsinline preload="auto" style="background-color: #0E0C0A;">
-    <source src="hero.mp4" type="video/mp4">
-  </video>
-</div>
-  <div class="hero-veil"></div>
-  
-  <div class="vid-play-hint hidden" id="vid-hint">
-    <div class="vid-play-hint-inner">
-      <i class="fas fa-play"></i>
-      <span>터치하여 시작</span>
-    </div>
+  <!-- ▼ hero.mp4 → hero.jpg 로 교체 -->
+  <div class="hero-photo" id="hero-photo">
+    <img src="hero.jpg" alt="태광 지현 웨딩 사진">
   </div>
-
+  <div class="hero-veil"></div>
   <div id="snow-c"></div>
   <div class="hero-body">
     <p class="hero-lead">눈부시게 푸르던 여름날 서로를 알아본 우리,<br>하얀 눈꽃 아래서 영원을 약속합니다.</p>
@@ -1012,14 +956,6 @@ document.addEventListener('keydown', e => {
 
 const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
-// ════════════════════════════════════════════════════════
-// 갤러리 이미지 목록
-//
-// thumb : 썸네일용 (thumbs/ 폴더) — 400×400px / JPG 75% 권장
-// full  : 모달 원본 (full/ 폴더)  — 최장변 1200px / JPG 85% 권장
-//
-// [수정] 확장자 .webp → .jpg (변환 작업 불필요, 호환성 100%)
-// ════════════════════════════════════════════════════════
 const IMGS = [
   { thumb: 'thumbs/1.jpg',  full: 'full/1.jpg'  },
   { thumb: 'thumbs/2.jpg',  full: 'full/2.jpg'  },
@@ -1045,10 +981,6 @@ const IMGS = [
 
 let ci = 0, sy = 0;
 
-// ══════════════════════════════════════════════════════════
-// [수정 2] initGallery: loading / decoding 을 src 보다 먼저 설정
-//          기존 코드는 src 이후에 lazy 속성을 붙여 효과가 없었음
-// ══════════════════════════════════════════════════════════
 function initGallery() {
   const g = document.getElementById('gal-grid');
   g.innerHTML = '';
@@ -1058,14 +990,11 @@ function initGallery() {
     d.onclick = () => openImg(i);
 
     const im = document.createElement('img');
-
-    // ✅ 속성을 src 보다 반드시 먼저 선언해야 lazy loading이 동작함
     im.loading  = 'lazy';
     im.decoding = 'async';
     im.alt      = '웨딩 사진 ' + (i + 1);
-    im.src      = src.thumb;   // ← 마지막에 src 할당
+    im.src      = src.thumb;
 
-    // 이미 캐시된 경우 즉시 blur 해제
     if (im.complete && im.naturalWidth > 0) {
       im.classList.add('loaded');
     } else {
@@ -1078,7 +1007,6 @@ function initGallery() {
   });
 }
 
-// ── 모달 열기: 인접 이미지 프리로드 ──
 function openImg(i) {
   ci = i;
   updModal();
@@ -1088,28 +1016,19 @@ function openImg(i) {
 
 function closeImg() { document.getElementById('img-modal').classList.remove('active'); unlock(); }
 
-// ══════════════════════════════════════════════════════════
-// [수정 3] updModal:
-//   ① src 변경 후 캐시된 이미지는 load 이벤트가 발생하지 않을 수 있어
-//      img.complete 즉시 체크로 확실히 표시
-//   ② 스와이프할 때마다 인접 이미지를 미리 내려받아
-//      다음 사진이 즉시 표시되도록 개선
-// ══════════════════════════════════════════════════════════
 function updModal() {
   const img = document.getElementById('modal-img');
-  img.classList.remove('modal-img-loaded');  // 교체 전: 투명
+  img.classList.remove('modal-img-loaded');
 
   img.addEventListener('load',  () => img.classList.add('modal-img-loaded'), { once: true });
   img.addEventListener('error', () => img.classList.add('modal-img-loaded'), { once: true });
 
   img.src = IMGS[ci].full;
 
-  // ✅ 캐시된 이미지는 load 이벤트가 오지 않으므로 즉시 확인
   if (img.complete && img.naturalWidth > 0) {
     img.classList.add('modal-img-loaded');
   }
 
-  // ✅ 스와이프마다 이전·다음 이미지를 미리 다운로드
   [ci - 1, ci + 1].forEach(idx => {
     if (idx >= 0 && idx < IMGS.length) new Image().src = IMGS[idx].full;
   });
@@ -1247,7 +1166,6 @@ let isFetchingAccounts = false;
 
 async function prefetchAccounts() {
   if (accountsCache) return;
-  // 이미 fetch 중이면 완료될 때까지 대기
   if (isFetchingAccounts) {
     await new Promise(resolve => {
       const check = setInterval(() => {
@@ -1267,7 +1185,6 @@ async function prefetchAccounts() {
   }
 }
 
-  
 function renderAccountRows(list) {
   return list.map(item => {
     if (!item.number) {
@@ -1411,11 +1328,10 @@ function submitRsvp(e) {
     .finally(() => { btn.textContent = '전송하기'; btn.disabled = false; });
 }
 
-
 function addSmartCalendar() {
   const ua = navigator.userAgent.toLowerCase();
   const isKakao = ua.includes('kakaotalk');
-  const isIOS   = /iphone|ipad|ipod|mac/.test(ua); // mac 유지
+  const isIOS   = /iphone|ipad|ipod|mac/.test(ua);
 
   const title = '태광 ♥ 지현 결혼식';
   const loc   = '경기 남양주시 다산순환로 20 파로스컨벤션';
@@ -1638,35 +1554,7 @@ function shareKakao() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
-  prefetchAccounts(); 
-
-  const heroVid = document.getElementById('hero-vid');
-  const vidHint = document.getElementById('vid-hint');
-
-  if (heroVid) {
-    let isPlaying = false;
-
-    heroVid.addEventListener('playing', () => {
-      isPlaying = true;
-      if (vidHint) vidHint.classList.add('hidden');
-    });
-
-    setTimeout(() => {
-      if (heroVid.paused && vidHint) {
-        vidHint.classList.remove('hidden');
-      }
-    }, 400);
-
-    const tryGlobalPlay = () => {
-      if (!isPlaying && heroVid.paused) {
-        heroVid.play().catch(() => {});
-      }
-    };
-
-    ['touchstart', 'click', 'scroll'].forEach(evt => {
-      document.addEventListener(evt, tryGlobalPlay, { passive: true });
-    });
-  }
+  prefetchAccounts();
 
   if (document.documentElement.classList.contains('pre-wedding-mask')) {
     var msg = window.__regOpenMsg || '예식 60일 전부터 확인 가능합니다';
@@ -1680,7 +1568,8 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.onclick = e => e.preventDefault();
     });
   }
-// ── RSVP 자동 팝업 ──
+
+  // ── RSVP 자동 팝업 ──
   (function () {
     if (localStorage.getItem('rsvp_done')) return;
 
