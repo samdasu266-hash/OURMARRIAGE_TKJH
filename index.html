@@ -19,19 +19,12 @@
 
 <script>
   (function() {
+    // 계좌 안내 마감(2/6 23:59)과 맞춰 2/7 00:00부터 Registry 섹션 숨김
     var today = new Date();
-    var weddingDate = new Date('2027-01-30T13:10:00+09:00');
-    var showStart = new Date(weddingDate);
-    showStart.setDate(weddingDate.getDate() - 60);
-    showStart.setHours(0, 0, 0, 0);
-    
-    var showEnd = new Date('2027-01-31T00:00:00+09:00');
+    var showEnd = new Date('2027-02-07T00:00:00+09:00');
 
     if (today >= showEnd) {
       document.documentElement.classList.add('post-wedding');
-    } else if (today < showStart) {
-      document.documentElement.classList.add('pre-wedding-mask');
-      window.__regOpenMsg = (showStart.getMonth() + 1) + '월 ' + showStart.getDate() + '일부터 확인 가능합니다';
     }
   })();
 </script>
@@ -743,7 +736,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     
     <div class="bus-r on" style="margin-bottom:20px;">
       <p class="bus-r-t" style="font-size:14px; color:var(--gold-lt);">출발 안내</p>
-      <div class="trans-desc" style="color:var(--ink); margin-bottom:5px;">일시 : 1월 30일(토) <strong></strong></div>
+      <div class="trans-desc" style="color:var(--ink); margin-bottom:5px;">일시 : 1월 30일(토) <strong>시간 추후 안내</strong></div>
       <div class="trans-desc" style="color:var(--ink); margin-bottom:5px;">장소 : <strong>전북특별자치도청 남문(예정)</strong></div>
       <div class="trans-desc" style="color:var(--ink);">예식 당일, 전주에서 출발하는 전세 버스를 섭외중입니다. 전세버스가 필요하신 분은 추후 모바일청첩장을 다시 확인하여 주시면 감사하겠습니다.</div>
     </div>
@@ -1164,7 +1157,37 @@ document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 let accountsCache = null;
 let isFetchingAccounts = false;
 
+// 계좌 공개 기간(공통): 예식 D-60 00:00 ~ 2027-02-06 23:59 (KST)
+const REG_WEDDING = new Date('2027-01-30T00:00:00+09:00');
+const REG_OPEN = (() => {
+  const d = new Date(REG_WEDDING);
+  d.setDate(d.getDate() - 60);
+  d.setHours(0, 0, 0, 0);
+  return d;
+})();
+const REG_CLOSE = new Date('2027-02-06T23:59:59+09:00');
+
+function registryStatus() {
+  const now = new Date();
+  if (now < REG_OPEN) return 'before';
+  if (now > REG_CLOSE) return 'after';
+  return 'open';
+}
+
+// HTML 텍스트 컨텍스트용 이스케이프
+function escHtml(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+// 인라인 onclick의 JS 문자열 리터럴용 이스케이프 (escJs → escHtml 순서로 적용)
+function escJs(s) {
+  return String(s ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+}
+function escAttr(s) { return escHtml(escJs(s)); }
+
 async function prefetchAccounts() {
+  if (registryStatus() !== 'open') return; // 공개 기간 밖에서는 호출하지 않음
   if (accountsCache) return;
   if (isFetchingAccounts) {
     await new Promise(resolve => {
@@ -1191,7 +1214,7 @@ function renderAccountRows(list) {
       return `
         <div class="acc-row">
           <div>
-            <p class="acc-lbl">${item.label}</p>
+            <p class="acc-lbl">${escHtml(item.label)}</p>
             <p class="acc-num missing">⚠ 계좌번호 미기재</p>
           </div>
           <div class="acc-btns">
@@ -1200,18 +1223,18 @@ function renderAccountRows(list) {
         </div>`;
     }
     const kakaoBtn = item.kakao
-      ? `<button class="kpay-btn" onclick="openKakao('${item.kakao}')">카카오페이</button>`
+      ? `<button class="kpay-btn" onclick="openKakao('${escAttr(item.kakao)}')">카카오페이</button>`
       : '';
     const isFull = item.kakao ? 'f' : '';
     return `
       <div class="acc-row">
         <div>
-          <p class="acc-lbl">${item.label}</p>
-          <p class="acc-num">${item.display}</p>
+          <p class="acc-lbl">${escHtml(item.label)}</p>
+          <p class="acc-num">${escHtml(item.display)}</p>
         </div>
         <div class="acc-btns">
           ${kakaoBtn}
-          <button class="copy-btn ${isFull}" onclick="cpCopy('${item.number}','${item.bank} ${item.display}')">복사</button>
+          <button class="copy-btn ${isFull}" onclick="cpCopy('${escAttr(item.number)}','${escAttr(item.bank)} ${escAttr(item.display)}')">복사</button>
         </div>
       </div>`;
   }).join('');
@@ -1233,19 +1256,12 @@ async function toggleAcc(id) {
   document.getElementById(id + '-btn').classList.add('open');
   document.getElementById(id + '-i').style.transform = 'rotate(45deg)';
 
-  const now = new Date(); 
-  const wDate = new Date('2027-01-30T00:00:00+09:00');
-  
-  const openDate = new Date(wDate);
-  openDate.setDate(wDate.getDate() - 60);
-  openDate.setHours(0, 0, 0, 0); 
-  
-  const closeDate = new Date('2027-02-06T23:59:59+09:00'); 
+  const status = registryStatus();
 
-  if (now < openDate) {
-    body.innerHTML = `<div style="text-align:center;padding:24px 16px;"><p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">${openDate.getMonth()+1}월 ${openDate.getDate()}일부터 확인 가능합니다.</p></div>`;
+  if (status === 'before') {
+    body.innerHTML = `<div style="text-align:center;padding:24px 16px;"><p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">${REG_OPEN.getMonth()+1}월 ${REG_OPEN.getDate()}일부터 확인 가능합니다.</p></div>`;
     return;
-  } else if (now > closeDate) {
+  } else if (status === 'after') {
     body.innerHTML = `<div style="text-align:center;padding:24px 16px;"><p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--muted);">마음 전하실 곳 안내가 종료되었습니다.</p></div>`;
     return;
   }
@@ -1350,15 +1366,29 @@ function addSmartCalendar() {
   }
 
   if (isIOS) {
+    // RFC 5545: TEXT 값의 콤마·세미콜론 이스케이프
+    const icsEsc = s => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,');
+    const dtstamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
     const ics = [
       'BEGIN:VCALENDAR', 'VERSION:2.0',
       'PRODID:-//Taekwang and Jihyun Wedding//EN', 'CALSCALE:GREGORIAN',
       'BEGIN:VEVENT',
+      'UID:wedding-20270130-tkjh@ourmarriage-tkjh.vercel.app',
+      'DTSTAMP:' + dtstamp,
       'DTSTART:20270130T041000Z', 'DTEND:20270130T061000Z',
-      'SUMMARY:' + title, 'LOCATION:' + loc, 'DESCRIPTION:' + desc,
+      'SUMMARY:' + icsEsc(title), 'LOCATION:' + icsEsc(loc), 'DESCRIPTION:' + icsEsc(desc),
       'END:VEVENT', 'END:VCALENDAR'
-    ].join('\n');
-    window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+    ].join('\r\n');
+
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url;
+    a.download = 'wedding-invitation.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   } else {
     window.open(googleUrl, '_blank');
   }
@@ -1444,7 +1474,7 @@ photoUp.addEventListener('change', async e => {
   lock();
   document.getElementById('loader-overlay').classList.add('active');
 
-  let ok = 0;
+  let ok = 0, fail = 0, processed = 0;
 
   for (let i = 0; i < itemEls.length; i++) {
     const { status, file, tooBig } = itemEls[i];
@@ -1469,12 +1499,14 @@ photoUp.addEventListener('change', async e => {
       status.className = 'upl-status upl-done';
       status.innerHTML = '<i class="fas fa-check" style="color:#fff;font-size:20px;font-weight:900;"></i>';
     } catch (err) {
+      fail++;
       status.className = 'upl-status upl-fail';
       status.innerHTML = '<i class="fas fa-times" style="color:#fff;font-size:18px;"></i>';
     }
 
-    countEl.textContent = `${ok} / ${validFiles.length}`;
-    progBar.style.width = `${Math.round((ok / validFiles.length) * 100)}%`;
+    processed++;
+    countEl.textContent = `${processed} / ${validFiles.length}`;
+    progBar.style.width = `${Math.round((processed / validFiles.length) * 100)}%`;
   }
 
   await new Promise(r => setTimeout(r, 900));
@@ -1485,7 +1517,11 @@ photoUp.addEventListener('change', async e => {
 
   objectURLs.forEach(u => URL.revokeObjectURL(u));
 
-  if (bigFiles.length > 0 && ok > 0) {
+  if (fail > 0 && ok > 0) {
+    toast(`${ok}장 저장 완료, ${fail}장은 전송에 실패했습니다. 실패한 사진은 다시 시도해 주세요.`);
+  } else if (fail > 0 && ok === 0) {
+    toast('전송에 실패했습니다. 네트워크 상태를 확인 후 다시 시도해 주세요.');
+  } else if (bigFiles.length > 0 && ok > 0) {
     toast(`${ok}장 저장 완료! 10MB가 넘는 사진/영상은 구글 드라이브를 이용해 주세요.`);
   } else if (bigFiles.length > 0 && ok === 0) {
     toast('용량이 10MB를 초과합니다. 아래 구글 드라이브 버튼을 이용해 주세요!');
@@ -1555,19 +1591,6 @@ function shareKakao() {
 document.addEventListener('DOMContentLoaded', () => {
   initSnow(); initGallery(); initDday();
   prefetchAccounts();
-
-  if (document.documentElement.classList.contains('pre-wedding-mask')) {
-    var msg = window.__regOpenMsg || '예식 60일 전부터 확인 가능합니다';
-    document.querySelectorAll('.acc-num:not(.missing)').forEach(el => {
-      el.textContent = msg;
-      el.style.cssText = 'font-size:13px;color:var(--muted);letter-spacing:0;';
-    });
-    document.querySelectorAll('.acc-btns button, .acc-btns a').forEach(btn => {
-      btn.style.cssText = 'opacity:.35;cursor:not-allowed;';
-      btn.removeAttribute('href');
-      btn.onclick = e => e.preventDefault();
-    });
-  }
 
   // ── RSVP 자동 팝업 ──
   (function () {
