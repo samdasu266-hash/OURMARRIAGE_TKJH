@@ -1328,12 +1328,14 @@ function submitRsvp(e) {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-  fetch(GAS, { method: 'POST', mode: 'no-cors', body: new FormData(e.target), signal: controller.signal })
-    .then(() => {
+   fetch(GAS, { method: 'POST', body: new FormData(e.target), signal: controller.signal })
+    .then(res => res.text())
+    .then(txt => {
       clearTimeout(timeoutId);
-      localStorage.setItem(rsvpKey, '1'); 
+      if (!txt.includes('Success')) throw new Error(txt);
+      localStorage.setItem(rsvpKey, '1');
       localStorage.setItem('rsvp_done', '1');
-      closeRsvp(); 
+      closeRsvp();
       toast('참석 정보가 성공적으로 전달되었습니다. 감사합니다!');
     })
     .catch((err) => {
