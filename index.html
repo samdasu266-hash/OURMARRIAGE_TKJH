@@ -954,28 +954,14 @@ document.addEventListener('keydown', e => {
 
 const GAS = 'https://script.google.com/macros/s/AKfycbzTrzXG9cZhqXlXohSlLzrq0qh0xEvk91fID0z7_EQWYE2VQU4Lh4jJFyC9B9ueCaM6/exec';
 
-const IMGS = [
-  { thumb: 'thumbs/1.jpg',  full: 'full/1.jpg'  },
-  { thumb: 'thumbs/2.jpg',  full: 'full/2.jpg'  },
-  { thumb: 'thumbs/3.jpg',  full: 'full/3.jpg'  },
-  { thumb: 'thumbs/4.jpg',  full: 'full/4.jpg'  },
-  { thumb: 'thumbs/5.jpg',  full: 'full/5.jpg'  },
-  { thumb: 'thumbs/6.jpg',  full: 'full/6.jpg'  },
-  { thumb: 'thumbs/7.jpg',  full: 'full/7.jpg'  },
-  { thumb: 'thumbs/8.jpg',  full: 'full/8.jpg'  },
-  { thumb: 'thumbs/9.jpg',  full: 'full/9.jpg'  },
-  { thumb: 'thumbs/10.jpg', full: 'full/10.jpg' },
-  { thumb: 'thumbs/11.jpg', full: 'full/11.jpg' },
-  { thumb: 'thumbs/12.jpg', full: 'full/12.jpg' },
-  { thumb: 'thumbs/13.jpg', full: 'full/13.jpg' },
-  { thumb: 'thumbs/14.jpg', full: 'full/14.jpg' },
-  { thumb: 'thumbs/15.jpg', full: 'full/15.jpg' },
-  { thumb: 'thumbs/16.jpg', full: 'full/16.jpg' },
-  { thumb: 'thumbs/17.jpg', full: 'full/17.jpg' },
-  { thumb: 'thumbs/18.jpg', full: 'full/18.jpg' },
-  { thumb: 'thumbs/19.jpg', full: 'full/19.jpg' },
-  { thumb: 'thumbs/20.jpg', full: 'full/20.jpg' },
-];
+const IMG_COUNT = 20;
+const vimg = (n, w, q) =>
+  `/_vercel/image?url=${encodeURIComponent('/photos/' + n + '.jpg')}&w=${w}&q=${q}`;
+
+const IMGS = Array.from({ length: IMG_COUNT }, (_, i) => ({
+  thumb: vimg(i + 1, 256, 70),
+  full:  vimg(i + 1, 1080, 82)
+}));
 
 let ci = 0, sy = 0;
 
