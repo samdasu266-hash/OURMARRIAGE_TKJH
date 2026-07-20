@@ -134,8 +134,25 @@ body{display:flex;justify-content:center;font-family:'Noto Serif KR',serif;color
 .hero-body>*{animation:fadeUp 1s ease forwards;opacity:0;}
 
 .hero-lead{animation-delay:.3s!important;font-size:13.5px;font-weight:300;line-height:2.1;color:rgba(253,250,245,.85);margin-bottom:32px;letter-spacing:.04em;font-family:'Noto Serif KR',serif;text-shadow:0 1px 12px rgba(0,0,0,.45);}
-.hero-names{animation-delay:.65s!important;font-family:'Noto Serif KR',serif;font-size:34px;font-weight:400;letter-spacing:.02em;color:var(--white);line-height:1;margin-bottom:24px;text-shadow:0 2px 20px rgba(0,0,0,.4);}
-.hero-names .hrt{font-size:14px;color:var(--gold-lt);vertical-align:middle;margin:0 8px;font-family:'Noto Serif KR',serif;}
+.hero-names{
+    animation-delay:.65s!important;
+    font-family:'Noto Serif KR',serif;
+    font-size:32px;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    line-height:1.2;
+    margin-bottom:34px;
+    color:rgba(253,250,245,.92);
+    text-shadow:0 2px 16px rgba(0,0,0,.35);
+}
+
+.hero-names .sep{
+    display:inline-block;
+    font-size:18px;
+    color:rgba(181,146,74,.9);
+    margin:0 8px;
+    transform:translateY(-2px);
+}
 
 .hero-info-box{animation-delay:.9s!important;display:inline-block;padding:20px 32px;border:1px solid rgba(181,146,74,.38);position:relative;margin-bottom:0;}
 .hero-info-box::before,.hero-info-box::after,
@@ -407,7 +424,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <div id="snow-c"></div>
   <div class="hero-body">
     <p class="hero-lead">눈부시게 푸르던 여름날 서로를 알아본 우리,<br>하얀 눈꽃 아래서 영원을 약속합니다.</p>
-    <h1 class="hero-names">태광<span class="hrt">♥</span>지현</h1>
+    <h1 class="hero-names">태광<span class="sep">·</span>지현</h1>
     <div class="hero-info-box">
       <span class="corner-bl"></span>
       <span class="corner-tr"></span>
