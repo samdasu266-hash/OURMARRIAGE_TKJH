@@ -480,6 +480,24 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     </div>
   </div>
 </section>
+  
+<section>
+  <span class="lbl rv">
+    <span class="lbl-kr">우리의 예쁜 순간들</span>
+    <span class="lbl-en">Gallery</span>
+  </span>
+  <div class="gal-grid rv" id="gal-grid"></div>
+  <p class="gal-hint rv">사진을 터치하시면 크게 보실 수 있습니다</p>
+</section>
+
+<div id="img-modal" onclick="handleImgOutsideClick(event)">
+  <button class="m-close" onclick="closeImg()"><i class="fas fa-times"></i></button>
+  <p id="modal-pnum"></p>
+  <div id="modal-ta">
+    <img id="modal-img" src="" alt="">
+  </div>
+  <p class="m-hint">← 좌우 스와이프로 이동 &nbsp;·&nbsp; 위아래로 내리면 닫힙니다</p>
+</div>
 
 <section style="background:var(--white);">
   <div class="lbl-cal rv">
@@ -771,23 +789,6 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
   <button class="btn-ghost rv" onclick="openRsvp()">참석 여부 전달하기</button>
 </section>
 
-<section>
-  <span class="lbl rv">
-    <span class="lbl-kr">우리의 예쁜 순간들</span>
-    <span class="lbl-en">Gallery</span>
-  </span>
-  <div class="gal-grid rv" id="gal-grid"></div>
-  <p class="gal-hint rv">사진을 터치하시면 크게 보실 수 있습니다</p>
-</section>
-
-<div id="img-modal" onclick="handleImgOutsideClick(event)">
-  <button class="m-close" onclick="closeImg()"><i class="fas fa-times"></i></button>
-  <p id="modal-pnum"></p>
-  <div id="modal-ta">
-    <img id="modal-img" src="" alt="">
-  </div>
-  <p class="m-hint">← 좌우 스와이프로 이동 &nbsp;·&nbsp; 위아래로 내리면 닫힙니다</p>
-</div>
 
 <section class="reg-sec hide-privacy">
   <span class="lbl rv">
