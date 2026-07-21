@@ -615,7 +615,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <div class="trans-row">
       <span class="dot">·</span>
       <div>
-        <div style="margin-bottom:4px;"><span class="badge bdg-8">8호선</span><span class="badge bdg-kj">경의중앙</span> <strong>구리역</strong> 7번 출구<</div>
+        <div style="margin-bottom:4px;"><span class="badge bdg-8">8호선</span><span class="badge bdg-kj">경의중앙</span> <strong>구리역</strong> 7번 출구</div>
         <div class="trans-desc">- <strong>[셔틀버스]</strong> 예식 당일 약 15분 간격 운행</div>
       </div>
     </div>
@@ -824,7 +824,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <div class="share-btn-group">
       <button class="share-btn-outline" id="up-btn">
         <i class="fas fa-camera"></i>
-        <span>간편 보내기<br><small style="font-size:11.5px;font-weight:300;color:var(--muted);">(10MB 이하)</small></span>
+        <span>간편 보내기<br><small style="font-size:11.5px;font-weight:300;color:var(--muted);">(300MB 이하)</small></span>
       </button>
       <button class="share-btn-outline" id="drive-btn">
         <i class="fab fa-google-drive"></i>
@@ -835,7 +835,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <div style="background:rgba(181,146,74,.06);border:.5px solid rgba(181,146,74,.2);border-radius:6px;padding:14px 16px;text-align:left;">
       <p style="font-family:'Noto Sans KR',sans-serif;font-size:12.5px;color:var(--ink);font-weight:400;line-height:1.7;word-break:keep-all;letter-spacing:-0.02em;margin:0;">
         <i class="fas fa-info-circle" style="color:var(--gold-lt);margin-right:4px;font-size:12px;"></i>
-        <strong>동영상이나 고화질 원본 사진</strong>은 용량 제한이 없는 <strong style="color:var(--gold);">구글 드라이브</strong> 버튼을 이용해 주시면 감사하겠습니다.
+        <strong>300MB가 넘는 대용량 원본 영상</strong>은 용량 제한이 없는 <strong style="color:var(--gold);">구글 드라이브</strong> 버튼을 이용해 주시면 감사하겠습니다.
       </p>
     </div>
   </div>
@@ -1403,7 +1403,7 @@ photoUp.addEventListener('change', async e => {
   const files = Array.from(e.target.files);
   if (!files.length) return;
 
-  const MAX = 10 * 1024 * 1024;
+  const MAX = 300 * 1024 * 1024;
   const validFiles = files.filter(f => f.size <= MAX);
   const bigFiles   = files.filter(f => f.size >  MAX);
 
@@ -1457,7 +1457,8 @@ photoUp.addEventListener('change', async e => {
   lock();
   document.getElementById('loader-overlay').classList.add('active');
 
-  let ok = 0, fail = 0, processed = 0;
+  const totalBytes = validFiles.reduce((s, f) => s + f.size, 0);
+  let doneBytes = 0, ok = 0, fail = 0, processed = 0;
 
   for (let i = 0; i < itemEls.length; i++) {
     const { status, file, tooBig } = itemEls[i];
@@ -1467,16 +1468,10 @@ photoUp.addEventListener('change', async e => {
     status.innerHTML = '<div class="upl-spinner-sm"></div>';
 
     try {
-      let b64 = await toB64(file);
-      const fd  = new FormData();
-      fd.append('action',   'upload');
-      fd.append('fileName',  file.name);
-      fd.append('mimeType',  file.type);
-      fd.append('fileData',  b64.split(',')[1]);
-      
-      b64 = null; 
-
-      await fetch(GAS, { method: 'POST', mode: 'no-cors', body: fd });
+      const uploadUrl = await initUploadSession(file);
+      await putFile(uploadUrl, file, loaded => {
+        if (totalBytes > 0) progBar.style.width = `${Math.min(100, ((doneBytes + loaded) / totalBytes) * 100)}%`;
+      });
 
       ok++;
       status.className = 'upl-status upl-done';
@@ -1487,9 +1482,10 @@ photoUp.addEventListener('change', async e => {
       status.innerHTML = '<i class="fas fa-times" style="color:#fff;font-size:18px;"></i>';
     }
 
+    doneBytes += file.size;
     processed++;
     countEl.textContent = `${processed} / ${validFiles.length}`;
-    progBar.style.width = `${Math.round((processed / validFiles.length) * 100)}%`;
+    if (totalBytes > 0) progBar.style.width = `${Math.round((doneBytes / totalBytes) * 100)}%`;
   }
 
   await new Promise(r => setTimeout(r, 900));
@@ -1505,9 +1501,9 @@ photoUp.addEventListener('change', async e => {
   } else if (fail > 0 && ok === 0) {
     toast('전송에 실패했습니다. 네트워크 상태를 확인 후 다시 시도해 주세요.');
   } else if (bigFiles.length > 0 && ok > 0) {
-    toast(`${ok}장 저장 완료! 10MB가 넘는 사진/영상은 구글 드라이브를 이용해 주세요.`);
+    toast(`${ok}장 저장 완료! 300MB가 넘는 파일은 구글 드라이브를 이용해 주세요.`);
   } else if (bigFiles.length > 0 && ok === 0) {
-    toast('용량이 10MB를 초과합니다. 아래 구글 드라이브 버튼을 이용해 주세요!');
+    toast('용량이 300MB를 초과합니다. 아래 구글 드라이브 버튼을 이용해 주세요!');
   } else if (ok > 0) {
     toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);
   } else {
@@ -1515,12 +1511,28 @@ photoUp.addEventListener('change', async e => {
   }
 });
 
-function toB64(f) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.readAsDataURL(f);
-    r.onload = () => res(r.result);
-    r.onerror = rej;
+// GAS(action=initUpload)가 발급한 Drive 재개 가능 업로드 세션 URL을 받아온다
+async function initUploadSession(file) {
+  const res = await fetch(GAS
+    + '?action=initUpload'
+    + '&fileName=' + encodeURIComponent(file.name)
+    + '&mimeType=' + encodeURIComponent(file.type || 'application/octet-stream')
+    + '&size=' + file.size);
+  const data = await res.json();
+  if (!data.url) throw new Error(data.error || '업로드 세션 발급 실패');
+  return data.url;
+}
+
+// 파일 바이너리를 Drive 세션 URL로 직접 전송 (base64 변환 없음)
+function putFile(url, file, onProgress) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', url);
+    xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
+    xhr.upload.onprogress = ev => { if (ev.lengthComputable) onProgress(ev.loaded); };
+    xhr.onload = () => (xhr.status >= 200 && xhr.status < 300) ? resolve() : reject(new Error('HTTP ' + xhr.status));
+    xhr.onerror = () => reject(new Error('network error'));
+    xhr.send(file);
   });
 }
 
