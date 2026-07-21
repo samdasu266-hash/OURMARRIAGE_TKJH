@@ -824,7 +824,7 @@ footer{background:var(--ink);padding:72px 32px 120px;text-align:center;}
     <div class="share-btn-group">
       <button class="share-btn-outline" id="up-btn">
         <i class="fas fa-camera"></i>
-        <span>사진 · 영상 보내기<br><small style="font-size:11.5px;font-weight:300;color:var(--muted);">(파일당 300MB 이하)</small></span>
+        <span>사진 · 영상 보내기<br><small style="font-size:11.5px;font-weight:300;color:var(--muted);">(파일당 1GB 이하)</small></span>
       </button>
     </div>
 
@@ -1396,7 +1396,7 @@ photoUp.addEventListener('change', async e => {
   const files = Array.from(e.target.files);
   if (!files.length) return;
 
-  const MAX = 300 * 1024 * 1024;
+  const MAX = 1024 * 1024 * 1024; // 파일당 1GB
   const validFiles = files.filter(f => f.size <= MAX);
   const bigFiles   = files.filter(f => f.size >  MAX);
 
@@ -1494,9 +1494,9 @@ photoUp.addEventListener('change', async e => {
   } else if (fail > 0 && ok === 0) {
     toast('전송에 실패했습니다. 네트워크 상태를 확인 후 다시 시도해 주세요.');
   } else if (bigFiles.length > 0 && ok > 0) {
-    toast(`${ok}장 저장 완료! 300MB가 넘는 파일은 제외되었습니다.`);
+    toast(`${ok}장 저장 완료! 1GB가 넘는 파일은 제외되었습니다.`);
   } else if (bigFiles.length > 0 && ok === 0) {
-    toast('파일당 300MB까지 전송하실 수 있습니다. 영상을 나눠서 보내주세요.');
+    toast('파일당 1GB까지 전송하실 수 있습니다. 영상을 나눠서 보내주세요.');
   } else if (ok > 0) {
     toast(`소중한 사진 ${ok}장이 안전하게 저장되었습니다. 감사합니다!`);
   } else {
